@@ -16,27 +16,24 @@ Public service http://diglot.copist.ru/
 * Secondary aim is improve web apps design skills and web programming.
 > Дополнительная цель - улучшение навыки проектирования программного веб-приложений и веб-программирования.
 
+# Disclaimer / Отказ от прав
+
+All works, books and articles published at http://diglot.copist.ru/ were taken from open sources. Every work, article or book has own copyright policy. Please check the rights before use.
+> Все работы, книги и статьи, опубликованные на http://diglot.copist.ru/, были взяты из открытых источников. Каждая работа, статья или книга имеет собственную политику защиты авторских прав. Пожалуйста, проверяйте права перед использованием.
+
 # Contributions / Вклад
 
 Help us to develop this project
 > Помогите нам развивать этот проект
 
-Send us bug reports
-> Присылайте нам отчёты об ошибках
+Star the project to make us know that you need our project
+> Поставьте звезду, дайте нам знать, что вам нужен наш проект
 
-Give us your ideas about additional features
-> Поделитесь своими идеями о дополнительных возможностях
-
-Give us your star to make us know that you need our project
-> Поставьте нам звезду, дайте нам знать, что вам нужен наш проект
+[Send us](https://github.com/pvolyntsev/diglot/issues) bug reports and ideas about additional features
+> [Присылайте](https://github.com/pvolyntsev/diglot/issues) нам отчёты об ошибках и идеи о дополнительных возможностях
 
 Feel free to send a pull request to add more features to service
-> Добавляйте новые возможности в сервис, отправляйте нам pull request
-
-
-# Disclaimer / Отказ от прав
-
-All works, books and articles published at http://diglot.copist.ru/ were taken from open sources. Every work, article or book has own copyright policy. Please check the rights before use.
+> Отправляйте нам pull request, чтобы добавить новые возможности в сервис
 
 # Team / Команда
 
