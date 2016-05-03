@@ -37,8 +37,8 @@ Feel free to send a pull request to add more features to service
 
 # Team / Команда
 
-Pavel Volyntsev (@pvolyntsev)
-Dubrovin Vasiliy (@DubrovinVA)
+Pavel Volyntsev ([@pvolyntsev](https://github.com/pvolyntsev))
+Dubrovin Vasiliy ([@DubrovinVA](https://github.com/DubrovinVA))
 
 Would you like to join team? Send request email pavel.volyntsev(with)gmail(dot)com
 > Хочешь вступить в команду? Отправь запрос на pavel.volyntsev(with)gmail(dot)com
