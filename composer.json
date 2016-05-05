@@ -1,18 +1,15 @@
 {
-    "name": "yiisoft/yii2-app-basic",
-    "description": "Yii 2 Basic Project Template",
-    "keywords": ["yii2", "framework", "basic", "project template"],
-    "homepage": "http://www.yiiframework.com/",
-    "type": "project",
+    "name": "https://github.com/pvolyntsev/diglot",
+    "description": "Your bilingual books and articles shelf. English and Russian.",
+    "keywords": ["bilingua", "language", "blog", "article", "book", "read", "text", "share"],
+    "homepage": "http://diglot.copist.ru/",
+    "type": "application",
     "license": "BSD-3-Clause",
     "support": {
-        "issues": "https://github.com/yiisoft/yii2/issues?state=open",
-        "forum": "http://www.yiiframework.com/forum/",
-        "wiki": "http://www.yiiframework.com/wiki/",
-        "irc": "irc://irc.freenode.net/yii",
-        "source": "https://github.com/yiisoft/yii2"
+        "issues": "https://github.com/pvolyntsev/diglot/issues?state=open",
+        "source": "https://github.com/pvolyntsev/diglot"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "development",
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": ">=2.0.5",
