@@ -1,0 +1,24 @@
+{
+    "name": "budyaga/yii2-cropper",
+    "description": "Yii-Framework widget for uploading and cropping images",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","upload","crop"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Sergey Krivochenko",
+            "email": "budyaga@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*",
+        "yiisoft/yii2-imagine": "*",
+        "bower-asset/Jcrop": "=0.9.12",
+        "bower-asset/simple-ajax-uploader": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "budyaga\\cropper\\": ""
+        }
+    }
+}
