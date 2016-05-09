@@ -38,14 +38,15 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
-        /*
         'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
+            'showScriptName' => false,     // Disable index.php
+            'enablePrettyUrl' => true,     // Disable ?r= routes
+            'enableStrictParsing' => true, // Only routes being listed in rules
             'rules' => [
+                [ 'pattern' => 'prototype', 'route' => 'prototype/index' ],
+                [ 'pattern' => 'prototype/<entity>/<mode>', 'route' => 'prototype/page' ],
             ],
         ],
-        */
     ],
     'params' => $params,
 ];
