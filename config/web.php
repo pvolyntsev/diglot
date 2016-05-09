@@ -117,6 +117,9 @@ $config = [
                 [ 'pattern' => 'prototype/<entity>/<mode>', 'route' => 'prototype/page' ],
             ],
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
     ],
 	'modules' => [
 		'user' => [
@@ -126,6 +129,7 @@ $config = [
 		],
 	],
     'params' => $params,
+
 ];
 
 if (YII_ENV_DEV) {
