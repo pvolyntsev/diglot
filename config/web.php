@@ -75,6 +75,8 @@ $config = [
 			'rules' => [
                 // Main page & static pages
                 '/' => 'site/index',
+                '/contact' => 'site/contact',
+                '/about' => 'site/about',
 
                 // Auth & user manager
 				'/signup' => '/user/user/signup',
