@@ -1,5 +1,13 @@
 <?php
 
+function merge_configs($base, $customized)
+{
+    $baseConfig = require($base);
+    if (is_file($customized))
+        return yii\helpers\ArrayHelper::merge($baseConfig, require($customized));
+    return $baseConfig;
+}
+
 Yii::setAlias('@tests', dirname(__DIR__) . '/tests/codeception');
 
 $params = require(__DIR__ . '/params.php');
@@ -112,7 +120,6 @@ $config = [
                 ],
             ],
         ],
-        'db' => require(__DIR__ . '/db.php'),
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
         ],
@@ -124,6 +131,7 @@ $config = [
             ],
         ],
         */
+        'db' => merge_configs(__DIR__ . '/db.php', __DIR__ . '/db.local.php'),
     ],
 	'modules' => [
 		'user' => [
