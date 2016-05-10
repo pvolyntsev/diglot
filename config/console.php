@@ -1,5 +1,13 @@
 <?php
 
+function merge_configs($base, $customized)
+{
+    $baseConfig = require($base);
+    if (is_file($customized))
+        return yii\helpers\ArrayHelper::merge($baseConfig, require($customized));
+    return $baseConfig;
+}
+
 Yii::setAlias('@tests', dirname(__DIR__) . '/tests/codeception');
 
 $params = require(__DIR__ . '/params.php');
@@ -13,14 +21,6 @@ $config = [
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
-        ],
-        'log' => [
-            'targets' => [
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
         ],
         /*
 		'user' => [
@@ -77,22 +77,6 @@ $config = [
 			],
 			*/
 		],
-		'urlManager' => [
-			'enablePrettyUrl' => true,
-			'showScriptName' => false,
-			'rules' => [
-				'/signup' => '/user/user/signup',
-				'/login' => '/user/user/login',
-				'/logout' => '/user/user/logout',
-				'/requestPasswordReset' => '/user/user/request-password-reset',
-				'/resetPassword' => '/user/user/reset-password',
-				'/profile' => '/user/user/profile',
-				'/retryConfirmEmail' => '/user/user/retry-confirm-email',
-				'/confirmEmail' => '/user/user/confirm-email',
-				'/unbind/<id:[\w\-]+>' => '/user/auth/unbind',
-				'/oauth/<authclient:[\w\-]+>' => '/user/auth/index'
-			],
-		],
 		'authManager' => [
 			'class' => 'yii\rbac\DbManager',
 		],
@@ -112,18 +96,7 @@ $config = [
                 ],
             ],
         ],
-        'db' => require(__DIR__ . '/db.php'),
-        'authManager' => [
-            'class' => 'yii\rbac\DbManager',
-        ],
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
-        ],
-        */
+        'db' => merge_configs(__DIR__ . '/db.php', __DIR__ . '/db.local.php'),
     ],
 	'modules' => [
 		'user' => [

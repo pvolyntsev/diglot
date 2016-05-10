@@ -40,6 +40,8 @@ Feel free to send a pull request to add more features to service
 * Pavel Volyntsev ([@pvolyntsev](https://github.com/pvolyntsev))
 * Dubrovin Vasiliy ([@DubrovinVA](https://github.com/DubrovinVA))
 * Popova Lyudmila ([@tobeinword1987](https://github.com/tobeinword1987))
+* Valera Molchanov ([@molchanovvg](https://github.com/molchanovvg))
+* Nicolay Poymanov ([@poymanov](https://github.com/poymanov))
 
 Would you like to join team? Send request email pavel.volyntsev(with)gmail(dot)com
 > Хочешь вступить в команду? Отправь запрос на pavel.volyntsev(with)gmail(dot)com
