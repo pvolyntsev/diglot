@@ -69,10 +69,14 @@ $config = [
 			*/
 		],
 		'urlManager' => [
-			'enablePrettyUrl' => true,
-			'showScriptName' => false,
+            'showScriptName' => false,     // Disable index.php
+            'enablePrettyUrl' => true,     // Disable ?r= routes
+            'enableStrictParsing' => true, // Only routes being listed in rules
 			'rules' => [
-				'/hello' => 'hello/test',
+                // Main page & static pages
+                '/' => 'site/index',
+
+                // Auth & user manager
 				'/signup' => '/user/user/signup',
 				'/login' => '/user/user/login',
 				'/logout' => '/user/user/logout',
@@ -82,7 +86,11 @@ $config = [
 				'/retryConfirmEmail' => '/user/user/retry-confirm-email',
 				'/confirmEmail' => '/user/user/confirm-email',
 				'/unbind/<id:[\w\-]+>' => '/user/auth/unbind',
-				'/oauth/<authclient:[\w\-]+>' => '/user/auth/index'
+				'/oauth/<authclient:[\w\-]+>' => '/user/auth/index',
+
+                // Prototypes
+                [ 'pattern' => 'prototype', 'route' => 'prototype/index' ],
+                [ 'pattern' => 'prototype/<entity>/<mode>', 'route' => 'prototype/page' ],
 			],
 		],
 		'authManager' => [
@@ -108,18 +116,6 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
-        'urlManager' => [
-            'showScriptName' => false,     // Disable index.php
-            'enablePrettyUrl' => true,     // Disable ?r= routes
-            'enableStrictParsing' => true, // Only routes being listed in rules
-            'rules' => [
-                [ 'pattern' => 'prototype', 'route' => 'prototype/index' ],
-                [ 'pattern' => 'prototype/<entity>/<mode>', 'route' => 'prototype/page' ],
-            ],
-        ],
-        'authManager' => [
-            'class' => 'yii\rbac\DbManager',
-        ],
     ],
 	'modules' => [
 		'user' => [
