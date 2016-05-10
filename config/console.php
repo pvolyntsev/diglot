@@ -22,14 +22,6 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'log' => [
-            'targets' => [
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
-        ],
         /*
 		'user' => [
 			'identityClass' => 'budyaga\users\models\User',
@@ -85,22 +77,6 @@ $config = [
 			],
 			*/
 		],
-		'urlManager' => [
-			'enablePrettyUrl' => true,
-			'showScriptName' => false,
-			'rules' => [
-				'/signup' => '/user/user/signup',
-				'/login' => '/user/user/login',
-				'/logout' => '/user/user/logout',
-				'/requestPasswordReset' => '/user/user/request-password-reset',
-				'/resetPassword' => '/user/user/reset-password',
-				'/profile' => '/user/user/profile',
-				'/retryConfirmEmail' => '/user/user/retry-confirm-email',
-				'/confirmEmail' => '/user/user/confirm-email',
-				'/unbind/<id:[\w\-]+>' => '/user/auth/unbind',
-				'/oauth/<authclient:[\w\-]+>' => '/user/auth/index'
-			],
-		],
 		'authManager' => [
 			'class' => 'yii\rbac\DbManager',
 		],
@@ -120,17 +96,6 @@ $config = [
                 ],
             ],
         ],
-        'authManager' => [
-            'class' => 'yii\rbac\DbManager',
-        ],
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
-        ],
-        */
         'db' => merge_configs(__DIR__ . '/db.php', __DIR__ . '/db.local.php'),
     ],
 	'modules' => [
