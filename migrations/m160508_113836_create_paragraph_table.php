@@ -26,7 +26,7 @@ class m160508_113836_create_paragraph_table extends Migration
 
         $this->addCommentOnTable('paragraph','Абзац в статье, который может быть и ссылкой на картинку');
 
-        $this->addForeignKey('Paragraph_Article','paragraph','article_id','article','id',$delete=null,$update=null);
+        $this->addForeignKey('fk_paragraph_article','paragraph','article_id','article','id',$delete=null,$update=null);
     }
 
     /**
@@ -34,8 +34,6 @@ class m160508_113836_create_paragraph_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('Paragraph_Article','paragraph');
-        $this->dropCommentFromTable('paragraph');
         $this->dropTable('paragraph');
     }
 }
