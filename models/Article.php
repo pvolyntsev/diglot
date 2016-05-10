@@ -27,6 +27,8 @@ use Yii;
  * @property integer $lang_original_id
  * @property integer $lang_transtate_id
  *
+ * @property User $user
+ * @property ComplaintOnArticle[] $complaintOnArticles
  * @property Paragraph[] $paragraphs
  */
 class Article extends \yii\db\ActiveRecord
@@ -52,6 +54,7 @@ class Article extends \yii\db\ActiveRecord
             [['title_original', 'title_translate'], 'string', 'max' => 100],
             [['url_original', 'url_translate', 'author_url', 'translator_url'], 'string', 'max' => 500],
             [['author_name', 'translator_name'], 'string', 'max' => 255],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -86,8 +89,33 @@ class Article extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComplaintOnArticles()
+    {
+        return $this->hasMany(ComplaintOnArticle::className(), ['article_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getParagraphs()
     {
         return $this->hasMany(Paragraph::className(), ['article_id' => 'id']);
+    }
+
+    /**
+     * @inheritdoc
+     * @return ArticleQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new ArticleQuery(get_called_class());
     }
 }

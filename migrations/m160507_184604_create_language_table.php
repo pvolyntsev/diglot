@@ -16,6 +16,9 @@ class m160507_184604_create_language_table extends Migration
             'id' => $this->primaryKey(),
             'language'=>$this->string(255).' not null',
         ]);
+        
+        
+        
     }
 
     /**
