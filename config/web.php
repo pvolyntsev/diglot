@@ -8,7 +8,8 @@ function merge_configs($base, $customized)
     return $baseConfig;
 }
 
-$params = require(__DIR__ . '/params.php');
+$params = merge_configs(__DIR__ . '/params.php', __DIR__ . '/params.local.php');
+$db = merge_configs(__DIR__ . '/db.php', __DIR__ . '/db.local.php');
 
 $config = [
     'id' => 'basic',
@@ -125,7 +126,7 @@ $config = [
                 ],
             ],
         ],
-        'db' => merge_configs(__DIR__ . '/db.php', __DIR__ . '/db.local.php'),
+        'db' => $db,
     ],
 	'modules' => [
 		'user' => [
