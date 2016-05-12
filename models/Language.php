@@ -9,6 +9,9 @@ use Yii;
  *
  * @property integer $id
  * @property string $language
+ *
+ * @property Article[] $articles
+ * @property Article[] $articles0
  */
 class Language extends \yii\db\ActiveRecord
 {
@@ -40,6 +43,22 @@ class Language extends \yii\db\ActiveRecord
             'id' => 'ID',
             'language' => 'Language',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getArticles()
+    {
+        return $this->hasMany(Article::className(), ['lang_transtate_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getArticles0()
+    {
+        return $this->hasMany(Article::className(), ['lang_original_id' => 'id']);
     }
 
     /**

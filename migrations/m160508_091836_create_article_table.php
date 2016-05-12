@@ -36,10 +36,7 @@ class m160508_091836_create_article_table extends Migration
         ]);
 
         $this->addForeignKey('fk_article_user','article','user_id','user','id',$delete=null,$update=null);
-
-        $this->addForeignKey('fk_language_origin_article','article','lang_original_id','language','id',$delete=null,$update=null);
-
-        $this->addForeignKey('fk_language_translate_article','article','lang_transtate_id','language','id',$delete=null,$update=null);
+        
     }
 
     /**

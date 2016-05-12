@@ -27,9 +27,15 @@ use Yii;
  * @property integer $lang_original_id
  * @property integer $lang_transtate_id
  *
+ * @property Language $langTranstate
  * @property User $user
+ * @property Language $langOriginal
+ * @property CategoryOfArticle[] $categoryOfArticles
+ * @property Category[] $categories
+ * @property Comment[] $comments
  * @property ComplaintOnArticle[] $complaintOnArticles
  * @property Paragraph[] $paragraphs
+ * @property TagOfArticle[] $tagOfArticles
  */
 class Article extends \yii\db\ActiveRecord
 {
@@ -54,7 +60,9 @@ class Article extends \yii\db\ActiveRecord
             [['title_original', 'title_translate'], 'string', 'max' => 100],
             [['url_original', 'url_translate', 'author_url', 'translator_url'], 'string', 'max' => 500],
             [['author_name', 'translator_name'], 'string', 'max' => 255],
+            [['lang_transtate_id'], 'exist', 'skipOnError' => true, 'targetClass' => Language::className(), 'targetAttribute' => ['lang_transtate_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['lang_original_id'], 'exist', 'skipOnError' => true, 'targetClass' => Language::className(), 'targetAttribute' => ['lang_original_id' => 'id']],
         ];
     }
 
@@ -89,9 +97,49 @@ class Article extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getLangTranstate()
+    {
+        return $this->hasOne(Language::className(), ['id' => 'lang_transtate_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLangOriginal()
+    {
+        return $this->hasOne(Language::className(), ['id' => 'lang_original_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategoryOfArticles()
+    {
+        return $this->hasMany(CategoryOfArticle::className(), ['article_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategories()
+    {
+        return $this->hasMany(Category::className(), ['id' => 'category_id'])->viaTable('category_of_article', ['article_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComments()
+    {
+        return $this->hasMany(Comment::className(), ['article_id' => 'id']);
     }
 
     /**
@@ -108,6 +156,14 @@ class Article extends \yii\db\ActiveRecord
     public function getParagraphs()
     {
         return $this->hasMany(Paragraph::className(), ['article_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTagOfArticles()
+    {
+        return $this->hasMany(TagOfArticle::className(), ['article_id' => 'id']);
     }
 
     /**
