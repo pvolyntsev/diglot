@@ -4,6 +4,12 @@ namespace app\models;
 
 use Yii;
 
+use budyaga\users\models\AuthAssignment;
+use budyaga\users\models\AuthItem;
+use budyaga\users\models\UserEmailConfirmToken;
+use budyaga\users\models\UserOauthKey;
+use budyaga\users\models\UserPasswordResetToken;
+
 /**
  * This is the model class for table "user".
  *
@@ -26,29 +32,8 @@ use Yii;
  * @property UserOauthKey[] $userOauthKeys
  * @property UserPasswordResetToken[] $userPasswordResetTokens
  */
-class User extends \yii\db\ActiveRecord
+class User extends \budyaga\users\models\User
 {
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'user';
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['username', 'auth_key', 'password_hash', 'created_at', 'updated_at'], 'required'],
-            [['sex', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'password_hash', 'email', 'photo'], 'string', 'max' => 255],
-            [['auth_key'], 'string', 'max' => 32],
-        ];
-    }
-
     /**
      * @inheritdoc
      */

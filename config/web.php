@@ -24,7 +24,7 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-			'identityClass' => 'budyaga\users\models\User',
+			'identityClass' => 'app\models\User',
 			'enableAutoLogin' => true,
 			'loginUrl' => ['/login'],
 		],
