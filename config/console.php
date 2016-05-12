@@ -80,12 +80,10 @@ $config = [
 		'authManager' => [
 			'class' => 'yii\rbac\DbManager',
 		],
-	    'mailer' => [
+        'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => $params['mailer.useFileTransport'], // send all mails to a file instead of other transports
+            'transport' => $params['mailer.transport'],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -95,6 +93,9 @@ $config = [
                     'levels' => ['error', 'warning'],
                 ],
             ],
+        ],
+        'urlManager' => [
+            'scriptUrl' => $params['domain'],
         ],
         'db' => $db,
     ],
