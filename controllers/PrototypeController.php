@@ -35,6 +35,10 @@ class PrototypeController extends Controller
         ];
         switch($entity.'-'.$mode)
         {
+            case 'article-view':
+                $data['article'] = require(__DIR__ . '/../assets/fixtures/article/things-everyone-should-do-code-review/article.php');
+                $data['paragraphs'] = require(__DIR__ . '/../assets/fixtures/article/things-everyone-should-do-code-review/paragraphs.php');
+                break;
         }
         return $this->render($entity.'-'.$mode, $data);
     }

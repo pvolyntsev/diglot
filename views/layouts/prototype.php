@@ -25,18 +25,6 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<nav style="left: 0px;
-    top: 50px;
-    bottom: 60px;
-    width: 200px;
-    position: fixed;
-    overflow-y: auto;">
-    <div class="list-group">
-        <a class="list-group-item" href="<?php echo Url::to(['prototype/page', 'entity' => 'article', 'mode' => 'view']);?>">Article/View</a>
-        <a class="list-group-item" href="<?php echo Url::to(['prototype/page', 'entity' => 'article', 'mode' => 'edit']);?>">Article/Edit</a>
-    </div>
-</nav>
-
 <div class="wrap">
     <?php
     NavBar::begin([
@@ -55,11 +43,26 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= $content ?>
+    <div style="height: 60px;"></div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col col-lg-2">
+                <!--Sidebar content-->
+                <div class="list-group">
+                    <a class="list-group-item" href="<?php echo Url::to(['prototype/page', 'entity' => 'article', 'mode' => 'view']);?>">Article/View</a>
+                    <a class="list-group-item" href="<?php echo Url::to(['prototype/page', 'entity' => 'article', 'mode' => 'edit']);?>">Article/Edit</a>
+                </div>
+            </div>
+            <div class="col col-lg-8">
+                <!--Body content-->
+                <?= Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]) ?>
+                <?= $content ?>
+            </div>
+            <div class="span2"></div>
+        </div>
     </div>
 </div>
 

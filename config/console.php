@@ -10,8 +10,8 @@ function merge_configs($base, $customized)
 
 Yii::setAlias('@tests', dirname(__DIR__) . '/tests/codeception');
 
-$params = require(__DIR__ . '/params.php');
-$db = require(__DIR__ . '/db.php');
+$params = merge_configs(__DIR__ . '/params.php', __DIR__ . '/params.local.php');
+$db = merge_configs(__DIR__ . '/db.php', __DIR__ . '/db.local.php');
 
 $config = [
     'id' => 'basic-console',
@@ -96,7 +96,7 @@ $config = [
                 ],
             ],
         ],
-        'db' => merge_configs(__DIR__ . '/db.php', __DIR__ . '/db.local.php'),
+        'db' => $db,
     ],
 	'modules' => [
 		'user' => [
