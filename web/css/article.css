@@ -1,0 +1,29 @@
+/**
+    Article
+    ---------------------------------- */
+
+.article-heading h1 {
+    margin: 0 0 0.2em 0;
+    font-weight: 800;
+    font-size: 1.5em;
+}
+.article-heading-title-original .label {
+    background-color: #3a87ad;
+    color: #fff;
+    font-size: 0.5em;;
+}
+.article-heading-title-translate .label {
+    background-color: #468847;
+    color: #fff;
+    font-size: 0.5em;;
+}
+.vertical.spacer {
+    padding-top: 3em;
+}
+.article-paragraph {
+    padding: 0.5em 0;
+}
+.article-footnote {
+    color: #999;
+    margin-top: 1em;
+}

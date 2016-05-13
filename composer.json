@@ -15,13 +15,14 @@
         "yiisoft/yii2": ">=2.0.5",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
-		"budyaga/yii2-users": "*"
+        "budyaga/yii2-users": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
         "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*",
-        "yiisoft/yii2-faker": "*"
+        "yiisoft/yii2-faker": "*",
+        "yiidoc/yii2-timeago": "dev-master"
     },
     "config": {
         "process-timeout": 1800
