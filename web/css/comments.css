@@ -1,0 +1,95 @@
+/**
+    Comments
+    ---------------------------------- */
+
+.comments.container {
+    width: 80%;
+    margin-left: 10%;
+}
+
+.comments-heading {
+    color: rgba(0,0,0,.8);
+    font-size: 16px;
+    letter-spacing: 0;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.comments-heading-title {
+    font-weight: bold;
+}
+
+.comments .comment-add {
+    background: #ccc;
+}
+
+.comments .comment-feed {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 3px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,.04);
+    border: 1px solid rgba(0,0,0,.09);
+}
+
+    .comments .comment-recommended {
+        margin: 5px 0;
+        color: rgba(0,0,0,.44);
+        font-size: 14px;
+    }
+        .comments .comment-recommended a {
+            color: rgba(0,0,0,.44);
+            text-decoration: none;
+        }
+            .comments .comment-recommended a:hover {
+                color: rgba(0,0,0,.9);
+            }
+
+    .comments .comment-card {
+        display: table;
+        margin: 10px 0;
+    }
+    .comments .comment-card:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+    .comments .comment-card .card-avatar {
+        display: table-cell;
+    }
+    .comments .comment-card .card-summary {
+        display: table-cell;
+        vertical-align: middle;
+        font-size: 14px;
+        line-height: 1.4;
+        padding-left: 10px;
+        text-rendering: auto;
+    }
+    .comments .comment-card .avatar-image.u-xs-size32x32 {
+        width: 32px;
+        height: 32px;
+        display: inline-block;
+        vertical-align: middle;
+        border-radius: 100%;
+    }
+    .comments .comment-card .card-extra {
+        display: block;
+        color: rgba(0,0,0,.44);
+        font-size: 12px;
+        line-height: 1.1;
+        margin-bottom: 5px;
+    }
+
+    .comments .comment-content {
+        clear: both;
+    }
+
+    .comments .comment-extra .btn {
+        background: #fff;
+        color: #999;
+    }
+
+    .comments .comment-extra .btn:hover {
+        background: #eee;
+        color: #333;
+    }
