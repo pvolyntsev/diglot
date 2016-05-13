@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5973b64b7757ef91bf4bf5576b8b63a3",
-    "content-hash": "89be455cda1f6093763d2c5ff1bc20af",
+    "hash": "fc1b263d6d27509b5697645a3c0c592c",
+    "content-hash": "9b022ea43ff1f86631f7106d49b29778",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -881,6 +881,35 @@
     ],
     "packages-dev": [
         {
+            "name": "bower-asset/jquery-timeago",
+            "version": "v1.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rmm5t/jquery-timeago.git",
+                "reference": "67c11951ae9b6020341c1056a42b5406162db40c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rmm5t/jquery-timeago/zipball/67c11951ae9b6020341c1056a42b5406162db40c",
+                "reference": "67c11951ae9b6020341c1056a42b5406162db40c",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.4"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "jquery.timeago.js",
+                "bower-asset-ignore": [
+                    "test",
+                    "vendor"
+                ]
+            },
+            "license": [
+                "MIT"
+            ]
+        },
+        {
             "name": "bower-asset/typeahead.js",
             "version": "v0.11.1",
             "source": {
@@ -992,6 +1021,48 @@
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
             "time": "2016-04-07 12:29:16"
+        },
+        {
+            "name": "yiidoc/yii2-timeago",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiidoc/yii2-timeago.git",
+                "reference": "2e8d2ff51d88bb1730c59ba448ae524879e329ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiidoc/yii2-timeago/zipball/2e8d2ff51d88bb1730c59ba448ae524879e329ba",
+                "reference": "2e8d2ff51d88bb1730c59ba448ae524879e329ba",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery-timeago": "1.*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "yii\\timeago\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Nghia Nguyen",
+                    "email": "yiidevelop@gmail.com"
+                }
+            ],
+            "description": "Timeago is a jQuery plugin that makes it easy to support automatically updating fuzzy timestamps. Forked from @rmm5t for Yii2 framework.",
+            "keywords": [
+                "jquery",
+                "timeago",
+                "yii"
+            ],
+            "time": "2015-05-04 04:49:38"
         },
         {
             "name": "yiisoft/yii2-codeception",
@@ -1188,7 +1259,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "yiidoc/yii2-timeago": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
