@@ -87,9 +87,32 @@
     .comments .comment-extra .btn {
         background: #fff;
         color: #999;
+        border: 1px solid transparent;
     }
 
     .comments .comment-extra .btn:hover {
-        background: #eee;
+        border: 1px solid #eee;
         color: #333;
+        box-shadow: 0 1px 4px rgba(0,0,0,.04);
+    }
+
+    .comments .comments-show-all {
+        display: block;
+        text-align: center;
+        background: #fff;
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 0;
+        padding: 20px;
+        border: 1px solid rgba(0,0,0,.09)!important;
+    }
+
+    .comments .comments-show-all a {
+        font-size: 12px;
+        color: #322B3B !important;
+        text-decoration: none;
+    }
+
+    .comments .comments-show-all a:hover {
+        color: #0000FF;
     }
