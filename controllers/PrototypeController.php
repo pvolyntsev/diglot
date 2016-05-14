@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Article;
 use Yii;
 use yii\web\Controller;
 
@@ -29,6 +30,7 @@ class PrototypeController extends Controller
 
     public function actionPage($entity, $mode)
     {
+
         $data = [
             'entity' => $entity,
             'mode' => $mode,

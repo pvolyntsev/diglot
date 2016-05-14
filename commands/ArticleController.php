@@ -18,5 +18,7 @@ class ArticleController extends Controller
 
         if (!$article->save())
             var_export($article->errors);
+
+        echo "jgjhgjhghgjh";
     }
 }

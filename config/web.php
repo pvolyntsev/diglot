@@ -58,9 +58,8 @@ $config = [
                 [ 'pattern' => 'prototype', 'route' => 'prototype/index' ],
                 [ 'pattern' => 'prototype/<entity>/<mode>', 'route' => 'prototype/page' ],
 
-                // Test
-                '/test' => '/test/index',
-                '/test/<action>' => '/test/<action>',
+				'addcomment/<action>'=>'addcomment/<action>',
+
 			],
 		],
 		'authManager' => [

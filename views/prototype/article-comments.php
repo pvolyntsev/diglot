@@ -37,6 +37,7 @@
             </div>
             <?php } ?>
 
+
             <div class="float-left comment-card">
                 <div class="card-avatar"><a class="card-avatar" href="#"><img src="/upload/user/<?php echo $comment->user->photo ?>" class="avatar-image u-xs-size32x32"></a></div>
                 <div class="card-summary">
@@ -71,6 +72,21 @@
     <?php } ?>
     </div>
     <?php } ?>
+
+<!--    Вставим поле для добавления нового комментария-->
+    <div class="comment-feed">
+        <div class="comment-recommended">
+            <div class="comment-recommender">Add new comment</a></div>
+        </div>
+
+        <div class="comment-content"><p><textarea rows="5" class="addComment" name="newComment"><?=$data?></textarea></p></div>
+
+        <div class="comment-extra">
+            <div class="btn-toolbar">
+                <button class="btn btn-mini">confirm</button>
+            </div>
+        </div>
+    </div>
 
     <div id="js-comments-recommended">
     <?php foreach($recommendedComments as $comment) { ?>
