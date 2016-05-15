@@ -4,6 +4,7 @@ namespace app\commands;
 use app\models\Language;
 use budyaga\users\models\User;
 use yii\console\Controller;
+use yii\db\Expression;
 
 class ArticleController extends Controller
 {
@@ -49,6 +50,9 @@ class ArticleController extends Controller
             $article->title_translate = $faker->text(80);
 //            $user_id=$user->findBySql('select max(id) as maxId from user')->one();
 //            echo "************************".$user_id->maxId;
+//            $user_id=$query = \app\models\User::find()
+//                ->orderBy(new Expression('rand()'))
+//                ->limit(1);
             $article->user_id = rand(1,16);
 
             $rus=$language->findBySql('select id from language where language=\'russian\'')->one();

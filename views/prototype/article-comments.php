@@ -83,7 +83,7 @@ $model=new \app\models\Comment();
 
         <div class="comment-form">
 
-            <?php $form = ActiveForm::begin(/* todo ACTION ? */); ?>
+            <?php $form = ActiveForm::begin(['action' =>['prototype/article/comments'], 'id' => 'forum_post', 'method' => 'post',]); ?>
 
             <!--        --><?//= $form->field($model, 'user_id')->textInput() ?>
 
