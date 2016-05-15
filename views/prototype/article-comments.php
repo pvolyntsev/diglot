@@ -11,6 +11,12 @@
  * @var \app\models\Comment[] $commentsPage1
  * @var \app\models\Comment[] $commentsPage2
  */
+
+use yii\widgets\ActiveForm;
+use yii\helpers\Html;
+
+
+$model=new \app\models\Comment();
 ?>
 
 <?php include(__DIR__.'/article-view.php') ?>
@@ -74,19 +80,30 @@
     <?php } ?>
 
 <!--    Вставим поле для добавления нового комментария-->
-    <div class="comment-feed">
-        <div class="comment-recommended">
-            <div class="comment-recommender">Add new comment</a></div>
-        </div>
 
-        <div class="comment-content"><p><textarea rows="5" class="addComment" name="newComment"><?=$data?></textarea></p></div>
+        <div class="comment-form">
 
-        <div class="comment-extra">
-            <div class="btn-toolbar">
-                <button class="btn btn-mini">confirm</button>
+            <?php $form = ActiveForm::begin(/* todo ACTION ? */); ?>
+
+            <!--        --><?//= $form->field($model, 'user_id')->textInput() ?>
+
+<!--            --><?//= $form->field($model, 'article_id')->hiddenInput() ?>
+
+            <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>
+
+            <!--        --><?//= $form->field($model, 'date_created')->textInput() ?>
+
+            <!--        --><?//= form->field($model, 'date_modified')->textInput() ?>
+
+            <!--        --><?//= $form->field($model, 'status')->dropDownList([ 'published' => 'Published', 'blocked' => 'Blocked', ], ['prompt' => '']) ?>
+
+            <div class="form-group">
+                <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
             </div>
+
+            <?php ActiveForm::end(); ?>
+
         </div>
-    </div>
 
     <div id="js-comments-recommended">
     <?php foreach($recommendedComments as $comment) { ?>

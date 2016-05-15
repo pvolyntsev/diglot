@@ -6,6 +6,7 @@ use app\models\Article;
 use Yii;
 use yii\web\Controller;
 
+
 class PrototypeController extends Controller
 {
     public $layout = 'prototype';

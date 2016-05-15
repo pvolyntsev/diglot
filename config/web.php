@@ -60,6 +60,8 @@ $config = [
 
 				'addcomment/<action>'=>'addcomment/<action>',
 
+				'comment/<action>' => 'comment/<action>',
+
 			],
 		],
 		'authManager' => [
