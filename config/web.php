@@ -60,6 +60,12 @@ $config = [
 
 				'addcomment/<action>'=>'addcomment/<action>',
 
+				//article
+				'/article' => '/article/index',
+				'/article/view' => '/article/view',
+				'/article/create' => '/article/create',
+				'/article/update' => '/article/update',
+				'/article/' => '/article/delete',
 			],
 		],
 		'authManager' => [

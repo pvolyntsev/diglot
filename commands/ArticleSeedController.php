@@ -1,13 +1,19 @@
 <?php
+
 namespace app\commands;
 
 use yii\console\Controller;
 
-class ArticleController extends Controller
+class ArticleSeedController extends Controller
 {
+    /**
+     * This command echoes what you have entered as the message.
+     * @param string $message the message to be echoed.
+     */
+	
     public function actionSeed($count = 1)
     {
-        for ($i=0; $i<$count; $i++) {
+		for ($i=0; $i<$count; $i++) {
 			$faker =\Faker\Factory::create();
 			$article = new \app\models\Article;
 			$article->title_original=$faker->text(80);
@@ -17,11 +23,6 @@ class ArticleController extends Controller
 			$article->save();
 			var_export($article->errors);
 		}
-		echo (" created"." ".$count." "."articles ");
-
-        if (!$article->save())
-            var_export($article->errors);
-
-        echo "jgjhgjhghgjh";
+		echo (" created"." ".$count." "."articles");
     }
 }
