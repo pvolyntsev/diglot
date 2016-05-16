@@ -1,7 +1,10 @@
 <?php
 namespace app\commands;
 
+use app\models\Language;
+use budyaga\users\models\User;
 use yii\console\Controller;
+use yii\db\Expression;
 
 class ArticleController extends Controller
 {
@@ -14,14 +17,10 @@ class ArticleController extends Controller
 			$article->title_translate=$faker->text(80);
 			$article->user_id='2';
 			$article->lang_original_id='2';
+			$article->lang_translate_id='1';
 			$article->save();
 			var_export($article->errors);
 		}
 		echo (" created"." ".$count." "."articles ");
-
-        if (!$article->save())
-            var_export($article->errors);
-
-        echo "jgjhgjhghgjh";
-    }
+	}
 }

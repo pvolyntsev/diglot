@@ -9,6 +9,10 @@ application.articleComments.ready = function($) {
     $('#js-comments-page').show();
   });
 
+  $('#addCommment').on('click', function(){
+    $('#newComment').val()
+  });
+
 };
 
 // attach ready event

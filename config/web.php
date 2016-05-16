@@ -56,9 +56,7 @@ $config = [
 
                 // Prototypes
                 [ 'pattern' => 'prototype', 'route' => 'prototype/index' ],
-                [ 'pattern' => 'prototype/<entity>/<mode>', 'route' => 'prototype/page' ],
-
-				'addcomment/<action>'=>'addcomment/<action>',
+				[ 'pattern' => 'prototype/<entity>/<mode>', 'route' => 'prototype/page' ],
 
 				//article
 				'/article' => '/article/index',
