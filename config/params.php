@@ -19,7 +19,7 @@ return [
     ],
 
     // List of options to authorize using third-party services
-    'authClientCollection.clients' => [
+//    'authClientCollection.clients' => [
 //        'vkontakte' => [ // https://vk.com/editapp?act=create
 //            'class' => 'budyaga\users\components\oauth\VKontakte',
 //            'clientId' => 'XXX',
@@ -62,5 +62,5 @@ return [
 //            'consumerKey' => 'XXX',
 //            'consumerSecret' => 'XXX',
 //        ],
-    ]
+//    ],
 ];
