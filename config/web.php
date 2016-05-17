@@ -41,7 +41,7 @@ $config = [
                 '/' => 'site/index',
                 '/contact' => 'site/contact',
                 '/about' => 'site/about',
-
+				
                 // Auth & user manager
 				'/signup' => '/user/user/signup',
 				'/login' => '/user/user/login',
@@ -93,7 +93,7 @@ $config = [
 			'class' => 'budyaga\users\Module',
 			'userPhotoUrl' => 'http://example.com/uploads/user/photo',
 			'userPhotoPath' => '@frontend/web/uploads/user/photo'
-		],
+		]
 	],
     'params' => $params,
 

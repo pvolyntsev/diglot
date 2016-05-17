@@ -60,6 +60,9 @@ $config = [
 			'userPhotoUrl' => 'http://example.com/uploads/user/photo',
 			'userPhotoPath' => '@frontend/web/uploads/user/photo'
 		],
+        'markdown' => [
+            'class' => 'kartik\markdown\Module',
+        ]
 	],
     'params' => $params,
 ];
