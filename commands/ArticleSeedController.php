@@ -19,7 +19,8 @@ class ArticleSeedController extends Controller
 			$article->title_original=$faker->text(80);
 			$article->title_translate=$faker->text(80);
 			$article->user_id='2';
-			$article->lang_original_id='2';
+			$article->lang_original_id='1';
+			$article->lang_transtate_id='2';
 			$article->save();
 			var_export($article->errors);
 		}
