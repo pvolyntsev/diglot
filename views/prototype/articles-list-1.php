@@ -6,6 +6,7 @@
  *
  * @var \app\models\User user
  * @var \app\models\Article[] $articles
+ * @var int $page
  */
 ?>
 <div class="articles list">
@@ -100,8 +101,8 @@
 
     <nav>
         <ul class="pager">
-            <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Newer</a></li>
-            <li class="next"><a href="#">Older <span aria-hidden="true">&rarr;</span></a></li>
+            <li class="previous"><a href="/prototype/articles/list?page=1"><span aria-hidden="true">&larr;</span> Newer</a></li>
+            <li class="next"><a href="/prototype/articles/list?page=2">Older <span aria-hidden="true">&rarr;</span></a></li>
         </ul>
     </nav>
 

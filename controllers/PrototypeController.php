@@ -53,6 +53,7 @@ class PrototypeController extends Controller
 
             case 'articles-list':
                 $data['articles'] = require(__DIR__ . '/../assets/fixtures/article/articles.php');
+                $mode = isset($_GET['page']) && (int)$_GET['page']>1 ? 'list-2' : 'list-1';
                 break;
         }
 

@@ -50,7 +50,8 @@ AppAsset::register($this);
             <div class="col col-lg-2">
                 <!--Sidebar content-->
                 <div class="list-group">
-                    <a class="list-group-item" href="<?php echo Url::to(['prototype/page', 'entity' => 'articles', 'mode' => 'list']);?>">Articles/List</a>
+                    <a class="list-group-item" href="<?php echo Url::to(['prototype/page', 'entity' => 'articles', 'mode' => 'list', 'page' => 1]);?>">Articles/List page 1</a>
+                    <a class="list-group-item" href="<?php echo Url::to(['prototype/page', 'entity' => 'articles', 'mode' => 'list', 'page' => 2]);?>">Articles/List page 2, 3, etc</a>
                     <a class="list-group-item" href="<?php echo Url::to(['prototype/page', 'entity' => 'article', 'mode' => 'view']);?>">Article/View</a>
                     <a class="list-group-item" href="<?php echo Url::to(['prototype/page', 'entity' => 'article', 'mode' => 'edit']);?>">Article/Edit</a>
                     <a class="list-group-item" href="<?php echo Url::to(['prototype/page', 'entity' => 'article', 'mode' => 'comments']);?>">Article/Comments</a>
