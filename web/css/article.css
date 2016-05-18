@@ -28,6 +28,25 @@
     margin-top: 1em;
 }
 
+/* Media Queries */
+.article-heading .col:nth-child(2) {
+    padding-left: 60px;
+}
+
+.article-paragraph .col:nth-child(2) {
+    padding-left: 60px;
+}
+
+@media (min-width: 992px) {
+    .article-heading .col {
+        padding-left: 0 !important;
+    }
+
+    .article-paragraph .col {
+        padding-left: 0 !important;
+    }
+}
+
 /**
     Articles list & search
     ---------------------------------- */
