@@ -35,4 +35,5 @@ return (object)(array(
             'id' => 2,
             'language' => 'russian',
         )),
+    'paragraphs' => require(__DIR__.'/paragraphs.php'),
 ));

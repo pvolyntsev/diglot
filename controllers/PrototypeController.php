@@ -41,12 +41,11 @@ class PrototypeController extends Controller
         {
             case 'article-view':
                 $data['article'] = require(__DIR__ . '/../assets/fixtures/article/things-everyone-should-do-code-review/article.php');
-                $data['paragraphs'] = require(__DIR__ . '/../assets/fixtures/article/things-everyone-should-do-code-review/paragraphs.php');
                 break;
 
             case 'article-comments':
                 $data['article'] = require(__DIR__ . '/../assets/fixtures/article/things-everyone-should-do-code-review/article.php');
-                $data['paragraphs'] = array_slice(require(__DIR__ . '/../assets/fixtures/article/things-everyone-should-do-code-review/paragraphs.php'), 2, 4);
+                    $data['article']->paragraphs = array_slice($data['article']->paragraphs, 2, 4); // чтобы страница была не очень длинная
                 $data['recommendedComments'] = array_slice(require(__DIR__ . '/../assets/fixtures/article/things-everyone-should-do-code-review/comments.php'), 0, 4);
                 $data['commentsPage1'] = array_slice(require(__DIR__ . '/../assets/fixtures/article/things-everyone-should-do-code-review/comments.php'), 0, 10);
                 $data['commentsPage2'] = array_slice(require(__DIR__ . '/../assets/fixtures/article/things-everyone-should-do-code-review/comments.php'), 10, 10);
