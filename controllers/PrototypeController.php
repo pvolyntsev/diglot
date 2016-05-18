@@ -51,6 +51,9 @@ class PrototypeController extends Controller
                 $data['commentsPage2'] = array_slice(require(__DIR__ . '/../assets/fixtures/article/things-everyone-should-do-code-review/comments.php'), 10, 10);
                 break;
 
+            case 'articles-list':
+                $data['articles'] = require(__DIR__ . '/../assets/fixtures/article/articles.php');
+                break;
         }
 
         $model = new Comment();
