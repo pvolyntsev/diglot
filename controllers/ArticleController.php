@@ -34,6 +34,8 @@ class ArticleController extends Controller
      * Lists all Article models.
      * @return mixed
      */
+	 
+	
 	public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
@@ -49,6 +51,7 @@ class ArticleController extends Controller
             'dataProvider' => $dataProvider,
         ]);
 	}
+	
 	
     /**
      * Displays a single Article model.
