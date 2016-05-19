@@ -55,6 +55,10 @@ class PrototypeController extends Controller
                 $data['articles'] = require(__DIR__ . '/../assets/fixtures/article/articles.php');
                 $mode = isset($_GET['page']) && (int)$_GET['page']>1 ? 'list-2' : 'list-1';
                 break;
+
+            case 'articles-search':
+                $data['articles'] = require(__DIR__ . '/../assets/fixtures/article/articles.php');
+                break;
         }
 
         return $this->render($entity.'-'.$mode, $data);
