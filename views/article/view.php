@@ -3,6 +3,10 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
+use yii\widgets\ActiveForm;
+use yii\grid\GridView;
+use yii\widgets\ListView;
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Article */
 
@@ -51,3 +55,52 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
+
+<div class="container comments">
+
+<div class="comment-form">
+
+    <?php $form = ActiveForm::begin(['id' => 'forum_post', 'method' => 'post',]); ?>
+
+    <!--        --><?//= $form->field($model, 'user_id')->textInput() ?>
+
+    <!--            --><?//= $form->field($model, 'article_id')->hiddenInput() ?>
+
+    <?= $form->field($comment, 'comment')->textarea(['rows' => 6]) ?>
+
+    <!--        --><?//= $form->field($model, 'date_created')->textInput() ?>
+
+    <!--        --><?//= form->field($model, 'date_modified')->textInput() ?>
+
+    <!--        --><?//= $form->field($model, 'status')->dropDownList([ 'published' => 'Published', 'blocked' => 'Blocked', ], ['prompt' => '']) ?>
+
+    <div class="form-group">
+<!--        --><?//= Html::submitButton($comment->isNewRecord ? 'Create' : 'Update', ['class' => $comment->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton('Create', ['class' => 'btn btn-success']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
+
+</div>
+
+
+<div class="container comments">
+<?= ListView::widget([
+    'dataProvider' => $comments,
+    'itemView' => function ($model, $key, $index, $widget) {
+        return $this->render('_comment', [
+            'comment' => $model,
+        ]);
+    },
+]);
+?>
+<!--    </div>-->
+<!---->
+<?php
+//if (!empty($comments)) { ?>
+<!--    <div class="comments-show-all" id="js-comments-show-all"><a href="#">Show all responses</a></div>-->
+<?php //}
+//?>
+<!--    </div-->
+
+
