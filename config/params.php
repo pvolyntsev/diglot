@@ -4,6 +4,7 @@ return [
     'adminEmail' => 'diglot-admin@copist.ru',
     'supportEmail' => 'diglot-support@copist.ru',
     'domain' => 'http://l.diglot.copist.ru/',
+    'name' => 'Diglot',
 
     // Send all mails to a file by default
     // You have to set 'mailer.useFileTransport' to false and configure a 'mailer.transport' to send real emails
