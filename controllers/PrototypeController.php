@@ -40,7 +40,8 @@ class PrototypeController extends Controller
         switch ($entity . '-' . $mode)
         {
             case 'article-view':
-                $data['article'] = require(__DIR__ . '/../assets/fixtures/article/things-everyone-should-do-code-review/article.php');
+                $data['article'] = require(__DIR__ . '/../assets/fixtures/article/over-thinking_and_knowing_too_much_to_just_code/article.php');
+                $data['article']->paragraphs = require(__DIR__ . '/../assets/fixtures/article/over-thinking_and_knowing_too_much_to_just_code/paragraphs.php');
                 break;
 
             case 'article-comments':
