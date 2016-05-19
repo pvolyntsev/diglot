@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Article;
+use app\models\Comment;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -59,10 +60,42 @@ class ArticleController extends Controller
      * @return mixed
      */
     
+    
 	public function actionView($id)
     {
+        $model = $this->findModel($id);
+
+        $comment = new Comment();
+
+        $comment->user_id = Yii::$app->user->identity->id;
+        $comment->article_id = $id;
+        $comment->status = 'published';
+//        $comment->date_created=Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));aa
+        $comment->date_created=$comment->behaviors();
+
+ //       var_dump($comment->load($_POST));//true
+ //       var_dump($comment->save());//false
+
+//        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($comment->load($_POST) && $comment->save()){
+//            return $this->redirect([$entity.'-'.$mode, 'id' => $model->id]); // TODO goto to the article
+            //return $this->render($entity.'-'.$mode, $data);
+        }
+
+        $comments = new ActiveDataProvider([
+            'query' => Comment::find()->limit(4)->where('article_id=:article_id and status=:published', [':article_id' => $id,':published'=>'published']),
+            'pagination' => ['pageSize' => 4],
+            'sort' => [
+				'defaultOrder' => [
+					'date_created' => SORT_DESC,
+				]
+			],
+        ]);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'comments' => $comments,
+            'comment' => $comment,
         ]);
 	}
 		
