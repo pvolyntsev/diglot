@@ -6,7 +6,6 @@
  *
  * @var \app\models\User user
  * @var \app\models\Article $article
- * @var \app\models\Paragraph[] $paragraphs
  * @var \app\models\Comment[] $comments
  */
 ?>
@@ -28,7 +27,7 @@
     </div>
 </div>
 <div class="vertical spacer"></div>
-<?php foreach($paragraphs as $paragraph) {?>
+<?php foreach($article->paragraphs as $paragraph) { ?>
     <div class="row article-paragraph">
         <div class="col col-md-6 article-paragraph-translate">
             <p><?php echo $paragraph->paragraph_translate ?></p>

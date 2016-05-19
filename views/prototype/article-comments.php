@@ -6,7 +6,6 @@
  *
  * @var \app\models\User user
  * @var \app\models\Article $article
- * @var \app\models\Paragraph[] $paragraphs
  * @var \app\models\Comment[] $recommendedComments
  * @var \app\models\Comment[] $commentsPage1
  * @var \app\models\Comment[] $commentsPage2
