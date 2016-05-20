@@ -55,6 +55,7 @@ AppAsset::register($this);
                     <a class="list-group-item" href="<?php echo Url::to(['prototype/page', 'entity' => 'article', 'mode' => 'view']);?>">Article/View</a>
                     <a class="list-group-item" href="<?php echo Url::to(['prototype/page', 'entity' => 'article', 'mode' => 'edit']);?>">Article/Edit</a>
                     <a class="list-group-item" href="<?php echo Url::to(['prototype/page', 'entity' => 'article', 'mode' => 'comments']);?>">Article/Comments</a>
+                    <a class="list-group-item" href="<?php echo Url::to(['prototype/page', 'entity' => 'articles', 'mode' => 'search']);?>">Article/Search</a>
                 </div>
             </div>
             <div class="col col-lg-8">

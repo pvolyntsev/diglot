@@ -1,8 +1,15 @@
 <?php
-use yii\helpers\Html;
 use yii\widgets\ListView;
 use app\models\Article;
 use app\models\Language;
+<<<<<<< HEAD
+=======
+use yii\helpers\Html;
+
+
+$article=new Article();
+$language=new \app\models\Language();
+>>>>>>> 09c1a8042b43e187a2e7c38d6649ed119402ec36
 
 $article=new Article();
 $language=new \app\models\Language();

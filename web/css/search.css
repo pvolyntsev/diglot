@@ -1,0 +1,35 @@
+.form__container {
+    margin-bottom: 45px;
+}
+
+.form__search {
+    padding-top: 55px;
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.form__input {
+    width: 80% !important;
+}
+
+.form__button.fa {
+    font-size: 20px;
+}
+
+.search__description {
+    text-align: center;
+    font-size: 17px;
+}
+
+.result__header {
+    margin-bottom: 10px;
+}
+
+.result__header-link {
+    font-weight: 700;
+    font-size: 22px;
+    display: block;
+    max-height: 90px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
