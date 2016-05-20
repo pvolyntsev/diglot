@@ -68,4 +68,9 @@ return [
 //            'consumerSecret' => 'XXX',
 //        ],
 //    ],
+
+    // banner positions and attributes
+    'banner.positions' => [
+        'footer.central.column' => [ 'format' => 'html/list' ],
+    ]
 ];
