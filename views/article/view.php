@@ -61,22 +61,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="comment-form">
 
     <?php $form = ActiveForm::begin(['id' => 'forum_post', 'method' => 'post',]); ?>
-
-    <!--        --><?//= $form->field($model, 'user_id')->textInput() ?>
-
-    <!--            --><?//= $form->field($model, 'article_id')->hiddenInput() ?>
-
     <?= $form->field($comment, 'comment')->textarea(['rows' => 6]) ?>
-
-    <!--        --><?//= $form->field($model, 'date_created')->textInput() ?>
-
-    <!--        --><?//= form->field($model, 'date_modified')->textInput() ?>
-
-    <!--        --><?//= $form->field($model, 'status')->dropDownList([ 'published' => 'Published', 'blocked' => 'Blocked', ], ['prompt' => '']) ?>
-
     <div class="form-group">
-<!--        --><?//= Html::submitButton($comment->isNewRecord ? 'Create' : 'Update', ['class' => $comment->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-        <?= Html::submitButton('Create', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Add Response', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
