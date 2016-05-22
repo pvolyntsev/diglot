@@ -65,6 +65,10 @@ $config = [
 				'/article/create' => '/article/create',
 				'/article/update' => '/article/update',
 				'/article/' => '/article/delete',
+
+                // banners
+                '/banner' => '/banner/index',
+                '/banner/<action>' => '/banner/<action>',
 			],
 		],
 		'authManager' => [

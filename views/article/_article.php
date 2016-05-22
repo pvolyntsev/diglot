@@ -6,7 +6,15 @@ use yii\helpers\Html;
 
 $article=new Article();
 $language=new \app\models\Language();
-?>
+
+/**
+ * @var Article $model
+ * @var $key
+ * @var $index
+ * @var ListView $widget
+ */
+
+ ?>
 
 	<div class="article">
 		<div class="row article-heading">
