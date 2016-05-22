@@ -25,7 +25,7 @@ use Yii;
  * @property string $translator_url
  * @property integer $own_translate
  * @property integer $lang_original_id
- * @property integer $lang_transtate_id
+ * @property integer $lang_translate_id
  *
  * @property Language $langTranstate
  * @property User $user
@@ -60,7 +60,7 @@ class Article extends \yii\db\ActiveRecord
             [['title_original', 'title_translate'], 'string', 'max' => 100],
             [['url_original', 'url_translate', 'author_url', 'translator_url'], 'string', 'max' => 500],
             [['author_name', 'translator_name'], 'string', 'max' => 255],
-            [['lang_transtate_id'], 'exist', 'skipOnError' => true, 'targetClass' => Language::className(), 'targetAttribute' => ['lang_transtate_id' => 'id']],
+            [['lang_translate_id'], 'exist', 'skipOnError' => true, 'targetClass' => Language::className(), 'targetAttribute' => ['lang_translate_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['lang_original_id'], 'exist', 'skipOnError' => true, 'targetClass' => Language::className(), 'targetAttribute' => ['lang_original_id' => 'id']],
         ];
@@ -90,7 +90,7 @@ class Article extends \yii\db\ActiveRecord
             'translator_url' => 'Translator Url',
             'own_translate' => 'Собственный перевод',
             'lang_original_id' => 'Язык оригинальной статьи',
-            'lang_transtate_id' => 'Язык перевода',
+            'lang_translate_id' => 'Язык перевода',
         ];
     }
 
@@ -99,7 +99,7 @@ class Article extends \yii\db\ActiveRecord
      */
     public function getLangTranstate()
     {
-        return $this->hasOne(Language::className(), ['id' => 'lang_transtate_id']);
+        return $this->hasOne(Language::className(), ['id' => 'lang_translate_id']);
     }
 
     /**
