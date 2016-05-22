@@ -6,6 +6,10 @@ use yii\widgets\DetailView;
 use yii\widgets\ActiveForm;
 use yii\grid\GridView;
 use yii\widgets\ListView;
+use ScrollPage;
+use yii\widgets\LinkPager;
+use yii\widgets\Pjax;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Article */
@@ -84,23 +88,50 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 
-<div class="container comments">
+<div class="container comments" id="js-comments-recommended">
 <?= ListView::widget([
-    'dataProvider' => $comments,
+    'dataProvider' => $comments_selected,
     'itemView' => function ($model, $key, $index, $widget) {
         return $this->render('_comment', [
             'comment' => $model,
         ]);
     },
+    'layout' => "{summary}\n{items}",
+    'summary' => 'Показано {count} из {totalCount}',
+    'summaryOptions' => [
+    'tag' => 'span',
+    'class' => 'my-summary',
+],
+    'emptyText' => 'Список пуст',
 ]);
 ?>
-<!--    </div>-->
-<!---->
+
+</div>
+
+<div id="js-comments-page" style="display: none; margin-bottom: 100px">
+
+<?php Pjax::begin(['id'=>'comments_list']); ?>
+    <?= ListView::widget([
+        'dataProvider' => $comments,
+        'itemView' => function ($model, $key, $index, $widget) {
+            return $this->render('_comment', [
+                'comment' => $model,
+            ]);
+        },
+        'layout' => "{summary}\n{items}\n{pager}",
+    ]);
+    ?>
+<?php Pjax::end(); ?>
+</div>
+
+
 <?php
-//if (!empty($comments)) { ?>
-<!--    <div class="comments-show-all" id="js-comments-show-all"><a href="#">Show all responses</a></div>-->
-<?php //}
-//?>
-<!--    </div-->
+if (!empty($comments_selected)) { ?>
+    <div class="comments-show-all" id="js-comments-show-all"><a href="#">Show all responses</a></div>
+<?php }
+?>
+
+</div>
+
 
 

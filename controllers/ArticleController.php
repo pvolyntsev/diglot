@@ -3,12 +3,14 @@
 namespace app\controllers;
 
 use Yii;
+
 use app\models\Article;
 use app\models\Comment;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\Pagination;
 
 /**
  * ArticleController implements the CRUD actions for Article model.
@@ -18,6 +20,7 @@ class ArticleController extends Controller
     /**
      * @inheritdoc
      */
+
     public function behaviors()
     {
         return [
@@ -78,11 +81,11 @@ class ArticleController extends Controller
 
 //        if ($model->load(Yii::$app->request->post()) && $model->save()) {
         if ($comment->load($_POST) && $comment->save()){
-//            return $this->redirect([$entity.'-'.$mode, 'id' => $model->id]); // TODO goto to the article
+//          return $this->redirect([$entity.'-'.$mode, 'id' => $model->id]); // TODO goto to the article
             //return $this->render($entity.'-'.$mode, $data);
         }
 
-        $comments = new ActiveDataProvider([
+        $comments_selected = new ActiveDataProvider([
             'query' => Comment::find()->limit(4)->where('article_id=:article_id and status=:published', [':article_id' => $id,':published'=>'published']),
             'pagination' => ['pageSize' => 4],
             'sort' => [
@@ -92,10 +95,65 @@ class ArticleController extends Controller
 			],
         ]);
 
+        $comments = new ActiveDataProvider([
+            'query' => Comment::find()->where('article_id=:article_id and status=:published', [':article_id' => $id,':published'=>'published']),
+            'pagination' => ['pageSize' => 8],
+            'sort' => [
+                'defaultOrder' => [
+                    'date_created' => SORT_DESC,
+                ]
+            ],
+        ]);
+        
+        ///////////////////////////////////////////////////////////////////////
+//        $query =  Comment::find()->where('article_id=:article_id and status=:published', [':article_id' => $id,':published'=>'published']);
+//        $countQuery = clone $query;
+//        $pages = new Pagination(['totalCount' => $countQuery->count()]);
+//        $models = $query->offset($pages->offset)
+//            ->limit($pages->limit)
+//            ->all();
+        /////////////////////////////////////////////////////////////////////////
+
+        ////////////////////////////////////////////////////////////// trying to use listview
+//        $dataProvider = new CActiveDataProvider('Comment', array(
+//            //Критерий для запроса. В этом примере, выбираются все опублкованные комментарии
+//            'criteria'=>array('article_id'=> 'published'),
+//            //Настройки для постраничной навигации
+//            'pagination'=>array(
+//                //Количество отзывов на страницу
+//                'pageSize'=>5,
+//                'pageVar'=>'view',
+//            ),
+//            //Настройки для сортировки
+//            'sort'=>array(
+//                //атрибуты по которым происходит сортировка
+//                'attributes'=>array(
+//                    'date_created'=>array(
+//                        'asc'=>'created_at ASC',
+//                        'desc'=>'created_at DESC',
+//                        'default'=>'desc',
+//                    )
+//                ),
+//                /** После того, как будет загружена страница с виджетом,
+//                 * сортировка будет происходить по этому параметру.
+//                 * Если указан defaultOrder, то задается стиль для атрибута, по которому происходит сортировка.
+//                 * В данном случае у created_at будет class="desc".
+//                 */
+//                'defaultOrder'=>array(
+//                    'date_created'=>CSort::SORT_DESC,
+//                )
+//            ),
+//        ));
+        ///////////////////////////////////////////////////////////////
+
         return $this->render('view', [
             'model' => $model,
             'comments' => $comments,
+            'comments_selected'=>$comments_selected,
             'comment' => $comment,
+//            'dataProvider'=>$dataProvider,
+//        'models'=>$models,
+//            'pages'=>$pages,
         ]);
 	}
 		

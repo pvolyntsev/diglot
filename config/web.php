@@ -65,6 +65,10 @@ $config = [
 				'/article/create' => '/article/create',
 				'/article/update' => '/article/update',
 				'/article/' => '/article/delete',
+
+				//comment
+				'/comment' => '/comment/index',
+				'/comment/<action>' => '/comment/<action>',
 			],
 		],
 		'authManager' => [

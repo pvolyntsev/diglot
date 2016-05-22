@@ -5,6 +5,7 @@
 .comments.container {
     width: 80%;
     margin-left: 10%;
+    margin-bottom: 100px;
 }
 
 .comments-heading {
@@ -102,7 +103,7 @@
         background: #fff;
         width: 100%;
         margin-top: 20px;
-        margin-bottom: 0;
+        margin-bottom: 100px;
         padding: 20px;
         border: 1px solid rgba(0,0,0,.09)!important;
     }
@@ -116,3 +117,7 @@
             .comments .comments-show-all a:hover {
                 color: #0000FF;
             }
+
+#all_comments {
+display:none;
+}
