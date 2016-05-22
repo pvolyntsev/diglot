@@ -32,7 +32,7 @@ class m160508_091836_create_article_table extends Migration
             'translator_url'=>$this->string(500),
             'own_translate'=>$this->integer()->notNull()->defaultValue(0)->comment('Собственный перевод'),
             'lang_original_id'=>$this->integer()->notNull()->comment('Язык оригинальной статьи'),
-            'lang_transtate_id'=>$this->integer()->comment('Язык перевода'),
+            'lang_translate_id'=>$this->integer()->comment('Язык перевода'),
         ]);
 
         $this->addForeignKey('fk_article_user','article','user_id','user','id',$delete=null,$update=null);

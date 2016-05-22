@@ -10,7 +10,7 @@ use yii\widgets\ListView;
 $this->title = 'Articles';
 $this->params['breadcrumbs'][] = $this->title;
 
-$page = $widget->dataProvider->getPagination()->getPage() + 1;
+//$page = $widget->dataProvider->getPagination()->getPage() + 1;
 ?>
 
 <div class="article-index">
