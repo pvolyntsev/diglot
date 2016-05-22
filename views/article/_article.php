@@ -2,14 +2,7 @@
 use yii\widgets\ListView;
 use app\models\Article;
 use app\models\Language;
-<<<<<<< HEAD
-=======
 use yii\helpers\Html;
-
-
-$article=new Article();
-$language=new \app\models\Language();
->>>>>>> 09c1a8042b43e187a2e7c38d6649ed119402ec36
 
 $article=new Article();
 $language=new \app\models\Language();
@@ -31,3 +24,9 @@ $language=new \app\models\Language();
 			</div>
 		</div>
 	</div>
+	<nav>
+        <ul class="pager">
+            <li class="previous"><a href="/prototype/articles/list?page=1"><span aria-hidden="true">&larr;</span> Newer</a></li>
+            <li class="next"><a href="/prototype/articles/list?page=2">Older <span aria-hidden="true">&rarr;</span></a></li>
+        </ul>
+    </nav>
