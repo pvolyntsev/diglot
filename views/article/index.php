@@ -10,15 +10,18 @@ use yii\widgets\ListView;
 $this->title = 'Articles';
 $this->params['breadcrumbs'][] = $this->title;
 
+$page = $widget->dataProvider->getPagination()->getPage() + 1;
 ?>
 
 <div class="article-index">
-    <h1><?= Html::encode($this->title) ?></h1>
-    <p>
-        <?= Html::a('Create Article', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <div class="col col-md-2">
+		<h1><?= Html::encode($this->title) ?></h1>
+		<p>
+			<?= Html::a('Create Article', ['create'], ['class' => 'btn btn-success']) ?>
+		</p>
+	</div>
 	<div class="articles list">
-	
+		
 			<div class="row two-columns">
 				<?= ListView::widget([
 					'dataProvider' => $dataProvider,

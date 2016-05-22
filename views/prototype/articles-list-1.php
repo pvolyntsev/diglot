@@ -11,6 +11,7 @@
 ?>
 <div class="articles list">
     <?php $n =0 ?>
+
     <?php foreach($articles as $article) { ?>
         <?php $n++ ?>
 

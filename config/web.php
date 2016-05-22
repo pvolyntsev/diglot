@@ -69,6 +69,9 @@ $config = [
 				//comment
 				'/comment' => '/comment/index',
 				'/comment/<action>' => '/comment/<action>',
+                // banners
+                '/banner' => '/banner/index',
+                '/banner/<action>' => '/banner/<action>',
 			],
 		],
 		'authManager' => [

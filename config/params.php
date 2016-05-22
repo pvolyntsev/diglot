@@ -5,6 +5,14 @@ return [
     'supportEmail' => 'diglot-support@copist.ru',
     'domain' => 'http://l.diglot.copist.ru/',
     'name' => 'Diglot',
+    'title' => [
+        'en' => 'Diglot. Your bilingual books and articles shelf. English and Russian.',
+        'ru' => 'Diglot. Твоя полка для статей и книг билингва. На английском и русском.',
+    ],
+    'description.256' => 'Diglot project gives the opportunity to learn English or Russian using examples of quality translation. Проект Diglot дает возможность изучать английский или русский язык, используя примеры качественного перевода.',
+    'description.100' => 'Learn English Russian using high quality translation. Изучи английский русский по качественным переводам',
+    'keywords' => 'learn, english, russian, translation, articles, stories, read, publish, social, service',
+    'social.image' => '/img/diglot_about.png',
 
     // Send all mails to a file by default
     // You have to set 'mailer.useFileTransport' to false and configure a 'mailer.transport' to send real emails
@@ -64,4 +72,9 @@ return [
 //            'consumerSecret' => 'XXX',
 //        ],
 //    ],
+
+    // banner positions and attributes
+    'banner.positions' => [
+        'footer.central.column' => [ 'format' => 'html/list' ],
+    ]
 ];
