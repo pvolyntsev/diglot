@@ -23,8 +23,8 @@ class m160522_191915_insert_article extends Migration
             'translator_name' => '@a553',
             'translator_url' => 'https://habrahabr.ru/users/a553/',
             'own_translate' => false,
-            'lang_original_id' => 53,
-            'lang_transtate_id' => 54,
+            'lang_original_id' => 1,
+            'lang_transtate_id' => 2,
         ]);
     }
 

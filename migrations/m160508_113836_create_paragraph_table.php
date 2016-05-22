@@ -21,10 +21,12 @@ class m160508_113836_create_paragraph_table extends Migration
             'paragraph_original'=>$this->text()->notNull(),
             'paragraph_translate'=>$this->text(),
             'date_modified'=>$this->timestamp()." DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
-            'sortorder'=>$this->integer()->unique()->notNull()->defaultValue(1)->comment('Порядковый номер параграфа в статье'),
+            'sortorder'=>$this->integer()->notNull()->defaultValue(1)->comment('Порядковый номер параграфа в статье'),
         ]);
 
         $this->addCommentOnTable('paragraph','Абзац в статье, который может быть и ссылкой на картинку');
+
+        $this->createIndex('uq_para_sortorder','paragraph',['article_id','sortorder'],$unique=true);
 
         $this->addForeignKey('fk_paragraph_article','paragraph','article_id','article','id',$delete=null,$update=null);
     }
