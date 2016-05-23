@@ -36,7 +36,7 @@
                     <div class="row article-heading">
                         <div class="col col-md-6 article-heading-title-translate">
                             <h1><a href="#"><?php echo $article->title_translate ?></a>
-                                <span class="label"><?php echo $article->langOriginal->language ?></span>
+                                <span class="label"><?php echo $article->langTranslate->language ?></span>
                             </h1>
                             <p class="author">Перевод <?php echo $article->translator_name ?></p>
                         </div>
