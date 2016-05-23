@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 
+use yii\filters\AccessControl;
 use app\models\Article;
 use app\models\Comment;
 use yii\data\ActiveDataProvider;
@@ -24,6 +25,17 @@ class ArticleController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create', 'update', 'delete'],
+                'rules' => [
+                    [
+                        #'actions' => ['logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
