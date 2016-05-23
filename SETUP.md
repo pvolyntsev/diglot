@@ -8,6 +8,7 @@
 - MySQL 5.0+
 - [Composer](https://getcomposer.org/download/)
 - php5-curl
+- [ElasticSearch](https://github.com/elastic/elasticsearch/blob/master/README.textile)
 
 ####Скопировать репозиторий####
 ```
