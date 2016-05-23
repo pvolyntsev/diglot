@@ -19,18 +19,18 @@ return (object)(array(
     'translator_url' => 'https://habrahabr.ru/users/limonte/',
     'own_translate' => false,
     'lang_original_id' => 1,
-    'lang_transtate_id' => 2,
+    'lang_translate_id' => 2,
     'user' =>
         (object)(array(
             'id' => 1,
             'username' => 'copist',
         )),
-    'lang_original' =>
+    'langOriginal' =>
         (object)(array(
             'id' => 1,
             'language' => 'english',
         )),
-    'lang_transtate' =>
+    'langTranslate' =>
         (object)(array(
             'id' => 2,
             'language' => 'russian',

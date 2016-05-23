@@ -13,14 +13,14 @@
 <div class="row article-heading">
     <div class="col col-md-6 article-heading-title-translate">
         <h1><?php echo $article->title_translate ?>
-            <span class="label"><?php echo $article->lang_transtate->language ?></span>
+            <span class="label"><?php echo $article->langTranslate->language ?></span>
         </h1>
         <a class="permalink" href="<?php echo $article->url_translate ?>"><?php echo $article->url_translate ?></a>
         <p class="author">Перевод <a href="<?php echo $article->translator_url ?>"><?php echo $article->translator_name ?></a></p>
     </div>
     <div class="col col-md-6 article-heading-title-original">
         <h1><?php echo $article->title_original ?>
-            <span class="label"><?php echo $article->lang_original->language ?></span>
+            <span class="label"><?php echo $article->langOriginal->language ?></span>
         </h1>
         <a class="permalink" href="<?php echo $article->url_original ?>"><?php echo $article->url_original ?></a>
         <p class="author">By <a href="<?php echo $article->author_url ?>"><?php echo $article->author_name ?></a></p>

@@ -27,7 +27,7 @@ use Yii;
  * @property integer $lang_original_id
  * @property integer $lang_translate_id
  *
- * @property Language $langTranstate
+ * @property Language $langTranslate
  * @property User $user
  * @property Language $langOriginal
  * @property CategoryOfArticle[] $categoryOfArticles
@@ -97,7 +97,7 @@ class Article extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getLangTranstate()
+    public function getLangTranslate()
     {
         return $this->hasOne(Language::className(), ['id' => 'lang_translate_id']);
     }

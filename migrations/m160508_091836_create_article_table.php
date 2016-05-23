@@ -15,9 +15,9 @@ class m160508_091836_create_article_table extends Migration
         $this->createTable('article', [
             'id' => $this->primaryKey(),
             'title_original'=>$this->string(100)->notNull(),
-            'url_original'=>$this->string(500).' null',
+            'url_original'=>$this->string(500),
             'title_translate'=>$this->string(100),
-            'url_translate'=>$this->string(500).' null',
+            'url_translate'=>$this->string(500),
             //'status'=>$this->enum('draft', 'published', 'blocked')->notNull()->defaultValue('draft')->comment('Статуc'),
             'status'=>"enum('draft', 'published', 'blocked') NOT NULL DEFAULT 'draft' COMMENT 'Статуc'",
             'date_created'=>$this->timestamp()->notNull()->defaultValue('0000-00-00 00:00:00'),

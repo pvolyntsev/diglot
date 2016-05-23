@@ -19,7 +19,7 @@ $page = $widget->dataProvider->getPagination()->getPage() + 1;
 		<div class="row article-heading">
 			<div class="col col-md-6 article-heading-title-translate">
 				<h1><a href="#"><?php echo $model->title_translate ?></a>
-					<span class="label"><?php echo $model->langTranstate->language ?></span>
+					<span class="label"><?php echo $model->langTranslate->language ?></span>
 				</h1>
 				<p class="author">Перевод <?php echo $model->translator_name ?></p>
 			</div>
@@ -44,7 +44,7 @@ $page = $widget->dataProvider->getPagination()->getPage() + 1;
 			<div class="col col-md-5 article-heading-title-translate">
 				<h1>
 					<?=Html::a(Html::encode($model->title_translate), ['view', 'id' => $model->id])?>
-					<span class="label"><?php echo $model->langTranstate->language ?></span>
+					<span class="label"><?php echo $model->langTranslate->language ?></span>
 				</h1>
 			</div>
 		</div>

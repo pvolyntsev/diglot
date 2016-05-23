@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'translator_url:url',
             'own_translate',
             'lang_original_id',
-            'lang_transtate_id',
+            'lang_translate_id',
         ],
     ]) ?>
 
