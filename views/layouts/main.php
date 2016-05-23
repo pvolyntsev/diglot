@@ -91,15 +91,15 @@ AppAsset::register($this);
     ]);
 
     $items = [
-        ['label' => 'Home', 'url' => ['/']],
+        //['label' => 'Home', 'url' => ['/']],
         //['label' => 'About', 'url' => ['/site/about']],
         //['label' => 'Contact', 'url' => ['/site/contact']],
     ];
 
     if (Yii::$app->user->isGuest)
     {
-        $items[] = ['label' => '<i class="fa fa-sign-in"></i> Login', 'url' => ['/login']];
-        $items[] = ['label' => '<i class="fa fa-user-plus"></i> Register', 'url' => ['/signup']];
+        $items[] = ['label' => '<i class="fa fa-sign-in"></i> Login', 'url' => ['/login'], 'encode' => false, 'options' => [ 'class' => 'link']];
+        $items[] = ['label' => '<i class="fa fa-user-plus"></i> Signup', 'url' => ['/signup'], 'encode' => false, 'options' => [ 'class' => 'link']];
     } else {
         $items[] = ['label' => '<i class="fa fa-user"></i> Profile', 'url' => ['/profile'], 'encode' => false, 'options' => [ 'class' => 'link']];
         $items[] = '<li>'
