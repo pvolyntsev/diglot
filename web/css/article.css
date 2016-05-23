@@ -87,12 +87,12 @@
         color: inherit;
     }
 
-    .articles.list .two-columns .article {
+    .articles.list.two-columns .article {
         margin-bottom: 2em;
         max-height: 250px;
         overflow: hidden;
     }
 
-    .articles.list .two-columns .article .article-heading {
+    .articles.list.two-columns .article .article-heading {
         font-size: 12px;
     }
