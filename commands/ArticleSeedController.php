@@ -11,19 +11,35 @@ class ArticleSeedController extends Controller
      * @param string $message the message to be echoed.
      */
 	
-    public function actionSeed($count = 1)
+    public function actionSeed($articles = 1, $paragraphs = 1)
     {
-		for ($i=0; $i<$count; $i++) {
-			$faker =\Faker\Factory::create();
-			$article = new \app\models\Article;
-			$article->title_original=$faker->text(80);
-			$article->title_translate=$faker->text(80);
-			$article->user_id='16';
-			$article->lang_original_id='1';
-			$article->lang_transtate_id='2';
-			$article->save();
-			var_export($article->errors);
-		}
-		echo (" created"." ".$count." "."articles");
+        $faker =\Faker\Factory::create();
+        for ($i=0; $i<$articles; $i++)
+        {
+            $article = new \app\models\Article;
+            $article->title_original=$faker->text(80);
+            $article->title_translate=$faker->text(80);
+            $article->user_id='2';
+            $article->lang_original_id='1';
+            $article->lang_translate_id='2';
+            if (!$article->save())
+            {
+                var_export($article->errors);
+                return -1;
+            }
+            for($j=0; $j<$paragraphs; $j++)
+            {
+                $paragraph = new \app\models\Paragraph;
+                $paragraph->article_id = $article->id;
+                $paragraph->sortorder = $j+1;
+                $paragraph->paragraph_original = $faker->text(400);
+                $paragraph->paragraph_translate = $faker->text(400);
+                if (!$paragraph->save())
+                {
+                    var_export($paragraph->errors);
+                    return -1;
+                }
+            }
+        }
     }
 }
