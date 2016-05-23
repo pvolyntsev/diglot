@@ -59,19 +59,20 @@ $config = [
                 [ 'pattern' => 'prototype', 'route' => 'prototype/index' ],
 				[ 'pattern' => 'prototype/<entity>/<mode>', 'route' => 'prototype/page' ],
 
-				//article
-				'/article' => '/article/index',
-				'/article/view' => '/article/view',
-				'/article/create' => '/article/create',
-				'/article/update' => '/article/update',
-				'/article/' => '/article/delete',
+                //article
+                '/article' => '/article/index',
+                '/article/<action>' => '/article/<action>',
+                '/article/<action>/<id:\d+>' => '/article/<action>',
 
 				//comment
 				'/comment' => '/comment/index',
 				'/comment/<action>' => '/comment/<action>',
+				'/comment/<action>/<id:\d+>' => '/comment/<action>',
+
                 // banners
                 '/banner' => '/banner/index',
                 '/banner/<action>' => '/banner/<action>',
+                '/banner/<action>/<id:\d+>' => '/banner/<action>',
 			],
 		],
 		'authManager' => [
