@@ -14,14 +14,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php
             $dataProvider->prepare();
             $pageNumber = $dataProvider->getPagination()->getPage()+1;
-            $itemsCount = $dataProvider->getCount();
         ?>
         <?= ListView::widget([
             'dataProvider' => $dataProvider,
             'itemView' => '_article',
             'viewParams' => [
                 'page' => $pageNumber,
-                'count' => $itemsCount,
             ],
 
             /*настройки контейнера списка */
@@ -37,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'article' . ($pageNumber > 1 ? ' col col-md-6' : ''),
             ],
 
-            'layout' => $pageNumber == 1 ? "<nav>{pager}</nav>\n{items}\n<nav>{pager}</nav>" : "{items}\n<nav>{pager}</nav>",
+            'layout' => $pageNumber > 1 ? "<nav>{pager}</nav>\n{items}\n<nav>{pager}</nav>" : "{items}\n<nav>{pager}</nav>",
 
             'emptyText' => 'No articles to show',
             'emptyTextOptions' => [

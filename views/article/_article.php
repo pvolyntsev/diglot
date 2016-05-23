@@ -1,7 +1,6 @@
 <?php
 use yii\widgets\ListView;
 use app\models\Article;
-use app\models\Language;
 use yii\helpers\Html;
 
 /**
@@ -9,7 +8,6 @@ use yii\helpers\Html;
  * @var $key
  * @var $index
  * @var ListView $widget
- * @var int $count
  * @var int $page
  */
 
