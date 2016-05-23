@@ -30,9 +30,24 @@ class ArticleController extends Controller
                 'only' => ['create', 'update', 'delete'],
                 'rules' => [
                     [
-                        #'actions' => ['logout'],
+                        // создавать может только авторизованный пользователь
+                        'actions' => ['create'],
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        // изменять, удалять статьи может только её владелец
+                        'actions' => ['update', 'delete'],
+                        'allow' => true,
+                        //'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            $article = $this->findModel(Yii::$app->request->get('id'));
+                            if ($article->user_id == Yii::$app->user->id)
+                            {
+                                return true;
+                            }
+                            return false;
+                        },
                     ],
                 ],
             ],
@@ -41,7 +56,6 @@ class ArticleController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
-				
             ],
         ];
     }
