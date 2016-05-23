@@ -36,7 +36,7 @@ class Paragraph extends \yii\db\ActiveRecord
             [['article_id', 'sortorder'], 'integer'],
             [['paragraph_original', 'paragraph_translate'], 'string'],
             [['date_modified'], 'safe'],
-            [['sortorder'], 'unique'],
+            [['article_id', 'sortorder'], 'unique', 'targetAttribute' => ['article_id', 'sortorder'], 'message' => 'The combination of Article ID and Порядковый номер параграфа в статье has already been taken.'],
             [['article_id'], 'exist', 'skipOnError' => true, 'targetClass' => Article::className(), 'targetAttribute' => ['article_id' => 'id']],
         ];
     }
@@ -61,6 +61,15 @@ class Paragraph extends \yii\db\ActiveRecord
      */
     public function getArticle()
     {
-        return $this->hasOne(Article::className(), ['id' => 'article_id'])->inverseOf('paragraphs');
+        return $this->hasOne(Article::className(), ['id' => 'article_id']);
+    }
+
+    /**
+     * @inheritdoc
+     * @return ParagraphQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new ParagraphQuery(get_called_class());
     }
 }
