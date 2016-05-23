@@ -14,6 +14,7 @@
 cd /var/www
 git clone https://github.com/pvolyntsev/diglot.git
 cd diglot
+composer global require "fxp/composer-asset-plugin:~1.1.4"
 composer update
 ```
 
@@ -27,6 +28,6 @@ GRANT ALL PRIVILEGES ON diglot.* TO diglot_rw@localhost IDENTIFIED BY '123456';
 #### Миграция таблиц ####
 ```
 cd /var/www/diglot
-yii migrate/up --migrationPath=@vendor/budyaga/yii2-users/migrations
-yii migrate/up
+php yii migrate/up --migrationPath=@vendor/budyaga/yii2-users/migrations
+php yii migrate/up
 ```
