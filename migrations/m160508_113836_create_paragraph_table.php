@@ -24,7 +24,7 @@ class m160508_113836_create_paragraph_table extends Migration
             'sortorder'=>$this->integer()->notNull()->defaultValue(1)->comment('Порядковый номер параграфа в статье'),
         ]);
 
-        $this->addCommentOnTable('paragraph','Абзац в статье, который может быть и ссылкой на картинку');
+        $this->addCommentOnTable('paragraph','Абзац статьи');
 
         $this->createIndex('uq_para_sortorder','paragraph',['article_id','sortorder'],$unique=true);
 
