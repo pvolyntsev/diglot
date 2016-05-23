@@ -56,7 +56,7 @@ class Article extends \yii\db\ActiveRecord
             [['title_original', 'title_translate', 'user_id', 'lang_original_id'], 'required'],
             [['status'], 'string'],
             [['date_created', 'date_modified', 'date_deleted', 'date_published'], 'safe'],
-            [['user_id', 'own_original', 'own_translate', 'lang_original_id', 'lang_transtate_id'], 'integer'],
+            [['user_id', 'own_original', 'own_translate', 'lang_original_id', 'lang_translate_id'], 'integer'],
             [['title_original', 'title_translate'], 'string', 'max' => 100],
             [['url_original', 'url_translate', 'author_url', 'translator_url'], 'string', 'max' => 500],
             [['author_name', 'translator_name'], 'string', 'max' => 255],
