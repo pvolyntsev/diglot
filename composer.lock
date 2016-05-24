@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "423271d127f905043b701503ecf05dc4",
-    "content-hash": "a1dfd227c42e0ae1cc32b2148e018dfd",
+    "hash": "ab9024097f8fad4de7a36a9a2ab88e18",
+    "content-hash": "fadc31f0498fc469255dbdae380de4b4",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -74,16 +74,16 @@
         },
         {
             "name": "bower-asset/jquery",
-            "version": "2.2.3",
+            "version": "2.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jquery/jquery-dist.git",
-                "reference": "af22a351b2ea5801ffb1695abb3bb34d5bed9198"
+                "reference": "c0185ab7c75aab88762c5aae780b9d83b80eda72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/af22a351b2ea5801ffb1695abb3bb34d5bed9198",
-                "reference": "af22a351b2ea5801ffb1695abb3bb34d5bed9198",
+                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/c0185ab7c75aab88762c5aae780b9d83b80eda72",
+                "reference": "c0185ab7c75aab88762c5aae780b9d83b80eda72",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -288,16 +288,16 @@
         },
         {
             "name": "budyaga/yii2-users",
-            "version": "0.1.11",
+            "version": "0.1.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/budyaga/yii2-users.git",
-                "reference": "5a211d8ec368a664e99a0bc4c51e5d1a4ae32530"
+                "reference": "39e51a4fbcf973e1ae51ed9a1f648dfd0e29f1b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/budyaga/yii2-users/zipball/5a211d8ec368a664e99a0bc4c51e5d1a4ae32530",
-                "reference": "5a211d8ec368a664e99a0bc4c51e5d1a4ae32530",
+                "url": "https://api.github.com/repos/budyaga/yii2-users/zipball/39e51a4fbcf973e1ae51ed9a1f648dfd0e29f1b1",
+                "reference": "39e51a4fbcf973e1ae51ed9a1f648dfd0e29f1b1",
                 "shasum": ""
             },
             "require": {
@@ -330,7 +330,7 @@
                 "rbac",
                 "yii2"
             ],
-            "time": "2016-04-26 15:41:43"
+            "time": "2016-05-17 07:49:23"
         },
         {
             "name": "cebe/markdown",
@@ -1364,6 +1364,55 @@
                 "yii2"
             ],
             "time": "2016-03-17 03:50:19"
+        },
+        {
+            "name": "yiisoft/yii2-elasticsearch",
+            "version": "2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-elasticsearch.git",
+                "reference": "c752e9ef2eb0bf6807f6b3a4fadc885f6f7fef59"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-elasticsearch/zipball/c752e9ef2eb0bf6807f6b3a4fadc885f6f7fef59",
+                "reference": "c752e9ef2eb0bf6807f6b3a4fadc885f6f7fef59",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\elasticsearch\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Carsten Brandt",
+                    "email": "mail@cebe.cc"
+                }
+            ],
+            "description": "Elasticsearch integration and ActiveRecord for the Yii framework",
+            "keywords": [
+                "active-record",
+                "elasticsearch",
+                "fulltext",
+                "search",
+                "yii2"
+            ],
+            "time": "2016-03-17 04:45:15"
         },
         {
             "name": "yiisoft/yii2-faker",
