@@ -131,46 +131,6 @@ class ArticleController extends Controller
             ],
         ]);
         
-        ///////////////////////////////////////////////////////////////////////
-//        $query =  Comment::find()->where('article_id=:article_id and status=:published', [':article_id' => $id,':published'=>'published']);
-//        $countQuery = clone $query;
-//        $pages = new Pagination(['totalCount' => $countQuery->count()]);
-//        $models = $query->offset($pages->offset)
-//            ->limit($pages->limit)
-//            ->all();
-        /////////////////////////////////////////////////////////////////////////
-
-        ////////////////////////////////////////////////////////////// trying to use listview
-//        $dataProvider = new CActiveDataProvider('Comment', array(
-//            //Критерий для запроса. В этом примере, выбираются все опублкованные комментарии
-//            'criteria'=>array('article_id'=> 'published'),
-//            //Настройки для постраничной навигации
-//            'pagination'=>array(
-//                //Количество отзывов на страницу
-//                'pageSize'=>5,
-//                'pageVar'=>'view',
-//            ),
-//            //Настройки для сортировки
-//            'sort'=>array(
-//                //атрибуты по которым происходит сортировка
-//                'attributes'=>array(
-//                    'date_created'=>array(
-//                        'asc'=>'created_at ASC',
-//                        'desc'=>'created_at DESC',
-//                        'default'=>'desc',
-//                    )
-//                ),
-//                /** После того, как будет загружена страница с виджетом,
-//                 * сортировка будет происходить по этому параметру.
-//                 * Если указан defaultOrder, то задается стиль для атрибута, по которому происходит сортировка.
-//                 * В данном случае у created_at будет class="desc".
-//                 */
-//                'defaultOrder'=>array(
-//                    'date_created'=>CSort::SORT_DESC,
-//                )
-//            ),
-//        ));
-        ///////////////////////////////////////////////////////////////
 
         return $this->render('view', [
             'model' => $model,

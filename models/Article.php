@@ -155,7 +155,7 @@ class Article extends \yii\db\ActiveRecord
      */
     public function getParagraphs()
     {
-        return $this->hasMany(Paragraph::className(), ['article_id' => 'id']);
+        return $this->hasMany(Paragraph::className(), ['article_id' => 'id'])->orderBy('id');
     }
 
     /**
