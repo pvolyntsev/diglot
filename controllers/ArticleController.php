@@ -12,6 +12,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\Pagination;
+use app\forms\SearchForm;
 
 /**
  * ArticleController implements the CRUD actions for Article model.
@@ -64,13 +65,13 @@ class ArticleController extends Controller
      * Lists all Article models.
      * @return mixed
      */
-	 
-	
+
+
 	public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Article::find(),
-			//sort 
+			//sort
 			'sort' => [
 				'defaultOrder' => [
 					'date_published' => SORT_DESC,
@@ -81,15 +82,15 @@ class ArticleController extends Controller
             'dataProvider' => $dataProvider,
         ]);
 	}
-	
-	
+
+
     /**
      * Displays a single Article model.
      * @param integer $id
      * @return mixed
      */
-    
-    
+
+
 	public function actionView($id)
     {
         $model = $this->findModel($id);
@@ -130,7 +131,7 @@ class ArticleController extends Controller
                 ]
             ],
         ]);
-        
+
         ///////////////////////////////////////////////////////////////////////
 //        $query =  Comment::find()->where('article_id=:article_id and status=:published', [':article_id' => $id,':published'=>'published']);
 //        $countQuery = clone $query;
@@ -182,7 +183,7 @@ class ArticleController extends Controller
 //            'pages'=>$pages,
         ]);
 	}
-		
+
     /**
      * Creates a new Article model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -248,32 +249,36 @@ class ArticleController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     *Поиск в ElasticSearch по полям title_original и title_translate
+     * @return searchResult the model ActiveDataProvider with result search
+     */
     public function actionSearch()
     {
-        $model = new SearchForm(); //\app\forms\SearchForm()
+        $model = new SearchForm();
+        $articlesFound = [];
         $searchResult = new ActiveDataProvider();
-
         if ($model->load(Yii::$app->request->post())) {
             $query = \app\elastic\models\Article::find()->query([
-                "fuzzy_like_this" => [
-                    "fields" => ["article_title_original", "article_title_translate"],
+                    "fuzzy_like_this" => [
+                    "fields" => ["title_original", "title_translate"],
                     "like_text" => $model->query,
                     "max_query_terms" => 10
                 ]
             ]);
-            $articlesFound = $query->column('article_id'); // gives id need the documents
-
+            $articlesFound = $query->column('id'); // gives id need the documents
             $searchResult = new ActiveDataProvider([
                 'query' => Article::find()->where(array('id'=>$articlesFound)),
                 'pagination' => [
                     'pageSize' => 10,
                 ],
-
             ]);
         }
         return $this->render('search', [
             'model' => $model,
             'searchResult' => $searchResult,
+            'articlesFound' => $articlesFound,
         ]);
     }
 
