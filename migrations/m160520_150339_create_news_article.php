@@ -19,10 +19,10 @@ class m160520_150339_create_news_article extends Migration
 		$article->title_translate='Паралич анализа: вы знаете слишком много, чтобы просто писать код';
 		$article->url_translate='https://habrahabr.ru/post/218345/';
 		$article->status='published';
-		$article->date_created=NULL;
-		$article->date_modified=NULL;
-		$article->date_deleted=time();
-		$article->date_published=NULL;
+		$article->date_created=date("c");
+		$article->date_modified=date("c");
+		$article->date_deleted='0000-00-00 00:00:00';
+		$article->date_published=date("c");
 		$article->user_id=1;
 		$article->author_name='Scott Hanselman';
 		$article->author_url='http://hanselman.com/about';
