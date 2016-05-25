@@ -23,4 +23,21 @@ class ArticleController extends Controller
 		}
 		echo (" created"." ".$count." "."articles ");
 	}
+
+	/**
+	 * Функция обновления всего индекса в ElasticSearch
+	 *
+	 */
+	public function updateElastic()
+	{
+
+	}
+	/**
+	 * Функция удаления всего индекса в ElasticSearch
+	 *
+	 */
+	public function deleteElastic()
+	{
+
+	}
 }
