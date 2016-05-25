@@ -248,4 +248,33 @@ class ArticleController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    public function actionSearch()
+    {
+        $model = new SearchForm(); //\app\forms\SearchForm()
+        $searchResult = new ActiveDataProvider();
+
+        if ($model->load(Yii::$app->request->post())) {
+            $query = \app\elastic\models\Article::find()->query([
+                "fuzzy_like_this" => [
+                    "fields" => ["article_title_original", "article_title_translate"],
+                    "like_text" => $model->query,
+                    "max_query_terms" => 10
+                ]
+            ]);
+            $articlesFound = $query->column('article_id'); // gives id need the documents
+
+            $searchResult = new ActiveDataProvider([
+                'query' => Article::find()->where(array('id'=>$articlesFound)),
+                'pagination' => [
+                    'pageSize' => 10,
+                ],
+
+            ]);
+        }
+        return $this->render('search', [
+            'model' => $model,
+            'searchResult' => $searchResult,
+        ]);
+    }
+
 }
