@@ -10,7 +10,7 @@ $this->title = 'Articles';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
-
+<div class="container">
         <?php
             $dataProvider->prepare();
             $pageNumber = $dataProvider->getPagination()->getPage()+1;
@@ -52,3 +52,4 @@ $this->params['breadcrumbs'][] = $this->title;
                 'maxButtonCount' => 0,
             ],
         ]) ?>
+</div>

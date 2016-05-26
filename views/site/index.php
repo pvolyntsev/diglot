@@ -4,7 +4,7 @@
 
 $this->title = Yii::$app->params['title']['en'];
 ?>
-<div class="site-index">
+<div class="container site-index">
 
     <div class="jumbotron">
         <h1>Congratulations!</h1>

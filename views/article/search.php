@@ -17,7 +17,7 @@ $pageNumber = $searchResult->getPagination()->getPage()+1;
 
 
 ?>
-
+<div class="container">
 <div class="articles list search">
     <div class="form__container">
         <?php $form = ActiveForm::begin(); ?>
@@ -67,41 +67,4 @@ $pageNumber = $searchResult->getPagination()->getPage()+1;
         'maxButtonCount' => 0,
     ],
 ]) ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>

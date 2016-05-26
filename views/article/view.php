@@ -68,16 +68,13 @@ $this->params['breadcrumbs'][] = $this->title;
         <h4>Responses</h4>
 
         <div class="comment-feed" id="js-add-comment">
-
             <div class="float-left comment-card">
                 <div class="card-avatar"><a class="card-avatar" href="#"><img src="/upload/user/0_440x440.png" class="avatar-image u-xs-size32x32"></a></div>
                 <div class="card-summary">
-                    <div class="comment-placeholder" id="js-add-card-placeholder">Write a response...</div>
+                    <div class="comment-placeholder" id="js-add-card-placeholder">Write a response... <!-- Be the first to write a response... --></div>
                     <div class="card-extra" id="js-add-card-user"><a href="#"><?php echo Yii::$app->user->identity->username ?></a></div>
                 </div>
             </div>
-
-
             <div class="comment-form" id="js-add-card-form">
                 <?php $form = ActiveForm::begin(['id' => 'comment_post', 'method' => 'post']); ?>
                 <?= $form->field($comment, 'comment')->textarea(['rows' => 6]) ?>
@@ -91,16 +88,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <div id="js-comments-recommended">
     <?= ListView::widget([
         'dataProvider' => $comments_selected,
-
-        'itemView' => function ($model, $key, $index, $widget) {
-            return $this->render('_comment', [
-                'comment' => $model,
-            ]);
-        },
-
+        'itemView' => '_comment',
         'layout' => "{items}",
-
-        'emptyText' => '', //Be the first to write a response...',
+        'emptyText' => '',
         'emptyTextOptions' => [
             //'tag' => 'p'
         ],
@@ -112,11 +102,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(['id'=>'comments_list']); ?>
     <?= ListView::widget([
         'dataProvider' => $comments,
-        'itemView' => function ($model, $key, $index, $widget) {
-            return $this->render('_comment', [
-                'comment' => $model,
-            ]);
-        },
+        'itemView' => '_comment',
         'layout' => "{summary}\n{items}\n{pager}",
     ]);
     ?>

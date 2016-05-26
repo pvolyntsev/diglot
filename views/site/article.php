@@ -12,8 +12,11 @@ use app\models\Article;
 /* @var $message string */
 /* @var $sample array */
 /* @var $article Article */
+?>
 
-if (!empty($error)) { ?>
+<div class="container article-view">
+
+<?php if (!empty($error)) { ?>
     <h2><?php echo $title ?></h2>
     <br/>
 
@@ -51,4 +54,6 @@ return <?php var_export($sample['code']) ?>;</pre>
         </div>
     <?php } ?>
 
-<?php }
+<?php } ?>
+
+</div> <!-- /.container">
