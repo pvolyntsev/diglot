@@ -86,7 +86,7 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => '<i class="fa fa-pencil-square"></i> Publish new translation', 'url' => ['article/create'], 'encode' => false, 'options' => [ 'class' => 'link link-publish'] , 'icon'=>'dd'],
+            ['label' => '<i class="fa fa-2x fa-plus-square"></i> Add Article', 'url' => ['/article/create'], 'encode' => false, 'options' => [ 'class' => 'link link-publish'] , 'icon'=>'dd'],
         ]
     ]);
 
@@ -98,14 +98,14 @@ AppAsset::register($this);
 
     if (Yii::$app->user->isGuest)
     {
-        $items[] = ['label' => '<i class="fa fa-sign-in"></i> Login', 'url' => ['/login'], 'encode' => false, 'options' => [ 'class' => 'link']];
-        $items[] = ['label' => '<i class="fa fa-user-plus"></i> Signup', 'url' => ['/signup'], 'encode' => false, 'options' => [ 'class' => 'link']];
+        $items[] = ['label' => '<i class="fa fa-2x fa-sign-in"></i> Login', 'url' => ['/login'], 'encode' => false, 'options' => [ 'class' => 'link']];
+        $items[] = ['label' => '<i class="fa fa-2x fa-user-plus"></i> Signup', 'url' => ['/signup'], 'encode' => false, 'options' => [ 'class' => 'link']];
     } else {
-        $items[] = ['label' => '<i class="fa fa-user"></i> Profile', 'url' => ['/profile'], 'encode' => false, 'options' => [ 'class' => 'link']];
+        $items[] = ['label' => '<i class="fa fa-2x fa-user"></i> Profile', 'url' => ['/profile'], 'encode' => false, 'options' => [ 'class' => 'link']];
         $items[] = '<li>'
                 . Html::beginForm(['/logout'], 'post', ['class' => 'navbar-form'])
                 . Html::submitButton(
-                    '<i class="fa fa-sign-out"></i> Logout', // (' . Yii::$app->user->identity->username . ')
+                    '<i class="fa fa-2x fa-sign-out"></i> Logout', // (' . Yii::$app->user->identity->username . ')
                     ['class' => 'btn btn-link']
                 )
                 . Html::endForm()
@@ -132,22 +132,23 @@ AppAsset::register($this);
         <div class="row">
             <div class="col col-md-4">
                 <ul>
-                    <li><i class="fa fa-copyright"></i> <?php echo Yii::$app->params['name'] ?> <?= date('Y') ?></li>
-                    <li>&nbsp; <?= HTML::a('Publish new translation', [ 'article/create' ]) ?></li>
-                    <li>&nbsp; <?= HTML::a('Terms', [ 'site/terms' ]) ?></li>
-                    <li>&nbsp; <?= HTML::a('GitHub Integration', [ 'site/github-integration' ]) ?></li>
+                    <li class="brand-name"><i class="fa fa-copyright"></i> <?php echo Yii::$app->params['name'] ?> <?= date('Y') ?></li>
+                    <li>&nbsp; <?= HTML::a('<i class="fa fa-plus-square"></i> Publish new Article or Translation', [ '/article/create' ]) ?></li>
+                    <li>&nbsp; <?= HTML::a('<i class="fa fa-file-text"></i> Terms', [ '/site/terms' ]) ?></li>
+                    <li>&nbsp; <?= HTML::a('<i class="fa fa-github"></i> GitHub Integration', [ '/site/github-integration' ]) ?></li>
                 </ul>
             </div>
             <div class="col col-md-4">
                 <ul>
                     <li>&nbsp;</li>
-                    <li><?= HTML::a('About Diglot service', [ 'site/about' ]) ?></li>
-                    <li><?= HTML::a('Team behind service', [ 'site/team' ]) ?></li>
-                    <li><?= HTML::a('Donate', [ 'site/donate' ]) ?></li>
+                    <li><?= HTML::a('<i class="fa fa-info-circle"></i> About Diglot Service', [ '/site/about' ]) ?></li>
+                    <li><?= HTML::a('<i class="fa fa-group"></i> Team Behind Service', [ '/site/team' ]) ?></li>
+                    <li><?= HTML::a('<i class="fa fa-money"></i> Donate', [ '/site/donate' ]) ?></li>
                 </ul>
             </div>
             <div class="col col-md-4">
                 <ul>
+                    <li>&nbsp;</li>
                     <li>Credits:</li>
                     <li>&nbsp; <a href="https://icons8.com/line-awesome">Line Awesome</a> font by <a href="https://icons8.com/">Icons8</a></li>
                 </ul>
