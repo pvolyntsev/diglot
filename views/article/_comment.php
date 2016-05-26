@@ -1,15 +1,16 @@
 <?php
+use app\models\Comment;
+use yii\helpers\Html;
+
+
 /**
- * Created by PhpStorm.
- * User: lyudmila
- * Date: 18.05.16
- * Time: 20:27
+ * @var $comment Comment
  */
 ?>
 
 
         <div class="comment-feed">
-            <?php if (rand(0,1)) { ?>
+            <?php if (0) { // скрыть панель ?>
             <div class="comment-recommended">
                 <div class="comment-recommender">Recommended by <a href="#">Peter Pan</a></div>
             </div>
@@ -19,13 +20,14 @@
             <div class="float-left comment-card">
                 <div class="card-avatar"><a class="card-avatar" href="#"><img src="/upload/user/0_440x440.png" class="avatar-image u-xs-size32x32"></a></div>
                 <div class="card-summary">
-                    <span class="card-extra"><a href="#"><?php echo $comment->user->username ?></a></span>
-                    <span class="card-extra"><?php echo \yii\timeago\TimeAgo::widget(['timestamp' => $comment->date_created]); ?></span>
+                    <div class="card-extra"><a href="#"><?php echo $comment->user->username ?></a></div>
+                    <div class="card-extra"><?php echo \yii\timeago\TimeAgo::widget(['timestamp' => $comment->date_created]); ?></div>
                 </div>
             </div>
 
             <div class="comment-content"><p><?php echo $comment->comment ?></p></div>
 
+            <?php if (0) { // скрыть панель ?>
             <div class="comment-extra">
                 <div class="btn-toolbar">
                     <button class="btn btn-mini">like</button>
@@ -46,4 +48,5 @@
                     </div>
                 </div>
             </div>
+            <?php } ?>
         </div>
