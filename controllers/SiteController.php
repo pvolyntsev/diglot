@@ -9,18 +9,6 @@ use app\forms\ContactForm;
 
 class SiteController extends Controller
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
-
     public function actions()
     {
         return [
@@ -31,6 +19,9 @@ class SiteController extends Controller
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
+            'article' => [
+                'class' => '\app\controllers\actions\ArticleViewAction',
+            ]
         ];
     }
 
@@ -50,10 +41,5 @@ class SiteController extends Controller
         return $this->render('contact', [
             'model' => $model,
         ]);
-    }
-
-    public function actionAbout()
-    {
-        return $this->render('about');
     }
 }

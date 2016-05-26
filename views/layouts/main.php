@@ -134,16 +134,16 @@ AppAsset::register($this);
                 <ul>
                     <li class="brand-name"><i class="fa fa-copyright"></i> <?php echo Yii::$app->params['name'] ?> <?= date('Y') ?></li>
                     <li>&nbsp; <?= HTML::a('<i class="fa fa-plus-square"></i> Publish new Article or Translation', [ '/article/create' ]) ?></li>
-                    <li>&nbsp; <?= HTML::a('<i class="fa fa-file-text"></i> Terms', [ '/site/terms' ]) ?></li>
-                    <li>&nbsp; <?= HTML::a('<i class="fa fa-github"></i> GitHub Integration', [ '/site/github-integration' ]) ?></li>
+                    <li>&nbsp; <?= HTML::a('<i class="fa fa-file-text"></i> Terms', [ '/terms' ]) ?></li>
+                    <li>&nbsp; <?= HTML::a('<i class="fa fa-github"></i> GitHub Integration', [ '/github-integration' ]) ?></li>
                 </ul>
             </div>
             <div class="col col-md-4">
                 <ul>
                     <li>&nbsp;</li>
-                    <li><?= HTML::a('<i class="fa fa-info-circle"></i> About Diglot Service', [ '/site/about' ]) ?></li>
-                    <li><?= HTML::a('<i class="fa fa-group"></i> Team Behind Service', [ '/site/team' ]) ?></li>
-                    <li><?= HTML::a('<i class="fa fa-money"></i> Donate', [ '/site/donate' ]) ?></li>
+                    <li><?= HTML::a('<i class="fa fa-info-circle"></i> About Diglot Service', [ '/about' ]) ?></li>
+                    <li><?= HTML::a('<i class="fa fa-group"></i> Team Behind Service', [ '/team' ]) ?></li>
+                    <li><?= HTML::a('<i class="fa fa-money"></i> Donate', [ '/donate' ]) ?></li>
                 </ul>
             </div>
             <div class="col col-md-4">

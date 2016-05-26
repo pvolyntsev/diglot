@@ -40,9 +40,13 @@ $config = [
 			'rules' => [
                 // Main page & static pages
                 '/' => 'site/index',
-                '/contact' => 'site/contact',
-                '/about' => 'site/about',
-				
+                #'/contact' => 'site/contact',
+                '/about' => 'site/article',
+                '/terms' => 'site/article',
+                '/team' => 'site/article',
+                '/donate' => 'site/article',
+                '/github-integration' => 'site/article',
+
                 // Auth & user manager
 				'/signup' => '/user/user/signup',
 				'/login' => '/user/user/login',
