@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
 use app\models\Comment;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -21,6 +22,17 @@ class CommentController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        // создавать может только авторизованный пользователь
+                        'actions' => ['create'],
+                        'allow' => true,
+                        'roles' => ['contentManager'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
