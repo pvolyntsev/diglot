@@ -4,7 +4,7 @@ namespace app\commands;
 use yii\console\Controller;
 use \app\models\User;
 
-class UserController extends Controller
+class UsersController extends Controller
 {
     public function actionSeedBasic()
     {
