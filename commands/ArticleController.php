@@ -51,16 +51,36 @@ class ArticleController extends Controller
 	 * Функция обновления всего индекса в ElasticSearch
 	 *
 	 */
-	public function updateElastic()
+	public function actionUpdateElastic()
 	{
+		$query = \app\models\Article::find();
+		$articles = $query->all();
+		foreach($articles as $article)
+		{
+			echo $article->title_original;
+			if (!(\app\elastic\models\Article::updateIndex($article)))
+			{
+				echo 'Method not work';
+			};
+		}
+
 
 	}
 	/**
 	 * Функция удаления всего индекса в ElasticSearch
 	 *
 	 */
-	public function deleteElastic()
+	public function actionDeleteElastic()
 	{
-
+		$query = \app\models\Article::find();
+		$articles = $query->all();
+		foreach($articles as $article)
+		{
+			echo $article->title_original;
+			if (!(\app\elastic\models\Article::deleteIndex($article)))
+			{
+				echo 'Method not work';
+			};
+		}
 	}
 }
