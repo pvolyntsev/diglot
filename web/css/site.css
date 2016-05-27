@@ -50,6 +50,13 @@ body {
         color: #999;
         vertical-align: -20%;
     }
+    .navbar.navbar-fixed-top .navbar-form.navbar-search-form {
+        margin: 0;
+        padding: 10px;
+    }
+    .navbar.navbar-fixed-top .navbar-form.navbar-search-form .form-control {
+        padding: 10px;
+    }
 
 .footer {
     background-color: #333;

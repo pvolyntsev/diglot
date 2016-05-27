@@ -91,9 +91,11 @@ AppAsset::register($this);
     ]);
 
     $items = [
-        //['label' => 'Home', 'url' => ['/']],
-        //['label' => 'About', 'url' => ['/site/about']],
-        //['label' => 'Contact', 'url' => ['/site/contact']],
+        '<li>'
+            . Html::beginForm(['/search'], 'get', ['class' => 'navbar-form navbar-search-form'])
+            . Html::textInput('query','', ['placeholder' => 'Search...', 'class' => 'form-control' ])
+            . Html::endForm()
+        . '</li>'
     ];
 
     if (Yii::$app->user->isGuest)
@@ -103,7 +105,7 @@ AppAsset::register($this);
     } else {
         $items[] = ['label' => '<i class="fa fa-2x fa-user"></i> Profile', 'url' => ['/profile'], 'encode' => false, 'options' => [ 'class' => 'link']];
         $items[] = '<li>'
-                . Html::beginForm(['/logout'], 'post', ['class' => 'navbar-form'])
+                . Html::beginForm(['/logout'], 'post', ['class' => 'navbar-form navbar-login-form'])
                 . Html::submitButton(
                     '<i class="fa fa-2x fa-sign-out"></i> Logout', // (' . Yii::$app->user->identity->username . ')
                     ['class' => 'btn btn-link']

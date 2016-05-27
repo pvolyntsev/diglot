@@ -67,6 +67,7 @@ $config = [
                 '/article' => '/article/index',
                 '/article/<action>' => '/article/<action>',
                 '/article/<action>/<id:\d+>' => '/article/<action>',
+                '/search' => '/article/search',
 
 				//comment
 				'/comment' => '/comment/index',
