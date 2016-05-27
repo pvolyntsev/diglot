@@ -43,12 +43,15 @@ class Article extends elasticsearch\ActiveRecord
                 'title_original' =>$article->title_original,
                 'title_translate' =>$article->title_translate
             ];
+            var_dump($elArticle);
             if (!$elArticle->save()){
-                var_dump($elArticle->errors);
+                return false;
             }
+            return true;
         } catch(\Exception $e)
         {
-            Yii::error('Error afterSave: '.$e.' '.$elArticle->errors, 'accessElastic');
+           \yii::error('Error afterSave: '.$e.' '.$elArticle->errors , 'accessElastic');
+            return false;
         }
     }
     public static function deleteIndex(\app\models\Article $article)
@@ -57,10 +60,15 @@ class Article extends elasticsearch\ActiveRecord
             $elArticle = \app\elastic\models\Article::findOne(['id' => $article->id]);
             if ($elArticle) {
                 $elArticle->delete();
+                return true;
+            }
+            else{
+                return false;
             }
         } catch(\Exception $e)
         {
             Yii::error('Error afterDelete: '.$e.' '.$elArticle->errors, 'accessElastic');
+            return false;
         }
     }
 }
