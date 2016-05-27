@@ -57,6 +57,12 @@ body {
     .navbar.navbar-fixed-top .navbar-form.navbar-search-form .form-control {
         padding: 10px;
     }
+    .navbar.navbar-fixed-top .navbar-dropdown-profile {
+        padding-top: 10px;
+    }
+        .navbar.navbar-fixed-top .navbar-dropdown-profile .btn.dropdown-toggle {
+            border-style: none;
+        }
 
 .footer {
     background-color: #333;

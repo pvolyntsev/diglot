@@ -53,11 +53,23 @@ $config = [
 				'/logout' => '/user/user/logout',
 				'/requestPasswordReset' => '/user/user/request-password-reset',
 				'/resetPassword' => '/user/user/reset-password',
-				'/profile' => '/user/user/profile',
+				#'/profile' => '/user/user/profile',
 				'/retryConfirmEmail' => '/user/user/retry-confirm-email',
 				'/confirmEmail' => '/user/user/confirm-email',
 				'/unbind/<id:[\w\-]+>' => '/user/auth/unbind',
 				'/oauth/<authclient:[\w\-]+>' => '/user/auth/index',
+
+                // Profile
+                '/profile' => 'author/articles',
+                '/profile/articles' => 'author/articles-published',
+                '/profile/draft' => 'author/articles-drafts',
+                '/profile/settings' => 'author/settings',
+                '/profile/social' => 'author/social',
+                '/profile/comments' => 'author/comments',
+                '/profile/favorites' => 'author/favorites',
+                '/profile/change-password' => 'author/change-password',
+                '/profile/userpic' => 'author/userpic',
+
 
                 // Prototypes
                 [ 'pattern' => 'prototype', 'route' => 'prototype/index' ],

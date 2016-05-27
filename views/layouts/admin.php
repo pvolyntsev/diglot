@@ -21,6 +21,8 @@ AdminAppAsset::register($this);
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 
+    <meta name="title"    content="<?= HTML::encode(Yii::$app->params['title']['en']) ?>">
+
     <?= Html::csrfMetaTags() ?>
     <?php $this->head() ?>
 </head>
@@ -46,6 +48,7 @@ echo Nav::widget([
     ]
 ]);
 
+$items = [];
 if (Yii::$app->user->isGuest)
 {
     $items[] = ['label' => 'Login', 'url' => ['/login'],  ];
