@@ -70,7 +70,7 @@ class ArticleController extends Controller
 	public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Article::find(),
+            'query' => Article::find()->where('status=:published', [':published'=>'published']),
 			//sort
 			'sort' => [
 				'defaultOrder' => [
@@ -92,9 +92,11 @@ class ArticleController extends Controller
 
 
 	public function actionView($id)
-    {
-        $model = $this->findModel($id);
-
+    {	
+		$model = $this->findModel($id);
+		$dataProvider = new ActiveDataProvider([
+			'query' => Article::find()->where('status=:published', [':published'=>'published']),
+		]);
         $comment = new Comment();
 
         $comment->user_id = Yii::$app->user->identity->id;
