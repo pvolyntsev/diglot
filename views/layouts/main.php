@@ -6,6 +6,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use app\widgets\UserMenuWidget;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
@@ -103,20 +104,7 @@ AppAsset::register($this);
         $items[] = ['label' => '<i class="fa fa-2x fa-sign-in"></i> Login', 'url' => ['/login'], 'encode' => false, 'options' => [ 'class' => 'link']];
         $items[] = ['label' => '<i class="fa fa-2x fa-user-plus"></i> Signup', 'url' => ['/signup'], 'encode' => false, 'options' => [ 'class' => 'link']];
     } else {
-        $items[] = '<li><div class="dropdown navbar-dropdown-profile">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    <i class="fa fa-2x fa-user"></i> Profile
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <li>' . Html::a('<i class="fa fa-2x fa-cogs"></i> Settings', ['/author/settings'] ) . '</li>
-    <li role="separator" class="divider"></li>
-    <li>' . Html::a('<i class="fa fa-2x fa-file-text"></i> Articles', ['/author/articles-published'] ) . '</li>
-    <li>' . Html::a('<i class="fa fa-2x fa-file"></i> Draft', ['/author/articles-drafts'] ) . '</li>
-    <li role="separator" class="divider"></li>
-    <li>' . Html::a('<i class="fa fa-2x fa-plus-square"></i> Add Article', ['/article/create'] ) . '</li>
-  </ul>
-</div></li>';
+        $items[] = UserMenuWidget::widget();
         $items[] = '<li>'
                 . Html::beginForm(['/logout'], 'post', ['class' => 'navbar-form navbar-login-form'])
                 . Html::submitButton(
