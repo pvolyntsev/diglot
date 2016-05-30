@@ -22,6 +22,7 @@ class AppAsset extends AssetBundle
         'css/article.css',
         'css/comments.css',
         'css/search.css',
+        'css/profile.css',
         'https://maxcdn.icons8.com/fonts/line-awesome/css/line-awesome-font-awesome.min.css',
     ];
     public $js = [

@@ -69,6 +69,13 @@ $config = [
                 '/profile/favorites' => 'author/favorites',
                 '/profile/change-password' => 'author/change-password',
                 '/profile/userpic' => 'author/userpic',
+                // Public Profile
+                '/<username>/profile' => 'author-public/profile',
+                '/<username>/articles' => 'author-public/articles',
+                '/<username>/responses' => 'author-public/responses',
+                '/<username>/followings' => 'author-public/followings',
+                '/<username>/followers' => 'author-public/followers',
+
 
 
                 // Prototypes
