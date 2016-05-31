@@ -8,6 +8,7 @@ use yii\helpers\Html;
 use yii\web\View;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\bootstrap\Alert;
 use app\widgets\UserMenuWidget;
 use yii\widgets\Breadcrumbs;
 use app\models\User;
@@ -243,6 +244,25 @@ AppAsset::register($this);
             </section><!--.box-typical-->
         </div>
     </div>
+
+    <?php
+    $flashes = Yii::$app->session->getAllFlashes();
+    if (count($flashes) > 0) {
+        echo '<br><br><br><br>';
+        foreach ($flashes as $key => $messages) {
+            if (is_array($messages)) {
+                foreach ($messages as $message) {
+                    echo Alert::widget([
+                        'options' => [
+                            'class' => 'alert-' . $key,
+                        ],
+                        'body' => $message,
+                    ]);
+                }
+            }
+        }
+    }
+    ?>
 
     <div class="container">
         <?= $content ?>

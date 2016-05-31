@@ -107,6 +107,15 @@
 
 .profile p.no-articles {
     text-align: center;
+}
+
+.profile p.no-followers {
+    text-align: center;
+}
+
+.profile p.no-followings {
+    text-align: center;
+}
 
 .profile p.no-drafts {
     text-align: center;

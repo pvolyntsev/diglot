@@ -13,36 +13,31 @@ use app\models\User;
  * @var $articles ActiveDataProvider
  */
 
-$this->title = $author->username . ' | Profile';
+$this->title = $author->username . ' | Articles';
 ?>
 
 <div class="container">
-    <?php
-    $articles->prepare();
-    $pageNumber = $articles->getPagination()->getPage()+1;
-    ?>
-
     <?= ListView::widget([
         'dataProvider' => $articles,
         'itemView' => '_article',
         'viewParams' => [
-            'page' => $pageNumber,
+            'page' => 1,
         ],
 
         /*настройки контейнера списка */
         'options' => [
             'tag' => 'div',
-            'class' => 'articles list' . ($pageNumber > 1 ? ' row two-columns' : '') ,
+            'class' => 'articles list row two-columns',
             'id' => 'articles-list',
         ],
 
         /*настройки элемента списка */
         'itemOptions' => [
             'tag' => 'div',
-            'class' => 'article' . ($pageNumber > 1 ? ' col col-md-6' : ''),
+            'class' => 'article col col-md-6',
         ],
 
-        'layout' => $pageNumber > 1 ? "<nav>{pager}</nav>\n{items}\n<nav>{pager}</nav>" : "{items}\n<nav>{pager}</nav>",
+        'layout' => "<nav>{pager}</nav>\n{items}\n<nav>{pager}</nav>",
 
         'emptyText' => 'No articles from ' . $author->username . ' were published',
         'emptyTextOptions' => [
