@@ -39,7 +39,7 @@ $config = [
             'enableStrictParsing' => true, // Only routes being listed in rules
 			'rules' => [
                 // Main page & static pages
-                '/' => 'site/index',
+                '/' => '/article/index',
                 #'/contact' => 'site/contact',
                 '/about' => 'site/article',
                 '/terms' => 'site/article',
