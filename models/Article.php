@@ -177,13 +177,16 @@ class Article extends \yii\db\ActiveRecord
     public function afterSave($insert, $changedAttributes)
     {
         try {
-            $elArticle = \app\elastic\models\Article::findOne(['article_id' => $this->id]);
+            $elArticle = \app\elastic\models\Article::findOne(['id' => $this->id]);
             if (!$elArticle) {
                 $elArticle = new \app\elastic\models\Article();
             }
-            $elArticle->attributes = ['article_id' => $this->id,
-                'article_title_original' =>$this->title_original,
-                'article_title_translate' => $this->title_translate
+            $elArticle->attributes = [
+                'id' => $this->id,
+                'user_id' => $this->user_id,
+                'status' => $this->status,
+                'title_original' =>$this->title_original,
+                'title_translate' => $this->title_translate
             ];
             $elArticle->save();
 
@@ -198,7 +201,7 @@ class Article extends \yii\db\ActiveRecord
     public function afterDelete()
     {
         try {
-            $elArticle = \app\elastic\models\Article::findOne(['article_id' => $this->id]);
+            $elArticle = \app\elastic\models\Article::findOne(['id' => $this->id]);
             if ($elArticle) {
                 $elArticle->delete();
             }
