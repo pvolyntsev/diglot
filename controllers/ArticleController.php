@@ -225,14 +225,13 @@ class ArticleController extends Controller
      */
     public function actionSearch()
     {
-        $model = new SearchForm();
         $articlesFound = [];
-        $searchResult = new ActiveDataProvider();
-        if ($model->load(Yii::$app->request->post())) {
+        $searchResult = null;
+        if (Yii::$app->request->get('query')) {
             $query = \app\elastic\models\Article::find()->query([
                         "multi_match" => [
-                        "fields" => ["title_original", "title_translate"],
-                        "query" => $model->query,
+                        "fields" => ['title_original', 'title_translate', 'paragraphs_original', 'paragraphs_translate'],
+                        "query" => Yii::$app->request->get('query'),
                         "fuzziness" => "AUTO",
                        ]
             ]);
@@ -245,7 +244,7 @@ class ArticleController extends Controller
             ]);
         }
         return $this->render('search', [
-            'model' => $model,
+            'query' => Yii::$app->request->get('query'),
             'searchResult' => $searchResult,
             'articlesFound' => $articlesFound,
         ]);
