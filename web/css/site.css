@@ -10,6 +10,7 @@ body {
     height: auto;
     margin: 0 auto;
     padding: 60px 0 0 0;
+    background-image: url('/img/dots-dark.png');
 }
 
 .wrap > .container {
