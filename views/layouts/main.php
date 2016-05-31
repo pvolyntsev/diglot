@@ -8,6 +8,8 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\web\Session;
+use yii\bootstrap\Alert;
 
 AppAsset::register($this);
 ?>
@@ -133,8 +135,27 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
-
-    <?= $content ?>
+	
+	<?php
+	$flashes = Yii::$app->session->getAllFlashes();
+	if (count($flashes) > 0) {
+		echo '<br><br><br><br>';
+		foreach ($flashes as $key => $messages) {
+			if (is_array($messages)) {
+				foreach ($messages as $message) {
+					echo Alert::widget([
+						'options' => [
+							'class' => 'alert-' . $key,
+						],
+						'body' => $message,
+					]);	
+				}
+			}
+		}
+	}
+	?>
+	
+	<?= $content ?>
 </div>
 
 <footer class="footer">

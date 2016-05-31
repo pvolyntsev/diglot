@@ -2,6 +2,8 @@
 use yii\widgets\ListView;
 use app\models\Article;
 use yii\helpers\Html;
+use yii\bootstrap\Alert;
+use yii\web\Session;
 
 /**
  * @var Article $model
@@ -13,7 +15,7 @@ use yii\helpers\Html;
 
 $paragraphs = (1 == $page) ? array_slice($model->paragraphs, 0, 2) : array_slice($model->paragraphs, 0, 1);
 ?>
-    <div class="row article-heading">
+	<div class="row article-heading">
         <div class="col col-md-6 article-heading-title-translate">
             <h1>
                 <?php if (1 == $page) { ?>
@@ -60,3 +62,5 @@ $paragraphs = (1 == $page) ? array_slice($model->paragraphs, 0, 2) : array_slice
     <div class="article-more">
         <?=Html::a(Html::encode('. . .'), ['view', 'id' => $model->id])?>
     </div>
+	
+	

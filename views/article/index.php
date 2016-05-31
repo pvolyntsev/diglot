@@ -2,8 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ListView;
-use kartik\growl\Growl;
-//use yii\bootstrap\Alert;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -17,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
             $dataProvider->prepare();
             $pageNumber = $dataProvider->getPagination()->getPage()+1;
         ?>
-		
+				
 		<?= ListView::widget([
             'dataProvider' => $dataProvider,
 			'itemView' => '_article',

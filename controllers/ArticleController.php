@@ -13,6 +13,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\Pagination;
 use app\forms\SearchForm;
+use yii\web\Session;
+use yii\bootstrap\Alert;
 
 /**
  * ArticleController implements the CRUD actions for Article model.
@@ -93,9 +95,16 @@ class ArticleController extends Controller
 
 	public function actionView($id)
     {	
+		$session = Yii::$app->session;
+		$session->addFlash('info', 'Я посмотрю статью ');
+		$session->addFlash('danger', 'Я посмотрю статью ');
+		$session->addFlash('success', 'Я посмотрел статью ');
+		$session->addFlash('warning', 'Я посмотрел статью ');
+		return $this->redirect('/');
+				
 		$model = $this->findModel($id);
 		
-        $comment = new Comment();
+		$comment = new Comment();
 
         $comment->user_id = Yii::$app->user->identity->id;
         $comment->article_id = $id;
@@ -153,7 +162,8 @@ class ArticleController extends Controller
         $model = new Article();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->session->addFlash('info', 'Статья создана и сохранена');
+			return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
