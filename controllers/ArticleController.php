@@ -230,11 +230,11 @@ class ArticleController extends Controller
         $searchResult = new ActiveDataProvider();
         if ($model->load(Yii::$app->request->post())) {
             $query = \app\elastic\models\Article::find()->query([
-                    "fuzzy_like_this" => [
-                    "fields" => ["title_original", "title_translate"],
-                    "like_text" => $model->query,
-                    "max_query_terms" => 10
-                ]
+                        "multi_match" => [
+                        "fields" => ["title_original", "title_translate"],
+                        "query" => $model->query,
+                        "fuzziness" => "AUTO",
+                       ]
             ]);
             $articlesFound = $query->column('id'); // gives id need the documents
             $searchResult = new ActiveDataProvider([
