@@ -107,4 +107,11 @@
 
 .profile p.no-articles {
     text-align: center;
+
+.profile p.no-drafts {
+    text-align: center;
+}
+
+.profile p.no-responses {
+    text-align: center;
 }

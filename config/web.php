@@ -59,16 +59,6 @@ $config = [
 				'/unbind/<id:[\w\-]+>' => '/user/auth/unbind',
 				'/oauth/<authclient:[\w\-]+>' => '/user/auth/index',
 
-                // Profile
-                '/profile' => 'author/articles',
-                '/profile/articles' => 'author/articles-published',
-                '/profile/draft' => 'author/articles-drafts',
-                '/profile/settings' => 'author/settings',
-                '/profile/social' => 'author/social',
-                '/profile/comments' => 'author/comments',
-                '/profile/favorites' => 'author/favorites',
-                '/profile/change-password' => 'author/change-password',
-                '/profile/userpic' => 'author/userpic',
                 // Public Profile
                 '/<username>/profile' => 'author-public/profile',
                 '/<username>/articles' => 'author-public/articles',
@@ -76,7 +66,9 @@ $config = [
                 '/<username>/followings' => 'author-public/followings',
                 '/<username>/followers' => 'author-public/followers',
 
-
+                // Private Profile
+                '/profile/drafts' => 'author-private/drafts',
+                '/profile/moderation' => 'author-private/moderation',
 
                 // Prototypes
                 [ 'pattern' => 'prototype', 'route' => 'prototype/index' ],
