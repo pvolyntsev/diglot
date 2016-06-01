@@ -12,47 +12,50 @@ class m160520_150339_create_news_article extends Migration
      * @inheritdoc
      */
     public function up()
-    {	
-		$article = new \app\models\Article;
-		$article->title_original='Analysis Paralysis: Over-thinking and Knowing Too Much to Just CODE';
-		$article->url_original='http://www.hanselman.com/blog/AnalysisParalysisOverthinkingAndKnowingTooMuchToJustCODE.aspx';
-		$article->title_translate='Паралич анализа: вы знаете слишком много, чтобы просто писать код';
-		$article->url_translate='https://habrahabr.ru/post/218345/';
-		$article->status='published';
-		$article->date_created=date("c");
-		$article->date_modified=date("c");
-		$article->date_deleted='0000-00-00 00:00:00';
-		$article->date_published=date("c");
-		$article->user_id=1;
-		$article->author_name='Scott Hanselman';
-		$article->author_url='http://hanselman.com/about';
-		$article->own_original=0;
-		$article->translator_name='@a553';
-		$article->translator_url='https://habrahabr.ru/users/a553/';
-		$article->own_translate=0;
-		$article->lang_original_id=1;
-		$article->lang_translate_id=2;
-		if (!$article->save())
+    {
+        $articleTemp = require (__DIR__ . '/../assets/fixtures/article/over-thinking_and_knowing_too_much_to_just_code/article.php');
+        $paragraphsTemp = require (__DIR__ . '/../assets/fixtures/article/over-thinking_and_knowing_too_much_to_just_code/paragraphs.php');
+
+        $article = new \app\models\Article;
+        $article->title_original = $articleTemp->title_original;
+        $article->url_original = $articleTemp->url_original;
+        $article->title_translate = $articleTemp->title_translate;
+        $article->url_translate = $articleTemp->url_translate;
+        $article->status = 'published';
+        $article->date_created = date("c");
+        $article->date_modified = date("c");
+        $article->date_deleted = '0000-00-00 00:00:00';
+        $article->date_published = date("c");
+        $article->user_id = $articleTemp->user_id;
+        $article->author_name = $articleTemp->author_name;
+        $article->author_url = $articleTemp->author_url;
+        $article->own_original = $articleTemp->own_original;
+        $article->translator_name = $articleTemp->translator_name;
+        $article->translator_url = $articleTemp->translator_url;
+        $article->own_translate = $articleTemp->own_translate;
+        $article->lang_original_id = $articleTemp->lang_original_id;
+        $article->lang_translate_id = $articleTemp->lang_translate_id;
+        if (!$article->save())
+        {
+            var_export($article->errors);
+            return false;
+        }
+
+        $sortorder = 0;
+        foreach($paragraphsTemp as $paragraphTemp)
+        {
+            $paragraph = new \app\models\Paragraph;
+            $paragraph->article_id = $article->id;
+            $paragraph->sortorder = ++$sortorder;
+            $paragraph->paragraph_original = $paragraphTemp->paragraph_original;
+            $paragraph->paragraph_translate = $paragraphTemp->paragraph_translate;
+            $paragraph->date_modified = date("c");
+            if (!$paragraph->save())
             {
-                var_export($article->errors);
-                return -1;
+                var_export($paragraph->errors);
+                return false;
             }
-		$paragraphs = require (__DIR__ . '/../assets/fixtures/article/over-thinking_and_knowing_too_much_to_just_code/paragraphs.php');
-		for($j=0; $j<count($paragraphs); $j++)
-		{
-			$paragraph = new \app\models\Paragraph;
-			$paragraph->article_id = $article->id;
-			$paragraph->sortorder = $j+1;
-			$paragraph->paragraph_original = $paragraphs[$j]->paragraph_original;
-			$paragraph->paragraph_translate = $paragraphs[$j]->paragraph_translate;
-			$paragraph->date_modified = time();
-			if (!$paragraph->save())
-			{
-				var_export($paragraph->errors);
-				return -1;
-			}
-		}
-		
+        }
     }
 
     /**
@@ -60,12 +63,15 @@ class m160520_150339_create_news_article extends Migration
      */
     public function down()
     {
-		$article = \app\models\Article::findOne([
-			'title_original' => 'Analysis Paralysis: Over-thinking and Knowing Too Much to Just CODE',
-			'user_id' => 1]);
-		if ($article) {     
-			\app\models\Paragraph::deleteAll(['article_id' => $article->id]);
-			$article->delete();
-		}
+        $articleTemp = require (__DIR__ . '/../assets/fixtures/article/over-thinking_and_knowing_too_much_to_just_code/article.php');
+
+        $article = \app\models\Article::findOne([
+            'title_original' => $articleTemp->title_original,
+            'user_id' => $articleTemp->user_id,
+        ]);
+        if ($article) {
+            \app\models\Paragraph::deleteAll(['article_id' => $article->id]);
+            $article->delete();
+        }
     }
 }
