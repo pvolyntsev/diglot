@@ -173,8 +173,6 @@
             opacity: 1;
         }
     .comments .comment-form {
-        opacity: 0;
-        height: 0;
         overflow: hidden;
         transition: transform 0.15s, height 0.15s;
         clear: both;

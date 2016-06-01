@@ -94,14 +94,8 @@ class ArticleController extends Controller
 
 
 	public function actionView($id)
-    {	
-		$session = Yii::$app->session;
-		$session->addFlash('info', 'Я посмотрю статью ');
-		$session->addFlash('danger', 'Я посмотрю статью ');
-		$session->addFlash('success', 'Я посмотрел статью ');
-		$session->addFlash('warning', 'Я посмотрел статью ');
-		return $this->redirect('/');
-				
+    {
+        
 		$model = $this->findModel($id);
 		
 		$comment = new Comment();

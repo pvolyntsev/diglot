@@ -6,6 +6,7 @@ use yii\helpers\Html;
 /**
  * @var $comment Comment
  */
+$comment=$model;
 ?>
 
 

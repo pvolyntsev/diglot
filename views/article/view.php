@@ -21,6 +21,7 @@ $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Articles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="container article-view">
 
     <div class="row article-heading">
@@ -66,93 +67,49 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="comments">
     <div class="container">
-<div class="comment-form">
-    <?php
-    yii\widgets\Pjax::begin(['id' => 'new_note']);
-    $form = ActiveForm::begin(['options' => ['data-pjax' => true]],[
-    'id' => 'comment-form',
-    ]) ?>
-    <?= $form->field($comment, 'comment')->textarea(['rows' => 6]) ?>
-    <div class="form-group">
-        <?= Html::submitButton($comment->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Create'), ['class' => $comment->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
-    </div>
-
-    <?php ActiveForm::end();
-    Pjax::end();
-    ?>
-</div>
-
-
-<div class="container comments" id="js-comments-recommended">
-<?= ListView::widget([
-    'dataProvider' => $comments_selected,
-    'itemView' => function ($model, $key, $index, $widget) {
-        return $this->render('_comment', [
-            'comment' => $model,
-        ]);
-    },
-    'layout' => "{summary}\n{items}",
-    'summary' => 'Показано {count} из {totalCount}',
-    'summaryOptions' => [
-    'tag' => 'span',
-    'class' => 'my-summary',
-],
-    'emptyText' => 'Список пуст',
-]);
-?>
-
-</div>
-
-    <div class="container comments" id="js-comments-page" style="display:none;">
-<?php Pjax::begin(['id'=>'comments_list']); ?>
         <h4>Responses</h4>
 
-        <div class="comment-feed" id="js-add-comment">
-            <div class="float-left comment-card">
-                <div class="card-avatar"><a class="card-avatar" href="#"><img src="/upload/user/0_440x440.png" class="avatar-image u-xs-size32x32"></a></div>
-                <div class="card-summary">
-                    <div class="comment-placeholder" id="js-add-card-placeholder">Write a response... <!-- Be the first to write a response... --></div>
-                    <div class="card-extra" id="js-add-card-user"><a href="#"><?php echo Yii::$app->user->identity->username ?></a></div>
-                </div>
+        <div class="comment-form">
+            <?php
+            yii\widgets\Pjax::begin(['id' => 'new_note']);
+            $form = ActiveForm::begin(['options' => ['data-pjax' => true]],['id' => 'comment-form',]) ?>
+            <?= $form->field($comment, 'comment')->textarea(['rows' => 6]) ?>
+            <div class="form-group">
+                <?= Html::submitButton($comment->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Create'), ['class' => $comment->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
             </div>
-            <div class="comment-form" id="js-add-card-form">
-                <?php $form = ActiveForm::begin(['id' => 'comment_post', 'method' => 'post']); ?>
-                <?= $form->field($comment, 'comment')->textarea(['rows' => 6]) ?>
-                <div class="form-group">
-                    <?= Html::submitButton('Publish', ['class' => 'btn']) ?>
-                </div>
-                <?php ActiveForm::end(); ?>
-            </div>
+            <?php
+            ActiveForm::end();
+            Pjax::end();
+            ?>
         </div>
 
-    <div id="js-comments-recommended">
-    <?= ListView::widget([
-        'dataProvider' => $comments_selected,
-        'itemView' => '_comment',
-        'layout' => "{items}",
-        'emptyText' => '',
-        'emptyTextOptions' => [
-            //'tag' => 'p'
-        ],
-    ]);
-    ?>
-    </div>
+        <div id="js-comments-recommended">
+        <?= ListView::widget([
+            'dataProvider' => $comments_selected,
+            'itemView' => '_comment',
+            'layout' => "{items}",
+            'emptyText' => '',
+            'emptyTextOptions' => [
+                //'tag' => 'p'
+            ],
+        ]);
+        ?>
+        </div>
 
-    <div class="comments" id="js-comments-page" style="display: none;">
-    <?php Pjax::begin(['id'=>'comments_list']); ?>
-    <?= ListView::widget([
-        'dataProvider' => $comments,
-        'itemView' => '_comment',
-        'layout' => "{summary}\n{items}\n{pager}",
-    ]);
-    ?>
-    <?php Pjax::end(); ?>
-    </div>
+        <div class="comments" id="js-comments-page" style="display: none;">
+            <?php Pjax::begin(['id'=>'comments_list']); ?>
+            <?= ListView::widget([
+                'dataProvider' => $comments,
+                'itemView' => '_comment',
+                'layout' => "{summary}\n{items}\n{pager}",
+            ]);
+            ?>
+            <?php Pjax::end(); ?>
+        </div>
 
-    <?php if ($comments_selected->totalCount > 0) { ?>
-        <div class="comments-show-all" id="js-comments-show-all"><a href="?responses">Show all responses</a></div>
-    <?php } ?>
+        <?php if ($comments_selected->totalCount > 0) { ?>
+            <div class="comments-show-all" id="js-comments-show-all"><a href="?responses">Show all responses</a></div>
+        <?php } ?>
 
     </div> <!-- /.container -->
 </div> <!-- /.comments -->
