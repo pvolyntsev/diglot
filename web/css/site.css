@@ -1,5 +1,6 @@
 html,
 body {
+    font-size: 16px;
     height: 100%;
     background: #fff;
 }
@@ -7,8 +8,9 @@ body {
 .wrap {
     min-height: 100%;
     height: auto;
-    margin: 0 auto 60px;
-    padding: 60px 0 60px 0;
+    margin: 0 auto;
+    padding: 60px 0 0 0;
+    background-image: url('/img/dots-dark.png');
 }
 
 .wrap > .container {
@@ -17,7 +19,7 @@ body {
 
 .navbar.navbar-fixed-top {
     background: #fff;
-    padding: 30px 0;
+    padding: 30px 0 20px 0;
     box-shadow: 0 1px 4px rgba(0,0,0,.1);
 }
 
@@ -35,7 +37,7 @@ body {
         border: 1px solid transparent;
         border-radius: 10px;
         padding-top: 15px;
-        padding-bottom: 15px;
+        padding-bottom: 10px;
     }
 
     .navbar.navbar-fixed-top .btn.btn-link:hover, .navbar.navbar-fixed-top .link:hover a {
@@ -44,17 +46,29 @@ body {
         text-decoration: none;
     }
 
-    .navbar.navbar-fixed-top .fa {
-        font-size: 24px;
+    .navbar.navbar-fixed-top .fa.fa-2x {
         margin-top: -8px;
         color: #999;
+        vertical-align: -20%;
     }
+    .navbar.navbar-fixed-top .navbar-form.navbar-search-form {
+        margin: 0;
+        padding: 10px;
+    }
+    .navbar.navbar-fixed-top .navbar-form.navbar-search-form .form-control {
+        padding: 10px;
+    }
+    .navbar.navbar-fixed-top .navbar-dropdown-profile {
+        padding-top: 10px;
+    }
+        .navbar.navbar-fixed-top .navbar-dropdown-profile .btn.dropdown-toggle {
+            border-style: none;
+        }
 
 .footer {
-    height: 160px;
     background-color: #333;
     border-top: 1px solid #ddd;
-    padding-top: 20px;
+    padding: 40px 0;
     color: #ccc;
 }
 
@@ -65,6 +79,10 @@ body {
         .footer ul li {
             list-style: none;
             padding: 0 0 10px 0;
+        }
+
+        .footer ul li.brand-name {
+            color: #fff;
         }
 
     .footer a {

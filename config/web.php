@@ -39,21 +39,36 @@ $config = [
             'enableStrictParsing' => true, // Only routes being listed in rules
 			'rules' => [
                 // Main page & static pages
-                '/' => 'site/index',
-                '/contact' => 'site/contact',
-                '/about' => 'site/about',
-				
+                '/' => '/article/index',
+                #'/contact' => 'site/contact',
+                '/about' => 'site/article',
+                '/terms' => 'site/article',
+                '/team' => 'site/article',
+                '/donate' => 'site/article',
+                '/github-integration' => 'site/article',
+
                 // Auth & user manager
 				'/signup' => '/user/user/signup',
 				'/login' => '/user/user/login',
 				'/logout' => '/user/user/logout',
 				'/requestPasswordReset' => '/user/user/request-password-reset',
 				'/resetPassword' => '/user/user/reset-password',
-				'/profile' => '/user/user/profile',
+				#'/profile' => '/user/user/profile',
 				'/retryConfirmEmail' => '/user/user/retry-confirm-email',
 				'/confirmEmail' => '/user/user/confirm-email',
 				'/unbind/<id:[\w\-]+>' => '/user/auth/unbind',
 				'/oauth/<authclient:[\w\-]+>' => '/user/auth/index',
+
+                // Public Profile
+                '/<username>/profile' => 'author-public/profile',
+                '/<username>/articles' => 'author-public/articles',
+                '/<username>/responses' => 'author-public/responses',
+                '/<username>/followings' => 'author-public/followings',
+                '/<username>/followers' => 'author-public/followers',
+
+                // Private Profile
+                '/profile/drafts' => 'author-private/drafts',
+                '/profile/moderation' => 'author-private/moderation',
 
                 // Prototypes
                 [ 'pattern' => 'prototype', 'route' => 'prototype/index' ],
@@ -63,6 +78,7 @@ $config = [
                 '/article' => '/article/index',
                 '/article/<action>' => '/article/<action>',
                 '/article/<action>/<id:\d+>' => '/article/<action>',
+                '/search' => '/article/search',
 
 				//comment
 				'/comment' => '/comment/index',
@@ -99,7 +115,7 @@ $config = [
         'elasticsearch' => [
             'class' => 'yii\elasticsearch\Connection',
             'nodes' => [
-                ['http_address' => '127.0.0.1:9200'],
+                ['http_address' => 'inet[/127.0.0.1:9200]'],
                 // configure more hosts if you have a cluster
             ],
         ],
@@ -117,11 +133,11 @@ $config = [
 
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
-    $config['bootstrap'][] = 'debug';
+    /*$config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         'allowedIPs' => [ '127.0.0.1', '::1', '192.168.*.*' ],
-    ];
+    ];*/
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [

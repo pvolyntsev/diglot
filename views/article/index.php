@@ -10,15 +10,16 @@ $this->title = 'Articles';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
-
-        <?php
+<div class="container">
+		<?php
             $dataProvider->prepare();
             $pageNumber = $dataProvider->getPagination()->getPage()+1;
         ?>
-        <?= ListView::widget([
+				
+		<?= ListView::widget([
             'dataProvider' => $dataProvider,
-            'itemView' => '_article',
-            'viewParams' => [
+			'itemView' => '_article',
+			'viewParams' => [
                 'page' => $pageNumber,
             ],
 
@@ -52,3 +53,4 @@ $this->params['breadcrumbs'][] = $this->title;
                 'maxButtonCount' => 0,
             ],
         ]) ?>
+</div>

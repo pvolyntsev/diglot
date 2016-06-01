@@ -41,19 +41,22 @@ class UsersController extends Controller
         }
     }
 
-    public function actionSeed()
+    public function actionSeed($users = 1)
     {
         $faker = \Faker\Factory::create();
 
-        $user = new User;
-        $user->username = $faker->userName;
-        $user->email = $faker->email;
-        $user->status = User::STATUS_ACTIVE;
-        $user->sex = User::SEX_MALE;
+        for($i=0; $i<$users; $i++)
+        {
+            $user = new User;
+            $user->username = $faker->userName;
+            $user->email = $faker->email;
+            $user->status = User::STATUS_ACTIVE;
+            $user->sex = User::SEX_MALE;
 
-        if (!$user->save())
-            var_export($user->errors);
-        else
-            echo 'Added user #', $user->id, ' username=', $user->username, ' email=', $user->email, PHP_EOL;
+            if (!$user->save())
+                var_export($user->errors);
+            else
+                echo 'Added user #', $user->id, ' username=', $user->username, ' email=', $user->email, PHP_EOL;
+        }
     }
 }

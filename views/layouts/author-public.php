@@ -1,16 +1,20 @@
 <?php
 
-/* @var $this \yii\web\View */
+/* @var $this View */
 /* @var $content string */
+/* @var $author User */
 
 use yii\helpers\Html;
+use yii\web\View;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\bootstrap\Alert;
 use app\widgets\UserMenuWidget;
 use yii\widgets\Breadcrumbs;
+use app\models\User;
 use app\assets\AppAsset;
-use yii\web\Session;
-use yii\bootstrap\Alert;
+
+$author = $this->params['author'];
 
 AppAsset::register($this);
 ?>
@@ -76,7 +80,7 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
+<div class="wrap profile">
     <?php
     NavBar::begin([
         'brandLabel' => Yii::$app->params['name'],
@@ -106,7 +110,7 @@ AppAsset::register($this);
         $items[] = ['label' => '<i class="fa fa-2x fa-sign-in"></i> Login', 'url' => ['/login'], 'encode' => false, 'options' => [ 'class' => 'link']];
         $items[] = ['label' => '<i class="fa fa-2x fa-user-plus"></i> Signup', 'url' => ['/signup'], 'encode' => false, 'options' => [ 'class' => 'link']];
     } else {
-        $items[] = UserMenuWidget::widget();
+        $items[] = ['label' => '<i class="fa fa-2x fa-user"></i> Profile', 'url' => ['/profile'], 'encode' => false, 'options' => [ 'class' => 'link']];
         $items[] = '<li>'
                 . Html::beginForm(['/logout'], 'post', ['class' => 'navbar-form navbar-login-form'])
                 . Html::submitButton(
@@ -123,27 +127,146 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
-	
-	<?php
-	$flashes = Yii::$app->session->getAllFlashes();
-	if (count($flashes) > 0) {
-		echo '<br><br><br><br>';
-		foreach ($flashes as $key => $messages) {
-			if (is_array($messages)) {
-				foreach ($messages as $message) {
-					echo Alert::widget([
-						'options' => [
-							'class' => 'alert-' . $key,
-						],
-						'body' => $message,
-					]);	
-				}
-			}
-		}
-	}
-	?>
-	
-	<?= $content ?>
+
+    <?php
+    NavBar::begin([
+        'brandLabel' => Yii::$app->params['name'],
+        'brandUrl' => Yii::$app->homeUrl,
+        'options' => [
+            'class' => 'navbar navbar-fixed-top',
+        ],
+    ]);
+
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav'],
+        'items' => [
+            ['label' => '<i class="fa fa-2x fa-plus-square"></i> Add Article', 'url' => ['/article/create'], 'encode' => false, 'options' => [ 'class' => 'link link-publish'] , 'icon'=>'dd'],
+        ]
+    ]);
+
+    $items = [
+        '<li>'
+        . Html::beginForm(['/search'], 'get', ['class' => 'navbar-form navbar-search-form'])
+        . Html::textInput('query','', ['placeholder' => 'Search...', 'class' => 'form-control' ])
+        . Html::endForm()
+        . '</li>'
+    ];
+
+    if (Yii::$app->user->isGuest)
+    {
+        $items[] = ['label' => '<i class="fa fa-2x fa-sign-in"></i> Login', 'url' => ['/login'], 'encode' => false, 'options' => [ 'class' => 'link']];
+        $items[] = ['label' => '<i class="fa fa-2x fa-user-plus"></i> Signup', 'url' => ['/signup'], 'encode' => false, 'options' => [ 'class' => 'link']];
+    } else {
+        $items[] = UserMenuWidget::widget();
+        $items[] = '<li>'
+            . Html::beginForm(['/logout'], 'post', ['class' => 'navbar-form navbar-login-form'])
+            . Html::submitButton(
+                '<i class="fa fa-2x fa-sign-out"></i> Logout', // (' . Yii::$app->user->identity->username . ')
+                ['class' => 'btn btn-link']
+            )
+            . Html::endForm()
+            . '</li>';
+    }
+
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items' => $items,
+    ]);
+    NavBar::end();
+    ?>
+
+    <div class="row profile-container">
+        <div class="col-lg-6 col-lg-push-3 col-md-12">
+            <section class="box-typical">
+                <div class="profile-card">
+<!--
+                    <div class="profile-card-photo">
+                        <img src="img/photo-220-1.jpg" alt="">
+                    </div>
+-->
+                    <div class="profile-card-name"><?php echo $author->username ?></div>
+<!--                    <div class="profile-card-status">Company Founder</div>-->
+<!--                    <div class="profile-card-location">Greater Seattle Area</div>-->
+<!--                    <button type="button" class="btn btn-rounded">Follow</button>-->
+<!--
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-rounded btn-primary-outline dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Connect
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#"><i class="font-icon font-icon-home"></i>Quant and Verbal</a>
+                            <a class="dropdown-item" href="#"><i class="font-icon font-icon-cart"></i>Real Gmat Test</a>
+                            <a class="dropdown-item" href="#"><i class="font-icon font-icon-speed"></i>Prep Official App</a>
+                            <a class="dropdown-item" href="#"><i class="font-icon font-icon-users"></i>CATprer Test</a>
+                            <a class="dropdown-item" href="#"><i class="font-icon font-icon-comments"></i>Third Party Test</a>
+                        </div>
+                    </div>
+-->
+                </div><!--.profile-card-->
+<!--
+                <div class="profile-statistic tbl">
+                    <div class="tbl-row">
+                        <div class="tbl-cell">
+                            <b>200</b>
+                            Connections
+                        </div>
+                        <div class="tbl-cell">
+                            <b>1.9M</b>
+                            Followers
+                        </div>
+                    </div>
+                </div>
+-->
+<!--
+                <ul class="profile-links-list">
+                    <li class="nowrap">
+                        <i class="font-icon font-icon-earth-bordered"></i>
+                        <a href="#">example.com</a>
+                    </li>
+                    <li class="nowrap">
+                        <i class="font-icon font-icon-fb-fill"></i>
+                        <a href="#">facebook.com/example</a>
+                    </li>
+                    <li class="nowrap">
+                        <i class="font-icon font-icon-vk-fill"></i>
+                        <a href="#">vk.com/example</a>
+                    </li>
+                    <li class="nowrap">
+                        <i class="font-icon font-icon-in-fill"></i>
+                        <a href="#">linked.in/example</a>
+                    </li>
+                    <li class="nowrap">
+                        <i class="font-icon font-icon-tw-fill"></i>
+                        <a href="#">twitter.com/example</a>
+                    </li>
+                </ul>
+-->
+            </section><!--.box-typical-->
+        </div>
+    </div>
+
+    <?php
+    $flashes = Yii::$app->session->getAllFlashes();
+    if (count($flashes) > 0) {
+        echo '<br><br><br><br>';
+        foreach ($flashes as $key => $messages) {
+            if (is_array($messages)) {
+                foreach ($messages as $message) {
+                    echo Alert::widget([
+                        'options' => [
+                            'class' => 'alert-' . $key,
+                        ],
+                        'body' => $message,
+                    ]);
+                }
+            }
+        }
+    }
+    ?>
+
+    <div class="container">
+        <?= $content ?>
+    </div>
 </div>
 
 <footer class="footer">

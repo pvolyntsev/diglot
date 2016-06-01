@@ -1,0 +1,126 @@
+.profile.wrap {
+    background: #FAFAFA;
+}
+.profile .navbar.navbar-fixed-top {
+    box-shadow: none;
+}
+
+.profile .profile-container {
+    margin-top: 50px;
+    background: #fff;
+}
+
+.profile-card {
+    text-align: center;
+    padding: 28px 15px 14px;
+}
+
+.profile-card .profile-card-photo {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto .5rem
+}
+
+.profile-card .profile-card-photo img {
+    display: block;
+    width: 100%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%
+}
+
+.profile-card .profile-card-location {
+    color: #6c7a86;
+    margin: .2em 0 18px
+}
+
+.profile-card .btn, .profile-card .btn-group {
+    width: 100%;
+    max-width: 130px;
+    margin: 0 5px
+}
+
+.profile-card .btn-group {
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+.profile-statistic {
+    text-align: center;
+    table-layout: fixed;
+    font-size: .9375rem
+}
+
+.profile-statistic .tbl-cell {
+    vertical-align: middle;
+    border: 1px solid #d8e2e7;
+    padding: 10px
+}
+
+.profile-statistic .tbl-cell:first-child {
+    border-left: none
+}
+
+.profile-statistic .tbl-cell:last-child {
+    border-right: none
+}
+
+.profile-statistic b {
+    font-weight: 600;
+    display: block
+}
+
+.profile-links-list {
+    padding: 10px 0;
+    font-size: .9375rem
+}
+
+.profile-links-list li {
+    padding: 4px 0;
+    margin: 0 15px
+}
+
+.profile-links-list li.nowrap {
+    white-space: nowrap;
+    overflow: hidden
+}
+
+.profile-links-list li.divider {
+    border-top: solid 1px #d8e2e7;
+    margin: 9px 0 11px;
+    padding: 0;
+    height: 0
+}
+
+.profile-links-list .fa {
+    color: #adb7be;
+    margin: 0 5px 0 0;
+    font-size: 1rem
+}
+
+.profile-links-list a {
+    color: #343434
+}
+
+.profile-links-list a:hover {
+    color: #00a8ff
+}
+
+.profile p.no-articles {
+    text-align: center;
+}
+
+.profile p.no-followers {
+    text-align: center;
+}
+
+.profile p.no-followings {
+    text-align: center;
+}
+
+.profile p.no-drafts {
+    text-align: center;
+}
+
+.profile p.no-responses {
+    text-align: center;
+}
