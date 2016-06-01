@@ -3,8 +3,8 @@
   (object)(array(
      'id' => 1,
      'article_id' => -1,
-     'paragraph_original' => '<img src="995220_592369157490181_1373465967_n_fb8d2640-82f9-4db0-ac30-470f3c2ecefd.jpg"/>',
-     'paragraph_translate' => '<img src="995220_592369157490181_1373465967_n_fb8d2640-82f9-4db0-ac30-470f3c2ecefd.jpg"/>',
+     'paragraph_original' => '{{"media":"image","src":"/upload/1/995220_592369157490181_1373465967_n_fb8d2640-82f9-4db0-ac30-470f3c2ecefd.jpg"}}',
+     'paragraph_translate' => '{{"media":"image","src":"/upload/1/995220_592369157490181_1373465967_n_fb8d2640-82f9-4db0-ac30-470f3c2ecefd.jpg"}}',
      'date_modified' => 1463696151,
      'sortorder' => 1,
   )),

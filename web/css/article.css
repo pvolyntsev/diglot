@@ -23,6 +23,10 @@
 .article-paragraph {
     padding: 0.5em 0;
 }
+    .article-paragraph > .wide-media {
+        text-align: center;
+    }
+
 .article-footnote {
     color: #999;
     margin-top: 1em;
