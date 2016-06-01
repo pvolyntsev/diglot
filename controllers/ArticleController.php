@@ -106,20 +106,20 @@ class ArticleController extends Controller
  //       var_dump($comment->load($_POST));//true
  //       var_dump($comment->save());//false
 
-//        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-        if ($comment->load($_POST) && $comment->save()){
-//          return $this->redirect([$entity.'-'.$mode, 'id' => $model->id]); // TODO goto to the article
-            //return $this->render($entity.'-'.$mode, $data);
+//        if ($comment->load(Yii::$app->response->format = \yii\web\Response::FORMAT_JSON) && $comment->save()) {
+//        if ($comment->load(Yii::$app->request->post()) && $comment->save()) {
+        if (($comment->load($_POST) && $comment->save()) or ($model->id!='')){
+           
         }
 
         $comments_selected = new ActiveDataProvider([
             'query' => Comment::find()->limit(4)->where('article_id=:article_id and status=:published', [':article_id' => $id,':published'=>'published']),
             'pagination' => ['pageSize' => 4],
             'sort' => [
-				'defaultOrder' => [
-					'date_created' => SORT_DESC,
-				]
-			],
+                'defaultOrder' => [
+                    'date_created' => SORT_DESC,
+                ]
+            ],
         ]);
 
         $comments = new ActiveDataProvider([
@@ -141,6 +141,7 @@ class ArticleController extends Controller
 //        'models'=>$models,
 //            'pages'=>$pages,
         ]);
+
 	}
 
     /**

@@ -6,13 +6,14 @@ use yii\widgets\DetailView;
 use yii\widgets\ActiveForm;
 use yii\grid\GridView;
 use yii\widgets\ListView;
-use ScrollPage;
+//use ScrollPage;
 use yii\widgets\LinkPager;
 use yii\widgets\Pjax;
 
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Article */
+/* @var $comment app\models\Comment*/
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Articles', 'url' => ['index']];
@@ -78,15 +79,20 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="container comments">
 
 <div class="comment-form">
-
-    <?php $form = ActiveForm::begin(['id' => 'forum_post', 'method' => 'post',]); ?>
+    <?php
+    yii\widgets\Pjax::begin(['id' => 'new_note']);
+    $form = ActiveForm::begin(['options' => ['data-pjax' => true]],[
+    'id' => 'comment-form',
+    ]) ?>
     <?= $form->field($comment, 'comment')->textarea(['rows' => 6]) ?>
     <div class="form-group">
-        <?= Html::submitButton('Add Response', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton($comment->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Create'), ['class' => $comment->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    </div>
     </div>
 
-    <?php ActiveForm::end(); ?>
-
+    <?php ActiveForm::end();
+    Pjax::end();
+    ?>
 </div>
 
 
@@ -110,8 +116,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </div>
 
-<div id="js-comments-page" style="display: none; margin-bottom: 100px">
-
+    <div class="container comments" id="js-comments-page" style="display:none;">
 <?php Pjax::begin(['id'=>'comments_list']); ?>
     <?= ListView::widget([
         'dataProvider' => $comments,

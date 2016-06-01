@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+
 /**
  * CommentController implements the CRUD actions for Comment model.
  */
@@ -61,12 +62,16 @@ class CommentController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($article_id = null)
     {
         $model = new Comment();
 
+        $model->user_id = Yii::$app->user->identity->id;
+        $model->article_id = 1;
+        $model->status = 'published';
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]); // TODO goto to the article
         } else {
             return $this->render('create', [
                 'model' => $model,
