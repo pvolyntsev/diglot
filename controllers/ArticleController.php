@@ -95,7 +95,9 @@ class ArticleController extends Controller
 
 	public function actionView($id)
     {
-        
+		$session = Yii::$app->session;
+		return $this->redirect('/');
+
 		$model = $this->findModel($id);
 		
 		$comment = new Comment();
