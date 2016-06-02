@@ -91,9 +91,17 @@ class ParagraphWidget extends Widget
             return '<!-- wrong media -->';
         }
 
-        if (self::MODE_COMPACT == $this->mode)
-            $object = mb_substr(strip_tags($object), 0, $this->length, 'utf-8') . mb_strlen($object > $this->length) ? '...' : '';
+        if ('<code>'===substr($object, 0, 6))
+            $object = '<pre class="code">' . $object . '</pre>';
+        elseif (!preg_match('/^\<(ul|ol|dl|table|blockquote)/', $object))
+            $object = '<p>' . $object . '</p>';
 
-        return '<p>' . ($link ? Html::a($object, $link) : $object) . '</p>';
+        if (self::MODE_COMPACT == $this->mode)
+        {
+            $text = mb_substr(strip_tags($object), 0, $this->length, 'utf-8') . (mb_strlen($object > $this->length) ? '...' : '');
+            $object = '<p>' . ($link ? Html::a($text, $link) : $text) . '</p>';
+        }
+
+        return $object;
     }
 }
