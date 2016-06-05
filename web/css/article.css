@@ -23,6 +23,77 @@
 .article-paragraph {
     padding: 0.5em 0;
 }
+    .article-paragraph > .wide-media {
+        text-align: center;
+    }
+    .article-paragraph pre.code {
+        border: 1px dashed #16a085;
+        color: #16a085;
+        background-color: #f9f9f9;
+        padding: 1em;
+        margin: 0;
+    }
+    .article-paragraph pre.code code {
+        line-height: 1.5em;
+        white-space: pre-line;
+    }
+    .article-paragraph code {
+        background-color: #f9f9f9;
+        padding: 2px;
+    }
+    .article-paragraph code small {
+        font-size: 0.7em;
+    }
+    .article-paragraph dd, .article-paragraph li {
+        margin: 0;
+        padding: 0;
+    }
+    .article-paragraph ol, .article-paragraph dl, .article-paragraph ul {
+        margin: 0.25em 0;
+        padding: 0 0 0 2em;
+    }
+    .article-paragraph blockquote {
+        display: block;
+        font-style: italic;
+        clear: both;
+    }
+    .article-paragraph blockquote em:before {
+        color: #bbb;
+        content: "\201C";
+        font-size: 3em;
+        line-height: 0.1em;
+        margin-right: 0.2em;
+        vertical-align: -.4em;
+    }
+    .article-paragraph blockquote em:after {
+        color: #bbb;
+        content: "\201D";
+        font-size: 3em;
+        line-height: 0.1em;
+        vertical-align: -.45em;
+    }
+    .article-paragraph blockquote em {
+        display: block;
+        margin: 0.25em 0;
+        padding: 0 0 0 2em;
+    }
+    .article-paragraph blockquote a, .article-paragraph blockquote cite {
+        display: inline-block;
+        float: right;
+        font-size: 0.9em;
+        color: #7f8c8d;
+        text-align: right;
+    }
+    .article-paragraph blockquote a:before, .article-paragraph blockquote cite:before {
+        content: '—';
+        margin-right: 0.5em;
+    }
+    .article-paragraph blockquote a {
+        color: #7f8c8d;
+        text-align: right;
+        text-decoration: none;
+    }
+
 .article-footnote {
     color: #999;
     margin-top: 1em;

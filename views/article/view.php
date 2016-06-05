@@ -4,6 +4,7 @@ use app\models\Article;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\ListView;
+use app\widgets\ParagraphWidget;
 
 use yii\data\ActiveDataProvider;
 use yii\widgets\LinkPager;
@@ -20,6 +21,9 @@ use yii\widgets\Pjax;
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Articles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$paragraphMode = ParagraphWidget::MODE_FULL;
+$articleLink = null; //['article/view', 'id' => $model->id];
 ?>
 
 <div class="container article-view">
@@ -43,12 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="vertical spacer"></div>
     <?php foreach($model->paragraphs as $paragraph) { ?>
         <div class="row article-paragraph">
-            <div class="col col-md-6 article-paragraph-translate">
-                <p><?php echo $paragraph->paragraph_translate ?></p>
-            </div>
-            <div class="col col-md-6 article-paragraph-original">
-                <p><?php echo $paragraph->paragraph_original ?></p>
-            </div>
+            <?php echo ParagraphWidget::widget(['paragraph' => $paragraph, 'mode' => $paragraphMode, 'link' => $articleLink]) ?>
         </div>
     <?php } ?>
 

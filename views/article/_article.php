@@ -1,5 +1,6 @@
 <?php
 use yii\widgets\ListView;
+use app\widgets\ParagraphWidget;
 use app\models\Article;
 use yii\helpers\Html;
 use yii\bootstrap\Alert;
@@ -14,6 +15,8 @@ use yii\web\Session;
  */
 
 $paragraphs = (1 == $page) ? array_slice($model->paragraphs, 0, 2) : array_slice($model->paragraphs, 0, 1);
+$paragraphMode = 1 == $page ? ParagraphWidget::MODE_FULL : ParagraphWidget::MODE_COMPACT;
+$articleLink = ['article/view', 'id' => $model->id];
 ?>
 	<div class="row article-heading">
         <div class="col col-md-6 article-heading-title-translate">
@@ -42,25 +45,10 @@ $paragraphs = (1 == $page) ? array_slice($model->paragraphs, 0, 2) : array_slice
 
     <?php foreach($paragraphs as $paragraph) {?>
         <div class="row article-paragraph">
-            <div class="col col-md-6 article-paragraph-translate">
-                <?php if (1 == $page) { ?>
-                    <p><?=Html::a(Html::encode($paragraph->paragraph_translate), ['view', 'id' => $model->id])?></p>
-                <?php } else { ?>
-                    <p><?=Html::a(Html::encode(mb_substr($paragraph->paragraph_translate, 0, 80, 'utf-8')).'...', ['view', 'id' => $model->id])?></p>
-                <?php } ?>
-            </div>
-            <div class="col col-md-6 article-paragraph-original">
-                <?php if (1 == $page) { ?>
-                    <p><?=Html::a(Html::encode($paragraph->paragraph_original), ['view', 'id' => $model->id])?></p>
-                <?php } else { ?>
-                    <p><?=Html::a(Html::encode(mb_substr($paragraph->paragraph_original, 0, 80, 'utf-8')).'...', ['view', 'id' => $model->id])?></p>
-                <?php } ?>
-            </div>
+            <?php echo ParagraphWidget::widget(['paragraph' => $paragraph, 'mode' => $paragraphMode, 'link' => $articleLink]) ?>
         </div>
     <?php } ?>
 
     <div class="article-more">
         <?=Html::a(Html::encode('. . .'), ['view', 'id' => $model->id])?>
     </div>
-	
-	
