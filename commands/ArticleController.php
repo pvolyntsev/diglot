@@ -60,17 +60,27 @@ class ArticleController extends Controller
 		$articles = $query->all();
 		foreach($articles as $article)
 		{
-			echo $article->title_original;
 			if (!(\app\elastic\models\Article::updateIndex($article)))
 			{
-				echo 'Method not work';
+				echo "Method not work\n";
 			};
 		}
-
-
 	}
+
+    /**
+     * Список записей из индекса
+     */
+    public function actionViewElastic()
+    {
+        $query = \app\models\Article::find();
+        $articles = $query->all();
+        foreach($articles as $article)
+        {
+            \app\elastic\models\Article::viewIndex($article);
+        }
+    }
 	/**
-	 * Функция удаления всего индекса в ElasticSearch
+	 * Удаление всего индекса в ElasticSearch
 	 *
 	 */
 	public function actionDeleteElastic()
@@ -79,7 +89,6 @@ class ArticleController extends Controller
 		$articles = $query->all();
 		foreach($articles as $article)
 		{
-			echo $article->title_original;
 			if (!(\app\elastic\models\Article::deleteIndex($article)))
 			{
 				echo 'Method not work';
