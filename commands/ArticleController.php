@@ -95,4 +95,26 @@ class ArticleController extends Controller
 			};
 		}
 	}
+
+    /**
+     * Удаляем индекс через curl
+     */
+    public function actionDeleteIndexInCurl()
+    {
+        if( $curl = curl_init() ) {
+            curl_setopt($curl, CURLOPT_URL, 'localhost:9200/diglot?pretty');
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+            $out = curl_exec($curl);
+            echo $out;
+            curl_close($curl);
+        }
+        if( $curl = curl_init() ) {
+            curl_setopt($curl, CURLOPT_URL, 'http://localhost:9200/_cat/indices?v');
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+            $out = curl_exec($curl);
+            echo $out;
+            curl_close($curl);
+        }
+    }
 }
