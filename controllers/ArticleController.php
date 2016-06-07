@@ -148,20 +148,20 @@ class ArticleController extends Controller
             {
                 Yii::$app->response->format = Response::FORMAT_JSON;
                 $comment->load(Yii::$app->request->post());
-                if (Yii::$app->request->post('ajax') == 'addComment') // perform only validate
+                if (Yii::$app->request->post('ajax') == 'addComment') // выполнить только валидацию и вернуть результат валидации
                 {
                     Yii::error('validate');
                     return ActiveForm::validate($comment);
                 }
 
                 Yii::error('save');
-                if($comment->validate() && $comment->save()) {   // если все хорошо, и валидация прошла успешно сохраняем модель
+                if($comment->validate() && $comment->save()) { // выполнить валидацию и сохранить модель
                     Yii::error('saved');
                     $added = true;
                     $comment->comment = ''; // сбросить текст комментария, чтобы можно было вводить новый комментарий
                 } else {
                     Yii::error('not saved');
-                    return ActiveForm::validate($comment);   // В случае ошибки валидации выводим ее
+                    return ActiveForm::validate($comment);   // в случае ошибки вернуть результат валидации или сохранения
                 }
 
                 return $this->renderAjax('_AddingCommentForm', [
