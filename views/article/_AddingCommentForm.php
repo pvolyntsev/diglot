@@ -9,7 +9,10 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
 
-Pjax::begin(['id'=>'new_note']);
+Pjax::begin(['id'=>'new_note',
+    'enablePushState' => false,
+    'enableReplaceState' => false
+]);
 $form = ActiveForm::begin([ 'action' => 'add-comment?id='.$model->id,'id' => 'addComment','enableClientValidation'=>false,'enableAjaxValidation' => true,'options' => ['data-pjax' => true,]]) ?>
 
 
