@@ -7,6 +7,7 @@ use yii\web\Controller;
 use app\models\Article;
 use yii\data\ActiveDataProvider;
 use app\models\User;
+use yii\web\NotFoundHttpException;
 
 class AuthorPrivateController extends Controller
 {
@@ -17,8 +18,8 @@ class AuthorPrivateController extends Controller
      */
 	
 	public function actionDrafts()
-    {
-        $articleDataProvider = new ActiveDataProvider([
+    {	
+		$articleDataProvider = new ActiveDataProvider([
             'query' => Article::find()
                     ->where('status=:draft and user_id=:author_id',
                         [
@@ -32,9 +33,16 @@ class AuthorPrivateController extends Controller
                 ]
             ],
         ]);
-        return $this->render('drafts', [
-            'articles' => $articleDataProvider
-        ]);
+		
+		$count = $articleDataProvider->getCount();// получаем количество элементов массива $articleDataProvider для текущей страницы
+		if ( $count != null) {
+			return $this->render('drafts', [
+				'articles' => $articleDataProvider
+			]);
+		}
+		else {
+            throw new NotFoundHttpException('The draft articles does not exist.');
+        }
     }
 	
     /**
