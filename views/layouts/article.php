@@ -94,6 +94,7 @@ AppAsset::register($this);
     ]);
 
     $items = [
+        ContextMenuWidget::widget(),
         '<li>'
             . Html::beginForm(['/search'], 'get', ['class' => 'navbar-form navbar-search-form'])
             . Html::textInput('query','', ['placeholder' => 'Search...', 'class' => 'form-control' ])

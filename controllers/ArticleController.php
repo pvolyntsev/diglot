@@ -94,6 +94,7 @@ class ArticleController extends Controller
     {
         $this->layout = 'article';
         $model = $this->findModel($id);
+        $this->view->params['article'] = $model;
 
         $comment = new Comment();
 
@@ -177,6 +178,7 @@ class ArticleController extends Controller
     public function actionCreate()
     {
         $model = new Article();
+        $this->view->params['article'] = $model;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->addFlash('info', 'Статья создана и сохранена');
@@ -197,6 +199,7 @@ class ArticleController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $this->view->params['article'] = $model;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
