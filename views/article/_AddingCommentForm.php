@@ -3,6 +3,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
 
+/* @var $article app\models\Article */
 /* @var $comment app\models\Comment */
 /* @var $added bool */
 
@@ -14,7 +15,7 @@ if (!empty($added))
     echo '<div>', Yii::t('app', 'Response published'), '</div>';
 
 $form = ActiveForm::begin([
-    'action' => [ 'add-comment', 'id' => $model->id ],
+    'action' => [ 'add-comment', 'id' => $article->id ],
     'id' => 'addComment',
     'enableClientValidation' => false,
     'enableAjaxValidation' => true,

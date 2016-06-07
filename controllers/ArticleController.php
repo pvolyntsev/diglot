@@ -164,7 +164,11 @@ class ArticleController extends Controller
                     return ActiveForm::validate($comment);   // В случае ошибки валидации выводим ее
                 }
 
-                return $this->renderAjax('_AddingCommentForm', ['comment' => $comment, 'added' => $added, 'model' => $model]);
+                return $this->renderAjax('_AddingCommentForm', [
+                    'comment' => $comment,
+                    'added' => $added,
+                    'article' => $model
+                ]);
             }
         }
 
