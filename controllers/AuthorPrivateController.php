@@ -34,16 +34,10 @@ class AuthorPrivateController extends Controller
             ],
         ]);
 		
-		$count = $articleDataProvider->getCount();// получаем количество элементов массива $articleDataProvider для текущей страницы
-		if ( $count != null) {
-			return $this->render('drafts', [
-				'articles' => $articleDataProvider
-			]);
-		}
-		else {
-            throw new NotFoundHttpException('The draft articles does not exist.');
-        }
-    }
+		return $this->render('drafts', [
+			'articles' => $articleDataProvider
+		]);
+	}
 	
     /**
      * Список комментариев на проверку

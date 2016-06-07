@@ -39,7 +39,7 @@ $this->title = 'Draft Articles';
 
         'layout' => "<nav>{pager}</nav>\n{items}\n<nav>{pager}</nav>",
 
-        'emptyText' => 'No articles from ' . $author->username . ' were published',
+        'emptyText' => 'No draft articles found',
         'emptyTextOptions' => [
             'tag' => 'p',
             'class' => 'no-articles'
