@@ -1,13 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: lyudmila
- * Date: 07.06.16
- * Time: 21:02
- */
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
+
+/* @var $comment app\models\Comment */
 
 Pjax::begin(['id'=>'new_note',
     'enablePushState' => false,
