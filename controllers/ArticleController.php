@@ -87,8 +87,7 @@ class ArticleController extends Controller
             'dataProvider' => $dataProvider,
         ]);
 	}
-
-
+	
     /**
      * Displays a single Article model.
      * @param integer $id
@@ -167,8 +166,6 @@ class ArticleController extends Controller
         }
 
 	}
-    
-    
 
     /**
      * Creates a new Article model.
