@@ -134,6 +134,7 @@ class ArticleController extends Controller
         $model = $this->findModel($id);
 
         $comment = NULL;
+        $added = false;
         if (!Yii::$app->user->isGuest)
         {
             $comment = new Comment();
@@ -156,12 +157,14 @@ class ArticleController extends Controller
                 Yii::error('save');
                 if($comment->validate() && $comment->save()) {   // если все хорошо, и валидация прошла успешно сохраняем модель
                     Yii::error('saved');
+                    $added = true;
+                    $comment->comment = ''; // сбросить текст комментария, чтобы можно было вводить новый комментарий
                 } else {
                     Yii::error('not saved');
                     return ActiveForm::validate($comment);   // В случае ошибки валидации выводим ее
                 }
-                
-                return $this->renderAjax('_AddingCommentForm', ['comment' => $comment, 'model' => $model]);
+
+                return $this->renderAjax('_AddingCommentForm', ['comment' => $comment, 'added' => $added, 'model' => $model]);
             }
         }
 

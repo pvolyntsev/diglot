@@ -4,11 +4,15 @@ use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
 
 /* @var $comment app\models\Comment */
+/* @var $added bool */
 
 Pjax::begin(['id'=>'new_note',
     'enablePushState' => false,
     'enableReplaceState' => false
 ]);
+if (!empty($added))
+    echo '<div>', Yii::t('app', 'Response published'), '</div>';
+
 $form = ActiveForm::begin([
     'action' => [ 'add-comment', 'id' => $model->id ],
     'id' => 'addComment',
