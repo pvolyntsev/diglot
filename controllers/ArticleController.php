@@ -27,7 +27,6 @@ class ArticleController extends Controller
     /**
      * @inheritdoc
      */
-
     public function behaviors()
     {
         return [
@@ -70,8 +69,6 @@ class ArticleController extends Controller
      * Lists all Article models.
      * @return mixed
      */
-
-
 	public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
@@ -87,18 +84,17 @@ class ArticleController extends Controller
             'dataProvider' => $dataProvider,
         ]);
 	}
-	
+
     /**
      * Displays a single Article model.
      * @param integer $id
      * @return mixed
      */
-
-
 	public function actionView($id)
     {
-
+        $this->layout = 'article';
         $model = $this->findModel($id);
+
         $comment = new Comment();
 
         $comments_selected = new ActiveDataProvider([
@@ -129,7 +125,7 @@ class ArticleController extends Controller
         ]);
     }
 
-        public function actionAddComment($id)
+    public function actionAddComment($id)
     {
         $model = $this->findModel($id);
 
@@ -171,8 +167,7 @@ class ArticleController extends Controller
                 ]);
             }
         }
-
-	}
+    }
 
     /**
      * Creates a new Article model.
@@ -242,8 +237,7 @@ class ArticleController extends Controller
     }
 
     /**
-     *Поиск в ElasticSearch по полям title_original и title_translate
-     * @return searchResult the model ActiveDataProvider with result search
+     * Поиск статей через ElasticSearch
      */
     public function actionSearch()
     {

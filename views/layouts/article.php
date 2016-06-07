@@ -6,10 +6,11 @@
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\bootstrap\Alert;
+use app\widgets\ContextMenuWidget;
 use app\widgets\UserMenuWidget;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use yii\bootstrap\Alert;
 
 AppAsset::register($this);
 ?>
@@ -88,7 +89,7 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => '<i class="fa fa-2x fa-plus-square"></i> Add Article', 'url' => ['/article/create'], 'encode' => false, 'options' => [ 'class' => 'link link-publish'] , 'icon'=>'dd'],
+            ['label' => '<i class="fa fa-2x fa-plus-square"></i> Add Article', 'url' => ['/article/create'], 'encode' => false, 'options' => [ 'class' => 'link link-publish']],
         ]
     ]);
 
@@ -122,27 +123,27 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
-	<?php
-	$flashes = Yii::$app->session->getAllFlashes();
-	if (count($flashes) > 0) {
-		echo '<br><br><br><br>';
-		foreach ($flashes as $key => $messages) {
-			if (is_array($messages)) {
-				foreach ($messages as $message) {
-					echo Alert::widget([
-						'options' => [
-							'class' => 'alert-' . $key,
-						],
-						'body' => $message,
-					]);	
-				}
-			}
-		}
-	}
-	?>
-    <div class="container">
-        <?= $content ?>
-    </div>
+
+    <?php
+    $flashes = Yii::$app->session->getAllFlashes();
+    if (count($flashes) > 0) {
+        echo '<br><br><br><br>';
+        foreach ($flashes as $key => $messages) {
+            if (is_array($messages)) {
+                foreach ($messages as $message) {
+                    echo Alert::widget([
+                        'options' => [
+                            'class' => 'alert-' . $key,
+                        ],
+                        'body' => $message,
+                    ]);
+                }
+            }
+        }
+    }
+    ?>
+
+    <?= $content ?>
 </div>
 
 <footer class="footer">
