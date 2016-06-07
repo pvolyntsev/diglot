@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Article;
 use Yii;
 use yii\filters\AccessControl;
 use app\models\Comment;
@@ -120,9 +121,36 @@ class CommentController extends Controller
      */
     public function actionDelete($id)
     {
+//        $model=new Article();
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['view']);
+//        $comments_selected = new ActiveDataProvider([
+//            'query' => Comment::find()->limit(4)->where('article_id=:article_id and status=:published', [':article_id' => $id,':published'=>'published']),
+//            'pagination' => ['pageSize' => 4],
+//            'sort' => [
+//                'defaultOrder' => [
+//                    'date_created' => SORT_DESC,
+//                ]
+//            ],
+//        ]);
+//
+//        $comments = new ActiveDataProvider([
+//            'query' => Comment::find()->where('article_id=:article_id and status=:published', [':article_id' => $id,':published'=>'published']),
+//            'pagination' => ['pageSize' => 8],
+//            'sort' => [
+//                'defaultOrder' => [
+//                    'date_created' => SORT_DESC,
+//                ]
+//            ],
+//        ]);
+//
+//        return $this->render('view', [
+//            'model' => $model,
+//            'comments' => $comments,
+//            'comments_selected' =>$comments_selected,
+//            'comment' => $this,
+//        ]);
     }
 
     /**

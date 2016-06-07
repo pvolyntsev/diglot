@@ -2,6 +2,7 @@
 
 use app\models\Article;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\widgets\ListView;
 
@@ -71,34 +72,49 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="comment-form">
             <?php
-            yii\widgets\Pjax::begin(['id' => 'new_note']);
-            $form = ActiveForm::begin(['options' => ['data-pjax' => true]],['id' => 'comment-form',]) ?>
-            <?= $form->field($comment, 'comment')->textarea(['rows' => 6]) ?>
-            <div class="form-group">
-                <?= Html::submitButton($comment->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Create'), ['class' => $comment->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-            </div>
+            $this->registerJs('
+                      jQuery(document).pjax("#btn_create", "#comments_list", {
+                          "push": true,
+                          "replace": false,
+                          "timeout": 1000,
+                          "scrollTo": false
+                      });
+                  ');
+            
+            if (!Yii::$app->user->isGuest) {
+            ?>
+
+            <?= $this->render('_AddingCommentForm', [
+                'comment' => $comment,
+                'model' => $model,
+            ]) ?>
+
             <?php
-            ActiveForm::end();
-            Pjax::end();
+            } else {
+                echo "Для добавления комментариев необходимо ". Html::a("авторизоваться",['/login']);
+            }
             ?>
         </div>
-
+        <button id="test">Test</button>
         <div id="js-comments-recommended">
-        <?= ListView::widget([
-            'dataProvider' => $comments_selected,
-            'itemView' => '_comment',
-            'layout' => "{items}",
-            'emptyText' => '',
-            'emptyTextOptions' => [
-                //'tag' => 'p'
-            ],
-        ]);
-        ?>
+            <?php Pjax::begin(['id'=>'comments_selected_list']); ?>
+            <?= ListView::widget([
+                'dataProvider' => $comments_selected,
+                'itemView' => '_comment',
+                'layout' => "{items}",
+                'emptyText' => '',
+                'emptyTextOptions' => [
+                    //'tag' => 'p'
+                ],
+            ]);
+            ?>
+            <?php Pjax::end(); ?>
         </div>
 
         <div class="comments" id="js-comments-page" style="display: none;">
             <?php Pjax::begin(['id'=>'comments_list']); ?>
             <?= ListView::widget([
+                'id' =>'xxx',
                 'dataProvider' => $comments,
                 'itemView' => '_comment',
                 'layout' => "{summary}\n{items}\n{pager}",

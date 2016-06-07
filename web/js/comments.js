@@ -52,11 +52,28 @@ $(document)
   .ready(application.articleComments.ready);
 
 $("document").ready(function() {
-  $("#new_note").on("pjax:end", function () {
+
+  // $(document).on('click', '#btn_create', function(){
+  $(document).on('click', '#test', function(){
+    console.log('test clicked');
     $('#js-comments-recommended').hide();
     $('#js-comments-page').show();
     $('#js-comments-show-all').hide();
-    $.pjax.reload({container: "#comments_list"});  //Reload ListView
-    return false;
+    $.pjax.reload({container:"#comments_list"});  //Reload ListView
   });
+
+  // $("#new_note").on("pjax:end", function () {
+  //   $('#js-comments-recommended').hide();
+  //   $('#js-comments-page').show();
+  //   $('#js-comments-show-all').hide();
+  //   $.pjax.reload({container: "#comments_list"});  //Reload ListView
+  //   return false;
+  // });
+
+  // $("#delete_note").on("pjax:end", function () {
+  //   $.pjax.reload({container: "#comments_list"});  //Reload ListView
+  //   $.pjax.reload({container: "#comments_selected_list"});  //Reload ListView
+  //   return false;
+  // });
+  
 });
