@@ -6,7 +6,7 @@ use yii\widgets\Pjax;
 /* @var $comment app\models\Comment */
 /* @var $added bool */
 
-Pjax::begin(['id'=>'new_note',
+Pjax::begin(['id'=>'new_comment_form',
     'enablePushState' => false,
     'enableReplaceState' => false
 ]);

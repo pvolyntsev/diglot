@@ -71,14 +71,6 @@ $articleLink = null; //['article/view', 'id' => $model->id];
 
         <div class="comment-form">
             <?php
-            $this->registerJs('
-                      jQuery(document).pjax("#btn_create", "#comments_list", {
-                          "push": true,
-                          "replace": false,
-                          "timeout": 1000,
-                          "scrollTo": false
-                      });
-                  ');
             
             if (!Yii::$app->user->isGuest) {
             ?>
@@ -94,7 +86,7 @@ $articleLink = null; //['article/view', 'id' => $model->id];
             }
             ?>
         </div>
-        <button id="test">Test</button>
+
         <div id="js-comments-recommended">
             <?php Pjax::begin(['id'=>'comments_selected_list']); ?>
             <?= ListView::widget([
