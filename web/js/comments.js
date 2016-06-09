@@ -45,18 +45,21 @@ application.articleComments.ready = function($) {
       addFormActive = false;
     }, 200);
   });
+
+  $("#new_comment_form").on("pjax:end", function() {
+    $('#js-comments-recommended').hide();
+    $('#js-comments-page').show();
+    $('#js-comments-show-all').hide();
+    $.pjax.reload({container:"#comments_list"});  //Reload ListView
+  });
+
+// $("#delete_note").on("pjax:end", function () {
+//   $.pjax.reload({container: "#comments_list"});  //Reload ListView
+//   $.pjax.reload({container: "#comments_selected_list"});  //Reload ListView
+//   return false;
+// });
 };
 
 // attach ready event
 $(document)
   .ready(application.articleComments.ready);
-
-$("document").ready(function() {
-  $("#new_note").on("pjax:end", function () {
-    $('#js-comments-recommended').hide();
-    $('#js-comments-page').show();
-    $('#js-comments-show-all').hide();
-    $.pjax.reload({container: "#comments_list"});  //Reload ListView
-    return false;
-  });
-});

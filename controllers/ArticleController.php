@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 
+use yii\base\ErrorException;
 use yii\filters\AccessControl;
 use app\models\Article;
 use app\models\Comment;
@@ -15,6 +16,8 @@ use yii\data\Pagination;
 use app\forms\SearchForm;
 use yii\web\Session;
 use yii\bootstrap\Alert;
+use yii\bootstrap\ActiveForm;
+use yii\web\Response;
 
 /**
  * ArticleController implements the CRUD actions for Article model.
@@ -24,7 +27,6 @@ class ArticleController extends Controller
     /**
      * @inheritdoc
      */
-
     public function behaviors()
     {
         return [
@@ -67,8 +69,6 @@ class ArticleController extends Controller
      * Lists all Article models.
      * @return mixed
      */
-
-
 	public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
@@ -84,38 +84,22 @@ class ArticleController extends Controller
             'dataProvider' => $dataProvider,
         ]);
 	}
-	
+
     /**
      * Displays a single Article model.
      * @param integer $id
      * @return mixed
      */
-
-
 	public function actionView($id)
     {
+        $this->layout = 'article';
+        $model = $this->findModel($id);
+        $this->view->params['article'] = $model;
 
-		$model = $this->findModel($id);
-		
-		$comment = new Comment();
-
-        $comment->user_id = Yii::$app->user->identity->id;
-        $comment->article_id = $id;
-        $comment->status = 'published';
-//        $comment->date_created=Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));aa
-        $comment->date_created=$comment->behaviors();
-
- //       var_dump($comment->load($_POST));//true
- //       var_dump($comment->save());//false
-
-//        if ($comment->load(Yii::$app->response->format = \yii\web\Response::FORMAT_JSON) && $comment->save()) {
-//        if ($comment->load(Yii::$app->request->post()) && $comment->save()) {
-        if (($comment->load($_POST) && $comment->save()) or ($model->id!='')){
-           
-        }
+        $comment = new Comment();
 
         $comments_selected = new ActiveDataProvider([
-            'query' => Comment::find()->limit(4)->where('article_id=:article_id and status=:published', [':article_id' => $id,':published'=>'published']),
+            'query' => Comment::find()->limit(4)->where('article_id=:article_id and status=:published', [':article_id' => $id, ':published' => 'published']),
             'pagination' => ['pageSize' => 4],
             'sort' => [
                 'defaultOrder' => [
@@ -125,7 +109,7 @@ class ArticleController extends Controller
         ]);
 
         $comments = new ActiveDataProvider([
-            'query' => Comment::find()->where('article_id=:article_id and status=:published', [':article_id' => $id,':published'=>'published']),
+            'query' => Comment::find()->where('article_id=:article_id and status=:published', [':article_id' => $id, ':published' => 'published']),
             'pagination' => ['pageSize' => 8],
             'sort' => [
                 'defaultOrder' => [
@@ -137,14 +121,55 @@ class ArticleController extends Controller
         return $this->render('view', [
             'model' => $model,
             'comments' => $comments,
-            'comments_selected'=>$comments_selected,
+            'comments_selected' => $comments_selected,
             'comment' => $comment,
-//            'dataProvider'=>$dataProvider,
-//        'models'=>$models,
-//            'pages'=>$pages,
         ]);
+    }
 
-	}
+    public function actionAddComment($id)
+    {
+        $model = $this->findModel($id);
+
+        $comment = NULL;
+        $added = false;
+        if (!Yii::$app->user->isGuest)
+        {
+            $comment = new Comment();
+
+            $comment->user_id = Yii::$app->user->identity->id;
+            $comment->article_id = $id;
+            $comment->status = 'published';
+            $comment->date_created = $comment->behaviors();
+
+            if(Yii::$app->request->isAjax)  // Вот тут мы проверяем если у нас это аякс запрос или нет
+            {
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                $comment->load(Yii::$app->request->post());
+                if (Yii::$app->request->post('ajax') == 'addComment') // выполнить только валидацию и вернуть результат валидации
+                {
+                    Yii::error('validate');
+                    return ActiveForm::validate($comment);
+                }
+
+                Yii::error('save');
+                if($comment->validate() && $comment->save()) { // выполнить валидацию и сохранить модель
+                    Yii::error('saved');
+                    $added = true;
+                    $comment->comment = ''; // сбросить текст комментария, чтобы можно было вводить новый комментарий
+                } else {
+                    Yii::error('not saved');
+                    return ActiveForm::validate($comment);   // в случае ошибки вернуть результат валидации или сохранения
+                }
+
+                return $this->renderAjax('_AddingCommentForm', [
+                    'comment' => $comment,
+                    'added' => $added,
+                    'article' => $model
+                ]);
+            }
+        }
+    }
+
     /**
      * Creates a new Article model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -153,6 +178,7 @@ class ArticleController extends Controller
     public function actionCreate()
     {
         $model = new Article();
+        $this->view->params['article'] = $model;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->addFlash('info', 'Статья создана и сохранена');
@@ -173,6 +199,7 @@ class ArticleController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $this->view->params['article'] = $model;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -213,8 +240,7 @@ class ArticleController extends Controller
     }
 
     /**
-     *Поиск в ElasticSearch по полям title_original и title_translate
-     * @return searchResult the model ActiveDataProvider with result search
+     * Поиск статей через ElasticSearch
      */
     public function actionSearch()
     {
