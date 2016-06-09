@@ -20,6 +20,10 @@
 .vertical.spacer {
     padding-top: 3em;
 }
+.article-draft {					/*для статей со статусом draft*/
+	background-color: orange; 
+	text-align: center;
+}
 .article-paragraph {
     padding: 0.5em 0;
 }
@@ -85,7 +89,7 @@
         text-align: right;
     }
     .article-paragraph blockquote a:before, .article-paragraph blockquote cite:before {
-        content: 'вЂ”';
+        content: '—';
         margin-right: 0.5em;
     }
     .article-paragraph blockquote a {
@@ -167,3 +171,5 @@
     .articles.list.two-columns .article .article-heading {
         font-size: 12px;
     }
+Status API Training Shop Blog About
+© 2016 GitHub, Inc. Te

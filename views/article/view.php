@@ -46,6 +46,11 @@ $articleLink = null; //['article/view', 'id' => $model->id];
         </div>
     </div>
     <div class="vertical spacer"></div>
+	
+	<div class="article-draft">
+		<? if ($model->status === draft) {echo $model->status;}?>
+	</div>
+	
     <?php foreach($model->paragraphs as $paragraph) { ?>
         <div class="row article-paragraph">
             <?php echo ParagraphWidget::widget(['paragraph' => $paragraph, 'mode' => $paragraphMode, 'link' => $articleLink]) ?>

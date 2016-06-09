@@ -32,7 +32,7 @@ class ArticleController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['create', 'update', 'delete'],
+                'only' => ['create', 'update', 'delete', 'view'],
                 'rules' => [
                     [
                         // создавать может только авторизованный пользователь
@@ -54,7 +54,25 @@ class ArticleController extends Controller
                             return false;
                         },
                     ],
-                ],
+					[
+					// смотреть черновики draft может только владелец
+                        'actions' => ['view'],
+                        'allow' => true,
+                        //'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            $article = $this->findModel(Yii::$app->request->get('id'));
+							if ($article->status !== draft) {
+								return true;
+							} else {
+								if ($article->user_id == Yii::$app->user->identity->id)
+								{
+									return true;
+								}
+								return false;
+							}
+                        },
+					],
+				],
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -70,7 +88,7 @@ class ArticleController extends Controller
      * @return mixed
      */
 	public function actionIndex()
-    {
+    {	
         $dataProvider = new ActiveDataProvider([
             'query' => Article::find()->where('status=:published', [':published'=>'published']),
 			//sort
