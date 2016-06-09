@@ -48,7 +48,7 @@ $articleLink = null; //['article/view', 'id' => $model->id];
     <div class="vertical spacer"></div>
 	
 	<div class="article-draft">
-		<? if ($model->status === draft) {echo $model->status;}?>
+		<? if ($model->status === draft) {echo 'Draft';}?>
 	</div>
 	
     <?php foreach($model->paragraphs as $paragraph) { ?>

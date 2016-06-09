@@ -61,7 +61,7 @@ class ArticleController extends Controller
                         //'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
                             $article = $this->findModel(Yii::$app->request->get('id'));
-							if ($article->status !== draft) {
+							if ($article->status !== 'draft') {
 								return true;
 							} else {
 								if ($article->user_id == Yii::$app->user->identity->id)
