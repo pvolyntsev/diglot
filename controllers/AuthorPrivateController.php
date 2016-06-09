@@ -8,6 +8,7 @@ use app\models\Article;
 use yii\data\ActiveDataProvider;
 use app\models\User;
 use yii\web\NotFoundHttpException;
+//use yii\helpers\ArrayHelper;
 
 class AuthorPrivateController extends Controller
 {
@@ -26,7 +27,7 @@ class AuthorPrivateController extends Controller
                             ':draft' => 'draft',
                             ':author_id' => Yii::$app->user->identity->id
                         ]),
-            //sort
+			//sort
             'sort' => [
                 'defaultOrder' => [
                     'date_created' => SORT_DESC,
@@ -38,7 +39,7 @@ class AuthorPrivateController extends Controller
 			'articles' => $articleDataProvider
 		]);
 	}
-	
+			
     /**
      * Список комментариев на проверку
      */
