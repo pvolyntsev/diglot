@@ -47,9 +47,10 @@ $articleLink = null; //['article/view', 'id' => $model->id];
     </div>
     <div class="vertical spacer"></div>
 	
-	<div class="article-draft">
-		<? if ($model->status === draft) {echo 'Draft';}?>
-	</div>
+	<?php if (Article::STATUS_DRAFT == $model->status) {
+		echo '<div class="article-draft">Draft</div>';
+		}
+	?>	
 	
     <?php foreach($model->paragraphs as $paragraph) { ?>
         <div class="row article-paragraph">
