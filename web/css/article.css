@@ -20,7 +20,7 @@
 .vertical.spacer {
     padding-top: 3em;
 }
-.article-draft {					/*для статей со статусом draft*/
+.article-draft {					/* РґР»СЏ СЃС‚Р°С‚РµР№ СЃРѕ СЃС‚Р°С‚СѓСЃРѕРј draft */
 	background-color: orange; 
 	text-align: center;
 }
@@ -89,7 +89,7 @@
         text-align: right;
     }
     .article-paragraph blockquote a:before, .article-paragraph blockquote cite:before {
-        content: '—';
+        content: 'вЂ”';
         margin-right: 0.5em;
     }
     .article-paragraph blockquote a {
@@ -171,5 +171,3 @@
     .articles.list.two-columns .article .article-heading {
         font-size: 12px;
     }
-Status API Training Shop Blog About
-© 2016 GitHub, Inc. Te
