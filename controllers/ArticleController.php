@@ -128,7 +128,10 @@ class ArticleController extends Controller
 
         $comments = new ActiveDataProvider([
             'query' => Comment::find()->where('article_id=:article_id and status=:published', [':article_id' => $id, ':published' => 'published']),
-            'pagination' => ['pageSize' => 8],
+            'pagination' => [
+                'defaultPageSize' => 10,
+                'pageSize' => 10,
+            ],
             'sort' => [
                 'defaultOrder' => [
                     'date_created' => SORT_DESC,
