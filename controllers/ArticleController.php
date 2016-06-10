@@ -23,8 +23,7 @@ use yii\web\Response;
  * ArticleController implements the CRUD actions for Article model.
  */
 class ArticleController extends Controller
-{
-    /**
+{	/**
      * @inheritdoc
      */
     public function behaviors()
@@ -61,7 +60,7 @@ class ArticleController extends Controller
                         //'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
                             $article = $this->findModel(Yii::$app->request->get('id'));
-							if ($article->status !== 'draft') {
+							if (Article::STATUS_DRAFT == $article->status) {
 								return true;
 							} else {
 								if ($article->user_id == Yii::$app->user->identity->id)

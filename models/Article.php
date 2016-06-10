@@ -38,7 +38,11 @@ use Yii;
  * @property TagOfArticle[] $tagOfArticles
  */
 class Article extends \yii\db\ActiveRecord
-{
+{	/**
+     * константы
+     */
+    const STATUS_DRAFT = 'draft';
+
     /**
      * @inheritdoc
      */
