@@ -2,10 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\Article;
+use app\models\Paragraph;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Article */
-/* @var $paragraphs app\models\Paragraph[] */
+/* @var $model Article */
+/* @var $paragraphs Paragraph[] */
 /* @var $form yii\widgets\ActiveForm */
 
 
@@ -106,7 +108,7 @@ $languageItems = \yii\helpers\ArrayHelper::map($languages, 'id','language');
     </div>
 
     <div class="form-group">
-        <?php if ($model->status == 'draft' || $model->isNewRecord) { ?>
+        <?php if ($model->status == Article::STATUS_DRAFT || $model->isNewRecord) { ?>
             <?php echo Html::submitButton(Yii::t('app','Store in drafts'), ['name' => 'store', 'class' => 'btn']) ?>
         <?php } ?>
         <?php echo Html::submitButton(Yii::t('app','Publish'), ['name' => 'publish', 'class' => 'btn btn-primary']) ?>

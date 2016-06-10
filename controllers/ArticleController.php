@@ -88,9 +88,9 @@ class ArticleController extends Controller
      * @return mixed
      */
 	public function actionIndex()
-    {	
+    {
         $dataProvider = new ActiveDataProvider([
-            'query' => Article::find()->where('status=:published', [':published'=>'published']),
+            'query' => Article::find()->where('status=:published', [':published'=>Article::STATUS_PUBLISHED]),
 			//sort
 			'sort' => [
 				'defaultOrder' => [
@@ -206,9 +206,9 @@ class ArticleController extends Controller
         $this->view->params['article'] = $model;
 
         if (!is_null(Yii::$app->request->post('store')))
-            $model->status = 'draft';
+            $model->status = Article::STATUS_DRAFT;
         if (!is_null(Yii::$app->request->post('publish')))
-            $model->status = 'published';
+            $model->status = Article::STATUS_PUBLISHED;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $paragraphs = $model->updateParagraphs($_POST['Article']['paragraphs']);
@@ -240,9 +240,9 @@ class ArticleController extends Controller
         $this->view->params['article'] = $model;
 
         if (!is_null(Yii::$app->request->post('store')))
-            $model->status = 'draft';
+            $model->status = Article::STATUS_DRAFT;
         if (!is_null(Yii::$app->request->post('publish')))
-            $model->status = 'published';
+            $model->status = Article::STATUS_PUBLISHED;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $paragraphs = $model->updateParagraphs($_POST['Article']['paragraphs']);

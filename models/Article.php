@@ -42,6 +42,8 @@ class Article extends \yii\db\ActiveRecord
      * константы
      */
     const STATUS_DRAFT = 'draft';
+    const STATUS_PUBLISHED = 'published';
+    const STATUS_BLOCKED = 'blocked';
 
     /**
      * @inheritdoc

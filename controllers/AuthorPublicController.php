@@ -38,7 +38,7 @@ class AuthorPublicController extends Controller
             'query' => Article::find()
                     ->where('status=:published and user_id=:author_id',
                         [
-                            ':published' => 'published',
+                            ':published' => Article::STATUS_PUBLISHED,
                             ':author_id' => $this->author->id
                         ])
                     ->limit(3),
@@ -66,7 +66,7 @@ class AuthorPublicController extends Controller
             'query' => Article::find()
                     ->where('status=:published and user_id=:author_id',
                         [
-                            ':published' => 'published',
+                            ':published' => Article::STATUS_PUBLISHED,
                             ':author_id' => $this->author->id
                         ]),
             //sort
