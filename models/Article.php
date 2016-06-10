@@ -73,11 +73,11 @@ class Article extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'title_original' => Yii::t('app', 'Title Original'),
-            'url_original' => Yii::t('app', 'Url Original'),
-            'title_translate' => Yii::t('app', 'Title Translate'),
-            'url_translate' => Yii::t('app', 'Url Translate'),
-            'status' => Yii::t('app', 'Статуc'),
+            'title_original' => Yii::t('app', 'Original Title'),
+            'url_original' => Yii::t('app', 'Cross Post Original Url'),
+            'title_translate' => Yii::t('app', 'Translated Title'),
+            'url_translate' => Yii::t('app', 'Cross Post Translated Url'),
+            'status' => Yii::t('app', 'Status'),
             'date_created' => Yii::t('app', 'Date Created'),
             'date_modified' => Yii::t('app', 'Date Modified'),
             'date_deleted' => Yii::t('app', 'Date Deleted'),
@@ -88,7 +88,7 @@ class Article extends \yii\db\ActiveRecord
             'own_original' => Yii::t('app', 'Own Original Article'),
             'translator_name' => Yii::t('app', 'Translator Name'),
             'translator_url' => Yii::t('app', 'Translator Url'),
-            'own_translate' => Yii::t('app', 'Собственный перевод'),
+            'own_translate' => Yii::t('app', 'Own Translated Article'),
             'lang_original_id' => Yii::t('app', 'Original Language'),
             'lang_translate_id' => Yii::t('app', 'Translation Language'),
         ];
