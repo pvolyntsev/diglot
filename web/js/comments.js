@@ -8,6 +8,7 @@ application.articleComments.ready = function($) {
     $('#js-comments-recommended').hide();
     $('#js-comments-page').show();
     $('#js-comments-show-all').hide();
+    self.location = '#responses';
     return false;
   });
 
