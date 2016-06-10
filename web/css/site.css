@@ -156,3 +156,29 @@ a.desc:after {
 .float-left {
     float: left;
 }
+
+.float.left {
+    float: left;
+}
+.float.right {
+    float: left;
+}
+.float.off:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.align.left {
+    text-align: left;
+}
+.align.right {
+    text-align: right;
+}
+.align.center {
+    text-align: center;
+}
+.block.align.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+

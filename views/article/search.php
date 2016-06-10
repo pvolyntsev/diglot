@@ -1,13 +1,11 @@
 <?php
 
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model app\forms\SearchForm */
-/* @var $articles */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
 use yii\helpers\Html;
 use yii\widgets\ListView;
+
+/** @var $this yii\web\View */
+/** @var $searchResult yii\data\ActiveDataProvider */
+/** @var $query string */
 
 $this->title = 'Search Articles';
 $this->params['breadcrumbs'][] = $this->title;
@@ -25,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 if (!is_null($searchResult))
                 {
                     ?>
-                    You found <strong><?= count($articlesFound)?></strong> articles about <strong><?=$query?></strong>. All from our global community of authors and creatives.
+                    You found <strong><?= count($articlesFound)?></strong> articles about <strong><?= Html::encode($query) ?></strong>. All from our global community of authors and creatives.
                     <?php
                 }else
                 {

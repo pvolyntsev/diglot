@@ -8,16 +8,17 @@ use yii\base\ErrorException;
 use yii\filters\AccessControl;
 use app\models\Article;
 use app\models\Comment;
+use app\models\Paragraph;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\Pagination;
-use app\forms\SearchForm;
 use yii\web\Session;
 use yii\bootstrap\Alert;
 use yii\bootstrap\ActiveForm;
 use yii\web\Response;
+use yii\helpers\Html;
 
 /**
  * ArticleController implements the CRUD actions for Article model.
@@ -197,14 +198,33 @@ class ArticleController extends Controller
         $model = new Article();
         $this->view->params['article'] = $model;
 
+        $model->user_id = Yii::$app->user->identity->id;
+        $model->own_original = 0;
+        $model->own_translate = 0;
+
+        $paragraphs = $model->paragraphs;
+        $this->view->params['article'] = $model;
+
+        if (!is_null(Yii::$app->request->post('store')))
+            $model->status = 'draft';
+        if (!is_null(Yii::$app->request->post('publish')))
+            $model->status = 'published';
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->addFlash('info', 'Статья создана и сохранена');
-			return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            $paragraphs = $model->updateParagraphs($_POST['Article']['paragraphs']);
+
+            if ($model->status == 'draft')
+                Yii::$app->session->addFlash('info', 'Article is saved to ' . Html::a('drafts', ['/author-private/drafts']));
+            else
+                Yii::$app->session->addFlash('info', 'Article is ' . Html::a('published', ['/article/view', 'id' => $model->id]));
+
+            #return $this->redirect(['view', 'id' => $model->id]);
+            #exit;
         }
+        return $this->render('update', [
+            'model' => $model,
+            'paragraphs' => $paragraphs,
+        ]);
     }
 
     /**
@@ -216,15 +236,29 @@ class ArticleController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $paragraphs = $model->paragraphs;
         $this->view->params['article'] = $model;
 
+        if (!is_null(Yii::$app->request->post('store')))
+            $model->status = 'draft';
+        if (!is_null(Yii::$app->request->post('publish')))
+            $model->status = 'published';
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            $paragraphs = $model->updateParagraphs($_POST['Article']['paragraphs']);
+
+            if ($model->status == 'draft')
+                Yii::$app->session->addFlash('info', 'Article is saved to ' . Html::a('drafts', ['/author-private/drafts']));
+            else
+                Yii::$app->session->addFlash('info', 'Article is ' . Html::a('published', ['/article/view', 'id' => $model->id]));
+
+            #return $this->redirect(['view', 'id' => $model->id]);
+            #exit;
         }
+        return $this->render('update', [
+            'model' => $model,
+            'paragraphs' => $paragraphs,
+        ]);
     }
 
     /**
@@ -264,14 +298,22 @@ class ArticleController extends Controller
         $articlesFound = [];
         $searchResult = null;
         if (Yii::$app->request->get('query')) {
-            $query = \app\elastic\models\Article::find()->query([
+            try
+            {
+                $query = \app\elastic\models\Article::find()->query([
                         "multi_match" => [
                         "fields" => ['title_original', 'title_translate', 'paragraphs_original', 'paragraphs_translate'],
                         "query" => Yii::$app->request->get('query'),
                         "fuzziness" => "AUTO",
                        ]
-            ]);
-            $articlesFound = $query->column('id'); // gives id need the documents
+                ]);
+                $articlesFound = $query->column('id'); // gives id need the documents
+            } catch(\yii\elasticsearch\Exception $e)
+            {
+                Yii::error('Error searching articles with ElasticSearch: '.$e, 'accessElastic');
+                $articlesFound = []; // Nothing found due to ElasticSearch problems
+            }
+
             $searchResult = new ActiveDataProvider([
                 'query' => Article::find()->where(array('id'=>$articlesFound)),
                 'pagination' => [
