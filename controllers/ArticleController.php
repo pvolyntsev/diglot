@@ -264,14 +264,22 @@ class ArticleController extends Controller
         $articlesFound = [];
         $searchResult = null;
         if (Yii::$app->request->get('query')) {
-            $query = \app\elastic\models\Article::find()->query([
+            try
+            {
+                $query = \app\elastic\models\Article::find()->query([
                         "multi_match" => [
                         "fields" => ['title_original', 'title_translate', 'paragraphs_original', 'paragraphs_translate'],
                         "query" => Yii::$app->request->get('query'),
                         "fuzziness" => "AUTO",
                        ]
-            ]);
-            $articlesFound = $query->column('id'); // gives id need the documents
+                ]);
+                $articlesFound = $query->column('id'); // gives id need the documents
+            } catch(\yii\elasticsearch\Exception $e)
+            {
+                Yii::error('Error searching articles with ElasticSearch: '.$e, 'accessElastic');
+                $articlesFound = []; // Nothing found due to ElasticSearch problems
+            }
+
             $searchResult = new ActiveDataProvider([
                 'query' => Article::find()->where(array('id'=>$articlesFound)),
                 'pagination' => [
