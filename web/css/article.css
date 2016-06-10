@@ -20,6 +20,9 @@
 .vertical.spacer {
     padding-top: 3em;
 }
+.horizontal.divider {
+    border-top: 1px solid rgba(0,0,0,0.5);
+}
 .article-draft {					/* для статей со статусом draft */
 	background-color: orange; 
 	text-align: center;
@@ -170,4 +173,74 @@
 
     .articles.list.two-columns .article .article-heading {
         font-size: 12px;
+    }
+
+/**
+    Article editor
+    ---------------------------------- */
+
+.article-form .article-paragraphs textarea {
+    width: 100%;
+}
+
+.article-form .article-paragraphs .editable {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    background: rgba(255,255,255,0.9);
+    border: 1px solid rgba(0,0,0,0.5);
+    padding: 5px;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.article-form .article-paragraph {
+    position: relative;
+}
+    .article-form .article-paragraph-add {
+        text-align: center;
+        clear: both;
+    }
+    /** анимация кнопки добавления параграфа */
+    .article-form .article-paragraph-add a {
+        transform: translateY(0);
+        opacity: 0;
+        transition: transform .15s, opacity .15s;
+    }
+        .article-form .article-paragraph:hover .article-paragraph-add a {
+            transform: translateY(10px);
+            opacity: 1;
+        }
+    #js-paragraphs:hover>.article-paragraph-add a {
+        transform: translateY(10px);
+        opacity: 1;
+    }
+
+    /** анимация кнопки удаления параграфа */
+    .article-form .article-paragraph-remove {
+        position: absolute;
+        top: 0;
+        right: 50%;
+        opacity: 0;
+        transition: top 0.15s, opacity 0.15s 0.05s;
+    }
+        .article-form .article-paragraph-remove a {
+            position: absolute;
+            left: -27px;
+        }
+        .article-form .article-paragraph:hover .article-paragraph-remove {
+            top: 10px;
+            opacity: 1;
+        }
+
+    /** шаблон нового параграфа */
+    .article-form #js-paragraph-template {
+        display: none;
+    }
+    .article-form #js-paragraph-template .article-paragraph-remove {
+        display: none;
+    }
+
+    .article-paragraph-remove { /* удаление параграфов не реализовано */
+        display: none !important;
     }

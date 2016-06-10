@@ -216,15 +216,29 @@ class ArticleController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $paragraphs = $model->paragraphs;
         $this->view->params['article'] = $model;
 
+        if (!is_null(Yii::$app->request->post('store')))
+            $model->status = 'draft';
+        if (!is_null(Yii::$app->request->post('publish')))
+            $model->status = 'published';
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            $paragraphs = $model->updateParagraphs($_POST['Article']['paragraphs']);
+
+            if ($model->status == 'draft')
+                Yii::$app->session->addFlash('info', 'Article is saved to ' . Html::a('drafts', ['/author-private/drafts']));
+            else
+                Yii::$app->session->addFlash('info', 'Article is ' . Html::a('published', ['/article/view', 'id' => $model->id]));
+
+            #return $this->redirect(['view', 'id' => $model->id]);
+            #exit;
         }
+        return $this->render('update', [
+            'model' => $model,
+            'paragraphs' => $paragraphs,
+        ]);
     }
 
     /**
