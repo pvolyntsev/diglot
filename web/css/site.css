@@ -161,7 +161,7 @@ a.desc:after {
     float: left;
 }
 .float.right {
-    float: left;
+    float: right;
 }
 .float.off:after {
     content: '';
