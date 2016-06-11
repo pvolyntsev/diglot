@@ -64,7 +64,7 @@ class ArticleController extends Controller
 							if (Article::STATUS_DRAFT !== $article->status) {
 								return true;
 							} else {
-								if ($article->user_id == Yii::$app->user->identity->id)
+								if ( (!Yii::$app->user->isGuest) && ($article->user_id == Yii::$app->user->identity->id) )
 								{
 									return true;
 								}
