@@ -170,6 +170,33 @@ class ArticleController extends Controller
         }
     }
 
+    public function actionDeleteComment($id)
+    {
+//        $model=$this->findModel($id_article);
+        $deleted = false;
+        $comment=Comment::findOne($id);
+
+        if (Yii::$app->request->isAjax)  // Вот тут мы проверяем если у нас это аякс запрос или нет
+        {
+            if($comment!=null)
+            {
+                $comment->delete();
+//                Yii::error('comment is deleted');
+            }
+//            else
+//            {
+//                throw new NotFoundHttpException('The requested page does not exist.');
+//            }
+        }
+        else
+        {
+//            Yii::error('comment is not deleted');
+        }
+        return $this->renderAjax('_comment', [
+            'comment' => $comment,
+        ]);
+    }
+
     /**
      * Creates a new Article model.
      * If creation is successful, the browser will be redirected to the 'view' page.

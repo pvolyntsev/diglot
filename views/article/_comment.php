@@ -9,6 +9,7 @@ use yii\widgets\Pjax;
 /**
  * @var $comment Comment
  */
+
 $comment=$model;
 ?>
 
@@ -41,16 +42,41 @@ $comment=$model;
                         <div class="btn-group">
 <!--                            <button class="btn btn-mini">edit</button>-->
                             <?php
-                            if (!Yii::$app->user->isGuest) {
-                                yii\widgets\Pjax::begin(['id' => 'delete_note']);
-                                $form = ActiveForm::begin([ 'action' => '../comment/delete?id='.$comment->id,'id' => 'deleteComment','enableAjaxValidation' => true, 'options' => ['data-pjax' => true]]);
-                                ?>
-                                    <button class="btn btn-mini">delete</button>
-                                <?php
+                            $user_id=$comment->user_id; // идентификатор пользователя, который является автором комментария
+                            try
+                            {
+                                if (!Yii::$app->user->isGuest)
+                                {
+                                    $current_user=Yii::$app->user->identity->getId();// идентификатор текущего пользователя
+                                    if ($user_id==$current_user) {
+
+                                        Pjax::begin(['id'=>'delete_comment_form',
+                                            'enablePushState' => false,
+                                            'enableReplaceState' => false
+                                        ]);
+
+                                        $form = ActiveForm::begin([
+                                            'action' => [ 'delete-comment', 'id' => $comment->id,],
+                                            'id' => 'deleteComment',
+                                            'enableClientValidation' => false,
+                                            'enableAjaxValidation' => true,
+                                            'options' => [
+                                                'data-pjax' => true,
+                                            ]]);
+                                        ?>
+                                        <?php echo Html::submitButton('delete', ['class' => 'btn btn-mini','value' => 'delete-comment?id='.$comment->id]); ?>
+                                        <?php
+
+                                        ActiveForm::end();
+                                        Pjax::end();
+                                    }
+                                }
                             }
-                            ActiveForm::end();
-                            Pjax::end();
-                            ?>
+                            catch (\yii\base\ErrorException $ex)
+                            {
+                                    $current_user=null;
+                            }
+                        ?>
                         </div>
                     </div>
 

@@ -70,14 +70,20 @@ $articleLink = null; //['article/view', 'id' => $model->id];
         <h4>Responses</h4>
 
         <div class="comment-form">
-            <?php if (!Yii::$app->user->isGuest) { ?>
+            <?php
+            if (!Yii::$app->user->isGuest)
+            { ?>
                 <?= $this->render('_AddingCommentForm', [
                     'comment' => $comment,
                     'article' => $model,
                 ]) ?>
-            <?php } else {
+            <?php
+            }
+            else
+            {
                 echo "Для добавления комментариев необходимо ". Html::a("авторизоваться",['/login']);
-            } ?>
+            } 
+            ?>
         </div>
 
         <div id="js-comments-recommended">

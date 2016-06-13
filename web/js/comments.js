@@ -53,11 +53,10 @@ application.articleComments.ready = function($) {
     $.pjax.reload({container:"#comments_list"});  //Reload ListView
   });
 
-// $("#delete_note").on("pjax:end", function () {
-//   $.pjax.reload({container: "#comments_list"});  //Reload ListView
-//   $.pjax.reload({container: "#comments_selected_list"});  //Reload ListView
-//   return false;
-// });
+  $("#delete_comment_form").on("pjax:end", function () {
+    $.pjax.reload({container: "#comments_list"});  //Reload ListView
+    $.pjax.reload({container: "#comments_selected_list"});  //Reload ListView
+  });
 };
 
 // attach ready event
