@@ -8,6 +8,7 @@ use yii\helpers\Html;
 use app\models\User;
 use app\models\Article;
 use app\models\Paragraph;
+use kartik\markdown\Markdown;
 
 class ParagraphWidget extends Widget
 {
@@ -52,11 +53,11 @@ class ParagraphWidget extends Widget
                     . '</div>';
         } else
         {
-            $html .= '<div class="col col-md-6 article-paragraph-original">';
-            $html .= $this->formatMediaObject($paragraph_original, $this->link);
-            $html .= '</div>';
             $html .= '<div class="col col-md-6 article-paragraph-translate">';
             $html .= $this->formatMediaObject($paragraph_translate, $this->link);
+            $html .= '</div>';
+            $html .= '<div class="col col-md-6 article-paragraph-original">';
+            $html .= $this->formatMediaObject($paragraph_original, $this->link);
             $html .= '</div>';
         }
 
@@ -94,7 +95,7 @@ class ParagraphWidget extends Widget
         if ('<code>'===substr($object, 0, 6))
             $object = '<pre class="code">' . $object . '</pre>';
         elseif (!preg_match('/^\<(ul|ol|dl|table|blockquote)/', $object))
-            $object = '<p>' . $object . '</p>';
+            $object = Markdown::convert($object); //'<p>' . $object . '</p>';
 
         if (self::MODE_COMPACT == $this->mode)
         {

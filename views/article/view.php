@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $paragraphMode = ParagraphWidget::MODE_FULL;
 $articleLink = null; //['article/view', 'id' => $model->id];
+$page = Yii::$app->request->get('page');
 ?>
 
 <div class="container article-view">
@@ -46,6 +47,12 @@ $articleLink = null; //['article/view', 'id' => $model->id];
         </div>
     </div>
     <div class="vertical spacer"></div>
+	
+	<?php if (Article::STATUS_DRAFT == $model->status) {
+		echo '<div class="article-draft">Draft</div>';
+		}
+	?>	
+	
     <?php foreach($model->paragraphs as $paragraph) { ?>
         <div class="row article-paragraph">
             <?php echo ParagraphWidget::widget(['paragraph' => $paragraph, 'mode' => $paragraphMode, 'link' => $articleLink]) ?>
@@ -67,55 +74,56 @@ $articleLink = null; //['article/view', 'id' => $model->id];
 
 <div class="comments">
     <div class="container">
+        <a name="responses"></a>
         <h4>Responses</h4>
 
         <div class="comment-form">
             <?php
-            if (!Yii::$app->user->isGuest)
-            { ?>
-                <?= $this->render('_AddingCommentForm', [
+
+            if (!Yii::$app->user->isGuest) {
+                echo $this->render('_AddingCommentForm', [
                     'comment' => $comment,
                     'article' => $model,
-                ]) ?>
-            <?php
-            }
-            else
-            {
+                ]);
+            } else {
                 echo "Для добавления комментариев необходимо ". Html::a("авторизоваться",['/login']);
-            } 
+            }
             ?>
         </div>
 
-        <div id="js-comments-recommended">
-            <?php Pjax::begin(['id'=>'comments_selected_list']); ?>
-            <?= ListView::widget([
-                'dataProvider' => $comments_selected,
-                'itemView' => '_comment',
-                'layout' => "{items}",
-                'emptyText' => '',
-                'emptyTextOptions' => [
-                    //'tag' => 'p'
-                ],
-            ]);
-            ?>
-            <?php Pjax::end(); ?>
-        </div>
+        <?php if (is_null($page)) { ?>
+            <div class="comments" id="js-comments-recommended">
+                <?php
+                Pjax::begin(['id'=>'comments_selected_list']);
+                echo ListView::widget([
+                    'dataProvider' => $comments_selected,
+                    'itemView' => '_comment',
+                    'layout' => "{items}",
+                    'emptyText' => '',
+                    'emptyTextOptions' => [
+                        //'tag' => 'p'
+                    ],
+                ]);
+                Pjax::end();
+                ?>
+            </div>
 
-        <div class="comments" id="js-comments-page" style="display: none;">
-            <?php Pjax::begin(['id'=>'comments_list']); ?>
-            <?= ListView::widget([
-                'id' =>'xxx',
+            <?php if ($comments_selected->totalCount > 0) { ?>
+                <div class="comments-show-all" id="js-comments-show-all"><?php echo Html::a(Yii::t('app', 'Show all responses'), ['view', 'id' => $model->id, 'page' => 1, '#' => 'responses']) ?></div>
+            <?php } ?>
+        <?php } ?>
+
+        <div class="comments" id="js-comments-page" <?php if (is_null($page)) echo 'style="display: none;"'; ?>>
+            <?php
+            Pjax::begin(['id'=>'comments_list']);
+            echo ListView::widget([
                 'dataProvider' => $comments,
                 'itemView' => '_comment',
                 'layout' => "{summary}\n{items}\n{pager}",
             ]);
+            Pjax::end();
             ?>
-            <?php Pjax::end(); ?>
         </div>
-
-        <?php if ($comments_selected->totalCount > 0) { ?>
-            <div class="comments-show-all" id="js-comments-show-all"><a href="?responses">Show all responses</a></div>
-        <?php } ?>
 
     </div> <!-- /.container -->
 </div> <!-- /.comments -->

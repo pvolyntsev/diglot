@@ -10,15 +10,15 @@ Public service http://diglot.copist.ru/
 
 # Aim / Цель
 
-* The main objective of the Diglot project - to give the opportunity to learn English or Russian using examples of quality translation.
+* The main objective of the Diglot project is to give the opportunity to learn English or Russian using examples of quality translation.
 > Основная цель проекта Diglot - дать возможность изучать английский или русский язык, используя примеры качественного перевода.
 
-* Secondary aim is improve web apps design skills and web programming.
+* The secondary aim is to improve web apps design skills and web programming.
 > Дополнительная цель - улучшение навыки проектирования программного веб-приложений и веб-программирования.
 
 # Disclaimer / Отказ от прав
 
-All works, books and articles published at http://diglot.copist.ru/ were taken from open sources. Every work, article or book has own copyright policy. Please check the rights before use.
+All works, books and articles published at http://diglot.copist.ru/ were taken from open sources. Every work, article or book has its own copyright policy. Please check the rights before use.
 > Все работы, книги и статьи, опубликованные на http://diglot.copist.ru/, были взяты из открытых источников. Каждая работа, статья или книга имеет собственную политику защиты авторских прав. Пожалуйста, проверяйте права перед использованием.
 
 # Contributions / Вклад
@@ -38,10 +38,10 @@ Feel free to send a pull request to add more features to service
 # Team / Команда
 
 * Pavel Volyntsev ([@pvolyntsev](https://github.com/pvolyntsev))
-* Dubrovin Vasiliy ([@DubrovinVA](https://github.com/DubrovinVA))
-* Popova Lyudmila ([@tobeinword1987](https://github.com/tobeinword1987))
+* Vasiliy Dubrovin ([@DubrovinVA](https://github.com/DubrovinVA))
+* Lyudmila Popova ([@tobeinword1987](https://github.com/tobeinword1987))
 * Valera Molchanov ([@molchanovvg](https://github.com/molchanovvg))
 * Nicolay Poymanov ([@poymanov](https://github.com/poymanov))
 
-Would you like to join team? Send request email pavel.volyntsev(with)gmail(dot)com
+Would you like to join the team? Send a request to email pavel.volyntsev(with)gmail(dot)com
 > Хочешь вступить в команду? Отправь запрос на pavel.volyntsev(with)gmail(dot)com
