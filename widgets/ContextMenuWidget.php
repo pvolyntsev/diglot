@@ -23,7 +23,7 @@ class ContextMenuWidget extends Widget
             /** @var Article $article */
             $article = $this->view->params['article'];
 
-            if ($article->user_id == $user->id)
+            if ((!Yii::$app->user->isGuest) && ($article->user_id == $user->id))
             {
                 switch(Yii::$app->requestedRoute)
                 {
@@ -34,10 +34,7 @@ class ContextMenuWidget extends Widget
 //                . 'owner '
 //                . Yii::$app->requestedRoute
 //                . '</li>';
-            } else
-            {
-
-            }
+            } 
         }
 
         return '';
