@@ -207,9 +207,9 @@ class ArticleController extends Controller
         {
 //            Yii::error('comment is not deleted');
         }
-        return $this->renderAjax('_comment', [
-            'comment' => $comment,
-        ]);
+//        return $this->renderAjax('_comment', [
+//            'comment' => $comment,
+//        ]);
     }
 
     /**
