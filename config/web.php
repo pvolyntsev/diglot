@@ -43,7 +43,7 @@ $config = [
                 #'/contact' => 'site/contact',
                 '/about' => 'site/article',
                 '/terms' => 'site/article',
-                '/team' => 'site/article',
+                '/team' => 'site/team',
                 '/donate' => 'site/article',
                 '/github-integration' => 'site/article',
 

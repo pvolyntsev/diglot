@@ -24,12 +24,17 @@ class SiteController extends Controller
             ]
         ];
     }
-	
+
     public function actionIndex()
     {
         return $this->render('index');
     }
-	
+
+    public function actionTeam()
+    {
+        return $this->render('team');
+    }
+
     public function actionContact()
     {
         $model = new ContactForm();
