@@ -58,6 +58,8 @@ $config = [
 				'/confirmEmail' => '/user/user/confirm-email',
 				'/unbind/<id:[\w\-]+>' => '/user/auth/unbind',
 				'/oauth/<authclient:[\w\-]+>' => '/user/auth/index',
+                '/user/admin' => '/user/admin/index',
+                '/user/admin/<action>' => '/user/admin/<action>',
 
                 // Public Profile
                 '/<username>/profile' => 'author-public/profile',
