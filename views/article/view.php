@@ -19,7 +19,7 @@ use yii\widgets\Pjax;
 /* @var $comments_selected ActiveDataProvider */
 /* @var $comments ActiveDataProvider */
 
-$this->title = $model->id;
+$this->title = $model->title_original . ($model->title_translate ? ' | ' . $model->title_translate : '');
 $this->params['breadcrumbs'][] = ['label' => 'Articles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -59,12 +59,12 @@ $page = Yii::$app->request->get('page');
         </div>
     </div>
     <div class="vertical spacer"></div>
-	
+
 	<?php if (Article::STATUS_DRAFT == $model->status) {
 		echo '<div class="article-draft">Draft</div>';
 		}
 	?>	
-	
+
     <?php foreach($model->paragraphs as $paragraph) { ?>
         <div class="row article-paragraph">
             <?php echo ParagraphWidget::widget(['paragraph' => $paragraph, 'mode' => $paragraphMode, 'link' => $articleLink]) ?>

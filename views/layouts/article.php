@@ -42,33 +42,33 @@ AppAsset::register($this);
     <meta name="theme-color" content="#ffffff">
 
     <!-- Site Properities -->
-    <title><?= HTML::encode(Yii::$app->params['title']['en']) ?></title>
+    <title><?php echo $this->title ? HTML::encode($this->title) . ' &mdash; ' : ''?><?php echo HTML::encode(Yii::$app->params['title']['en']) ?></title>
     <meta name="description" content="<?= HTML::encode(Yii::$app->params['description.256']) ?>">
     <meta name="keywords" content="<?= HTML::encode(Yii::$app->params['keywords']) ?>" />
 
     <!-- Special meta -->
     <!-- Schema.org markup for Google+ -->
-    <meta itemprop="name" content="<?= HTML::encode(Yii::$app->params['title']['en']) ?>">
+    <meta itemprop="name" content="<?php echo $this->title ? HTML::encode($this->title) . ' &mdash; ' : ''?><?php echo HTML::encode(Yii::$app->params['title']['en']) ?>">
     <meta itemprop="description" content="<?= HTML::encode(Yii::$app->params['description.256']) ?>">
     <meta itemprop="image" content="<?= Yii::$app->params['social.image'] ?>">
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" value="summary">
     <meta name="twitter:site" content="@publisher_handle">
-    <meta name="twitter:title" content="<?= HTML::encode(Yii::$app->params['title']['en']) ?>">
+    <meta name="twitter:title" content="<?php echo $this->title ? HTML::encode($this->title) . ' &mdash; ' : ''?><?php echo HTML::encode(Yii::$app->params['title']['en']) ?>">
     <meta name="twitter:description" content="<?= HTML::encode(Yii::$app->params['description.256']) ?>">
     <meta name="twitter:creator" content="@author_handle">
     <meta name="twitter:image" content="<?= Yii::$app->params['social.image'] ?>">
 
     <!-- Open Graph tags (facebook, google) -->
-    <meta property="og:title"       content="<?= HTML::encode(Yii::$app->params['title']['en']) ?>">
+    <meta property="og:title"       content="<?php echo $this->title ? HTML::encode($this->title) . ' &mdash; ' : ''?><?php echo HTML::encode(Yii::$app->params['title']['en']) ?>">
     <meta property="og:image"       content="<?= Yii::$app->params['social.image'] ?>">
     <meta property="og:site_name"   content="<?= HTML::encode(Yii::$app->params['name']) ?>">
     <meta property="og:description" content="<?= HTML::encode(Yii::$app->params['description.256']) ?>">
 
     <!-- VK tags -->
     <link rel="image_src" href="<?= Yii::$app->params['social.image'] ?>">
-    <meta name="title"    content="<?= HTML::encode(Yii::$app->params['title']['en']) ?>">
+    <meta name="title"    content="<?php echo $this->title ? HTML::encode($this->title) . ' &mdash; ' : ''?><?php echo HTML::encode(Yii::$app->params['title']['en']) ?>">
 
     <?= Html::csrfMetaTags() ?>
     <?php $this->head() ?>
