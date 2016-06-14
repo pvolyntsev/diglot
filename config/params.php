@@ -32,7 +32,6 @@ return [
     'static.articles' => [
         'site/article/about' => [ 'user_id' => 1, 'title_original' => 'About Diglot Service'],
         'site/article/donate' => [ 'user_id' => 1, 'title_original' => 'Please Help Us To Deliver Diglot Service'],
-        'site/article/team' => [ 'user_id' => 1, 'title_original' => 'The Team Behind Diglot Service'],
         'site/article/terms' => [ 'user_id' => 1, 'title_original' => 'Terms and Conditions of Diglot Service'],
         'site/article/github-integration' => [ 'user_id' => 1, 'title_original' => 'Publish Articles from Your GitHub Repositories'],
     ],
