@@ -79,7 +79,7 @@ $languageItems = \yii\helpers\ArrayHelper::map($languages, 'id','language');
 
     <div class="article-paragraphs">
         <div id="js-paragraphs">
-            <div class="article-paragraph-add" id="js-article-paragraph-add" title="Add text block below"><a class="btn"><i class="fa fa-2x fa-plus-square"></i></a></div>
+            <!--div class="article-paragraph-add" id="js-article-paragraph-add" title="Add text block below"><a class="btn"><i class="fa fa-2x fa-plus-square"></i></a></div-->
             <?php foreach($paragraphs as $paragraph) { ?>
                 <div class="row article-paragraph">
                     <div class="col-md-6">
