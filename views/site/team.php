@@ -72,8 +72,11 @@ $this->title = 'The Team Behind Diglot Service';
 
 </style>
 
+<h2 class="c-page-header align center">The Team Behind Diglot OpenSource Project</h2>
 
-<h2 class="c-page-header align center">The Team Behind Diglot Service</h2>
+<p>Мы работаем над <a href="https://github.com/pvolyntsev/diglot">проектом с открытым исходным кодом Diglot</a> с мая 2016 года. Вместе собралась замечательная команда энтузиастов веб-разработчиков.</p>
+<p>Основная цель проекта - дать возможность изучать английский или русский язык, используя примеры качественного перевода.</p>
+<p>Дополнительная цель - улучшение навыков проектирования и разработки веб-приложений.</p>
 
 <div class="row">
 
@@ -229,3 +232,7 @@ $this->title = 'The Team Behind Diglot Service';
     </div>
 
 </div>
+
+<h3 class="align center">
+    Would you like to join the team? Send us a request using our contacts above.
+</h3>
