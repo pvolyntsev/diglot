@@ -35,15 +35,27 @@ $page = Yii::$app->request->get('page');
             <h1><?php echo $model->title_translate ?>
                 <span class="label"><?php echo $model->langTranslate->language ?></span>
             </h1>
-            <a class="permalink" href="<?php echo $model->url_translate ?>"><?php echo $model->url_translate ?></a>
-            <p class="author">Перевод <a href="<?php echo $model->translator_url ?>"><?php echo $model->translator_name ?></a></p>
+            <?php if ($model->url_translate) { ?>
+                <a class="permalink" href="<?php echo $model->url_translate ?>"><?php echo $model->url_translate ?></a>
+            <?php } ?>
+            <?php if ($model->translator_url && $model->translator_name) { ?>
+                <p class="author">Перевод <a href="<?php echo $model->translator_url ?>"><?php echo $model->translator_name ?></a></p>
+            <?php } elseif ($model->translator_name) { ?>
+                <p class="author">Перевод <?php echo $model->translator_name ?></p>
+            <?php } ?>
         </div>
         <div class="col col-md-6 article-heading-title-original">
             <h1><?php echo $model->title_original ?>
                 <span class="label"><?php echo $model->langOriginal->language ?></span>
             </h1>
-            <a class="permalink" href="<?php echo $model->url_original ?>"><?php echo $model->url_original ?></a>
-            <p class="author">By <a href="<?php echo $model->author_url ?>"><?php echo $model->author_name ?></a></p>
+            <?php if ($model->url_original) { ?>
+                <a class="permalink" href="<?php echo $model->url_original ?>"><?php echo $model->url_original ?></a>
+            <?php } ?>
+            <?php if ($model->author_url && $model->translator_name) { ?>
+                <p class="author">By <a href="<?php echo $model->author_url ?>"><?php echo $model->author_name ?></a></p>
+            <?php } elseif ($model->author_name) { ?>
+                <p class="author">Перевод <?php echo $model->author_name ?></p>
+            <?php } ?>
         </div>
     </div>
     <div class="vertical spacer"></div>
