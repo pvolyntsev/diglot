@@ -4,11 +4,10 @@ $this->title = 'The Team Behind Diglot Service';
 ?>
 <style>
 .c-page-header {
-    margin-bottom: 3em;
 }
 
 .c-person {
-
+    margin-top: 3em;
 }
     .c-person .c-info .c-img {
         width: 100%;
@@ -86,17 +85,7 @@ $this->title = 'The Team Behind Diglot Service';
             <div class="c-name">Lyudmila Popova</div>
             <ul class="c-socials">
                 <li>
-                    <a href="#">
-                        <i class="fa fa-twitter"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-facebook"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
+                    <a href="skype:popovaluydmila1">
                         <i class="fa fa-skype"></i>
                     </a>
                 </li>
@@ -109,7 +98,7 @@ $this->title = 'The Team Behind Diglot Service';
             <div class="c-position">PHP Web Developer</div>
         </div>
         <div class="c-bio">
-            <p>Впервые я познакомилась с программированием в школе, разбирая несложные задачи с массивами. После этого был институт и знакомство с объектно-ориентированными языками программирования. Хотя прошло уже три года, как я выполняю ежедневные задачи на работе, только недавно я действительно открыла для себя нечто большее, чем просто работа. Я поняла, что можно каждый день открывать для себя новые горизонты и развиваться, превращая работу в хобби и настоящее увлечение.</p>
+            <p>Недавно я действительно открыла для себя нечто большее, чем просто работа. Я поняла, что можно каждый день открывать для себя новые горизонты и развиваться, превращая работу в хобби и настоящее увлечение.</p>
             <p>“Diglot” - это первый open source проект, в котором я принимаю участие. Здесь я работаю в команде и смогла почувствовать, как проект развивается общими усилиями. Чувствуется поддержка ребят, и чувство ответственности перед другими.</p>
             <p>Конечно, без ошибок не бывает, но именно на ошибках ты учишься и понимаешь, как сделать что то еще лучше. Теперь только вперед!</p>
         </div>
@@ -123,17 +112,7 @@ $this->title = 'The Team Behind Diglot Service';
             <div class="c-name">Valera Molchanov</div>
             <ul class="c-socials">
                 <li>
-                    <a href="#">
-                        <i class="fa fa-twitter"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-facebook"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
+                    <a href="skype:molchanov_vg?chat">
                         <i class="fa fa-skype"></i>
                     </a>
                 </li>
@@ -161,17 +140,7 @@ $this->title = 'The Team Behind Diglot Service';
             <div class="c-name">Vasiliy Dubrovin</div>
             <ul class="c-socials">
                 <li>
-                    <a href="#">
-                        <i class="fa fa-twitter"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-facebook"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
+                    <a href="skype:ofipa_dubrovinva?chat">
                         <i class="fa fa-skype"></i>
                     </a>
                 </li>
@@ -184,10 +153,78 @@ $this->title = 'The Team Behind Diglot Service';
             <div class="c-position">PHP Web Developer</div>
         </div>
         <div class="c-bio">
-            <p>Начинающий, но перспективный веб-программист.</p>
             <p>В веб-разработке с 2015 года, намерен стать Мастером. В программирование пришёл, вдохновлённый примерами Ильи Сегаловича и Аркадия Воложа, основателей Яндекса.</p>
             <p>Проект Diglot привлёк совпадением личных целей: изучение веб-технологий в команде и изучение английского языка, используя примеры качественного перевода. Командная работа мотивирует, заставляет шевелиться, работать быстрее и лучше, чем «одиночное плавание».</p>
             <p>Проект создаётся на базе фреймворка Yii2, который считаю одним из лучших на базе языка PHP.</p>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-1"></div>
+
+    <div class="col-md-4 c-person">
+        <div class="c-info">
+            <div class="c-img">
+                <img src="/img/team/pavel_volyntsev.jpg">
+            </div>
+            <div class="c-name">Pavel Volyntsev</div>
+            <ul class="c-socials">
+                <li>
+                    <a href="https://twitter.com/pavel_volyntsev">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.facebook.com/volyntsev.pavel">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="skype:pavel.volyntsev?chat">
+                        <i class="fa fa-skype"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/pvolyntsev">
+                        <i class="fa fa-github"></i>
+                    </a>
+                </li>
+            </ul>
+            <div class="c-position">Web Architect / Backend Developer / Web Mentor</div>
+        </div>
+        <div class="c-bio">
+            <p>С 2000 года занимаюсь разработкой разных веб-проектов профессионально.</p>
+            <p>Профессиональная цель: дать людям возможность дать людям больше. Empower people to give.</p>
+            <p>Доношу свет знаний об информационных технологиях всем заинтересованным, с очень понятными словами, картинками, указкой и личным примером. Добиваюсь своего активного ресурсного состояния и активно веду других.</p>
+            <p>Веду <a href="http://copist.ru/">блог по веб-технологиям</a>. Занимаюсь <a href="http://webmentor.pro/">наставничеством по веб-технологиям</a> в режиме 1:1, в том числе <a href="https://www.codementor.io/copist">на английском языке</a>.</p>
+        </div>
+    </div>
+
+    <div class="col-md-2"></div>
+
+    <div class="col-md-4 c-person">
+        <div class="c-info">
+            <div class="c-img">
+                <img src="/img/team/nicolay_poymanov.jpg">
+            </div>
+            <div class="c-name">Nicolay Poymanov</div>
+            <ul class="c-socials">
+                <li>
+                    <a href="skype:n.poymanov?chat">
+                        <i class="fa fa-skype"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/poymanov">
+                        <i class="fa fa-github"></i>
+                    </a>
+                </li>
+            </ul>
+            <div class="c-position">PHP Web Developer</div>
+        </div>
+        <div class="c-bio">
+            <p></p>
         </div>
     </div>
 
