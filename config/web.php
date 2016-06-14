@@ -44,7 +44,7 @@ $config = [
                 '/about' => 'site/article',
                 '/terms' => 'site/article',
                 '/team' => 'site/team',
-                '/donate' => 'site/article',
+                '/donate' => 'site/donate',
                 '/github-integration' => 'site/article',
 
                 // Auth & user manager

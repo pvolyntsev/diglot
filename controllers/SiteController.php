@@ -21,6 +21,10 @@ class SiteController extends Controller
             ],
             'article' => [
                 'class' => '\app\controllers\actions\ArticleViewAction',
+            ],
+            'donate' => [
+                'class' => '\app\controllers\actions\ArticleViewAction',
+                'view' => 'donate',
             ]
         ];
     }
