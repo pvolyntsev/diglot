@@ -157,6 +157,7 @@ AppAsset::register($this);
     {
         $items[] = ['label' => '<i class="fa fa-2x fa-sign-in"></i> Login', 'url' => ['/login'], 'encode' => false, 'options' => [ 'class' => 'link']];
         $items[] = ['label' => '<i class="fa fa-2x fa-user-plus"></i> Signup', 'url' => ['/signup'], 'encode' => false, 'options' => [ 'class' => 'link']];
+        $items[] = ['label' => '<i class="fa fa-2x fa-github"></i> Diglot', 'url' => 'https://github.com/pvolyntsev/diglot', 'encode' => false, 'options' => [ 'class' => 'link']];
         $items[] = BannerMenuWidget::widget();
     } else {
         $items[] = UserMenuWidget::widget();
