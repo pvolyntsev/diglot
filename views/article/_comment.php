@@ -50,13 +50,13 @@ $comment=$model;
                                     $current_user=Yii::$app->user->identity->getId();// идентификатор текущего пользователя
                                     if ($user_id==$current_user) {
 
-                                        Pjax::begin(['id'=>'delete_comment_form',
-                                            'enablePushState' => false,
-                                            'enableReplaceState' => false
-                                        ]);
+//                                        Pjax::begin(['id'=>'delete_comment_form',
+//                                            'enablePushState' => false,
+//                                            'enableReplaceState' => false
+//                                        ]);
 
                                         $form = ActiveForm::begin([
-                                            'action' => [ 'delete-comment', 'id' => $comment->id,],
+                                            'action' => [ 'delete-comment', 'id' => $comment->id, 'id_article' => $this->title],
                                             'id' => 'deleteComment',
                                             'enableClientValidation' => false,
                                             'enableAjaxValidation' => true,
@@ -64,11 +64,11 @@ $comment=$model;
                                                 'data-pjax' => true,
                                             ]]);
                                         ?>
-                                        <?php echo Html::submitButton('delete', ['class' => 'btn btn-mini','value' => 'delete-comment?id='.$comment->id]); ?>
+                                        <?php echo Html::submitButton('delete', ['class' => 'btn btn-mini']); ?>
                                         <?php
 
                                         ActiveForm::end();
-                                        Pjax::end();
+//                                        Pjax::end();
                                     }
                                 }
                             }

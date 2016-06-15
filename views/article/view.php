@@ -94,7 +94,9 @@ $page = Yii::$app->request->get('page');
         <?php if (is_null($page)) { ?>
             <div class="comments" id="js-comments-recommended">
                 <?php
-                Pjax::begin(['id'=>'comments_selected_list']);
+                Pjax::begin(['id'=>'comments_selected_list',
+                'enablePushState' => false,
+                'enableReplaceState' => false]);
                 echo ListView::widget([
                     'dataProvider' => $comments_selected,
                     'itemView' => '_comment',
@@ -115,7 +117,9 @@ $page = Yii::$app->request->get('page');
 
         <div class="comments" id="js-comments-page" <?php if (is_null($page)) echo 'style="display: none;"'; ?>>
             <?php
-            Pjax::begin(['id'=>'comments_list']);
+            Pjax::begin(['id'=>'comments_list',
+                'enablePushState' => false,
+                'enableReplaceState' => false]);
             echo ListView::widget([
                 'dataProvider' => $comments,
                 'itemView' => '_comment',

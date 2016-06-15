@@ -185,10 +185,11 @@ class ArticleController extends Controller
         }
     }
 
-    public function actionDeleteComment($id)
+    public function actionDeleteComment($id,$id_article)
     {
-//        $model=$this->findModel($id_article);
-        $deleted = false;
+
+        $article=$this->findModel($id_article);
+
         $comment=Comment::findOne($id);
 
         if (Yii::$app->request->isAjax)  // Вот тут мы проверяем если у нас это аякс запрос или нет
@@ -196,20 +197,55 @@ class ArticleController extends Controller
             if($comment!=null)
             {
                 $comment->delete();
-//                Yii::error('comment is deleted');
+                Yii::error('comment is deleted');
             }
-//            else
-//            {
-//                throw new NotFoundHttpException('The requested page does not exist.');
-//            }
+            else
+            {
+                throw new NotFoundHttpException('The requested page does not exist.');
+            }
         }
         else
         {
-//            Yii::error('comment is not deleted');
+            Yii::error('comment is not deleted');
         }
-//        return $this->renderAjax('_comment', [
+
+        $comments_selected = new ActiveDataProvider([
+            'query' => Comment::find()->limit(4)->where('article_id=:article_id and status=:published', [':article_id' => $id_article, ':published' => 'published']),
+            'pagination' => ['pageSize' => 4],
+            'sort' => [
+                'defaultOrder' => [
+                    'date_created' => SORT_DESC,
+                ]
+            ],
+        ]);
+
+        $comments = new ActiveDataProvider([
+            'query' => Comment::find()->where('article_id=:article_id and status=:published', [':article_id' => $id_article, ':published' => 'published']),
+            'pagination' => [
+                'defaultPageSize' => 10,
+                'pageSize' => 10,
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'date_created' => SORT_DESC,
+                ]
+            ],
+        ]);
+
+        return $this->render('view', [
+            'model' => $article,
+            'comments' => $comments,
+            'comments_selected' => $comments_selected,
+            'comment' => $comment,
+        ]);
+
+//        return $this->renderAjax('_AddingCommentForm', [
 //            'comment' => $comment,
+//            'model' => $article,
 //        ]);
+
+
+//        return 'Hello World'.$id_article;
     }
 
     /**

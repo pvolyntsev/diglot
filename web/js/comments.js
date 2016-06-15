@@ -54,10 +54,18 @@ application.articleComments.ready = function($) {
     $.pjax.reload({container:"#comments_list"});  //Reload ListView
   });
 
-  $("#delete_comment_form").on("pjax:end", function () {
-    $.pjax.reload({container: "#comments_list"});  //Reload ListView
-    $.pjax.reload({container: "#comments_selected_list"});  //Reload ListView
+  // $("#delete_comment_form").on("pjax:end", function () {
+  //   $.pjax.reload({container: "#comments_list"});  //Reload ListView
+  //   $.pjax.reload({container: "#comments_selected_list"});  //Reload ListView
+  // });
+
+  $("#comments_selected_list").on("pjax:end", function () {
+    $('#js-comments-recommended').hide();
+    $('#js-comments-page').show();
+    $('#js-comments-show-all').hide();
+    $.pjax.reload({container:"#comments_list"});  //Reload ListView
   });
+
 };
 
 // attach ready event
