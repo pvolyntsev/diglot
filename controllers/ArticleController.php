@@ -278,8 +278,7 @@ class ArticleController extends Controller
             else
                 Yii::$app->session->addFlash('info', 'Article is ' . Html::a('published', ['/article/view', 'id' => $model->id]));
 
-            #return $this->redirect(['view', 'id' => $model->id]);
-            #exit;
+            return $this->redirect(['update', 'id' => $model->id]);
         }
         return $this->render('update', [
             'model' => $model,

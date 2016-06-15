@@ -43,8 +43,8 @@ $config = [
                 #'/contact' => 'site/contact',
                 '/about' => 'site/article',
                 '/terms' => 'site/article',
-                '/team' => 'site/article',
-                '/donate' => 'site/article',
+                '/team' => 'site/team',
+                '/donate' => 'site/donate',
                 '/github-integration' => 'site/article',
 
                 // Auth & user manager
@@ -58,6 +58,8 @@ $config = [
 				'/confirmEmail' => '/user/user/confirm-email',
 				'/unbind/<id:[\w\-]+>' => '/user/auth/unbind',
 				'/oauth/<authclient:[\w\-]+>' => '/user/auth/index',
+                '/user/admin' => '/user/admin/index',
+                '/user/admin/<action>' => '/user/admin/<action>',
 
                 // Public Profile
                 '/<username>/profile' => 'author-public/profile',

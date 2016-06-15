@@ -32,7 +32,7 @@ $comment=$model;
 
             <div class="comment-content"><p><?php echo $comment->comment ?></p></div>
 
-
+<?php if (0) { ?>
             <div class="comment-extra">
                 <div class="btn-toolbar">
 <!--                    <button class="btn btn-mini">like</button>-->
@@ -88,5 +88,5 @@ $comment=$model;
                     </div>
                 </div>
             </div>
-
+<?php } ?>
         </div>
