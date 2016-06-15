@@ -80,6 +80,7 @@ $config = [
                 '/article' => '/article/index',
                 '/article/<action>' => '/article/<action>',
 				'/article/add-comment' => '/article/addComment',
+				'/article/delete-comment' => '/article/DeleteComment',
                 '/article/<action>/<id:\d+>' => '/article/<action>',
                 '/search' => '/article/search',
 

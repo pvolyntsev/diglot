@@ -232,20 +232,13 @@ class ArticleController extends Controller
             ],
         ]);
 
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $article,
             'comments' => $comments,
             'comments_selected' => $comments_selected,
             'comment' => $comment,
         ]);
 
-//        return $this->renderAjax('_AddingCommentForm', [
-//            'comment' => $comment,
-//            'model' => $article,
-//        ]);
-
-
-//        return 'Hello World'.$id_article;
     }
 
     /**

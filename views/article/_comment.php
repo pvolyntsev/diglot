@@ -32,7 +32,6 @@ $comment=$model;
 
             <div class="comment-content"><p><?php echo $comment->comment ?></p></div>
 
-<?php if (0) { ?>
             <div class="comment-extra">
                 <div class="btn-toolbar">
 <!--                    <button class="btn btn-mini">like</button>-->
@@ -50,13 +49,8 @@ $comment=$model;
                                     $current_user=Yii::$app->user->identity->getId();// идентификатор текущего пользователя
                                     if ($user_id==$current_user) {
 
-//                                        Pjax::begin(['id'=>'delete_comment_form',
-//                                            'enablePushState' => false,
-//                                            'enableReplaceState' => false
-//                                        ]);
-
                                         $form = ActiveForm::begin([
-                                            'action' => [ 'delete-comment', 'id' => $comment->id, 'id_article' => $this->title],
+                                            'action' => [ 'delete-comment', 'id' => $comment->id, 'id_article' => $comment->article_id],
                                             'id' => 'deleteComment',
                                             'enableClientValidation' => false,
                                             'enableAjaxValidation' => true,
@@ -68,7 +62,6 @@ $comment=$model;
                                         <?php
 
                                         ActiveForm::end();
-//                                        Pjax::end();
                                     }
                                 }
                             }
@@ -88,5 +81,5 @@ $comment=$model;
                     </div>
                 </div>
             </div>
-<?php } ?>
+
         </div>
