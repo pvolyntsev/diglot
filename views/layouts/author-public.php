@@ -10,6 +10,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\bootstrap\Alert;
 use app\widgets\UserMenuWidget;
+use app\widgets\BannerMenuWidget;
 use yii\widgets\Breadcrumbs;
 use app\models\User;
 use app\assets\AppAsset;
@@ -156,6 +157,7 @@ AppAsset::register($this);
     {
         $items[] = ['label' => '<i class="fa fa-2x fa-sign-in"></i> Login', 'url' => ['/login'], 'encode' => false, 'options' => [ 'class' => 'link']];
         $items[] = ['label' => '<i class="fa fa-2x fa-user-plus"></i> Signup', 'url' => ['/signup'], 'encode' => false, 'options' => [ 'class' => 'link']];
+        $items[] = BannerMenuWidget::widget();
     } else {
         $items[] = UserMenuWidget::widget();
         $items[] = '<li>'
