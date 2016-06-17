@@ -265,6 +265,7 @@ class ArticleController extends Controller
         return $this->render('update', [
             'model' => $model,
             'paragraphs' => $paragraphs,
+            'publishFailed' => false,
         ]);
     }
 
@@ -281,6 +282,7 @@ class ArticleController extends Controller
         $this->view->params['article'] = $model;
 
         $status = Article::STATUS_DRAFT;
+        $publishFailed = false;
         if (!is_null(Yii::$app->request->post('publish')))
             $status = Article::STATUS_PUBLISHED;
 
@@ -290,6 +292,7 @@ class ArticleController extends Controller
             if (Article::STATUS_PUBLISHED == $status && !$model->validateOnPublish())
             {
                 $status = Article::STATUS_DRAFT;
+                $publishFailed = true;
                 Yii::$app->session->addFlash('warning', Yii::t('app', 'Article can\'t be published')); // TODO details о причинах
             }
 
@@ -307,6 +310,7 @@ class ArticleController extends Controller
         return $this->render('update', [
             'model' => $model,
             'paragraphs' => $paragraphs,
+            'publishFailed' => $publishFailed,
         ]);
     }
 
