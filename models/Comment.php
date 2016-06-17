@@ -25,14 +25,13 @@ class Comment extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-
     public function behaviors()
     {
         return [
             [
                 'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'date_created',
-                'updatedAtAttribute' => false,
+                'updatedAtAttribute' => 'date_modified',
                 'value' => new Expression('NOW()'),
             ],
         ];
