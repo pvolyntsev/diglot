@@ -15,8 +15,8 @@ application.articleEdit.ready = function($) {
   else
     initEditor($paragraphs);
 
-  $paragraphs.on('click', '.js-article-paragraph-add a', appendParagraph)
-  $paragraphs.on('click', '.js-article-paragraph-remove a', removeParagraph)
+  $paragraphs.on('click', '.js-article-paragraph-add a', appendParagraph);
+  $paragraphs.on('click', '.js-article-paragraph-remove a', removeParagraph);
 
   function appendParagraph(event)
   {
@@ -54,6 +54,25 @@ application.articleEdit.ready = function($) {
   {
     //if (MediumEditor)
     //  new MediumEditor($(paragraph).find('.editable'));
+
+    $('.expandingArea', paragraph).each(function(){
+      makeExpandingArea($(this));
+    });
+  }
+
+  function makeExpandingArea(container) {
+    var $container = $(container),
+      $area = $('textarea', $container),
+      $span = $('span', $container);
+
+    $span.text($area.val());
+
+    $area.on('keyup', function(){
+      $span.text($area.val());
+    });
+
+    // Enable extra CSS
+    $container.addClass('active');
   }
 };
 
