@@ -86,7 +86,7 @@ $languageItems = \yii\helpers\ArrayHelper::map($languages, 'id','language');
 
     <div class="article-paragraphs">
         <div class="article-paragraphs-active" id="js-paragraphs">
-            <div class="article-paragraph-add js-article-paragraph-add" title="Add text block below"><a class="btn"><i class="fa fa-plus-square"></i></a></div>
+            <div class="article-paragraph-add js-article-paragraph-add" title="Add text block above"><a class="btn"><i class="fa fa-plus-square"></i></a></div>
             <?php foreach($paragraphs as $paragraph) { ?>
                 <div class="row article-paragraph">
                     <div class="col-md-6">
@@ -102,7 +102,7 @@ $languageItems = \yii\helpers\ArrayHelper::map($languages, 'id','language');
                             <textarea name="Article[paragraphs][paragraph_translate][]" placeholder="Перевод ..." class="editable"><?php echo $paragraph->paragraph_translate ?></textarea>
                         </div>
                     </div>
-                    <div class="article-paragraph-add js-article-paragraph-add" title="Insert text block here"><a class="btn"><i class="fa fa-plus-square"></i></a></div>
+                    <div class="article-paragraph-add js-article-paragraph-add" title="Insert text block below"><a class="btn"><i class="fa fa-plus-square"></i></a></div>
                     <div class="article-paragraph-remove js-article-paragraph-remove" title="Remove text block"><a class="btn"><i class="fa fa-minus-square"></i></a></div>
                 </div>
             <?php } ?>
@@ -121,7 +121,7 @@ $languageItems = \yii\helpers\ArrayHelper::map($languages, 'id','language');
                     <textarea name="Article[paragraphs][paragraph_translate][]" placeholder="Перевод ..." class="editable"></textarea>
                 </div>
             </div>
-            <div class="article-paragraph-add js-article-paragraph-add" title="Add text block above"><a class="btn"><i class="fa fa-plus-square"></i></a></div>
+            <div class="article-paragraph-add js-article-paragraph-add" title="Add text block below"><a class="btn"><i class="fa fa-plus-square"></i></a></div>
             <div class="article-paragraph-remove js-article-paragraph-remove" title="Remove text block"><a class="btn"><i class="fa fa-minus-square"></i></a></div>
         </div>
     </div>
