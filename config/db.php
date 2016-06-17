@@ -12,4 +12,5 @@ return [
     'username' => 'diglot_rw',
     'password' => '123456',
     'charset' => 'utf8',
+    'enableSchemaCache' => true,
 ];
