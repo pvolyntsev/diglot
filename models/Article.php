@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "article".
@@ -69,6 +71,21 @@ class Article extends \yii\db\ActiveRecord
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['lang_original_id'], 'exist', 'skipOnError' => true, 'targetClass' => Language::className(), 'targetAttribute' => ['lang_original_id' => 'id']],
             [['lang_translate_id'], 'exist', 'skipOnError' => true, 'targetClass' => Language::className(), 'targetAttribute' => ['lang_translate_id' => 'id']],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'date_created',
+                'updatedAtAttribute' => 'date_modified',
+                'value' => new Expression('NOW()'),
+            ],
         ];
     }
 
@@ -179,6 +196,15 @@ class Article extends \yii\db\ActiveRecord
     public static function find()
     {
         return new ArticleQuery(get_called_class());
+    }
+
+    public function beforeSave($insert)
+    {
+        if (self::STATUS_PUBLISHED == $this->getAttribute('status') && self::STATUS_PUBLISHED != $this->getOldAttribute('status')) // become published
+        {
+            $this->date_published = new Expression('NOW()'); // set published date
+        }
+        return parent::beforeSave($insert);
     }
 
     public function afterSave($insert, $changedAttributes)
