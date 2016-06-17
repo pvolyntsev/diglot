@@ -24,7 +24,8 @@ use yii\helpers\Html;
  * ArticleController implements the CRUD actions for Article model.
  */
 class ArticleController extends Controller
-{	/**
+{
+    /**
      * @inheritdoc
      */
     public function behaviors()
@@ -44,35 +45,30 @@ class ArticleController extends Controller
                         // изменять, удалять статьи может только её владелец
                         'actions' => ['update', 'delete'],
                         'allow' => true,
-                        //'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
                             $article = $this->findModel(Yii::$app->request->get('id'));
-                            if ($article->user_id == Yii::$app->user->id)
+                            if ($article->user_id != Yii::$app->user->id)
                             {
-                                return true;
+                                return false;
                             }
-                            return false;
+                            return true;
                         },
                     ],
-					[
-					// смотреть черновики draft может только владелец
+                    [
+                        // смотреть черновики draft может только владелец
                         'actions' => ['view'],
                         'allow' => true,
                         //'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
                             $article = $this->findModel(Yii::$app->request->get('id'));
-							if (Article::STATUS_DRAFT !== $article->status) {
-								return true;
-							} else {
-								if ( (!Yii::$app->user->isGuest) && ($article->user_id == Yii::$app->user->identity->id) )
-								{
-									return true;
-								}
-								return false;
-							}
+                            if (Article::STATUS_DRAFT == $article->status && $article->user_id != Yii::$app->user->id)
+                            {
+                                return false;
+                            }
+                            return true;
                         },
-					],
-				],
+                    ],
+                ],
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),
