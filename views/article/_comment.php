@@ -42,32 +42,21 @@ $comment=$model;
 <!--                            <button class="btn btn-mini">edit</button>-->
                             <?php
                             $user_id=$comment->user_id; // идентификатор пользователя, который является автором комментария
-                            try
-                            {
-                                if (!Yii::$app->user->isGuest)
-                                {
-                                    $current_user=Yii::$app->user->identity->getId();// идентификатор текущего пользователя
-                                    if ($user_id==$current_user) {
+                            if (!Yii::$app->user->isGuest && $user_id == Yii::$app->user->identity->getId()) {
 
-                                        $form = ActiveForm::begin([
-                                            'action' => [ 'delete-comment', 'id' => $comment->id, 'id_article' => $comment->article_id],
-                                            'id' => 'deleteComment',
-                                            'enableClientValidation' => false,
-                                            'enableAjaxValidation' => true,
-                                            'options' => [
-                                                'data-pjax' => true,
-                                            ]]);
-                                        ?>
-                                        <?php echo Html::submitButton('delete', ['class' => 'btn btn-mini']); ?>
-                                        <?php
+                                $form = ActiveForm::begin([
+                                    'action' => [ 'delete-comment', 'id' => $comment->id, 'id_article' => $comment->article_id],
+                                    'id' => 'deleteComment',
+                                    'enableClientValidation' => false,
+                                    'enableAjaxValidation' => true,
+                                    'options' => [
+                                        'data-pjax' => true,
+                                    ]]);
+                                ?>
+                                <?php echo Html::submitButton('delete', ['class' => 'btn btn-mini']); ?>
+                                <?php
 
-                                        ActiveForm::end();
-                                    }
-                                }
-                            }
-                            catch (\yii\base\ErrorException $ex)
-                            {
-                                    $current_user=null;
+                                ActiveForm::end();
                             }
                         ?>
                         </div>
