@@ -247,25 +247,18 @@ class ArticleController extends Controller
         $model = new Article();
         $this->view->params['article'] = $model;
 
-        $model->user_id = Yii::$app->user->identity->id;
+        $model->user_id = Yii::$app->user->id;
         $model->own_original = 0;
         $model->own_translate = 0;
+        $model->status = Article::STATUS_DRAFT;
 
         $paragraphs = $model->paragraphs;
         $this->view->params['article'] = $model;
 
-        if (!is_null(Yii::$app->request->post('store')))
-            $model->status = Article::STATUS_DRAFT;
-        if (!is_null(Yii::$app->request->post('publish')))
-            $model->status = Article::STATUS_PUBLISHED;
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $paragraphs = $model->updateParagraphs($_POST['Article']['paragraphs']);
 
-            if ($model->status == 'draft')
-                Yii::$app->session->addFlash('info', 'Article is saved to ' . Html::a('drafts', ['/author-private/drafts']));
-            else
-                Yii::$app->session->addFlash('info', 'Article is ' . Html::a('published', ['/article/view', 'id' => $model->id]));
+            Yii::$app->session->addFlash('info', 'Article is saved to ' . Html::a('drafts', ['/author-private/drafts']));
 
             return $this->redirect(['update', 'id' => $model->id]);
         }
@@ -287,21 +280,29 @@ class ArticleController extends Controller
         $paragraphs = $model->paragraphs;
         $this->view->params['article'] = $model;
 
-        if (!is_null(Yii::$app->request->post('store')))
-            $model->status = Article::STATUS_DRAFT;
+        $status = Article::STATUS_DRAFT;
         if (!is_null(Yii::$app->request->post('publish')))
-            $model->status = Article::STATUS_PUBLISHED;
+            $status = Article::STATUS_PUBLISHED;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $paragraphs = $model->updateParagraphs($_POST['Article']['paragraphs']);
 
-            if ($model->status == 'draft')
-                Yii::$app->session->addFlash('info', 'Article is saved to ' . Html::a('drafts', ['/author-private/drafts']));
-            else
-                Yii::$app->session->addFlash('info', 'Article is ' . Html::a('published', ['/article/view', 'id' => $model->id]));
+            if (Article::STATUS_PUBLISHED == $status && !$model->validateOnPublish())
+            {
+                $status = Article::STATUS_DRAFT;
+                Yii::$app->session->addFlash('warning', Yii::t('app', 'Article can\'t be published')); // TODO details о причинах
+            }
 
-            #return $this->redirect(['view', 'id' => $model->id]);
-            #exit;
+            $model->status = $status;
+            $model->update(false);
+
+            if (Article::STATUS_PUBLISHED == $status)
+            {
+                Yii::$app->session->addFlash('info', 'Article is ' . Html::a('published', ['/article/view', 'id' => $model->id]));
+            } elseif (Article::STATUS_DRAFT == $status)
+            {
+                Yii::$app->session->addFlash('info', 'Article is saved to ' . Html::a('drafts', ['/author-private/drafts']));
+            }
         }
         return $this->render('update', [
             'model' => $model,

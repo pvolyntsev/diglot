@@ -74,6 +74,13 @@ $languageItems = \yii\helpers\ArrayHelper::map($languages, 'id','language');
     <div class="vertical spacer"></div>
 
     <div class="horizontal divider"></div>
+    <?php if ($model->hasErrors('paragraphs')) { ?>
+        <div class="has-error">
+            <div class="help-block">
+                <?php echo \yii\helpers\Html::error($model, 'paragraphs') ?>
+            </div>
+        </div>
+    <?php } ?>
 
     <p class="align right"><small><a href="https://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown</a> enabled</small></p>
 

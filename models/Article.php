@@ -287,4 +287,68 @@ class Article extends \yii\db\ActiveRecord
 
         return $updatedParagraphs;
     }
+
+    /**
+     * Check if article is ready to be published
+     * @return bool
+     */
+    public function validateOnPublish()
+    {
+        $this->refresh();
+
+        if (!$this->lang_original_id)
+            $this->addError('lang_original_id', Yii::t('app', 'Original Language is not defined'));
+
+        if (!$this->lang_translate_id)
+            $this->addError('lang_translate_id', Yii::t('app', 'Translation Language is not defined'));
+
+        if ($this->lang_original_id && $this->lang_translate_id && $this->lang_original_id == $this->lang_translate_id)
+        {
+            $this->addError('lang_original_id', Yii::t('app', 'Original and Translation Language must be different'));
+            $this->addError('lang_translate_id', Yii::t('app', 'Original and Translation Language must be different'));
+        }
+
+        if (mb_strlen($this->title_original, 'utf-8') < 10)
+            $this->addError('title_original', Yii::t('app', 'Original Title is too short'));
+
+        if (mb_strlen($this->title_translate, 'utf-8') < 10)
+            $this->addError('title_original', Yii::t('app', 'Translated Title is too short'));
+
+        if ($this->url_original && !filter_var($this->url_original, FILTER_VALIDATE_URL))
+            $this->addError('url_original', Yii::t('app', 'URL of Original Article is not valid'));
+
+        if ($this->url_translate && !filter_var($this->url_translate, FILTER_VALIDATE_URL))
+            $this->addError('url_translate', Yii::t('app', 'URL of Translated Article is not valid'));
+
+        if ($this->author_name && mb_strlen($this->author_name, 'utf-8') < 4)
+            $this->addError('author_name', Yii::t('app', 'Authors\' name is too short'));
+
+        if ($this->translator_name && mb_strlen($this->translator_name, 'utf-8') < 4)
+            $this->addError('translator_name', Yii::t('app', 'Translators\' name is too short'));
+
+        if ($this->author_url && !filter_var($this->author_url, FILTER_VALIDATE_URL))
+            $this->addError('author_url', Yii::t('app', 'URL of Author is not valid'));
+
+        if ($this->translator_url && !filter_var($this->translator_url, FILTER_VALIDATE_URL))
+            $this->addError('translator_url', Yii::t('app', 'URL of Translator is not valid'));
+
+        if (count($this->paragraphs) < 3)
+            $this->addError('paragraphs', Yii::t('app', 'Article is too short, add more paragraphs'));
+
+        foreach($this->paragraphs as $paragraph)
+        {
+            if (mb_strlen($paragraph->paragraph_original, 'utf-8') < 10)
+            {
+                $this->addError('paragraphs', Yii::t('app', 'One or more paragraphs in original language is too short or empty, find and rewrite them'));
+                break;
+            }
+            if (mb_strlen($paragraph->paragraph_translate, 'utf-8') < 10)
+            {
+                $this->addError('paragraphs', Yii::t('app', 'One or more translated paragraphs is too short or empty, find and rewrite them'));
+                break;
+            }
+        }
+
+        return !$this->hasErrors();
+    }
 }
