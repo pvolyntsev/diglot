@@ -115,12 +115,18 @@ $languageItems = \yii\helpers\ArrayHelper::map($languages, 'id','language');
     </div>
 
     <div class="form-group">
-        <?php if ($model->status == Article::STATUS_PUBLISHED) { ?>
-            <?php echo Html::submitButton(Yii::t('app','Back to drafts'), ['name' => 'store', 'class' => 'btn']) ?>
+        <?php if ($model->isNewRecord) { ?>
+            <?php echo Html::submitButton(Yii::t('app','Save'), ['name' => 'store', 'class' => 'btn btn-primary']) ?>
         <?php } else { ?>
-            <?php echo Html::submitButton(Yii::t('app','Store in drafts'), ['name' => 'store', 'class' => 'btn']) ?>
+            <?php if (Article::STATUS_PUBLISHED == $model->status) { ?>
+                <?php echo Html::submitButton(Yii::t('app','Back to drafts'), ['name' => 'store', 'class' => 'btn']) ?>
+            <?php } elseif (Article::STATUS_DRAFT == $model->status) { ?>
+                <?php echo Html::submitButton(Yii::t('app','Keep in drafts'), ['name' => 'store', 'class' => 'btn']) ?>
+            <?php } else { ?>
+                <?php echo Html::submitButton(Yii::t('app','Store in drafts'), ['name' => 'store', 'class' => 'btn']) ?>
+            <?php } ?>
+            <?php echo Html::submitButton(Yii::t('app','Publish'), ['name' => 'publish', 'class' => 'btn btn-primary']) ?>
         <?php } ?>
-        <?php echo Html::submitButton(Yii::t('app','Publish'), ['name' => 'publish', 'class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
