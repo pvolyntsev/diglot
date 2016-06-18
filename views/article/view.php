@@ -63,7 +63,7 @@ $page = Yii::$app->request->get('page');
         <?php $widget->endOriginal(); ?>
         <?php DilingvoWidget::end(); ?>
 
-        <div class="article-switch-languages js-article-switch-languages" title="Swap the original and the translation"><a class="btn"><i class="fa fa-arrows-h"></i></a></div>
+        <div class="article-switch-languages js-article-switch-languages" title="Swap the original and the translation"><a class="btn"><i class="fa fa-exchange"></i></a></div>
     </div>
     <div class="vertical spacer"></div>
 
