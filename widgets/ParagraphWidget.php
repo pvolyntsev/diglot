@@ -53,12 +53,24 @@ class ParagraphWidget extends Widget
                     . '</div>';
         } else
         {
-            $html .= '<div class="col col-md-6 article-paragraph-translate">';
-            $html .= $this->formatMediaObject($paragraph_translate, $this->link);
-            $html .= '</div>';
-            $html .= '<div class="col col-md-6 article-paragraph-original">';
-            $html .= $this->formatMediaObject($paragraph_original, $this->link);
-            $html .= '</div>';
+            $langOrder = Article::getLanguageOrder();
+            if (Article::LANGUAGE_ORDER_ORIGINAL == $langOrder)
+            {
+                $html .= '<div class="col col-md-6 article-paragraph-original">';
+                $html .= $this->formatMediaObject($paragraph_original, $this->link);
+                $html .= '</div>';
+                $html .= '<div class="col col-md-6 article-paragraph-translate">';
+                $html .= $this->formatMediaObject($paragraph_translate, $this->link);
+                $html .= '</div>';
+            } else
+            {
+                $html .= '<div class="col col-md-6 article-paragraph-translate">';
+                $html .= $this->formatMediaObject($paragraph_translate, $this->link);
+                $html .= '</div>';
+                $html .= '<div class="col col-md-6 article-paragraph-original">';
+                $html .= $this->formatMediaObject($paragraph_original, $this->link);
+                $html .= '</div>';
+            }
         }
 
         return $html;

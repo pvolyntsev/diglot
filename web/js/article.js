@@ -2,6 +2,19 @@ application = application || {};
 
 application.articleView = {};
 application.articleView.ready = function($) {
+
+  $('.js-article-switch-languages').click(function(e){
+    e.stopPropagation();
+
+    // url, data, callback, type
+    $.ajax('/article/swap', {
+      type: 'post',
+      dataType: 'application/json',
+      complete: function(){
+        window.location.href = window.location.href;
+      }
+    });
+  });
 };
 
 application.articleEdit = {};

@@ -47,6 +47,10 @@ class Article extends \yii\db\ActiveRecord
     const STATUS_PUBLISHED = 'published';
     const STATUS_BLOCKED = 'blocked';
 
+    const LANGUAGE_ORDER_COOKIE  = 'lo';
+    const LANGUAGE_ORDER_ORIGINAL  = 'original';
+    const LANGUAGE_ORDER_TRANSLATION  = 'translation';
+
     /**
      * @inheritdoc
      */
@@ -376,5 +380,10 @@ class Article extends \yii\db\ActiveRecord
         }
 
         return !$this->hasErrors();
+    }
+
+    public static function getLanguageOrder()
+    {
+        return Yii::$app->request ? Yii::$app->request->getCookies()->getValue(self::LANGUAGE_ORDER_COOKIE, self::LANGUAGE_ORDER_ORIGINAL) : self::LANGUAGE_ORDER_ORIGINAL;
     }
 }

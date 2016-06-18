@@ -89,7 +89,8 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => '<i class="fa fa-2x fa-plus-square"></i> Add Article', 'url' => ['/article/create'], 'encode' => false, 'options' => [ 'class' => 'link link-publish'] , 'icon'=>'dd'],
+            ['label' => '<i class="fa fa-2x fa-plus-square"></i> Add Article', 'url' => ['/article/create'], 'encode' => false, 'options' => [ 'class' => 'link link-publish']],
+            '<li class="link article-switch-languages js-article-switch-languages" title="Swap the original and the translation"><a class="btn"><i class="fa fa-2x fa-arrows-h"></i></a></li>',
         ]
     ]);
 

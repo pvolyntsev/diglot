@@ -2,13 +2,11 @@
 
 use app\models\Article;
 use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\widgets\ActiveForm;
 use yii\widgets\ListView;
 use app\widgets\ParagraphWidget;
+use app\widgets\DilingvoWidget;
 
 use yii\data\ActiveDataProvider;
-use yii\widgets\LinkPager;
 use yii\widgets\Pjax;
 
 
@@ -31,6 +29,8 @@ $page = Yii::$app->request->get('page');
 <div class="container article-view">
 
     <div class="row article-heading">
+        <?php $widget = DilingvoWidget::begin(); ?>
+        <?php $widget->beginTranslation(); ?>
         <div class="col col-md-6 article-heading-title-translate">
             <h1><?php echo $model->title_translate ?>
                 <span class="label"><?php echo $model->langTranslate->language ?></span>
@@ -44,6 +44,9 @@ $page = Yii::$app->request->get('page');
                 <p class="author">Перевод <?php echo $model->translator_name ?></p>
             <?php } ?>
         </div>
+        <?php $widget->endTranslation(); ?>
+
+        <?php $widget->beginOriginal(); ?>
         <div class="col col-md-6 article-heading-title-original">
             <h1><?php echo $model->title_original ?>
                 <span class="label"><?php echo $model->langOriginal->language ?></span>
@@ -57,6 +60,10 @@ $page = Yii::$app->request->get('page');
                 <p class="author">Перевод <?php echo $model->author_name ?></p>
             <?php } ?>
         </div>
+        <?php $widget->endOriginal(); ?>
+        <?php DilingvoWidget::end(); ?>
+
+        <div class="article-switch-languages js-article-switch-languages" title="Swap the original and the translation"><a class="btn"><i class="fa fa-arrows-h"></i></a></div>
     </div>
     <div class="vertical spacer"></div>
 
@@ -76,7 +83,7 @@ $page = Yii::$app->request->get('page');
         <div class="col col-md-10">
             <p>
                 Тексты были взяты из открытых источников и соединены в формате "билингва" (bilingual book).
-                Материал на левой стороне страницы является переводом, а на правой - оригиналом.
+<!--                Материал на левой стороне страницы является переводом, а на правой - оригиналом.-->
                 Для каждой страницы указан источник, автор и переводчик.
                 Если вы заметили неточность перевода, или неправильно сопоставленные абзацы, или текст оформлен неаккуратно - сообщите в комментариях.
             </p>

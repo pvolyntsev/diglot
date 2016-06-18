@@ -2,6 +2,47 @@
     Article
     ---------------------------------- */
 
+.article-heading {
+    position: relative;
+}
+
+.article-heading .article-switch-languages {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+}
+
+.article-heading .article-switch-languages a {
+    font-size: 28px;
+    left: -36px;
+    position: absolute;
+    opacity: 0.4;
+    transition: opacity .15s;
+    border: 1px solid #eee;
+    border-radius: 50%;
+}
+
+.article-heading:hover .article-switch-languages a {
+    opacity: 1;
+
+    /*-webkit-animation: wiggle 0.4s ease-in-out 0s 2;*/
+    /*animation: wiggle 0.4s ease-in-out 0s 2;*/
+}
+
+/*@-webkit-keyframes wiggle {*/
+    /*0% {transform: translateX(0);}*/
+    /*25% {transform: translateX(-10px);}*/
+    /*75% {transform: translateX(10px);}*/
+    /*100% {transform: translateX(0);}*/
+/*}*/
+
+/*@keyframes wiggle {*/
+    /*0% {transform: translateX(0);}*/
+    /*25% {transform: translateX(-10px);}*/
+    /*75% {transform: translateX(10px);}*/
+    /*100% {transform: translateX(0);}*/
+/*}*/
+
 .article-heading h1 {
     margin: 0 0 0.2em 0;
     font-weight: 800;

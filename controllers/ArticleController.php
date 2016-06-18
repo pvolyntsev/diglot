@@ -74,6 +74,7 @@ class ArticleController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'swap' => ['POST'],
                 ],
             ],
         ];
@@ -381,4 +382,17 @@ class ArticleController extends Controller
         ]);
     }
 
+    public function actionSwap()
+    {
+        $curOrder = Article::getLanguageOrder();
+        $newOrder = Article::LANGUAGE_ORDER_ORIGINAL == $curOrder ? Article::LANGUAGE_ORDER_TRANSLATION : Article::LANGUAGE_ORDER_ORIGINAL;
+        $cookie = new \yii\web\Cookie([
+            'name' => Article::LANGUAGE_ORDER_COOKIE,
+            'value' => $newOrder,
+        ]);
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        Yii::$app->response->getCookies()->add($cookie);
+        Yii::$app->session->addFlash('info', 'Columns order changed, the ' . ($newOrder == Article::LANGUAGE_ORDER_ORIGINAL ? 'original' : 'translation' ) . ' is at the left now');
+        return ['done' => true];
+    }
 }
