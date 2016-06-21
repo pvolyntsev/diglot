@@ -1,2 +1,5 @@
 .idea
 vendor
+yii
+yii.bat
+composer.lock
