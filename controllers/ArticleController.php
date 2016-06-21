@@ -207,7 +207,7 @@ class ArticleController extends Controller
 
             $comment_model->comment = $comment;
 
-        $comment_model->update();
+            $comment_model->update();
 
             if ($comment_model->update() !== false) {
                 // update successful
