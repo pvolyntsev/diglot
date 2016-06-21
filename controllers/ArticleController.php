@@ -207,7 +207,7 @@ class ArticleController extends Controller
 
             $comment_model->comment = $comment;
 
-//        $comment_model->update();
+        $comment_model->update();
 
             if ($comment_model->update() !== false) {
                 // update successful
@@ -218,7 +218,7 @@ class ArticleController extends Controller
             }
         }
 
-    
+
     /**
      * Creates a new Article model.
      * If creation is successful, the browser will be redirected to the 'view' page.
