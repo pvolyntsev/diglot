@@ -1,30 +1,30 @@
 <?php
 
 return array (
-    0 =>
-        (object)(array(
-            'id' => 1,
-            'article_id' => -1,
-            'paragraph_original' => 'As I alluded to in my last post (which I will be correcting shortly), I no longer work for Google. I still haven’t decided quite where I’m going to wind up - I’ve got a couple of excellent offers to choose between. But in the interim, since I’m not technically employed by anyone, I thought I’d do a bit of writing about some professional things that are interesting, but that might have caused tension with coworkers or management.',
-            'paragraph_translate' => '',
-            'date_modified' => 1462990179,
-            'sortorder' => 1,
-        )),
-    1 =>
-        (object)(array(
-            'id' => 0,
-            'article_id' => -1,
-            'paragraph_original' => 'Google is a really cool company. And they’ve done some really amazing things - both outside the company, where users can see it, and inside the company. There are a couple of things about the inside that aren’t confidential, but which also haven’t been discussed all that widely on the outside. That’s what I want to talk about.',
-            'paragraph_translate' => '',
-            'date_modified' => 1462990179,
-            'sortorder' => 2,
-        )),
+//    0 =>
+//        (object)(array(
+//            'id' => 1,
+//            'article_id' => -1,
+//            'paragraph_original' => 'As I alluded to in my last post (which I will be correcting shortly), I no longer work for Google. I still haven’t decided quite where I’m going to wind up - I’ve got a couple of excellent offers to choose between. But in the interim, since I’m not technically employed by anyone, I thought I’d do a bit of writing about some professional things that are interesting, but that might have caused tension with coworkers or management.',
+//            'paragraph_translate' => '',
+//            'date_modified' => 1462990179,
+//            'sortorder' => 1,
+//        )),
+//    1 =>
+//        (object)(array(
+//            'id' => 0,
+//            'article_id' => -1,
+//            'paragraph_original' => 'Google is a really cool company. And they’ve done some really amazing things - both outside the company, where users can see it, and inside the company. There are a couple of things about the inside that aren’t confidential, but which also haven’t been discussed all that widely on the outside. That’s what I want to talk about.',
+//            'paragraph_translate' => '',
+//            'date_modified' => 1462990179,
+//            'sortorder' => 2,
+//        )),
     2 =>
         (object)(array(
             'id' => -1,
             'article_id' => -1,
             'paragraph_original' => 'The biggest thing that makes Google’s code so good is simple: code review. That’s not specific to Google - it’s widely recognized as a good idea, and a lot of people do it. But I’ve never seen another large company where it was such a universal. At Google, <em>no code</em>, for any product, for any project, gets checked in until it gets a positive review.',
-            'paragraph_translate' => 'Самая значимая вещь, которая делает код в компании Google таким хорошим проста — code review (далее CR). Google не единственная компания, использующая CR. Всем известно, что это хорошая идея и множество разработчиков делают это. Но я не видел ни одной другой большой компании, в которой CR был бы так грамотно внедрен. В Google ни одна линия кода не уходит в production пока не получит позитивную оценку на CR.',
+            'paragraph_translate' => 'Самая значимая вещь, которая делает код в компании Google таким хорошим, проста — code review (далее CR). Google не единственная компания, использующая CR. Всем известно, что это хорошая идея и множество разработчиков делают это. Но я не видел ни одной другой большой компании, в которой CR был бы так грамотно внедрен. В Google ни одна линия кода не уходит в production пока не получит позитивную оценку на CR.',
             'date_modified' => 1462990179,
             'sortorder' => 3,
         )),
