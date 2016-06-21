@@ -185,31 +185,101 @@ class ArticleController extends Controller
         }
     }
 
-    public function actionDeleteComment($id)
-    {
-//        $model=$this->findModel($id_article);
-        $deleted = false;
-        $comment=Comment::findOne($id);
-
-        if (Yii::$app->request->isAjax)  // Вот тут мы проверяем если у нас это аякс запрос или нет
-        {
-            if($comment!=null)
-            {
-                $comment->delete();
+//    public function actionDeleteComment($id,$id_article)
+//    {
+//
+//        $article=$this->findModel($id_article);
+//        $deleted="none";
+//        $comment=Comment::findOne($id);
+//
+//        if (Yii::$app->request->isAjax)  // Вот тут мы проверяем если у нас это аякс запрос или нет
+//        {
+//            if($comment!=null)
+//            {
+//                $comment->delete();
+//                $deleted="block";
 //                Yii::error('comment is deleted');
-            }
+//            }
 //            else
 //            {
 //                throw new NotFoundHttpException('The requested page does not exist.');
 //            }
+//        }
+//        else
+//        {
+//            Yii::error('comment is not deleted');
+//        }
+//
+//        $comments_selected = new ActiveDataProvider([
+//            'query' => Comment::find()->limit(4)->where('article_id=:article_id and status=:published', [':article_id' => $id_article, ':published' => 'published']),
+//            'pagination' => ['pageSize' => 4],
+//            'sort' => [
+//                'defaultOrder' => [
+//                    'date_created' => SORT_DESC,
+//                ]
+//            ],
+//        ]);
+//
+//        $comments = new ActiveDataProvider([
+//            'query' => Comment::find()->where('article_id=:article_id and status=:published', [':article_id' => $id_article, ':published' => 'published']),
+//            'pagination' => [
+//                'defaultPageSize' => 10,
+//                'pageSize' => 10,
+//            ],
+//            'sort' => [
+//                'defaultOrder' => [
+//                    'date_created' => SORT_DESC,
+//                ]
+//            ],
+//        ]);
+//
+//
+//        return $this->renderAjax('view', [
+//            'model' => $article,
+//            'comments' => $comments,
+//            'comments_selected' => $comments_selected,
+//            'comment' => $comment,
+//            'deleted' => $deleted,
+//        ]);
+//
+//    }
+
+    public function actionDeleteComment()
+    {
+        $id=$_POST['id'];
+        $id_article=$_POST['id_article'];
+
+        $article = $this->findModel($id_article);
+        $comment = Comment::findOne($id);
+
+        if($comment->delete() !==false)
+        {
+            echo 'success';
+        }
+    }
+
+
+        public function actionUpdateComment($id,$id_article)
+    {
+        $comment=$_POST['comment'];
+
+        $article=$this->findModel($id_article);
+
+        $comment_model=Comment::findOne($id);
+
+        $comment_model->comment = $comment;
+
+//        $comment_model->update();
+
+        if ($comment_model->update() !== false) {
+            // update successful
+            $comment_from_bd = $comment_model::find()->where(['id' => $id])->one();
+            echo $comment_from_bd['comment'];
         }
         else
         {
-//            Yii::error('comment is not deleted');
+            // update failed
         }
-//        return $this->renderAjax('_comment', [
-//            'comment' => $comment,
-//        ]);
     }
 
     /**

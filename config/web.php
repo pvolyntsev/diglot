@@ -36,7 +36,7 @@ $config = [
 		'urlManager' => [
             'showScriptName' => false,     // Disable index.php
             'enablePrettyUrl' => true,     // Disable ?r= routes
-            'enableStrictParsing' => true, // Only routes being listed in rules
+            'enableStrictParsing' => false, // Only routes being listed in rules
 			'rules' => [
                 // Main page & static pages
                 '/' => '/article/index',
@@ -58,6 +58,8 @@ $config = [
 				'/confirmEmail' => '/user/user/confirm-email',
 				'/unbind/<id:[\w\-]+>' => '/user/auth/unbind',
 				'/oauth/<authclient:[\w\-]+>' => '/user/auth/index',
+        '/user/admin' => '/user/admin/index',
+        '/user/admin/<action>' => '/user/admin/<action>',
 
                 // Public Profile
                 '/<username>/profile' => 'author-public/profile',
@@ -78,6 +80,7 @@ $config = [
                 '/article' => '/article/index',
                 '/article/<action>' => '/article/<action>',
 				'/article/add-comment' => '/article/addComment',
+				'/article/update-comment' => '/article/updateComment',
                 '/article/<action>/<id:\d+>' => '/article/<action>',
                 '/search' => '/article/search',
 
@@ -124,8 +127,9 @@ $config = [
 	'modules' => [
 		'user' => [
 			'class' => 'budyaga\users\Module',
-			'userPhotoUrl' => 'http://example.com/uploads/user/photo',
-			'userPhotoPath' => '@frontend/web/uploads/user/photo'
+			'userPhotoUrl' => 'http://www.diglot.example.com/upload/user',
+//			'userPhotoPath' => '@frontend/web/upload/user'
+		'userPhotoPath' => '/var/www/html/diglot/web/upload/user',
 		],
         'markdown' => [
             'class' => '\kartik\markdown\Module',

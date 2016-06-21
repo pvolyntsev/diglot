@@ -10,7 +10,7 @@ use app\widgets\ParagraphWidget;
 use yii\data\ActiveDataProvider;
 use yii\widgets\LinkPager;
 use yii\widgets\Pjax;
-
+use yii\bootstrap\Alert;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Article */
@@ -72,6 +72,30 @@ $page = Yii::$app->request->get('page');
     </div>
 </div>
 
+<!--    --><?php
+//
+//    if (!empty($deleted)) {
+//        $id = 'js-alert-'.time()+1;
+//        echo Alert::widget([
+//            'id' => $id,
+//            'options' => [
+//                'class' => 'alert-info float right',
+//            ],
+//            'closeButton' => false,
+//            'body' => Yii::t('app', 'Comment deleted. Thank you!'),
+//        ]);
+//
+//        $this->registerJs(<<<JS
+//jQuery(function(){
+//    setTimeout(function(){
+//        jQuery('#$id').fadeOut('slow').remove();
+//    }, 4000);
+//});
+//JS
+//        );
+//    }
+//    ?>
+
 <div class="comments">
     <div class="container">
         <a name="responses"></a>
@@ -94,7 +118,9 @@ $page = Yii::$app->request->get('page');
         <?php if (is_null($page)) { ?>
             <div class="comments" id="js-comments-recommended">
                 <?php
-                Pjax::begin(['id'=>'comments_selected_list']);
+                Pjax::begin(['id'=>'comments_selected_list',
+                'enablePushState' => false,
+                'enableReplaceState' => false]);
                 echo ListView::widget([
                     'dataProvider' => $comments_selected,
                     'itemView' => '_comment',
@@ -115,12 +141,15 @@ $page = Yii::$app->request->get('page');
 
         <div class="comments" id="js-comments-page" <?php if (is_null($page)) echo 'style="display: none;"'; ?>>
             <?php
-            Pjax::begin(['id'=>'comments_list']);
+            Pjax::begin(['id'=>'comments_list',
+                'enablePushState' => false,
+                'enableReplaceState' => false]);
             echo ListView::widget([
                 'dataProvider' => $comments,
                 'itemView' => '_comment',
                 'layout' => "{summary}\n{items}\n{pager}",
             ]);
+
             Pjax::end();
             ?>
         </div>

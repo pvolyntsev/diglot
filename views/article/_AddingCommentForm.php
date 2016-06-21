@@ -8,6 +8,8 @@ use yii\bootstrap\Alert;
 /* @var $article app\models\Article */
 /* @var $comment app\models\Comment */
 /* @var $added bool */
+/* @var $deleted bool */
+
 
 Pjax::begin(['id'=>'new_comment_form',
     'enablePushState' => false,
@@ -49,6 +51,7 @@ JS
             );
         }
         ?>
+
     </div>
 <?php
 ActiveForm::end();

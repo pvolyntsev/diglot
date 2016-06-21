@@ -54,12 +54,70 @@ application.articleComments.ready = function($) {
     $.pjax.reload({container:"#comments_list"});  //Reload ListView
   });
 
-  $("#delete_comment_form").on("pjax:end", function () {
-    $.pjax.reload({container: "#comments_list"});  //Reload ListView
-    $.pjax.reload({container: "#comments_selected_list"});  //Reload ListView
+  $("#comments_selected_list").on("pjax:end", function () {
+    $('#js-comments-recommended').hide();
+    $('#js-comments-page').show();
+    $('#js-comments-show-all').hide();
+    $.pjax.reload({container:"#comments_list"});  //Reload ListView
   });
+
 };
+
 
 // attach ready event
 $(document)
   .ready(application.articleComments.ready);
+
+function funcSuccess(id,response)
+{
+  alert ("Ajax works!");
+  $('#comment_'+id).html(response);
+}
+
+function update_comment(id,id_article)
+{
+  var comment="yess7";
+  $.ajax({
+    url:"update-comment?id="+id+"&id_article="+id_article,
+    type:"POST",
+    data:{id:id,comment:comment},
+    datatype:"json",
+    // beforeSend:funcBefore,
+    // success:funcSuccess(id,response)
+    success:function (response)
+    {
+      if (response!=null)
+      {
+        $('#comment_'+id).html(response);
+        alert ("Комментарий успешно изменен!");
+      }
+    }
+  });
+}
+
+function delete_comment(id,id_article)
+{
+  $.ajax({
+    url:"delete-comment",
+    type:"POST",
+    data:{id:id,id_article:id_article},
+    datatype:"json",
+    // beforeSend:funcBefore,
+    // success:funcSuccess(id,response)
+    success:function (response)
+    {
+      if (response=='success')
+      {
+        $('#js-comments-recommended').hide();
+        $('#js-comments-page').show();
+        $('#js-comments-show-all').hide();
+        $.pjax.reload({container:"#comments_list"});  //Reload ListView
+        alert ("Комментарий успешно удален!");
+      }
+      else
+      {
+        alert ("Произошел сбой!");
+      }
+    }
+  });
+}

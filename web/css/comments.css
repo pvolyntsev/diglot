@@ -180,9 +180,15 @@
         .comments .comment-form.visible2 {
             opacity: 1;
             height: 100%;
+            background-color: red;
         }
 
 
 #all_comments {
     display:none;
+}
+
+#update_comment_form
+{
+    display: none;
 }
