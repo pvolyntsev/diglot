@@ -32,7 +32,7 @@ class Paragraph extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['article_id', 'paragraph_original'], 'required'],
+            [['article_id'], 'required'],
             [['article_id', 'sortorder'], 'integer'],
             [['paragraph_original', 'paragraph_translate'], 'string'],
             [['date_modified'], 'safe'],
