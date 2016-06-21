@@ -24,7 +24,8 @@ use yii\helpers\Html;
  * ArticleController implements the CRUD actions for Article model.
  */
 class ArticleController extends Controller
-{	/**
+{
+    /**
      * @inheritdoc
      */
     public function behaviors()
@@ -44,40 +45,36 @@ class ArticleController extends Controller
                         // изменять, удалять статьи может только её владелец
                         'actions' => ['update', 'delete'],
                         'allow' => true,
-                        //'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
                             $article = $this->findModel(Yii::$app->request->get('id'));
-                            if ($article->user_id == Yii::$app->user->id)
+                            if ($article->user_id != Yii::$app->user->id)
                             {
-                                return true;
+                                return false;
                             }
-                            return false;
+                            return true;
                         },
                     ],
-					[
-					// смотреть черновики draft может только владелец
+                    [
+                        // смотреть черновики draft может только владелец
                         'actions' => ['view'],
                         'allow' => true,
                         //'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
                             $article = $this->findModel(Yii::$app->request->get('id'));
-							if (Article::STATUS_DRAFT !== $article->status) {
-								return true;
-							} else {
-								if ( (!Yii::$app->user->isGuest) && ($article->user_id == Yii::$app->user->identity->id) )
-								{
-									return true;
-								}
-								return false;
-							}
+                            if (Article::STATUS_DRAFT == $article->status && $article->user_id != Yii::$app->user->id)
+                            {
+                                return false;
+                            }
+                            return true;
                         },
-					],
-				],
+                    ],
+                ],
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'swap' => ['POST'],
                 ],
             ],
         ];
@@ -185,65 +182,6 @@ class ArticleController extends Controller
         }
     }
 
-//    public function actionDeleteComment($id,$id_article)
-//    {
-//
-//        $article=$this->findModel($id_article);
-//        $deleted="none";
-//        $comment=Comment::findOne($id);
-//
-//        if (Yii::$app->request->isAjax)  // Вот тут мы проверяем если у нас это аякс запрос или нет
-//        {
-//            if($comment!=null)
-//            {
-//                $comment->delete();
-//                $deleted="block";
-//                Yii::error('comment is deleted');
-//            }
-//            else
-//            {
-//                throw new NotFoundHttpException('The requested page does not exist.');
-//            }
-//        }
-//        else
-//        {
-//            Yii::error('comment is not deleted');
-//        }
-//
-//        $comments_selected = new ActiveDataProvider([
-//            'query' => Comment::find()->limit(4)->where('article_id=:article_id and status=:published', [':article_id' => $id_article, ':published' => 'published']),
-//            'pagination' => ['pageSize' => 4],
-//            'sort' => [
-//                'defaultOrder' => [
-//                    'date_created' => SORT_DESC,
-//                ]
-//            ],
-//        ]);
-//
-//        $comments = new ActiveDataProvider([
-//            'query' => Comment::find()->where('article_id=:article_id and status=:published', [':article_id' => $id_article, ':published' => 'published']),
-//            'pagination' => [
-//                'defaultPageSize' => 10,
-//                'pageSize' => 10,
-//            ],
-//            'sort' => [
-//                'defaultOrder' => [
-//                    'date_created' => SORT_DESC,
-//                ]
-//            ],
-//        ]);
-//
-//
-//        return $this->renderAjax('view', [
-//            'model' => $article,
-//            'comments' => $comments,
-//            'comments_selected' => $comments_selected,
-//            'comment' => $comment,
-//            'deleted' => $deleted,
-//        ]);
-//
-//    }
-
     public function actionDeleteComment()
     {
         $id=$_POST['id'];
@@ -260,28 +198,27 @@ class ArticleController extends Controller
 
 
         public function actionUpdateComment($id,$id_article)
-    {
-        $comment=$_POST['comment'];
+        {
+            $comment = $_POST['comment'];
 
-        $article=$this->findModel($id_article);
+            $article = $this->findModel($id_article);
 
-        $comment_model=Comment::findOne($id);
+            $comment_model = Comment::findOne($id);
 
-        $comment_model->comment = $comment;
+            $comment_model->comment = $comment;
 
 //        $comment_model->update();
 
-        if ($comment_model->update() !== false) {
-            // update successful
-            $comment_from_bd = $comment_model::find()->where(['id' => $id])->one();
-            echo $comment_from_bd['comment'];
+            if ($comment_model->update() !== false) {
+                // update successful
+                $comment_from_bd = $comment_model::find()->where(['id' => $id])->one();
+                echo $comment_from_bd['comment'];
+            } else {
+                // update failed
+            }
         }
-        else
-        {
-            // update failed
-        }
-    }
 
+    
     /**
      * Creates a new Article model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -292,32 +229,25 @@ class ArticleController extends Controller
         $model = new Article();
         $this->view->params['article'] = $model;
 
-        $model->user_id = Yii::$app->user->identity->id;
+        $model->user_id = Yii::$app->user->id;
         $model->own_original = 0;
         $model->own_translate = 0;
+        $model->status = Article::STATUS_DRAFT;
 
         $paragraphs = $model->paragraphs;
         $this->view->params['article'] = $model;
 
-        if (!is_null(Yii::$app->request->post('store')))
-            $model->status = Article::STATUS_DRAFT;
-        if (!is_null(Yii::$app->request->post('publish')))
-            $model->status = Article::STATUS_PUBLISHED;
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $paragraphs = $model->updateParagraphs($_POST['Article']['paragraphs']);
 
-            if ($model->status == 'draft')
-                Yii::$app->session->addFlash('info', 'Article is saved to ' . Html::a('drafts', ['/author-private/drafts']));
-            else
-                Yii::$app->session->addFlash('info', 'Article is ' . Html::a('published', ['/article/view', 'id' => $model->id]));
+            Yii::$app->session->addFlash('info', 'Article is saved to ' . Html::a('drafts', ['/author-private/drafts']));
 
-            #return $this->redirect(['view', 'id' => $model->id]);
-            #exit;
+            return $this->redirect(['update', 'id' => $model->id]);
         }
         return $this->render('update', [
             'model' => $model,
             'paragraphs' => $paragraphs,
+            'publishFailed' => false,
         ]);
     }
 
@@ -333,25 +263,36 @@ class ArticleController extends Controller
         $paragraphs = $model->paragraphs;
         $this->view->params['article'] = $model;
 
-        if (!is_null(Yii::$app->request->post('store')))
-            $model->status = Article::STATUS_DRAFT;
+        $status = Article::STATUS_DRAFT;
+        $publishFailed = false;
         if (!is_null(Yii::$app->request->post('publish')))
-            $model->status = Article::STATUS_PUBLISHED;
+            $status = Article::STATUS_PUBLISHED;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $paragraphs = $model->updateParagraphs($_POST['Article']['paragraphs']);
 
-            if ($model->status == 'draft')
-                Yii::$app->session->addFlash('info', 'Article is saved to ' . Html::a('drafts', ['/author-private/drafts']));
-            else
-                Yii::$app->session->addFlash('info', 'Article is ' . Html::a('published', ['/article/view', 'id' => $model->id]));
+            if (Article::STATUS_PUBLISHED == $status && !$model->validateOnPublish())
+            {
+                $status = Article::STATUS_DRAFT;
+                $publishFailed = true;
+                Yii::$app->session->addFlash('warning', Yii::t('app', 'Article can\'t be published')); // TODO details о причинах
+            }
 
-            #return $this->redirect(['view', 'id' => $model->id]);
-            #exit;
+            $model->status = $status;
+            $model->update(false);
+
+            if (Article::STATUS_PUBLISHED == $status)
+            {
+                Yii::$app->session->addFlash('info', 'Article is ' . Html::a('published', ['/article/view', 'id' => $model->id]));
+            } elseif (Article::STATUS_DRAFT == $status)
+            {
+                Yii::$app->session->addFlash('info', 'Article is saved to ' . Html::a('drafts', ['/author-private/drafts']));
+            }
         }
         return $this->render('update', [
             'model' => $model,
             'paragraphs' => $paragraphs,
+            'publishFailed' => $publishFailed,
         ]);
     }
 
@@ -422,4 +363,17 @@ class ArticleController extends Controller
         ]);
     }
 
+    public function actionSwap()
+    {
+        $curOrder = Article::getLanguageOrder();
+        $newOrder = Article::LANGUAGE_ORDER_ORIGINAL == $curOrder ? Article::LANGUAGE_ORDER_TRANSLATION : Article::LANGUAGE_ORDER_ORIGINAL;
+        $cookie = new \yii\web\Cookie([
+            'name' => Article::LANGUAGE_ORDER_COOKIE,
+            'value' => $newOrder,
+        ]);
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        Yii::$app->response->getCookies()->add($cookie);
+        Yii::$app->session->addFlash('info', 'Columns order changed, the ' . ($newOrder == Article::LANGUAGE_ORDER_ORIGINAL ? 'original' : 'translation' ) . ' is at the left now');
+        return ['done' => true];
+    }
 }

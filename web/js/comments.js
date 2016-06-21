@@ -54,13 +54,6 @@ application.articleComments.ready = function($) {
     $.pjax.reload({container:"#comments_list"});  //Reload ListView
   });
 
-  $("#comments_selected_list").on("pjax:end", function () {
-    $('#js-comments-recommended').hide();
-    $('#js-comments-page').show();
-    $('#js-comments-show-all').hide();
-    $.pjax.reload({container:"#comments_list"});  //Reload ListView
-  });
-
 };
 
 

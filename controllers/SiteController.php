@@ -21,15 +21,24 @@ class SiteController extends Controller
             ],
             'article' => [
                 'class' => '\app\controllers\actions\ArticleViewAction',
+            ],
+            'donate' => [
+                'class' => '\app\controllers\actions\ArticleViewAction',
+                'view' => 'donate',
             ]
         ];
     }
-	
+
     public function actionIndex()
     {
         return $this->render('index');
     }
-	
+
+    public function actionTeam()
+    {
+        return $this->render('team');
+    }
+
     public function actionContact()
     {
         $model = new ContactForm();

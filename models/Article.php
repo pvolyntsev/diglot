@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "article".
@@ -45,6 +47,10 @@ class Article extends \yii\db\ActiveRecord
     const STATUS_PUBLISHED = 'published';
     const STATUS_BLOCKED = 'blocked';
 
+    const LANGUAGE_ORDER_COOKIE  = 'lo';
+    const LANGUAGE_ORDER_ORIGINAL  = 'original';
+    const LANGUAGE_ORDER_TRANSLATION  = 'translation';
+
     /**
      * @inheritdoc
      */
@@ -69,6 +75,21 @@ class Article extends \yii\db\ActiveRecord
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['lang_original_id'], 'exist', 'skipOnError' => true, 'targetClass' => Language::className(), 'targetAttribute' => ['lang_original_id' => 'id']],
             [['lang_translate_id'], 'exist', 'skipOnError' => true, 'targetClass' => Language::className(), 'targetAttribute' => ['lang_translate_id' => 'id']],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'date_created',
+                'updatedAtAttribute' => 'date_modified',
+                'value' => new Expression('NOW()'),
+            ],
         ];
     }
 
@@ -181,6 +202,15 @@ class Article extends \yii\db\ActiveRecord
         return new ArticleQuery(get_called_class());
     }
 
+    public function beforeSave($insert)
+    {
+        if (self::STATUS_PUBLISHED == $this->getAttribute('status') && self::STATUS_PUBLISHED != $this->getOldAttribute('status')) // become published
+        {
+            $this->date_published = new Expression('NOW()'); // set published date
+        }
+        return parent::beforeSave($insert);
+    }
+
     public function afterSave($insert, $changedAttributes)
     {
         try {
@@ -286,5 +316,74 @@ class Article extends \yii\db\ActiveRecord
         }
 
         return $updatedParagraphs;
+    }
+
+    /**
+     * Check if article is ready to be published
+     * @return bool
+     */
+    public function validateOnPublish()
+    {
+        $this->refresh();
+
+        if (!$this->lang_original_id)
+            $this->addError('lang_original_id', Yii::t('app', 'Original Language is not defined'));
+
+        if (!$this->lang_translate_id)
+            $this->addError('lang_translate_id', Yii::t('app', 'Translation Language is not defined'));
+
+        if ($this->lang_original_id && $this->lang_translate_id && $this->lang_original_id == $this->lang_translate_id)
+        {
+            $this->addError('lang_original_id', Yii::t('app', 'Original and Translation Language must be different'));
+            $this->addError('lang_translate_id', Yii::t('app', 'Original and Translation Language must be different'));
+        }
+
+        if (mb_strlen($this->title_original, 'utf-8') < 10)
+            $this->addError('title_original', Yii::t('app', 'Original Title is too short'));
+
+        if (mb_strlen($this->title_translate, 'utf-8') < 10)
+            $this->addError('title_original', Yii::t('app', 'Translated Title is too short'));
+
+        if ($this->url_original && !filter_var($this->url_original, FILTER_VALIDATE_URL))
+            $this->addError('url_original', Yii::t('app', 'URL of Original Article is not valid'));
+
+        if ($this->url_translate && !filter_var($this->url_translate, FILTER_VALIDATE_URL))
+            $this->addError('url_translate', Yii::t('app', 'URL of Translated Article is not valid'));
+
+        if ($this->author_name && mb_strlen($this->author_name, 'utf-8') < 4)
+            $this->addError('author_name', Yii::t('app', 'Authors\' name is too short'));
+
+        if ($this->translator_name && mb_strlen($this->translator_name, 'utf-8') < 4)
+            $this->addError('translator_name', Yii::t('app', 'Translators\' name is too short'));
+
+        if ($this->author_url && !filter_var($this->author_url, FILTER_VALIDATE_URL))
+            $this->addError('author_url', Yii::t('app', 'URL of Author is not valid'));
+
+        if ($this->translator_url && !filter_var($this->translator_url, FILTER_VALIDATE_URL))
+            $this->addError('translator_url', Yii::t('app', 'URL of Translator is not valid'));
+
+        if (count($this->paragraphs) < 3)
+            $this->addError('paragraphs', Yii::t('app', 'Article is too short, add more paragraphs'));
+
+        foreach($this->paragraphs as $paragraph)
+        {
+            if (mb_strlen($paragraph->paragraph_original, 'utf-8') < 10)
+            {
+                $this->addError('paragraphs', Yii::t('app', 'One or more paragraphs in original language is too short or empty, find and rewrite them'));
+                break;
+            }
+            if (mb_strlen($paragraph->paragraph_translate, 'utf-8') < 10)
+            {
+                $this->addError('paragraphs', Yii::t('app', 'One or more translated paragraphs is too short or empty, find and rewrite them'));
+                break;
+            }
+        }
+
+        return !$this->hasErrors();
+    }
+
+    public static function getLanguageOrder()
+    {
+        return Yii::$app->request ? Yii::$app->request->getCookies()->getValue(self::LANGUAGE_ORDER_COOKIE, self::LANGUAGE_ORDER_ORIGINAL) : self::LANGUAGE_ORDER_ORIGINAL;
     }
 }

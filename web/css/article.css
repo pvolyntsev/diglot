@@ -2,6 +2,47 @@
     Article
     ---------------------------------- */
 
+.article-heading {
+    position: relative;
+}
+
+.article-heading .article-switch-languages {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+}
+
+.article-heading .article-switch-languages a {
+    font-size: 28px;
+    left: -36px;
+    position: absolute;
+    opacity: 0.4;
+    transition: opacity .15s;
+    border: 1px solid #eee;
+    border-radius: 50%;
+}
+
+.article-heading:hover .article-switch-languages a {
+    opacity: 1;
+
+    /*-webkit-animation: wiggle 0.4s ease-in-out 0s 2;*/
+    /*animation: wiggle 0.4s ease-in-out 0s 2;*/
+}
+
+/*@-webkit-keyframes wiggle {*/
+    /*0% {transform: translateX(0);}*/
+    /*25% {transform: translateX(-10px);}*/
+    /*75% {transform: translateX(10px);}*/
+    /*100% {transform: translateX(0);}*/
+/*}*/
+
+/*@keyframes wiggle {*/
+    /*0% {transform: translateX(0);}*/
+    /*25% {transform: translateX(-10px);}*/
+    /*75% {transform: translateX(10px);}*/
+    /*100% {transform: translateX(0);}*/
+/*}*/
+
 .article-heading h1 {
     margin: 0 0 0.2em 0;
     font-weight: 800;
@@ -179,6 +220,11 @@
     Article editor
     ---------------------------------- */
 
+.article-form .article-paragraphs {
+    position: relative;
+    margin-bottom: 3em;
+}
+
 .article-form .article-paragraphs textarea {
     width: 100%;
 }
@@ -186,10 +232,8 @@
 .article-form .article-paragraphs .editable {
     display: block;
     width: 100%;
-    margin: 10px 0;
     background: rgba(255,255,255,0.9);
-    border: 1px solid rgba(0,0,0,0.5);
-    padding: 5px;
+    border: 1px solid rgba(0,0,0,0.1);
     min-width: 100%;
     max-width: 100%;
 }
@@ -198,11 +242,20 @@
     position: relative;
 }
     .article-form .article-paragraph-add {
-        text-align: center;
-        clear: both;
+        position: absolute;
+        left: 50%;
+        bottom: 36px;
     }
+    .article-form .article-paragraphs .article-paragraph-add:first-child {
+        top: -36px;
+        bottom: auto;
+    }
+
     /** анимация кнопки добавления параграфа */
     .article-form .article-paragraph-add a {
+        font-size: 28px;
+        left: -28px;
+        position: absolute;
         transform: translateY(0);
         opacity: 0;
         transition: transform .15s, opacity .15s;
@@ -211,7 +264,8 @@
             transform: translateY(10px);
             opacity: 1;
         }
-    #js-paragraphs:hover>.article-paragraph-add a {
+
+    .article-paragraphs-active:hover>.article-paragraph-add a {
         transform: translateY(10px);
         opacity: 1;
     }
@@ -225,8 +279,12 @@
         transition: top 0.15s, opacity 0.15s 0.05s;
     }
         .article-form .article-paragraph-remove a {
+            font-size: 28px;
             position: absolute;
             left: -27px;
+        }
+        .article-form .article-paragraph:hover {
+            background-color: rgba(200,200,200,0.1);
         }
         .article-form .article-paragraph:hover .article-paragraph-remove {
             top: 10px;
@@ -234,13 +292,72 @@
         }
 
     /** шаблон нового параграфа */
-    .article-form #js-paragraph-template {
+    .article-form .article-paragraph-new {
         display: none;
     }
-    .article-form #js-paragraph-template .article-paragraph-remove {
+    .article-form .article-paragraph-new .article-paragraph-remove {
         display: none;
     }
 
     .article-paragraph-remove { /* удаление параграфов не реализовано */
         display: none !important;
     }
+
+.expandingArea textarea,
+.expandingArea pre {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+}
+
+.expandingArea {
+    position: relative;
+    /*border: 1px solid #888;*/
+    background: #fff;
+}
+
+.expandingArea > textarea,
+.expandingArea > pre {
+    padding: 5px;
+    background: transparent;
+    /*font: 400 13px/16px helvetica, arial, sans-serif;*/
+    font: inherit;
+    /* Make the text soft-wrap */
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.expandingArea > textarea {
+    /* The border-box box model is used to allow
+     * padding whilst still keeping the overall width
+     * at exactly that of the containing element.
+     */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    /* This height is used when JS is disabled */
+    height: 100px;
+}
+
+.expandingArea.active > textarea {
+    /* Hide any scrollbars */
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    /* Remove WebKit user-resize widget */
+    resize: none;
+}
+
+.expandingArea > pre {
+    display: none;
+}
+.expandingArea.active > pre {
+    display: block;
+    /* Hide the text; just using it for sizing */
+    visibility: hidden;
+}

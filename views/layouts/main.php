@@ -7,6 +7,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use app\widgets\UserMenuWidget;
+use app\widgets\BannerMenuWidget;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use yii\bootstrap\Alert;
@@ -41,33 +42,33 @@ AppAsset::register($this);
     <meta name="theme-color" content="#ffffff">
 
     <!-- Site Properities -->
-    <title><?= HTML::encode(Yii::$app->params['title']['en']) ?></title>
+    <title><?php echo $this->title ? HTML::encode($this->title) . ' &mdash; ' : ''?><?php echo HTML::encode(Yii::$app->params['title']['en']) ?></title>
     <meta name="description" content="<?= HTML::encode(Yii::$app->params['description.256']) ?>">
     <meta name="keywords" content="<?= HTML::encode(Yii::$app->params['keywords']) ?>" />
 
     <!-- Special meta -->
     <!-- Schema.org markup for Google+ -->
-    <meta itemprop="name" content="<?= HTML::encode(Yii::$app->params['title']['en']) ?>">
+    <meta itemprop="name" content="<?php echo $this->title ? HTML::encode($this->title) . ' &mdash; ' : ''?><?php echo HTML::encode(Yii::$app->params['title']['en']) ?>">
     <meta itemprop="description" content="<?= HTML::encode(Yii::$app->params['description.256']) ?>">
     <meta itemprop="image" content="<?= Yii::$app->params['social.image'] ?>">
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" value="summary">
     <meta name="twitter:site" content="@publisher_handle">
-    <meta name="twitter:title" content="<?= HTML::encode(Yii::$app->params['title']['en']) ?>">
+    <meta name="twitter:title" content="<?php echo $this->title ? HTML::encode($this->title) . ' &mdash; ' : ''?><?php echo HTML::encode(Yii::$app->params['title']['en']) ?>">
     <meta name="twitter:description" content="<?= HTML::encode(Yii::$app->params['description.256']) ?>">
     <meta name="twitter:creator" content="@author_handle">
     <meta name="twitter:image" content="<?= Yii::$app->params['social.image'] ?>">
 
     <!-- Open Graph tags (facebook, google) -->
-    <meta property="og:title"       content="<?= HTML::encode(Yii::$app->params['title']['en']) ?>">
+    <meta property="og:title"       content="<?php echo $this->title ? HTML::encode($this->title) . ' &mdash; ' : ''?><?php echo HTML::encode(Yii::$app->params['title']['en']) ?>">
     <meta property="og:image"       content="<?= Yii::$app->params['social.image'] ?>">
     <meta property="og:site_name"   content="<?= HTML::encode(Yii::$app->params['name']) ?>">
     <meta property="og:description" content="<?= HTML::encode(Yii::$app->params['description.256']) ?>">
 
     <!-- VK tags -->
     <link rel="image_src" href="<?= Yii::$app->params['social.image'] ?>">
-    <meta name="title"    content="<?= HTML::encode(Yii::$app->params['title']['en']) ?>">
+    <meta name="title"    content="<?php echo $this->title ? HTML::encode($this->title) . ' &mdash; ' : ''?><?php echo HTML::encode(Yii::$app->params['title']['en']) ?>">
 
     <?= Html::csrfMetaTags() ?>
     <?php $this->head() ?>
@@ -88,7 +89,8 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => '<i class="fa fa-2x fa-plus-square"></i> Add Article', 'url' => ['/article/create'], 'encode' => false, 'options' => [ 'class' => 'link link-publish'] , 'icon'=>'dd'],
+            ['label' => '<i class="fa fa-2x fa-plus-square"></i> Add Article', 'url' => ['/article/create'], 'encode' => false, 'options' => [ 'class' => 'link link-publish']],
+            '<li class="link article-switch-languages js-article-switch-languages" title="Swap the original and the translation"><a class="btn"><i class="fa fa-2x fa-exchange"></i></a></li>',
         ]
     ]);
 
@@ -104,6 +106,8 @@ AppAsset::register($this);
     {
         $items[] = ['label' => '<i class="fa fa-2x fa-sign-in"></i> Login', 'url' => ['/login'], 'encode' => false, 'options' => [ 'class' => 'link']];
         $items[] = ['label' => '<i class="fa fa-2x fa-user-plus"></i> Signup', 'url' => ['/signup'], 'encode' => false, 'options' => [ 'class' => 'link']];
+        $items[] = ['label' => '<i class="fa fa-2x fa-github"></i> Diglot', 'url' => 'https://github.com/pvolyntsev/diglot', 'encode' => false, 'options' => [ 'class' => 'link']];
+        $items[] = BannerMenuWidget::widget();
     } else {
         $items[] = UserMenuWidget::widget();
         $items[] = '<li>'
@@ -152,8 +156,8 @@ AppAsset::register($this);
                 <ul>
                     <li class="brand-name"><i class="fa fa-copyright"></i> <?php echo Yii::$app->params['name'] ?> <?= date('Y') ?></li>
                     <li>&nbsp; <?= HTML::a('<i class="fa fa-plus-square"></i> Publish new Article or Translation', [ '/article/create' ]) ?></li>
-                    <li>&nbsp; <?= HTML::a('<i class="fa fa-file-text"></i> Terms', [ '/terms' ]) ?></li>
-                    <li>&nbsp; <?= HTML::a('<i class="fa fa-github"></i> GitHub Integration', [ '/github-integration' ]) ?></li>
+                    <?php /* <li>&nbsp; <?= HTML::a('<i class="fa fa-file-text"></i> Terms', [ '/terms' ]) ?></li> */ ?>
+                    <?php /* <li>&nbsp; <?= HTML::a('<i class="fa fa-github"></i> GitHub Integration', [ '/github-integration' ]) ?></li> */ ?>
                 </ul>
             </div>
             <div class="col col-md-4">

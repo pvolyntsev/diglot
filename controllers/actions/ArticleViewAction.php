@@ -23,7 +23,7 @@ class ArticleViewAction extends Action
 
     public function run()
     {
-        $articleKey = Yii::$app->requestedRoute . Yii::$app->request->url;
+        $articleKey = Yii::$app->requestedRoute . '/' . Yii::$app->request->pathInfo;
         $articles = Yii::$app->params['static.articles'];
 
         if (!isset($articles[$articleKey]))

@@ -3,8 +3,7 @@ use yii\widgets\ListView;
 use app\widgets\ParagraphWidget;
 use app\models\Article;
 use yii\helpers\Html;
-use yii\bootstrap\Alert;
-use yii\web\Session;
+use app\widgets\DilingvoWidget;
 
 /**
  * @var Article $model
@@ -18,7 +17,9 @@ $paragraphs = (1 == $page) ? array_slice($model->paragraphs, 0, 2) : array_slice
 $paragraphMode = 1 == $page ? ParagraphWidget::MODE_FULL : ParagraphWidget::MODE_COMPACT;
 $articleLink = ['article/view', 'id' => $model->id];
 ?>
-	<div class="row article-heading">
+    <div class="row article-heading">
+        <?php $widget = DilingvoWidget::begin(); ?>
+        <?php $widget->beginTranslation(); ?>
         <div class="col col-md-6 article-heading-title-translate">
             <h1>
                 <?php if (1 == $page) { ?>
@@ -30,6 +31,9 @@ $articleLink = ['article/view', 'id' => $model->id];
             </h1>
             <p class="author">Перевод <?php echo $model->translator_name ?></p>
         </div>
+        <?php $widget->endTranslation(); ?>
+
+        <?php $widget->beginOriginal(); ?>
         <div class="col col-md-6 article-heading-title-original">
             <h1>
                 <?php if (1 == $page) { ?>
@@ -41,6 +45,8 @@ $articleLink = ['article/view', 'id' => $model->id];
             </h1>
             <p class="author">By <?php echo $model->author_name ?></p>
         </div>
+        <?php $widget->endOriginal(); ?>
+        <?php DilingvoWidget::end(); ?>
     </div>
 
     <?php foreach($paragraphs as $paragraph) {?>

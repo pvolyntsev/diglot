@@ -43,8 +43,8 @@ $config = [
                 #'/contact' => 'site/contact',
                 '/about' => 'site/article',
                 '/terms' => 'site/article',
-                '/team' => 'site/article',
-                '/donate' => 'site/article',
+                '/team' => 'site/team',
+                '/donate' => 'site/donate',
                 '/github-integration' => 'site/article',
 
                 // Auth & user manager
@@ -53,13 +53,16 @@ $config = [
 				'/logout' => '/user/user/logout',
 				'/requestPasswordReset' => '/user/user/request-password-reset',
 				'/resetPassword' => '/user/user/reset-password',
-				#'/profile' => '/user/user/profile',
+                '/profile' => '/user/user/profile',
+                '/profile/photo?' => '/user/user/uploadPhoto',
 				'/retryConfirmEmail' => '/user/user/retry-confirm-email',
 				'/confirmEmail' => '/user/user/confirm-email',
 				'/unbind/<id:[\w\-]+>' => '/user/auth/unbind',
 				'/oauth/<authclient:[\w\-]+>' => '/user/auth/index',
-        '/user/admin' => '/user/admin/index',
-        '/user/admin/<action>' => '/user/admin/<action>',
+
+                '/user/admin' => '/user/admin/index',
+                '/user/admin/<action>' => '/user/admin/<action>',
+
 
                 // Public Profile
                 '/<username>/profile' => 'author-public/profile',
@@ -81,6 +84,7 @@ $config = [
                 '/article/<action>' => '/article/<action>',
 				'/article/add-comment' => '/article/addComment',
 				'/article/update-comment' => '/article/updateComment',
+				'/article/delete-comment' => '/article/DeleteComment',
                 '/article/<action>/<id:\d+>' => '/article/<action>',
                 '/search' => '/article/search',
 
@@ -127,9 +131,8 @@ $config = [
 	'modules' => [
 		'user' => [
 			'class' => 'budyaga\users\Module',
-			'userPhotoUrl' => 'http://www.diglot.example.com/upload/user',
-//			'userPhotoPath' => '@frontend/web/upload/user'
-		'userPhotoPath' => '/var/www/html/diglot/web/upload/user',
+			'userPhotoUrl' => '/upload/user',
+			'userPhotoPath' => dirname(__DIR__) . '/web/upload/user'
 		],
         'markdown' => [
             'class' => '\kartik\markdown\Module',
