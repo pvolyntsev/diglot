@@ -82,7 +82,7 @@ function update_comment(id,id_article)
       if (response!=null)
       {
         $('#comment_'+id).html(response);
-        alert ("Комментарий успешно изменен!");
+        swal("Comment is updated!", "You clicked the button!", "success");
       }
     }
   });
@@ -90,27 +90,30 @@ function update_comment(id,id_article)
 
 function delete_comment(id,id_article)
 {
-  $.ajax({
-    url:"delete-comment",
-    type:"POST",
-    data:{id:id,id_article:id_article},
-    datatype:"json",
-    // beforeSend:funcBefore,
-    // success:funcSuccess(id,response)
-    success:function (response)
-    {
-      if (response=='success')
+  swal({   title: "Are you sure?",   text: "Your will not be able to recover this comment!",   type: "warning",   showCancelButton: true,   confirmButtonColor: "#DD6B55",   confirmButtonText: "Yes, delete it!" }, function()
+  {
+    $.ajax({
+      url:"delete-comment",
+      type:"POST",
+      data:{id:id,id_article:id_article},
+      datatype:"json",
+      // beforeSend:funcBefore,
+      // success:funcSuccess(id,response)
+      success:function (response)
       {
-        $('#js-comments-recommended').hide();
-        $('#js-comments-page').show();
-        $('#js-comments-show-all').hide();
-        $.pjax.reload({container:"#comments_list"});  //Reload ListView
-        alert ("Комментарий успешно удален!");
+        if (response=='success')
+        {
+          $('#js-comments-recommended').hide();
+          $('#js-comments-page').show();
+          $('#js-comments-show-all').hide();
+          $.pjax.reload({container:"#comments_list"});  //Reload ListView
+          swal("Comment is deleted!", "You clicked the button!", "success")
+        }
+        else
+        {
+          sweetAlert("Oops...", "Something went wrong!", "error");
+        }
       }
-      else
-      {
-        alert ("Произошел сбой!");
-      }
-    }
+    });
   });
 }

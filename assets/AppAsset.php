@@ -23,12 +23,14 @@ class AppAsset extends AssetBundle
         'css/comments.css',
         'css/search.css',
         'css/profile.css',
+        'css/sweetalert.css',
         'https://maxcdn.icons8.com/fonts/line-awesome/css/line-awesome-font-awesome.min.css',
     ];
     public $js = [
         'js/application.js',
         'js/article.js',
         'js/comments.js',
+        'js/sweetalert.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

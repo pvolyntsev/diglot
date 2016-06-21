@@ -1,0 +1,58 @@
+{
+  "name": "sweetalert",
+  "version": "1.1.3",
+  "description": "A beautiful replacement for JavaScript's \"alert\"",
+  "main": "lib/sweetalert.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/t4t5/sweetalert"
+  },
+  "keywords": [
+    "sweetalert",
+    "alert",
+    "modal",
+    "popup"
+  ],
+  "author": {
+    "name": "Tristan Edwards",
+    "email": "tristan.edwards@me.com",
+    "url": "http://tristanedwards.me"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/t4t5/sweetalert/issues"
+  },
+  "homepage": "http://tristanedwards.me/sweetalert",
+  "devDependencies": {
+    "babelify": "^6.0.2",
+    "browserify": "^9.0.8",
+    "glob": "^5.0.3",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.2.1",
+    "gulp-concat": "^2.4.3",
+    "gulp-jshint": "^1.9.0",
+    "gulp-minify-css": "^0.3.13",
+    "gulp-qunit": "latest",
+    "gulp-rename": "^1.2.0",
+    "gulp-sass": "^2.0.1",
+    "gulp-uglify": "^1.0.2",
+    "gulp-wrap": "^0.11.0",
+    "path": "^0.11.14",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "readme": "SweetAlert [![Build Status](https://travis-ci.org/t4t5/sweetalert.svg?branch=master)](https://travis-ci.org/t4t5/sweetalert)\n==========\n\nAn awesome replacement for JavaScript's alert.\n\n![A success modal](https://raw.github.com/t4t5/sweetalert/master/sweetalert.gif)\n\n[See it in action!](http://t4t5.github.io/sweetalert)\n\n[Learn how to use it!](https://www.ludu.co/lesson/how-to-use-sweetalert)\n\n\nUsage\n-----\n\nYou can install SweetAlert through bower:\n\n```bash\nbower install sweetalert\n```\n\nOr through npm:\n\n```bash\nnpm install sweetalert\n```\n\nAlternatively, download the package and reference the JavaScript and CSS files manually:\n\n```html\n<script src=\"dist/sweetalert.min.js\"></script>\n<link rel=\"stylesheet\" type=\"text/css\" href=\"dist/sweetalert.css\">\n```\n**Note:** If you're using an older version than v1.0.0, the files are `lib/sweet-alert.min.js` and `lib/sweet-alert.css`\n\n\nTutorial\n--------\n\nThe easiest way to get started is follow the [SweetAlert tutorial on Ludu](https://www.ludu.co/lesson/how-to-use-sweetalert)!\n\n\nExamples\n--------\n\nThe most basic message:\n\n```javascript\nswal(\"Hello world!\");\n```\n\nA message signaling an error:\n\n```javascript\nswal(\"Oops...\", \"Something went wrong!\", \"error\");\n```\n\nA warning message, with a function attached to the \"Confirm\"-button:\n\n```javascript\nswal({\n  title: \"Are you sure?\",\n  text: \"You will not be able to recover this imaginary file!\",\n  type: \"warning\",\n  showCancelButton: true,\n  confirmButtonColor: \"#DD6B55\",\n  confirmButtonText: \"Yes, delete it!\",\n  closeOnConfirm: false,\n  html: false\n}, function(){\n  swal(\"Deleted!\",\n  \"Your imaginary file has been deleted.\",\n  \"success\");\n});\n```\n\nA prompt modal where the user's input is logged:\n\n```javascript\nswal({\n  title: \"An input!\",\n  text: 'Write something interesting:',\n  type: 'input',\n  showCancelButton: true,\n  closeOnConfirm: false,\n  animation: \"slide-from-top\"\n}, function(inputValue){\n  console.log(\"You wrote\", inputValue);\n});\n```\n\nAjax request example:\n\n```javascript\nswal({\n  title: 'Ajax request example',\n  text: 'Submit to run ajax request',\n  type: 'info',\n  showCancelButton: true,\n  closeOnConfirm: false,\n  disableButtonsOnConfirm: true,\n  confirmLoadingButtonColor: '#DD6B55'\n}, function(inputValue){\n  setTimeout(function() {\n    swal('Ajax request finished!');\n  }, 2000);\n});\n```\n\n[View more examples](http://t4t5.github.io/sweetalert)\n\n\nThemes\n------\n\nSweetAlert can easily be themed to fit your site's design. SweetAlert comes with three example themes that you can try out: **facebook**, **twitter** and **google**. They can be referenced right after the intial sweetalert-CSS:\n```html\n<link rel=\"stylesheet\" href=\"dist/sweetalert.css\">\n<link rel=\"stylesheet\" href=\"themes/twitter/twitter.css\">\n```\n\n\nBrowser compatibility\n---------------------\n\nSweetAlert works in most major browsers (yes, even IE). Some details:\n\n- **IE8**: (Dropped since v1.0.0-beta)\n- **IE9**: Works, but icons are not animated.\n- **IE10+**: Works!\n- **Safari 4+**: Works!\n- **Firefox 3+**: Works!\n- **Chrome 14+**: Works!\n- **Opera 15+**: Works!\n\n\nContributing\n------------\n\nIf you want to contribute:\n\n- Fork the repo\n\n- Make sure you have [Node](http://nodejs.org/), [NPM](https://www.npmjs.com/) and [Gulp](http://gulpjs.com/) installed. When in the SweetAlert directory, run `npm install` to install the dependencies. Then run `gulp` while working to automatically minify the SCSS and JS-files.\n\n- Keep in mind that SweetAlert uses Browserify in order to compile ES6-files. For easy debugging, make sure you reference the file `dist/sweetalert-dev.js` instead of `sweetalert.js`.\n\n- After you're done, make a pull request and wait for approval! :)\n\n\nRelated projects\n----------------\n\n* [SweetAlert for Android](https://github.com/pedant/sweet-alert-dialog)\n* [SweetAlert for Bootstrap](https://github.com/lipis/bootstrap-sweetalert)\n* [SweetAlert for AngularJS](https://github.com/oitozero/ngSweetAlert)\n* [SweetAlert for RubyOnRails](https://github.com/sharshenov/sweetalert-rails)\n",
+  "readmeFilename": "README.md",
+  "_id": "sweetalert@1.1.3",
+  "dist": {
+    "shasum": "1c739e1fa148d7da2334fb7d83ccdac03b564c42"
+  },
+  "_from": "sweetalert@",
+  "_resolved": "https://registry.npmjs.org/sweetalert/-/sweetalert-1.1.3.tgz"
+}
