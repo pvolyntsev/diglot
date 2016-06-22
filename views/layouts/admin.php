@@ -76,6 +76,8 @@ NavBar::end();
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
+                <li><?php echo Html::a("Users", ['/user/admin']) ?></li>
+                <li><?php echo Html::a("User Roles", ['/user/roles']) ?></li>
                 <li><?php echo Html::a("Banners", ['/banner']) ?></li>
                 <li><?php echo Html::a("Comments", ['/comment']) ?></li>
             </ul>

@@ -63,8 +63,11 @@ $config = [
 				'/unbind/<id:[\w\-]+>' => '/user/auth/unbind',
 				'/oauth/<authclient:[\w\-]+>' => '/user/auth/index',
 
+                // Admin Panel
                 '/user/admin' => '/user/admin/index',
                 '/user/admin/<action>' => '/user/admin/<action>',
+                '/user/roles' => '/user/rbac/index',
+                '/user/roles/<action>' => '/user/rbac/<action>',
 
 
                 // Public Profile
