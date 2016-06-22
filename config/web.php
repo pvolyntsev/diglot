@@ -15,9 +15,11 @@ $db = merge_configs(__DIR__ . '/db.php', __DIR__ . '/db.local.php');
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
+    'language' => 'en',
     'bootstrap' => ['log'],
     'components' => [
         'request' => [
+            'class' => 'app\components\LangRequest',
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'jAGgbpxexwgV7oInQ6yB0cdmKoYSmY7P',
         ],
@@ -46,6 +48,7 @@ $config = [
                 '/team' => 'site/team',
                 '/donate' => 'site/donate',
                 '/github-integration' => 'site/article',
+                'set' => 'lang/set',
 
                 // Auth & user manager
 				'/signup' => '/user/user/signup',
@@ -125,6 +128,19 @@ $config = [
             'nodes' => [
                 ['http_address' => 'inet[/127.0.0.1:9200]'],
                 // configure more hosts if you have a cluster
+            ],
+        ],
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/messages',
+                    'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'app'       => 'app.php',
+                        'app/error' => 'error.php',
+                    ],
+                ],
             ],
         ],
     ],
