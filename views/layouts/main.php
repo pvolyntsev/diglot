@@ -9,7 +9,7 @@ use yii\bootstrap\NavBar;
 use app\widgets\UserMenuWidget;
 use app\widgets\BannerMenuWidget;
 use app\widgets\ChangeLanguageWidget;
-use yii\widgets\Breadcrumbs;
+use app\widgets\BannerWidget;
 use app\assets\AppAsset;
 use yii\bootstrap\Alert;
 
@@ -144,9 +144,14 @@ AppAsset::register($this);
 		}
 	}
 	?>
+
+    <?php echo BannerWidget::widget(['position' => 'content.before']) ?>
+
     <div class="container">
         <?= $content ?>
     </div>
+
+    <?php echo BannerWidget::widget(['position' => 'content.after']) ?>
 </div>
 
 <footer class="footer">

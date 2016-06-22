@@ -10,7 +10,7 @@ use yii\bootstrap\Alert;
 use app\widgets\ContextMenuWidget;
 use app\widgets\UserMenuWidget;
 use app\widgets\BannerMenuWidget;
-use yii\widgets\Breadcrumbs;
+use app\widgets\BannerWidget;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
@@ -148,7 +148,11 @@ AppAsset::register($this);
     }
     ?>
 
+    <?php echo BannerWidget::widget(['position' => 'article.before']) ?>
+
     <?= $content ?>
+
+    <?php echo BannerWidget::widget(['position' => 'article.after']) ?>
 </div>
 
 <footer class="footer">

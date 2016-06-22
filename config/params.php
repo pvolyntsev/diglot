@@ -85,5 +85,9 @@ return [
     // banner positions and attributes
     'banner.positions' => [
         'footer.central.column' => [ 'format' => 'html/list' ],
+        'content.before' => [ 'format' => 'html/list' ],
+        'content.after' => [ 'format' => 'html/list' ],
+        'article.before' => [ 'format' => 'html/list' ],
+        'article.after' => [ 'format' => 'html/list' ],
     ]
 ];

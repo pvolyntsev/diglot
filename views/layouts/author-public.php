@@ -11,7 +11,7 @@ use yii\bootstrap\NavBar;
 use yii\bootstrap\Alert;
 use app\widgets\UserMenuWidget;
 use app\widgets\BannerMenuWidget;
-use yii\widgets\Breadcrumbs;
+use app\widgets\BannerWidget;
 use app\models\User;
 use app\assets\AppAsset;
 
@@ -268,9 +268,13 @@ AppAsset::register($this);
     }
     ?>
 
+    <?php echo BannerWidget::widget(['position' => 'content.before']) ?>
+
     <div class="container">
         <?= $content ?>
     </div>
+
+    <?php echo BannerWidget::widget(['position' => 'content.after']) ?>
 </div>
 
 <footer class="footer">
