@@ -8,6 +8,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use app\widgets\UserMenuWidget;
 use app\widgets\BannerMenuWidget;
+use app\widgets\ChangeLanguageWidget;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use yii\bootstrap\Alert;
@@ -89,23 +90,22 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => '<i class="fa fa-2x fa-plus-square"></i> Add Article', 'url' => ['/article/create'], 'encode' => false, 'options' => [ 'class' => 'link link-publish']],
-            '<li class="link article-switch-languages js-article-switch-languages" title="Swap the original and the translation"><a class="btn"><i class="fa fa-2x fa-exchange"></i></a></li>',
+            ['label' => '<i class="fa fa-2x fa-plus-square"></i>'. \Yii::t('app', 'ADD_ARTICLE'), 'url' => ['/article/create'], 'encode' => false, 'options' => [ 'class' => 'link link-publish'] , 'icon'=>'dd'],
         ]
     ]);
 
     $items = [
         '<li>'
             . Html::beginForm(['/search'], 'get', ['class' => 'navbar-form navbar-search-form'])
-            . Html::textInput('query','', ['placeholder' => 'Search...', 'class' => 'form-control' ])
+            . Html::textInput('query','', ['placeholder' => \Yii::t('app', 'SEARCH___'), 'class' => 'form-control' ])
             . Html::endForm()
         . '</li>'
     ];
 
     if (Yii::$app->user->isGuest)
     {
-        $items[] = ['label' => '<i class="fa fa-2x fa-sign-in"></i> Login', 'url' => ['/login'], 'encode' => false, 'options' => [ 'class' => 'link']];
-        $items[] = ['label' => '<i class="fa fa-2x fa-user-plus"></i> Signup', 'url' => ['/signup'], 'encode' => false, 'options' => [ 'class' => 'link']];
+        $items[] = ['label' => '<i class="fa fa-2x fa-sign-in"></i>'. \Yii::t('app', 'LOGIN'), 'url' => ['/login'], 'encode' => false, 'options' => [ 'class' => 'link']];
+        $items[] = ['label' => '<i class="fa fa-2x fa-user-plus"></i>'. \Yii::t('app', 'SIGNUP'), 'url' => ['/signup'], 'encode' => false, 'options' => [ 'class' => 'link']];
         $items[] = ['label' => '<i class="fa fa-2x fa-github"></i> Diglot', 'url' => 'https://github.com/pvolyntsev/diglot', 'encode' => false, 'options' => [ 'class' => 'link']];
         $items[] = BannerMenuWidget::widget();
     } else {
@@ -119,7 +119,7 @@ AppAsset::register($this);
                 . Html::endForm()
                 . '</li>';
     }
-
+    $items[] = ChangeLanguageWidget::widget();
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $items,
@@ -155,7 +155,7 @@ AppAsset::register($this);
             <div class="col col-md-4">
                 <ul>
                     <li class="brand-name"><i class="fa fa-copyright"></i> <?php echo Yii::$app->params['name'] ?> <?= date('Y') ?></li>
-                    <li>&nbsp; <?= HTML::a('<i class="fa fa-plus-square"></i> Publish new Article or Translation', [ '/article/create' ]) ?></li>
+                    <li>&nbsp; <?= HTML::a('<i class="fa fa-plus-square"></i>'. \Yii::t('app', 'PUBLISH_NEW_ARTICLE_TRANSLATE'), [ '/article/create' ]) ?></li>
                     <?php /* <li>&nbsp; <?= HTML::a('<i class="fa fa-file-text"></i> Terms', [ '/terms' ]) ?></li> */ ?>
                     <?php /* <li>&nbsp; <?= HTML::a('<i class="fa fa-github"></i> GitHub Integration', [ '/github-integration' ]) ?></li> */ ?>
                 </ul>
@@ -163,9 +163,9 @@ AppAsset::register($this);
             <div class="col col-md-4">
                 <ul>
                     <li>&nbsp;</li>
-                    <li><?= HTML::a('<i class="fa fa-info-circle"></i> About Diglot Service', [ '/about' ]) ?></li>
-                    <li><?= HTML::a('<i class="fa fa-group"></i> Team Behind Service', [ '/team' ]) ?></li>
-                    <li><?= HTML::a('<i class="fa fa-money"></i> Donate', [ '/donate' ]) ?></li>
+                    <li><?= HTML::a('<i class="fa fa-info-circle"></i>'. \Yii::t('app', 'ABOUT_DIGLOT_SERVICE'), [ '/about' ]) ?></li>
+                    <li><?= HTML::a('<i class="fa fa-group"></i>'. \Yii::t('app', 'TEAM_BEHIND_SERVICE'), [ '/team' ]) ?></li>
+                    <li><?= HTML::a('<i class="fa fa-money"></i>'. \Yii::t('app', 'DONATE'), [ '/donate' ]) ?></li>
                 </ul>
             </div>
             <div class="col col-md-4">
