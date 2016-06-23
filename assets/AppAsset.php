@@ -33,6 +33,5 @@ class AppAsset extends AssetBundle
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
-        'yii2mod\alert\AlertAsset',
     ];
 }

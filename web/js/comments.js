@@ -59,7 +59,7 @@ application.articleComments.ready = function($) {
 
 // attach ready event
 $(document)
-    .ready(application.articleComments.ready);
+  .ready(application.articleComments.ready);
 
 function funcSuccess(id,response)
 {
@@ -82,7 +82,7 @@ function update_comment(id,id_article)
       if (response!=null)
       {
         $('#comment_'+id).html(response);
-        swal("Comment is updated!", "You clicked the button!", "success");
+        alert ("Комментарий успешно изменен!");
       }
     }
   });
@@ -90,30 +90,27 @@ function update_comment(id,id_article)
 
 function delete_comment(id,id_article)
 {
-  swal({   title: "Are you sure?",   text: "Your will not be able to recover this comment!",   type: "warning",   showCancelButton: true,   confirmButtonColor: "#DD6B55",   confirmButtonText: "Yes, delete it!" }, function()
-  {
-    $.ajax({
-      url:"delete-comment",
-      type:"POST",
-      data:{id:id,id_article:id_article},
-      datatype:"json",
-      // beforeSend:funcBefore,
-      // success:funcSuccess(id,response)
-      success:function (response)
+  $.ajax({
+    url:"delete-comment",
+    type:"POST",
+    data:{id:id,id_article:id_article},
+    datatype:"json",
+    // beforeSend:funcBefore,
+    // success:funcSuccess(id,response)
+    success:function (response)
+    {
+      if (response=='success')
       {
-        if (response=='success')
-        {
-          $('#js-comments-recommended').hide();
-          $('#js-comments-page').show();
-          $('#js-comments-show-all').hide();
-          $.pjax.reload({container:"#comments_list"});  //Reload ListView
-          swal("Comment is deleted!", "You clicked the button!", "success")
-        }
-        else
-        {
-          sweetAlert("Oops...", "Something went wrong!", "error");
-        }
+        $('#js-comments-recommended').hide();
+        $('#js-comments-page').show();
+        $('#js-comments-show-all').hide();
+        $.pjax.reload({container:"#comments_list"});  //Reload ListView
+        alert ("Комментарий успешно удален!");
       }
-    });
+      else
+      {
+        alert ("Произошел сбой!");
+      }
+    }
   });
 }
