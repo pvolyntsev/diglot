@@ -9,18 +9,12 @@ use yii\web\Cookie;
 
 class BannerMenuWidget extends Widget
 {
-    protected $donateLinks = [
-        ['label' => '<i class="fa fa-2x fa-money"></i> Support Us', 'url' => ['/donate', '_utm' => 'support-us']],
-        ['label' => '<i class="fa fa-2x fa-money"></i> Donate', 'url' => ['/donate', '_utm' => 'donate']],
-        ['label' => '<i class="fa fa-2x fa-life-ring"></i> Help Us', 'url' => ['/donate', '_utm' => 'help-us']],
-        ['label' => '<i class="fa fa-2x fa-thumbs-up"></i> Support Us', 'url' => ['/donate', '_utm' => 'support-us-up']],
-    ];
-
     /**
      * Renders the widget.
      */
     public function run()
     {
+
         $index = Yii::$app->request->getCookies()->getValue('_sup');
         if (is_null($index))
         {
@@ -32,7 +26,12 @@ class BannerMenuWidget extends Widget
             ]);
             Yii::$app->response->getCookies()->add($cookie);
         }
-
-        return '<li class="link link-publish">' . Html::a($this->donateLinks[$index]['label'], $this->donateLinks[$index]['url'], [ 'encode' => false, 'options' => [ 'class' => 'link']]) . '</li>';
+        $donateLinks = [
+            ['label' => '<i class="fa fa-2x fa-money"></i>'.\Yii::t('app', 'SUPPORT_US'), 'url' => ['/donate', '_utm' => 'support-us']],
+            ['label' => '<i class="fa fa-2x fa-money"></i>'.\Yii::t('app', 'DONATE'), 'url' => ['/donate', '_utm' => 'donate']],
+            ['label' => '<i class="fa fa-2x fa-life-ring"></i>'.\Yii::t('app', 'HELP_US'), 'url' => ['/donate', '_utm' => 'help-us']],
+            ['label' => '<i class="fa fa-2x fa-thumbs-up"></i>'.\Yii::t('app', 'SUPPORT_US'), 'url' => ['/donate', '_utm' => 'support-us-up']],
+        ];
+        return '<li class="link link-publish">' . Html::a($donateLinks[$index]['label'], $donateLinks[$index]['url'], [ 'encode' => false, 'options' => [ 'class' => 'link']]) . '</li>';
     }
 }
