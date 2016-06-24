@@ -85,7 +85,7 @@ class SiteController extends Controller
                     //return StringHelper::truncateWords($model->title_translate, 50);
                 },
                 'link' => function ($model, $widget) {
-                    return Url::toRoute(['article/view', 'id' => $model->id, 'slug' => $model->slug], true); //, 'slug' => $model->slug
+                    return Url::toRoute(['article/view', 'id' => $model->id], true); //, 'slug' => $model->slug
                 },
                 'pubDate' => function ($model, $widget) {
                     $date = \DateTime::createFromFormat('Y-m-d H:i:s', $model->date_created);
