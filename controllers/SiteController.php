@@ -4,10 +4,8 @@ namespace app\controllers;
 
 use Yii;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
 use app\forms\ContactForm;
 use yii\helpers\Url;
-use yii\helpers\StringHelper;
 use \app\models;
 
 class SiteController extends Controller
@@ -59,8 +57,6 @@ class SiteController extends Controller
     {
         $dataProvider = new \yii\data\ActiveDataProvider([
             'query' => \app\models\Article::find()->where('status=:published', [':published'=>\app\models\Article::STATUS_PUBLISHED]),
-//            'pagination' => [
-//                'pageSize' => 10],
             'sort' => [
                 'defaultOrder' => [
                     'date_published' => SORT_DESC,
@@ -79,10 +75,6 @@ class SiteController extends Controller
                 'link' => Url::toRoute('/', true),
                 'description' => 'Статьи ',
                 'language' => Yii::$app->language
-//                'title_original' => '111',
-//                'title_translate' => '111',
-//                'link' => Url::toRoute('/', true),
-
             ],
             'items' => [
                 'title' => function ($model, $widget) {
