@@ -19,7 +19,8 @@
         "michelf/php-smartypants": "dev-lib",
         "kartik-v/yii2-markdown": "dev-master",
         "kartik-v/yii2-widget-alert": "*",
-        "yii2mod/yii2-sweet-alert": "*"
+        "yii2mod/yii2-sweet-alert": "*",
+        "zelenin/yii2-rss": "~0.1"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
