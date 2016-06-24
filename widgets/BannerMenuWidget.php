@@ -14,11 +14,10 @@ class BannerMenuWidget extends Widget
      */
     public function run()
     {
-
         $index = Yii::$app->request->getCookies()->getValue('_sup');
         if (is_null($index))
         {
-            $index = rand(0, count($this->donateLinks)-1);
+            $index = rand(0, 4-1);
             $cookie = new Cookie([
                 'name' => '_sup',
                 'value' => $index,
