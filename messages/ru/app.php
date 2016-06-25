@@ -12,6 +12,7 @@ return [
     'TEAM_BEHIND_SERVICE' => 'Команда',
     'SUPPORT_US' => 'Поддержите нас',
     'HELP_US' => 'Помогите нам',
+    'LOGOUT' => 'Выход',
 
 
 ];

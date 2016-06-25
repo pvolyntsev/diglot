@@ -104,8 +104,8 @@ AppAsset::register($this);
 
     if (Yii::$app->user->isGuest)
     {
-        $items[] = ['label' => '<i class="fa fa-2x fa-sign-in"></i>'. \Yii::t('app', 'LOGIN'), 'url' => ['/login'], 'encode' => false, 'options' => [ 'class' => 'link']];
-        $items[] = ['label' => '<i class="fa fa-2x fa-user-plus"></i>'. \Yii::t('app', 'SIGNUP'), 'url' => ['/signup'], 'encode' => false, 'options' => [ 'class' => 'link']];
+        $items[] = ['label' => '<i class="fa fa-2x fa-sign-in"></i> '. \Yii::t('app', 'LOGIN'), 'url' => ['/login'], 'encode' => false, 'options' => [ 'class' => 'link']];
+        $items[] = ['label' => '<i class="fa fa-2x fa-user-plus"></i> '. \Yii::t('app', 'SIGNUP'), 'url' => ['/signup'], 'encode' => false, 'options' => [ 'class' => 'link']];
         $items[] = ['label' => '<i class="fa fa-2x fa-github"></i> Diglot', 'url' => 'https://github.com/pvolyntsev/diglot', 'encode' => false, 'options' => [ 'class' => 'link']];
         $items[] = BannerMenuWidget::widget();
     } else {
@@ -113,7 +113,7 @@ AppAsset::register($this);
         $items[] = '<li>'
                 . Html::beginForm(['/logout'], 'post', ['class' => 'navbar-form navbar-login-form'])
                 . Html::submitButton(
-                    '<i class="fa fa-2x fa-sign-out"></i> Logout', // (' . Yii::$app->user->identity->username . ')
+                    '<i class="fa fa-2x fa-sign-out"></i> '. \Yii::t('app', 'LOGOUT'), // (' . Yii::$app->user->identity->username . ')
                     ['class' => 'btn btn-link']
                 )
                 . Html::endForm()
@@ -160,7 +160,7 @@ AppAsset::register($this);
             <div class="col col-md-4">
                 <ul>
                     <li class="brand-name"><i class="fa fa-copyright"></i> <?php echo Yii::$app->params['name'] ?> <?= date('Y') ?></li>
-                    <li>&nbsp; <?= HTML::a('<i class="fa fa-plus-square"></i>'. \Yii::t('app', 'PUBLISH_NEW_ARTICLE_TRANSLATE'), [ '/article/create' ]) ?></li>
+                    <li>&nbsp; <?= HTML::a('<i class="fa fa-plus-square"></i> '. \Yii::t('app', 'PUBLISH_NEW_ARTICLE_TRANSLATE'), [ '/article/create' ]) ?></li>
                     <?php /* <li>&nbsp; <?= HTML::a('<i class="fa fa-file-text"></i> Terms', [ '/terms' ]) ?></li> */ ?>
                     <?php /* <li>&nbsp; <?= HTML::a('<i class="fa fa-github"></i> GitHub Integration', [ '/github-integration' ]) ?></li> */ ?>
                 </ul>
@@ -168,9 +168,9 @@ AppAsset::register($this);
             <div class="col col-md-4">
                 <ul>
                     <li>&nbsp;</li>
-                    <li><?= HTML::a('<i class="fa fa-info-circle"></i>'. \Yii::t('app', 'ABOUT_DIGLOT_SERVICE'), [ '/about' ]) ?></li>
-                    <li><?= HTML::a('<i class="fa fa-group"></i>'. \Yii::t('app', 'TEAM_BEHIND_SERVICE'), [ '/team' ]) ?></li>
-                    <li><?= HTML::a('<i class="fa fa-money"></i>'. \Yii::t('app', 'DONATE'), [ '/donate' ]) ?></li>
+                    <li><?= HTML::a('<i class="fa fa-info-circle"></i> '. \Yii::t('app', 'ABOUT_DIGLOT_SERVICE'), [ '/about' ]) ?></li>
+                    <li><?= HTML::a('<i class="fa fa-group"></i> '. \Yii::t('app', 'TEAM_BEHIND_SERVICE'), [ '/team' ]) ?></li>
+                    <li><?= HTML::a('<i class="fa fa-money"></i> '. \Yii::t('app', 'DONATE'), [ '/donate' ]) ?></li>
                 </ul>
             </div>
             <div class="col col-md-4">

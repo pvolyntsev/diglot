@@ -12,6 +12,7 @@ return [
     'TEAM_BEHIND_SERVICE' => 'Team Behind Service',
     'SUPPORT_US' => 'Support us',
     'HELP_US' => 'Help us',
+    'LOGOUT' => 'Logout',
 
 
 ];
