@@ -94,15 +94,21 @@ $config = [
                 '/article/<action>/<id:\d+>' => '/article/<action>',
                 '/search' => '/article/search',
 
+				// control panel (adminka)
+				'/cp' => '/admin-panel/index',
+				
 				//comment
-				'/comment' => '/comment/index',
-				'/comment/<action>' => '/comment/<action>',
-				'/comment/<action>/<id:\d+>' => '/comment/<action>',
+				'/cp/comment' => '/comment/index',
+				'/cp/comment/<action>' => '/comment/<action>',
+				'/cp/comment/<action>/<id:\d+>' => '/comment/<action>',
 
                 // banners
-                '/banner' => '/banner/index',
-                '/banner/<action>' => '/banner/<action>',
-                '/banner/<action>/<id:\d+>' => '/banner/<action>',
+                '/cp/banner' => '/banner/index',
+                '/cp/banner/<action>' => '/banner/<action>',
+                '/cp/banner/<action>/<id:\d+>' => '/banner/<action>',
+				
+				// categories
+				// TODO
 			],
 		],
 		'authManager' => [
@@ -155,7 +161,7 @@ $config = [
 		],
         'markdown' => [
             'class' => '\kartik\markdown\Module',
-        ]
+        ],
     ],
     'params' => $params,
 

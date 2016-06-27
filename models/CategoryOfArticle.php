@@ -1,9 +1,6 @@
 <?php
-
 namespace app\models;
-
 use Yii;
-
 /**
  * This is the model class for table "category_of_article".
  *
@@ -23,7 +20,6 @@ class CategoryOfArticle extends \yii\db\ActiveRecord
     {
         return 'category_of_article';
     }
-
     /**
      * @inheritdoc
      */
@@ -37,7 +33,6 @@ class CategoryOfArticle extends \yii\db\ActiveRecord
             [['article_id'], 'exist', 'skipOnError' => true, 'targetClass' => Article::className(), 'targetAttribute' => ['article_id' => 'id']],
         ];
     }
-
     /**
      * @inheritdoc
      */
@@ -49,7 +44,6 @@ class CategoryOfArticle extends \yii\db\ActiveRecord
             'article_id' => 'Article ID',
         ];
     }
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -57,7 +51,6 @@ class CategoryOfArticle extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -65,7 +58,6 @@ class CategoryOfArticle extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Article::className(), ['id' => 'article_id']);
     }
-
     /**
      * @inheritdoc
      * @return CategoryOfArticleQuery the active query used by this AR class.

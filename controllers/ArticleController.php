@@ -9,6 +9,7 @@ use yii\filters\AccessControl;
 use app\models\Article;
 use app\models\Comment;
 use app\models\Paragraph;
+use app\models\Category;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -260,6 +261,10 @@ class ArticleController extends Controller
     {
         $model = $this->findModel($id);
         $paragraphs = $model->paragraphs;
+		$categories = [];
+		foreach ($model->categoryOfArticles as $articleCat)
+			$categories[] = $articleCat->category;
+					
         $this->view->params['article'] = $model;
 
         $status = Article::STATUS_DRAFT;
@@ -267,8 +272,9 @@ class ArticleController extends Controller
         if (!is_null(Yii::$app->request->post('publish')))
             $status = Article::STATUS_PUBLISHED;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $paragraphs = $model->updateParagraphs($_POST['Article']['paragraphs']);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) { //сохранение параметров отредактированной статьи
+            $paragraphs = $model->updateParagraphs($_POST['Article']['paragraphs']); //сохранение параграфов
+			$categories = $model->updateCategories($_POST['Article']['category']); //сохранение категорий
 
             if (Article::STATUS_PUBLISHED == $status && !$model->validateOnPublish())
             {
@@ -291,6 +297,7 @@ class ArticleController extends Controller
         return $this->render('update', [
             'model' => $model,
             'paragraphs' => $paragraphs,
+			'categories' => $categories, 
             'publishFailed' => $publishFailed,
         ]);
     }

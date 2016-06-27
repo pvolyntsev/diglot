@@ -4,16 +4,22 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\Article;
 use app\models\Paragraph;
+use app\models\Category;
 
 /* @var $this yii\web\View */
 /* @var $model Article */
 /* @var $paragraphs Paragraph[] */
+/* @var $categories Category[] */
 /* @var $form yii\widgets\ActiveForm */
 
 
 // получаем всех авторов
 $languages = \app\models\Language::find()->all();
 $languageItems = \yii\helpers\ArrayHelper::map($languages, 'id','language');
+
+// получаем все категории
+$categoriesRef = \app\models\Category::find()->all();
+$categoriesReference = \yii\helpers\ArrayHelper::map($categoriesRef, 'id','category');
 
 /*
 <script src="//cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"></script>
@@ -70,6 +76,20 @@ $languageItems = \yii\helpers\ArrayHelper::map($languages, 'id','language');
             <?php echo $form->field($model, 'translator_url')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<?php
+				$id[0] = isset($categories[0])? $categories[0]->id : '';
+				$id[1] = isset($categories[1])? $categories[1]->id : '';
+				$id[2] = isset($categories[2])? $categories[2]->id : '';
+			?>
+			<?php echo Html::dropDownList('Article[category][]', $id[0], $categoriesReference)?>
+			<?php echo Html::dropDownList('Article[category][]', $id[1], $categoriesReference)?>
+			<?php echo Html::dropDownList('Article[category][]', $id[2], $categoriesReference)?>
+				<!-- Html-хэлпер, указываем имя,Article[category][], потом допустимые значения 1,2,3 и их отображение-название    -->
+		</div>
+	</div>
 
     <div class="vertical spacer"></div>
 
