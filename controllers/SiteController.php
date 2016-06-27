@@ -7,6 +7,8 @@ use yii\web\Controller;
 use app\forms\ContactForm;
 use yii\helpers\Url;
 use \app\models;
+use samdark\sitemap\Sitemap;
+use samdark\sitemap\Index;
 
 class SiteController extends Controller
 {
@@ -28,6 +30,55 @@ class SiteController extends Controller
                 'view' => 'donate',
             ]
         ];
+    }
+
+    public function actionSitemap()
+    {
+        // create sitemap
+        $sitemap = new Sitemap(__DIR__ . '/sitemap.xml');
+
+        // add some URLs
+//                $sitemap->addItem('http://www.diglot.example.com/article');
+//                $sitemap->addItem('http://www.diglot.example.com/article', time());
+//                $sitemap->addItem('http://www.diglot.example.com/article', time(), Sitemap::HOURLY);
+        $sitemap->addItem('http://www.diglot.example.com/article', time(), Sitemap::DAILY, 0.3);
+
+        // write it
+        $sitemap->write();
+
+        // get URLs of sitemaps written
+        $sitemapFileUrls = $sitemap->getSitemapUrls('http://www.diglot.example.com/');
+
+        // create sitemap for static files
+        $staticSitemap = new Sitemap(__DIR__ . '/sitemap_static.xml');
+
+        // add some URLs
+//        $staticSitemap->addItem('http://example.com/about');
+//        $staticSitemap->addItem('http://example.com/tos');
+        $staticSitemap->addItem('http://www.diglot.example.com/team');
+//        $staticSitemap->addItem('http://www.diglot.example.com/sitemap');
+
+        // write it
+        $staticSitemap->write();
+
+        // get URLs of sitemaps written
+        $staticSitemapUrls = $staticSitemap->getSitemapUrls('http://www.diglot.example.com/');
+
+        // create sitemap index file
+        $index = new Index(__DIR__ . '/sitemap_index.xml');
+
+        // add URLs
+        foreach ($sitemapFileUrls as $sitemapUrl) {
+            $index->addSitemap($sitemapUrl);
+        }
+
+        // add more URLs
+        foreach ($staticSitemapUrls as $sitemapUrl) {
+            $index->addSitemap($sitemapUrl);
+        }
+
+        // write it
+        $index->write();
     }
 
     public function actionIndex()

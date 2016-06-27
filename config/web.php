@@ -39,7 +39,10 @@ $config = [
             'showScriptName' => false,     // Disable index.php
             'enablePrettyUrl' => true,     // Disable ?r= routes
             'enableStrictParsing' => false, // Only routes being listed in rules
+			'baseUrl' => 'http://www.diglot.example.com/',
 			'rules' => [
+				//sitemap
+					'/sitemap' => 'site/sitemap',
                 // Main page & static pages
                 '/' => '/article/index',
                 #'/contact' => 'site/contact',
@@ -103,6 +106,7 @@ $config = [
                 '/banner' => '/banner/index',
                 '/banner/<action>' => '/banner/<action>',
                 '/banner/<action>/<id:\d+>' => '/banner/<action>',
+				['pattern' => 'sitemap', 'route' => 'sitemap/default/index', 'suffix' => '.xml'],
 			],
 		],
 		'authManager' => [
@@ -155,7 +159,8 @@ $config = [
 		],
         'markdown' => [
             'class' => '\kartik\markdown\Module',
-        ]
+        ],
+
     ],
     'params' => $params,
 

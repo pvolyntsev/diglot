@@ -20,7 +20,9 @@
         "kartik-v/yii2-markdown": "dev-master",
         "kartik-v/yii2-widget-alert": "*",
         "yii2mod/yii2-sweet-alert": "*",
-        "zelenin/yii2-rss": "~0.1"
+        "zelenin/yii2-rss": "~0.1",
+        "himiklab/yii2-sitemap-module" : "*",
+        "samdark/sitemap":"*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
