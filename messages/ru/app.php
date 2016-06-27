@@ -10,7 +10,9 @@ return [
     'PUBLISH_NEW_ARTICLE_TRANSLATE' => 'Опубликовать статью или перевод',
     'ABOUT_DIGLOT_SERVICE' => 'Что такое Diglot',
     'TEAM_BEHIND_SERVICE' => 'Команда',
-    'DONATE' => 'Пожертвование',
+    'SUPPORT_US' => 'Поддержите нас',
+    'HELP_US' => 'Помогите нам',
+    'LOGOUT' => 'Выход',
 
 
 ];

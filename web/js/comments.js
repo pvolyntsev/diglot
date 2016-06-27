@@ -59,7 +59,7 @@ application.articleComments.ready = function($) {
 
 // attach ready event
 $(document)
-  .ready(application.articleComments.ready);
+    .ready(application.articleComments.ready);
 
 function funcSuccess(id,response)
 {

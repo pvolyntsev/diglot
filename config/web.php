@@ -39,7 +39,10 @@ $config = [
             'showScriptName' => false,     // Disable index.php
             'enablePrettyUrl' => true,     // Disable ?r= routes
             'enableStrictParsing' => false, // Only routes being listed in rules
+			'baseUrl' => 'http://www.diglot.example.com/',
 			'rules' => [
+				//sitemap
+					'/sitemap' => 'site/sitemap',
                 // Main page & static pages
                 '/' => '/article/index',
                 #'/contact' => 'site/contact',
@@ -109,6 +112,8 @@ $config = [
 				
 				// categories
 				// TODO
+
+				['pattern' => 'sitemap', 'route' => 'sitemap/default/index', 'suffix' => '.xml'],
 			],
 		],
 		'authManager' => [
