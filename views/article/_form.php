@@ -80,6 +80,7 @@ $categoriesReference = \yii\helpers\ArrayHelper::map($categoriesRef, 'id','categ
 	<div class="row">
 		<div class="col-md-12">
 			<?php
+			//var_dump($categories); exit;
 				$id[0] = isset($categories[0])? $categories[0]->id : '';
 				$id[1] = isset($categories[1])? $categories[1]->id : '';
 				$id[2] = isset($categories[2])? $categories[2]->id : '';
