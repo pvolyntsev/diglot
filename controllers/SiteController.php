@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\web\Response;
 use yii\web\Controller;
 use app\forms\ContactForm;
 use yii\helpers\Url;
@@ -107,7 +108,12 @@ class SiteController extends Controller
     public function actionRss()
     {
         $dataProvider = new \yii\data\ActiveDataProvider([
-            'query' => \app\models\Article::find()->where('status=:published', [':published'=>\app\models\Article::STATUS_PUBLISHED]),
+            'query' => models\Article::find()->where(
+                    'status=:published',
+                    [
+                        ':published' => models\Article::STATUS_PUBLISHED
+                    ]
+                ),
             'sort' => [
                 'defaultOrder' => [
                     'date_published' => SORT_DESC,
@@ -115,31 +121,47 @@ class SiteController extends Controller
             ],
         ]);
         $response = Yii::$app->getResponse();
-        $headers = $response->getHeaders();
-
-        $headers->set('Content-Type', 'application/rss+xml; charset=utf-8');
+        $response->format = Response::FORMAT_XML;
+        $response->formatters[Response::FORMAT_XML] = [
+            'class' => '\yii\web\XmlResponseFormatter',
+            'contentType' => 'application/rss+xml; charset=utf-8',
+        ];
 
         $response->content = \Zelenin\yii\extensions\Rss\RssView::widget([
             'dataProvider' => $dataProvider,
             'channel' => [
-                'title' => 'Diglot',
+                'title' => \Yii::$app->params['name'],
                 'link' => Url::toRoute('/', true),
-                'description' => 'Статьи ',
+                'description' => \Yii::$app->params['title']['en'] . "<br/>\n" . \Yii::$app->params['title']['ru'],
                 'language' => Yii::$app->language
             ],
             'items' => [
-                'title' => function ($model, $widget) {
-                    return $model->title_original;
+                'title' => function ($model, $widget, $feed) {
+                    /** @var models\Article $model */
+                    return $model->title_original . ($model->title_translate ? "<br/>\n" . $model->title_translate: '');
                 },
-                'description' => function ($model, $widget) {
-                    return $model->title_translate;
-                    //return StringHelper::truncateWords($model->title_translate, 50);
+                'description' => function ($model, $widget, $feed) {
+                    /** @var models\Article $model */
+                    $paragraphsHtml = '';
+                    foreach($model->paragraphs as $i => $paragraph)
+                    {
+                        $paragraphsHtml .= \app\widgets\ParagraphWidget::widget([
+                            'paragraph' => $paragraph,
+                            'outputFormat' => \app\widgets\ParagraphWidget::OUTPUT_FORMAT_RSS,
+                        ]);
+
+                        if ($i>2)
+                            break;
+                    }
+                    return $paragraphsHtml; //$model->title_translate;
                 },
-                'link' => function ($model, $widget) {
+                'link' => function ($model, $widget, $feed) {
+                    /** @var models\Article $model */
                     return Url::toRoute(['article/view', 'id' => $model->id], true); //, 'slug' => $model->slug
                 },
-                'pubDate' => function ($model, $widget) {
-                    $date = \DateTime::createFromFormat('Y-m-d H:i:s', $model->date_created);
+                'pubDate' => function ($model, $widget, $feed) {
+                    /** @var models\Article $model */
+                    $date = \DateTime::createFromFormat('Y-m-d H:i:s', $model->date_published);
                     return $date->format(DATE_RSS);
                 },
             ]
