@@ -30,7 +30,7 @@ class m160623_123913_add_category_table extends Migration
 		]);
 		$this->insert('category', [
             'id' => 6,
-            'category' => 'Time managenemt',
+            'category' => 'Time Management',
 		]);
 		$this->insert('category', [
             'id' => 7,
