@@ -38,10 +38,13 @@ $page = Yii::$app->request->get('page');
             <?php if ($model->url_translate) { ?>
                 <a class="permalink" href="<?php echo $model->url_translate ?>"><?php echo $model->url_translate ?></a>
             <?php } ?>
-            <?php
 
-            if ((!empty($model->translator_url) or (!empty($model->translator_name)))) { ?>
-                <p class="author">Перевод <a href="<?php echo empty($model->translator_url)?'#':$model->translator_url; ?>"><?php echo empty($model->translator_name)?$model->translator_url:$model->translator_name; ?></a></p>
+            <?php if ($model->translator_url && $model->translator_name) { ?>
+                <p class="author">Перевод <a href="<?php echo $model->translator_url ?>"><?php echo $model->translator_name ?></a></p>
+            <?php } elseif ($model->translator_name) { ?>
+                <p class="author">Перевод <?php echo $model->translator_name ?></p>
+            <?php } elseif ($model->translator_url) { ?>
+                <p class="author">Перевод <a href="<?php echo $model->translator_url ?>"><?php echo parse_url($model->translator_url, PHP_URL_HOST) ?></a></p>
             <?php } ?>
         </div>
         <?php $widget->endTranslation(); ?>
@@ -54,8 +57,13 @@ $page = Yii::$app->request->get('page');
             <?php if ($model->url_original) { ?>
                 <a class="permalink" href="<?php echo $model->url_original ?>"><?php echo $model->url_original ?></a>
             <?php } ?>
-            <?php if ((!empty($model->author_url) or (!empty($model->author_name)))) { ?>
-                <p class="author">By <a href="<?php echo empty($model->author_url)?'#':$model->author_url; ?>"><?php echo empty($model->author_name)?$model->author_url:$model->author_name; ?></a></p>
+
+            <?php if ($model->author_url && $model->translator_name) { ?>
+                <p class="author">By <a href="<?php echo $model->author_url ?>"><?php echo $model->author_name ?></a></p>
+            <?php } elseif ($model->author_name) { ?>
+                <p class="author">By <?php echo $model->author_name ?></p>
+            <?php } elseif ($model->author_url) { ?>
+                <p class="author">By <a href="<?php echo $model->author_url ?>"><?php echo parse_url($model->translator_url, PHP_URL_HOST) ?></a></p>
             <?php } ?>
         </div>
         <?php $widget->endOriginal(); ?>
