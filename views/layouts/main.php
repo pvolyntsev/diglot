@@ -22,7 +22,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--  RSS Feed  -->
-    <link rel="alternate" type="application/rss+xml" title="Your bilingual books and articles shelf. English and Russian." href="/site/rss" />
+    <link rel="alternate" type="application/rss+xml" title="<?php echo HTML::encode(Yii::$app->params['title']['en']) ?>" href="/site/rss" />
 
 
     <!-- Favicon -->
