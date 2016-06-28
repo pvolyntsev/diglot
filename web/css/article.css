@@ -65,9 +65,10 @@
 .horizontal.divider {
     border-top: 1px solid rgba(0,0,0,0.5);
 }
-.article-draft {					/* для статей со статусом draft */
-	background-color: orange; 
-	text-align: center;
+.article-draft { /* для статей со статусом draft */
+    background-color: orange;
+    text-align: center;
+}
 
 .article-meta { /* метаданные о статье */
     color: #333;
