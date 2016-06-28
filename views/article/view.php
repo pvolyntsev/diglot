@@ -35,17 +35,6 @@ $page = Yii::$app->request->get('page');
             <h1><?php echo $model->title_translate ?>
                 <span class="label"><?php echo $model->langTranslate->language ?></span>
             </h1>
-            <?php if ($model->url_translate) { ?>
-                <a class="permalink" href="<?php echo $model->url_translate ?>"><?php echo $model->url_translate ?></a>
-            <?php } ?>
-
-            <?php if ($model->translator_url && $model->translator_name) { ?>
-                <p class="author">Перевод <a href="<?php echo $model->translator_url ?>"><?php echo $model->translator_name ?></a></p>
-            <?php } elseif ($model->translator_name) { ?>
-                <p class="author">Перевод <?php echo $model->translator_name ?></p>
-            <?php } elseif ($model->translator_url) { ?>
-                <p class="author">Перевод <a href="<?php echo $model->translator_url ?>"><?php echo parse_url($model->translator_url, PHP_URL_HOST) ?></a></p>
-            <?php } ?>
         </div>
         <?php $widget->endTranslation(); ?>
 
@@ -54,17 +43,6 @@ $page = Yii::$app->request->get('page');
             <h1><?php echo $model->title_original ?>
                 <span class="label"><?php echo $model->langOriginal->language ?></span>
             </h1>
-            <?php if ($model->url_original) { ?>
-                <a class="permalink" href="<?php echo $model->url_original ?>"><?php echo $model->url_original ?></a>
-            <?php } ?>
-
-            <?php if ($model->author_url && $model->translator_name) { ?>
-                <p class="author">By <a href="<?php echo $model->author_url ?>"><?php echo $model->author_name ?></a></p>
-            <?php } elseif ($model->author_name) { ?>
-                <p class="author">By <?php echo $model->author_name ?></p>
-            <?php } elseif ($model->author_url) { ?>
-                <p class="author">By <a href="<?php echo $model->author_url ?>"><?php echo parse_url($model->translator_url, PHP_URL_HOST) ?></a></p>
-            <?php } ?>
         </div>
         <?php $widget->endOriginal(); ?>
         <?php DilingvoWidget::end(); ?>
@@ -72,6 +50,42 @@ $page = Yii::$app->request->get('page');
         <div class="article-switch-languages js-article-switch-languages" title="Swap the original and the translation"><a class="btn"><i class="fa fa-exchange"></i></a></div>
     </div>
     <div class="row article-heading article-meta">
+        <div class="article-author">
+            <?php $widget = DilingvoWidget::begin(); ?>
+            <?php $widget->beginTranslation(); ?>
+            <div class="col col-md-6 article-heading-title-translate">
+                <?php if ($model->url_translate) { ?>
+                    <a class="permalink" href="<?php echo $model->url_translate ?>"><?php echo $model->url_translate ?></a>
+                <?php } ?>
+
+                <?php if ($model->translator_url && $model->translator_name) { ?>
+                    <p class="author">Перевод <a href="<?php echo $model->translator_url ?>"><?php echo $model->translator_name ?></a></p>
+                <?php } elseif ($model->translator_name) { ?>
+                    <p class="author">Перевод <?php echo $model->translator_name ?></p>
+                <?php } elseif ($model->translator_url) { ?>
+                    <p class="author">Перевод <a href="<?php echo $model->translator_url ?>"><?php echo parse_url($model->translator_url, PHP_URL_HOST) ?></a></p>
+                <?php } ?>
+            </div>
+            <?php $widget->endTranslation(); ?>
+
+            <?php $widget->beginOriginal(); ?>
+            <div class="col col-md-6 article-heading-title-original">
+                <?php if ($model->url_original) { ?>
+                    <a class="permalink" href="<?php echo $model->url_original ?>"><?php echo $model->url_original ?></a>
+                <?php } ?>
+
+                <?php if ($model->author_url && $model->translator_name) { ?>
+                    <p class="author">By <a href="<?php echo $model->author_url ?>"><?php echo $model->author_name ?></a></p>
+                <?php } elseif ($model->author_name) { ?>
+                    <p class="author">By <?php echo $model->author_name ?></p>
+                <?php } elseif ($model->author_url) { ?>
+                    <p class="author">By <a href="<?php echo $model->author_url ?>"><?php echo parse_url($model->translator_url, PHP_URL_HOST) ?></a></p>
+                <?php } ?>
+            </div>
+            <?php $widget->endOriginal(); ?>
+            <?php DilingvoWidget::end(); ?>
+        </div>
+
         <?php if (count($model->categories)) { ?>
             <div class="article-categories">
                 <?php foreach($model->categories as $category) { ?>
