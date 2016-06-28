@@ -13,8 +13,8 @@ return [
     'SUPPORT_US' => 'Поддержите нас',
     'HELP_US' => 'Помогите нам',
     'LOGOUT' => 'Выход',
-
-
+    'CATEGORY' => 'Категория',
+    'CHOOSE_CATEGORY' => 'Выбери категорию',
     'CATEGORY_Design' => 'Дизайн',
     'CATEGORY_Development' => 'Разработка',
     'CATEGORY_User Interface (UI)' => 'User Interface (UI)',

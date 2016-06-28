@@ -13,8 +13,8 @@ return [
     'SUPPORT_US' => 'Support us',
     'HELP_US' => 'Help us',
     'LOGOUT' => 'Logout',
-
-
+    'CATEGORY' => 'Category',
+    'CHOOSE_CATEGORY' => 'Choose Category',
     'CATEGORY_Design' => 'Design',
     'CATEGORY_Development' => 'Development',
     'CATEGORY_User Interface (UI)' => 'User Interface (UI)',
