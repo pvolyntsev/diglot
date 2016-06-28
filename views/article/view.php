@@ -71,6 +71,16 @@ $page = Yii::$app->request->get('page');
 
         <div class="article-switch-languages js-article-switch-languages" title="Swap the original and the translation"><a class="btn"><i class="fa fa-exchange"></i></a></div>
     </div>
+    <div class="row article-heading article-meta">
+        <?php if (count($model->categories)) { ?>
+            <div class="article-categories">
+                <?php foreach($model->categories as $category) { ?>
+                    <div class="article-category"><a href="#"><?php echo Yii::t('app', 'CATEGORY_' . $category->category) ?></a></div>
+                <?php } ?>
+            </div>
+        <?php } ?>
+    </div>
+
     <div class="vertical spacer"></div>
 
 	<?php if (Article::STATUS_DRAFT == $model->status) {
@@ -83,6 +93,16 @@ $page = Yii::$app->request->get('page');
             <?php echo ParagraphWidget::widget(['paragraph' => $paragraph, 'mode' => $paragraphMode, 'link' => $articleLink]) ?>
         </div>
     <?php } ?>
+
+    <div class="row article-footer article-meta">
+        <?php if (count($model->categories)) { ?>
+            <div class="article-categories">
+                <?php foreach($model->categories as $category) { ?>
+                    <div class="article-category"><a href="#"><?php echo Yii::t('app', 'CATEGORY_' . $category->category) ?></a></div>
+                <?php } ?>
+            </div>
+        <?php } ?>
+    </div>
 
     <div class="row article-footnote">
         <div class="col col-md-1"></div>
