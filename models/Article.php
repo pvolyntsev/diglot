@@ -318,6 +318,24 @@ class Article extends \yii\db\ActiveRecord
         return $updatedParagraphs;
     }
 
+	public function updateCategories($categories)
+    {
+		foreach ($this->categoryOfArticles as $articleCat)		
+			$articleCat->delete(); //удалить старые категории, которые были присвоены статье ранее
+		
+		$articleCats = [];
+		
+		foreach ($categories as $articleCat) { //присвоить и сохранить новые категории
+			$category = new CategoryOfArticle();
+			$category->attributes = [
+				'category_id' => $articleCat,
+				'article_id' => $this->id
+				];
+            $category->save();
+        }
+		
+		return $articleCats;
+	}
     /**
      * Check if article is ready to be published
      * @return bool

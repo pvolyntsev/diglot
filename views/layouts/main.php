@@ -21,6 +21,9 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--  RSS Feed  -->
+    <link rel="alternate" type="application/rss+xml" title="<?php echo HTML::encode(Yii::$app->params['title']['en']) ?>" href="/site/rss" />
+
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">

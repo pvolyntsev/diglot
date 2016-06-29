@@ -80,6 +80,7 @@ NavBar::end();
                 <li><?php echo Html::a("User Roles", ['/user/roles']) ?></li>
                 <li><?php echo Html::a("Banners", ['/banner']) ?></li>
                 <li><?php echo Html::a("Comments", ['/comment']) ?></li>
+				<li><?php echo Html::a("Category", ['/category']) ?></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

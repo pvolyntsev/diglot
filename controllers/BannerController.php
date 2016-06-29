@@ -34,7 +34,7 @@ class BannerController extends Controller
                     [
                         'allow' => true,
                         'actions' => ['index', 'create', 'view', 'update', 'delete'],
-                        'roles' => ['bannerManager'],
+                        //'roles' => ['bannerManager'],
                     ],
                 ],
             ],

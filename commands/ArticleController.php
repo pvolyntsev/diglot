@@ -31,7 +31,8 @@ class ArticleController extends Controller
                 var_export($article->errors);
                 return -1;
             }
-            for($j=0; $j<$paragraphs; $j++)
+			
+			for($j=0; $j<$paragraphs; $j++)
             {
                 $paragraph = new \app\models\Paragraph;
                 $paragraph->article_id = $article->id;
@@ -45,6 +46,19 @@ class ArticleController extends Controller
                     return -1;
                 }
             }
+			
+			for ($nCat = 1; $nCat <= 3; $nCat++) //привязываем созданную статью к трём категориям
+			{
+				$articleCat = new \app\models\CategoryOfArticle;
+				$articleCat->category_id = $nCat;
+				$articleCat->article_id = $article->id;
+			}
+			if (!$articleCat->save())
+			{
+				echo "Error during category add: ";
+                var_export($articleCat->errors);
+                return -1;
+			}
 
             echo 'Added article #', $article->id, ' title_original="', $article->title_original, '" title_translate="', $article->title_translate, '"', PHP_EOL;
         }

@@ -5,6 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Article */
 /* @var $paragraphs app\models\Paragraph[] */
+/* @var $categories app\models\Category[] */
 /* @var $publishFailed bool */
 
 $this->title = 'Update Article: ' . $model->id;
@@ -27,6 +28,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <?= $this->render('_form', [
         'model' => $model,
         'paragraphs' => $paragraphs,
+		'categories' => $categories,
     ]) ?>
 
 </div>

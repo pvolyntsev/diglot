@@ -13,6 +13,19 @@ return [
     'SUPPORT_US' => 'Support us',
     'HELP_US' => 'Help us',
     'LOGOUT' => 'Logout',
-
-
+    'CATEGORY' => 'Category',
+    'CHOOSE_CATEGORY' => 'Choose Category',
+    'CATEGORY_Design' => 'Design',
+    'CATEGORY_Development' => 'Development',
+    'CATEGORY_User Interface (UI)' => 'User Interface (UI)',
+    'CATEGORY_Startups' => 'Startups',
+    'CATEGORY_Management' => 'Management',
+    'CATEGORY_Time Management' => 'Time Management',
+    'CATEGORY_Marketing' => 'Marketing',
+    'CATEGORY_Web Analytics' => 'Web Analytics',
+    'CATEGORY_Productivity' => 'Productivity',
+    'CATEGORY_User Experience (UX)' => 'User Experience (UX)',
+    'CATEGORY_Growth Hack' => 'Growth Hack',
+    'CATEGORY_Mobile' => 'Mobile',
+    'CATEGORY_Web Development' => 'Web Development',
 ];

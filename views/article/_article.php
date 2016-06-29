@@ -29,7 +29,14 @@ $articleLink = ['article/view', 'id' => $model->id];
                 <?php } ?>
                 <span class="label"><?php echo $model->langTranslate->language ?></span>
             </h1>
-            <p class="author">Перевод <?php echo $model->translator_name ?></p>
+
+            <?php if ($model->translator_url && $model->translator_name) { ?>
+                <p class="author">Перевод <a href="<?php echo $model->translator_url ?>"><?php echo $model->translator_name ?></a></p>
+            <?php } elseif ($model->translator_name) { ?>
+                <p class="author">Перевод <?php echo $model->translator_name ?></p>
+            <?php } elseif ($model->translator_url) { ?>
+                <p class="author">Перевод <a href="<?php echo $model->translator_url ?>"><?php echo parse_url($model->translator_url, PHP_URL_HOST) ?></a></p>
+            <?php } ?>
         </div>
         <?php $widget->endTranslation(); ?>
 
@@ -43,7 +50,14 @@ $articleLink = ['article/view', 'id' => $model->id];
                 <?php } ?>
                 <span class="label"><?php echo $model->langOriginal->language ?></span>
             </h1>
-            <p class="author">By <?php echo $model->author_name ?></p>
+
+            <?php if ($model->author_url && $model->translator_name) { ?>
+                <p class="author">By <a href="<?php echo $model->author_url ?>"><?php echo $model->author_name ?></a></p>
+            <?php } elseif ($model->author_name) { ?>
+                <p class="author">By <?php echo $model->author_name ?></p>
+            <?php } elseif ($model->author_url) { ?>
+                <p class="author">By <a href="<?php echo $model->author_url ?>"><?php echo parse_url($model->translator_url, PHP_URL_HOST) ?></a></p>
+            <?php } ?>
         </div>
         <?php $widget->endOriginal(); ?>
         <?php DilingvoWidget::end(); ?>
