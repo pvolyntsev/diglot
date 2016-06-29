@@ -51,6 +51,8 @@ $config = [
         ],
         'urlManager' => [
             'scriptUrl' => $params['domain'],
+//			'baseUrl' => 'http://www.diglot.example.com/',
+			'baseUrl' => 'http://l.diglot.copist.ru/',
         ],
         'db' => $db,
         'elasticsearch' => [

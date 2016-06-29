@@ -1,58 +1,60 @@
 <?php
 
-namespace app\controllers;
+namespace app\commands;
 
 use Yii;
-use yii\web\Controller;
-use app\forms\ContactForm;
+use yii\console\Controller;
 use yii\helpers\Url;
 use \app\models;
 use samdark\sitemap\Sitemap;
 use samdark\sitemap\Index;
 
-class SiteController extends Controller
+class SitemapcronController extends Controller
 {
-    public function actions()
+    public function actionSitemap()
     {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
-            'article' => [
-                'class' => '\app\controllers\actions\ArticleViewAction',
-            ],
-            'donate' => [
-                'class' => '\app\controllers\actions\ArticleViewAction',
-                'view' => 'donate',
-            ]
-        ];
-    }
+        // create sitemap
+        $sitemap = new Sitemap('web/sitemap.xml');
 
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
+        // add some URLs
+//                $sitemap->addItem('http://www.diglot.example.com/article');
+//                $sitemap->addItem('http://www.diglot.example.com/article', time());
+//                $sitemap->addItem('http://www.diglot.example.com/article', time(), Sitemap::HOURLY);
+        $sitemap->addItem('http://l.diglot.copist.ru/article', time(), Sitemap::DAILY, 0.3);
 
-    public function actionTeam()
-    {
-        return $this->render('team');
-    }
+        // write it
+        $sitemap->write();
 
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
+        // get URLs of sitemaps written
+        $sitemapFileUrls = $sitemap->getSitemapUrls('http://l.diglot.copist.ru/');
 
-            return $this->refresh();
+        // create sitemap for static files
+        $staticSitemap = new Sitemap('web/sitemap_static.xml');
+
+        // add some URLs
+        $staticSitemap->addItem('http://l.diglot.copist.ru/team');
+
+        // write it
+        $staticSitemap->write();
+
+        // get URLs of sitemaps written
+        $staticSitemapUrls = $staticSitemap->getSitemapUrls('http://l.diglot.copist.ru/');
+
+        // create sitemap index file
+        $index = new Index('web/sitemap_index.xml');
+
+        // add URLs
+        foreach ($sitemapFileUrls as $sitemapUrl) {
+            $index->addSitemap($sitemapUrl);
         }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
+
+        // add more URLs
+        foreach ($staticSitemapUrls as $sitemapUrl) {
+            $index->addSitemap($sitemapUrl);
+        }
+
+        // write it
+        $index->write();
     }
 
     public function actionRss()
