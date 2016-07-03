@@ -12,6 +12,7 @@ class m160520_150339_create_news_article extends Migration
      * @inheritdoc
      */
     public function up()
+<<<<<<< Updated upstream
     {
         $articleTemp = require (__DIR__ . '/../assets/fixtures/article/over-thinking_and_knowing_too_much_to_just_code/article.php');
         $paragraphsTemp = require (__DIR__ . '/../assets/fixtures/article/over-thinking_and_knowing_too_much_to_just_code/paragraphs.php');
@@ -56,6 +57,30 @@ class m160520_150339_create_news_article extends Migration
                 return false;
             }
         }
+=======
+    {	
+		$this->insert('article', [
+			'id' => 1,
+			'title_original' => 'Analysis Paralysis: Over-thinking and Knowing Too Much to Just CODE',
+			'url_original' => 'http://www.hanselman.com/blog/AnalysisParalysisOverthinkingAndKnowingTooMuchToJustCODE.aspx',
+			'title_translate' => 'Паралич анализа: вы знаете слишком много, чтобы просто писать код',
+			'url_translate' => 'https://habrahabr.ru/post/218345/',
+			'status' => 'published',
+			'date_created' => 1463696151,
+			'date_modified' => 1463696151,
+			'date_deleted' => NULL,
+			'date_published' => 1463696151,
+			'user_id' => 1,
+			'author_name' => 'Scott Hanselman',
+			'author_url' => 'http://hanselman.com/about',
+			'own_original' => false,
+			'translator_name' => '@a553',
+			'translator_url' => 'https://habrahabr.ru/users/a553/',
+			'own_translate' => false,
+			'lang_original_id' => 1,
+			'lang_transtate_id' => 2,
+		]);
+>>>>>>> Stashed changes
     }
 
     /**
@@ -63,11 +88,17 @@ class m160520_150339_create_news_article extends Migration
      */
     public function down()
     {
+<<<<<<< Updated upstream
         $articleTemp = require (__DIR__ . '/../assets/fixtures/article/over-thinking_and_knowing_too_much_to_just_code/article.php');
 
         $article = \app\models\Article::findOne([
             'title_original' => $articleTemp->title_original,
             'user_id' => $articleTemp->user_id,
+=======
+        $this->delete('article', [
+            'title_original' => 'Analysis Paralysis: Over-thinking and Knowing Too Much to Just CODE',
+			'user_id' => 1
+>>>>>>> Stashed changes
         ]);
         if ($article) {
             \app\models\Paragraph::deleteAll(['article_id' => $article->id]);
