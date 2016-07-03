@@ -16,11 +16,19 @@ class SitemapcronController extends Controller
         // create sitemap
         $sitemap = new Sitemap('web/sitemap.xml');
 
-        // add some URLs
-//                $sitemap->addItem('http://www.diglot.example.com/article');
-//                $sitemap->addItem('http://www.diglot.example.com/article', time());
-//                $sitemap->addItem('http://www.diglot.example.com/article', time(), Sitemap::HOURLY);
-        $sitemap->addItem('http://l.diglot.copist.ru/article', time(), Sitemap::DAILY, 0.3);
+        //Find all articles which are published
+        $articles_published=\app\models\Article::find()
+            ->where('status=:published', [':published'=>\app\models\Article::STATUS_PUBLISHED])
+            ->all();
+        foreach ($articles_published as $article_published)
+        {
+            // add some URLs
+            $sitemap->addItem('http://l.diglot.copist.ru/article/view?id='.$article_published["id"], time(), Sitemap::MONTHLY, 0.9);
+        }
+
+
+        // add some more URLs
+        $sitemap->addItem('http://l.diglot.copist.ru/article', time(), Sitemap::DAILY, 0.8);
 
         // write it
         $sitemap->write();
