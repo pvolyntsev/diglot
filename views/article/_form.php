@@ -88,10 +88,9 @@ $categoriesReference = array_merge(['' => '(' . Yii::t('app', 'CHOOSE_CATEGORY')
                 $id[1] = isset($categories[1])? $categories[1]->id : '';
                 $id[2] = isset($categories[2])? $categories[2]->id : '';
             ?>
-            <?php echo Html::dropDownList('Article[category][]', $id[0], $categoriesReference, ['id' => 'article-category-0'])?>
+			<?php echo Html::dropDownList('Article[category][]', $id[0], $categoriesReference, ['id' => 'article-category-0'])?>
             <?php echo Html::dropDownList('Article[category][]', $id[1], $categoriesReference, ['id' => 'article-category-1'])?>
             <?php echo Html::dropDownList('Article[category][]', $id[2], $categoriesReference, ['id' => 'article-category-2'])?>
-                <!-- Html-хэлпер, указываем имя,Article[category][], потом допустимые значения 1,2,3 и их отображение-название    -->
         </div>
     </div>
 
