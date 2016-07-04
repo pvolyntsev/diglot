@@ -2,7 +2,7 @@
 
 return (object)(array(
     'id' => -3,
-    'title_original' => 'how to debug your brain',
+    'title_original' => 'How to debug your brain',
     'url_original' => 'http://oliveremberton.com/2014/how-to-debug-your-brain/',
     'title_translate' => 'Как отлаживать свой мозг',
     'url_translate' => 'https://habrahabr.ru/post/240935/',
