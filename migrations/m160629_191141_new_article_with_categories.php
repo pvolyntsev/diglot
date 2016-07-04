@@ -15,7 +15,7 @@ class m160629_191141_new_article_with_categories extends Migration
     {
         $articleTemp = require (__DIR__ . '/../assets/fixtures/article/how_to_debug_your_brain/article.php');
         $paragraphsTemp = require (__DIR__ . '/../assets/fixtures/article/how_to_debug_your_brain/paragraphs.php');
-		$categoriesTemp = require (__DIR__ . '/../assets/fixtures/article/how_to_debug_your_brain/categories.php');
+        $categoriesTemp = require (__DIR__ . '/../assets/fixtures/article/how_to_debug_your_brain/categories.php');
 
         $article = Article::findOne([
             'title_original' => $articleTemp->title_original,
@@ -23,8 +23,7 @@ class m160629_191141_new_article_with_categories extends Migration
         ]);
         if (!$article)
             $article = new Article;
-		
-		//$article->id = $articleTemp->id;
+
         $article->title_original = $articleTemp->title_original;
         $article->url_original = $articleTemp->url_original;
         $article->title_translate = $articleTemp->title_translate;
@@ -49,6 +48,7 @@ class m160629_191141_new_article_with_categories extends Migration
             return false;
         }
 
+        Paragraph::deleteAll(['article_id' => $article->id]);
         $sortorder = 0;
         foreach($paragraphsTemp as $paragraphTemp)
         {
@@ -64,48 +64,23 @@ class m160629_191141_new_article_with_categories extends Migration
                 return false;
             }
         }
-		/*
-		$catIdDev = $categoriesTemp[0];
-		$catIdProd = $categoriesTemp[1];
-		$catIdTime = $categoriesTemp[2];
-		
-		$catId_1 = Yii::$app->db->createCommand("SELECT `id` FROM `category` WHERE `category` = '$catIdDev'")
-							->queryScalar();
-		//var_dump($catId_1);
-		//return false;
-		
-		$this->insert('category_of_article', [
-			'article_id' => $article->id,
-			'category_id' => $catId_1, // Development
-		]);
-		
-		$catId_2 = Yii::$app->db->createCommand("SELECT `id` FROM `category` WHERE `category`='$catIdProd'")
-								->queryScalar();
-		$this->insert('category_of_article', [
-			'article_id' => $article->id,
-			'category_id' => $catId_2, // Productivity
-		]);
-		
-		$catId_3 = Yii::$app->db->createCommand("SELECT `id` FROM `category` WHERE `category`='$catIdTime'")
-								->queryScalar();
-		$this->insert('category_of_article', [
-			'article_id' => $article->id,
-			'category_id' => $catId_3, // Time Management
-		]);
-		*/	
-		
-		
-		
-		foreach ($categoriesTemp as $categoryTemp)
-		{	
-			$category = new CategoryOfArticle();
-			$category->article_id = $article->id;
-			$cat = $categoryTemp->category;
-			$cat_id = Yii::$app->db->createCommand("SELECT `id` FROM `category` WHERE `category`='$cat'")
-								->queryScalar();
-			$category->category_id = $cat_id;
-			
-            if (!$category->save() or $cat_id=null)
+
+        CategoryOfArticle::deleteAll(['article_id' => $article->id]);
+        foreach ($categoriesTemp as $categoryTemp)
+        {
+            $categoryId = Yii::$app->db
+                ->createCommand("SELECT `id` FROM `category` WHERE `category`=:cat", ['cat' => $categoryTemp->category])
+                ->queryScalar();
+            if (is_null($categoryId))
+            {
+                echo 'Category "', $categoryTemp->category, '" not found', PHP_EOL;
+                return false;
+            }
+
+            $category = new CategoryOfArticle();
+            $category->article_id = $article->id;
+            $category->category_id = $categoryId;
+            if (!$category->save())
             {
                 var_export($category->errors);
                 return false;
@@ -125,7 +100,7 @@ class m160629_191141_new_article_with_categories extends Migration
             'user_id' => $articleTemp->user_id,
         ]);
         if ($article) {
-			CategoryOfArticle::deleteAll(['article_id' => $article->id]);
+            CategoryOfArticle::deleteAll(['article_id' => $article->id]);
             Paragraph::deleteAll(['article_id' => $article->id]);
             $article->delete();
         }
