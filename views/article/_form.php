@@ -22,7 +22,8 @@ $categoriesRef = \app\models\Category::find()->all();
 $categoriesReference = [];
 foreach($categoriesRef as $category)
     $categoriesReference[$category->id] = Yii::t('app', 'CATEGORY_'.$category->category);
-$categoriesReference = array_merge(['' => '(' . Yii::t('app', 'CHOOSE_CATEGORY') .')'], $categoriesReference);
+asort($categoriesReference);
+$categoriesReference = ['' => '(' . Yii::t('app', 'CHOOSE_CATEGORY') .')'] + $categoriesReference;
 
 /*
 <script src="//cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"></script>
