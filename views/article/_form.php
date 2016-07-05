@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use app\models\Article;
 use app\models\Paragraph;
 use app\models\Category;
+use app\models\CategoryOfArticle;
 
 /* @var $this yii\web\View */
 /* @var $model Article */
@@ -85,9 +86,14 @@ $categoriesReference = ['' => '(' . Yii::t('app', 'CHOOSE_CATEGORY') .')'] + $ca
         <div class="col-md-12">
             <label class="control-label" for="article-category-0"><?php echo Yii::t('app', 'CATEGORY') ?></label><br/>
             <?php
-                $id[0] = isset($categories[0])? $categories[0]->id : '';
-                $id[1] = isset($categories[1])? $categories[1]->id : '';
-                $id[2] = isset($categories[2])? $categories[2]->id : '';
+				
+				$categoryId = Yii::$app->db
+						->createCommand("SELECT `category_id` FROM `category_of_article` WHERE `article_id`=:art_id", ['art_id' => $model->id])
+						->queryAll();
+				
+				$id[0] = isset($categories[0])? $categories[0]->id : $categoryId[0];
+                $id[1] = isset($categories[1])? $categories[1]->id : $categoryId[1];
+                $id[2] = isset($categories[2])? $categories[2]->id : $categoryId[2];
             ?>
 			<?php echo Html::dropDownList('Article[category][]', $id[0], $categoriesReference, ['id' => 'article-category-0'])?>
             <?php echo Html::dropDownList('Article[category][]', $id[1], $categoriesReference, ['id' => 'article-category-1'])?>
