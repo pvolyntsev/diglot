@@ -20,7 +20,7 @@ return [
     'CATEGORY_User Interface (UI)' => 'User Interface (UI)',
     'CATEGORY_Startups' => 'Стартапы',
     'CATEGORY_Management' => 'Управление',
-    'CATEGORY_Time managenemt' => 'Тайм-менеджмент',
+    'CATEGORY_Time Management' => 'Тайм-менеджмент',
     'CATEGORY_Marketing' => 'Маркетинг',
     'CATEGORY_Web Analytics' => 'Веб-анатитика',
     'CATEGORY_Productivity' => 'Продуктивность',
