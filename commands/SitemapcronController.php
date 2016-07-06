@@ -23,7 +23,7 @@ class SitemapcronController extends Controller
         foreach ($articles_published as $article_published)
         {
             // add some URLs
-            $sitemap->addItem('http://l.diglot.copist.ru/article/view?id='.$article_published["id"], time(), Sitemap::MONTHLY, 0.9);
+            $sitemap->addItem(Url::toRoute(['/article/view', 'id' => $article_published["id"]], true), time(), Sitemap::MONTHLY, 0.9);
         }
 
 
@@ -34,7 +34,7 @@ class SitemapcronController extends Controller
         $sitemap->write();
 
         // get URLs of sitemaps written
-        $sitemapFileUrls = $sitemap->getSitemapUrls('http://l.diglot.copist.ru/');
+        $sitemapFileUrls = $sitemap->getSitemapUrls(Url::toRoute('/', true));
 
         // create sitemap for static files
         $staticSitemap = new Sitemap('web/sitemap_static.xml');
