@@ -49,10 +49,26 @@ $config = [
                 ],
             ],
         ],
-        'urlManager' => [
+        'urlManager' => $urlManager, 
+        [
+            'showScriptName' => false,     // Disable index.php
+            'enablePrettyUrl' => true,     // Disable ?r= routes
+            'enableStrictParsing' => false, // Only routes being listed in rules
+
             'scriptUrl' => $params['domain'],
 //			'baseUrl' => 'http://www.diglot.example.com/',
-			'baseUrl' => 'http://l.diglot.copist.ru/',
+			'baseUrl' => $params['domain'], //'http://l.diglot.copist.ru/',
+            'rules' => [
+                //article
+                '/article' => '/article/index',
+                '/article/<action>' => '/article/<action>',
+                '/article/add-comment' => '/article/addComment',
+                '/article/update-comment' => '/article/updateComment',
+                '/article/delete-comment' => '/article/DeleteComment',
+                '/article/<action>/<id:\d+>' => '/article/<action>',
+                '/search' => '/article/search',
+
+            ],
         ],
         'db' => $db,
         'elasticsearch' => [
