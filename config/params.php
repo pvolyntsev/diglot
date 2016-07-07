@@ -15,7 +15,7 @@ return [
     'social.image' => '/img/diglot_about.png',
 
     // Send all mails to a file by default
-    // You have to set 'mailer.useFileTransport' to false and configure a 'mailer.transport' to send real emails
+    // You have to set 'mai   ler.useFileTransport' to false and configure a 'mailer.transport' to send real emails
     'mailer.useFileTransport' => true,
 
     'mailer.transport' => [

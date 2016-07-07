@@ -11,7 +11,8 @@ function merge_configs($base, $customized)
 
 $params = merge_configs(__DIR__ . '/params.php', __DIR__ . '/params.local.php');
 $db = merge_configs(__DIR__ . '/db.php', __DIR__ . '/db.local.php');
-$urlManager = include(__DIR__ . '/urlManager.php');
+$urlManager = require(__DIR__ . '/urlManager.php');
+$modules=require_once(__DIR__ . '/modules.php');
 
 $config = [
     'id' => 'basic',
@@ -79,16 +80,7 @@ $config = [
             ],
         ],
     ],
-	'modules' => [
-		'user' => [
-			'class' => 'budyaga\users\Module',
-			'userPhotoUrl' => '/upload/user',
-			'userPhotoPath' => dirname(__DIR__) . '/web/upload/user'
-		],
-        'markdown' => [
-            'class' => '\kartik\markdown\Module',
-        ],
-    ],
+	'modules' => $modules,
     'params' => $params,
 
 ];
