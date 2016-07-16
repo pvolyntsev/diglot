@@ -14,7 +14,7 @@ class SitemapcronController extends Controller
     public function actionSitemap()
     {
         // create sitemap
-        $sitemap = new Sitemap('web/sitemap.xml');
+        $sitemap = new Sitemap('web/sitemap_article.xml');
 
         //Find all articles which are published
         $articles_published=\app\models\Article::find()
@@ -26,10 +26,6 @@ class SitemapcronController extends Controller
             $sitemap->addItem(Url::toRoute(['/article/view', 'id' => $article_published["id"]], true), time(), Sitemap::MONTHLY, 0.9);
         }
 
-
-        // add some more URLs
-        $sitemap->addItem('http://l.diglot.copist.ru/article', time(), Sitemap::DAILY, 0.8);
-
         // write it
         $sitemap->write();
 
@@ -40,16 +36,18 @@ class SitemapcronController extends Controller
         $staticSitemap = new Sitemap('web/sitemap_static.xml');
 
         // add some URLs
-        $staticSitemap->addItem('http://l.diglot.copist.ru/team');
+        $staticSitemap->addItem(Url::toRoute('/team', true));
+
+        $staticSitemap->addItem(Url::toRoute('/article', true), time(), Sitemap::DAILY, 0.8);
 
         // write it
         $staticSitemap->write();
 
         // get URLs of sitemaps written
-        $staticSitemapUrls = $staticSitemap->getSitemapUrls('http://l.diglot.copist.ru/');
+        $staticSitemapUrls = $staticSitemap->getSitemapUrls(Url::toRoute('/', true));
 
         // create sitemap index file
-        $index = new Index('web/sitemap_index.xml');
+        $index = new Index('web/sitemap.xml');
 
         // add URLs
         foreach ($sitemapFileUrls as $sitemapUrl) {

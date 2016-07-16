@@ -1,5 +1,3 @@
 User-agent: *
 Disallow:
 Sitemap : http:///l.diglot.copist.ru/sitemap.xml
-Sitemap : http:///l.diglot.copist.ru/sitemap_index.xml
-Sitemap : http:///l.diglot.copist.ru/sitemap_static.xml

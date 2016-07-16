@@ -12,6 +12,8 @@ Yii::setAlias('@tests', dirname(__DIR__) . '/tests/codeception');
 
 $params = merge_configs(__DIR__ . '/params.php', __DIR__ . '/params.local.php');
 $db = merge_configs(__DIR__ . '/db.php', __DIR__ . '/db.local.php');
+$urlManager = require_once(__DIR__ . '/urlManager.php');
+$modules=require_once(__DIR__ . '/modules.php');
 
 $config = [
     'id' => 'basic-console',
@@ -49,27 +51,7 @@ $config = [
                 ],
             ],
         ],
-        'urlManager' => $urlManager, 
-        [
-            'showScriptName' => false,     // Disable index.php
-            'enablePrettyUrl' => true,     // Disable ?r= routes
-            'enableStrictParsing' => false, // Only routes being listed in rules
-
-            'scriptUrl' => $params['domain'],
-//			'baseUrl' => 'http://www.diglot.example.com/',
-			'baseUrl' => $params['domain'], //'http://l.diglot.copist.ru/',
-            'rules' => [
-                //article
-                '/article' => '/article/index',
-                '/article/<action>' => '/article/<action>',
-                '/article/add-comment' => '/article/addComment',
-                '/article/update-comment' => '/article/updateComment',
-                '/article/delete-comment' => '/article/DeleteComment',
-                '/article/<action>/<id:\d+>' => '/article/<action>',
-                '/search' => '/article/search',
-
-            ],
-        ],
+        'urlManager' => $urlManager,
         'db' => $db,
         'elasticsearch' => [
             'class' => 'yii\elasticsearch\Connection',
@@ -79,19 +61,9 @@ $config = [
             ],
         ],
     ],
-	'modules' => [
-		'user' => [
-			'class' => 'budyaga\users\Module',
-			'userPhotoUrl' => 'http://example.com/uploads/user/photo',
-			'userPhotoPath' => '@frontend/web/uploads/user/photo'
-		],
-        'markdown' => [
-            'class' => 'kartik\markdown\Module',
-        ]
-	],
+	'modules' => $modules,
     'params' => $params,
 ];
-
 
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment

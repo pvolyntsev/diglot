@@ -1,10 +1,10 @@
 <?php
-
 return [
     'showScriptName' => false,     // Disable index.php
     'enablePrettyUrl' => true,     // Disable ?r= routes
     'enableStrictParsing' => false, // Only routes being listed in rules
 
+    'scriptUrl' => $params['domain'],
     'baseUrl' => $params['domain'],
 
     'rules' => [
