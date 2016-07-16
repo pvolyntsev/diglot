@@ -10,6 +10,7 @@ use app\models\Article;
 use app\models\Comment;
 use app\models\Paragraph;
 use app\models\Category;
+use app\models\CategoryOfArticle;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -98,6 +99,35 @@ class ArticleController extends Controller
         ]);
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+        ]);
+	}
+	
+	/**
+     * Lists Article models by given category
+	 * @param integer $id ID of category
+     * @return mixed
+     */
+	public function actionCategory($id)
+    {
+		
+		if (($category = Category::findOne($id)) === null) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+		
+        $dataProvider = new ActiveDataProvider([
+            'query' => Article::find()
+			   ->joinWith('categoryOfArticles')//соединение Article && CategoryOfArticles
+			   ->where('category_id=:category_id and status=:published', [':category_id' => $id, ':published' => 'published']),
+			//sort
+			'sort' => [
+				'defaultOrder' => [
+					'date_published' => SORT_DESC,
+				]
+			],
+        ]);
+        return $this->render('category', [
+            'dataProvider' => $dataProvider,
+			'category' => $category,
         ]);
 	}
 
@@ -262,9 +292,7 @@ class ArticleController extends Controller
     {
         $model = $this->findModel($id);
         $paragraphs = $model->paragraphs;
-		$categories = [];
-		foreach ($model->categoryOfArticles as $articleCat)
-			$categories[] = $articleCat->category;
+		$categories = $model->categoryOfArticles;
 					
         $this->view->params['article'] = $model;
 
@@ -369,7 +397,7 @@ class ArticleController extends Controller
             'articlesFound' => $articlesFound,
         ]);
     }
-
+	
     public function actionSwap()
     {
         $curOrder = Article::getLanguageOrder();
