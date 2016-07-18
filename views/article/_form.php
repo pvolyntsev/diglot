@@ -88,12 +88,16 @@ $categoriesReference = ['' => '(' . Yii::t('app', 'CHOOSE_CATEGORY') .')'] + $ca
             <?php
 				
 				$id[0] = isset($categories[0])? $categories[0]->category_id : null;
-                $id[1] = isset($categories[1])? $categories[1]->category_id : null;
+				$id[1] = isset($categories[1])? $categories[1]->category_id : null;
                 $id[2] = isset($categories[2])? $categories[2]->category_id : null;
+				
+				$categoriesReference_first = $categoriesReference; unset($categoriesReference_first[$id[1]], $categoriesReference_first[$id[2]]);
+				$categoriesReference_second = $categoriesReference; unset($categoriesReference_second[$id[0]], $categoriesReference_second[$id[2]]);
+				$categoriesReference_third = $categoriesReference; unset($categoriesReference_third[$id[0]], $categoriesReference_third[$id[1]]);
             ?>
-			<?php echo Html::dropDownList('Article[category][]', $id[0], $categoriesReference, ['id' => 'article-category-0'])?>
-            <?php echo Html::dropDownList('Article[category][]', $id[1], $categoriesReference, ['id' => 'article-category-1'])?>
-            <?php echo Html::dropDownList('Article[category][]', $id[2], $categoriesReference, ['id' => 'article-category-2'])?>
+			<?php echo Html::dropDownList('Article[category][]', $id[0], $categoriesReference_first, ['id' => 'article-category-0'])?>
+            <?php echo Html::dropDownList('Article[category][]', $id[1], $categoriesReference_second, ['id' => 'article-category-1'])?>
+            <?php echo Html::dropDownList('Article[category][]', $id[2], $categoriesReference_third, ['id' => 'article-category-2'])?>
         </div>
     </div>
 
