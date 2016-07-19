@@ -91,7 +91,11 @@ $categoriesReference = ['' => '(' . Yii::t('app', 'CHOOSE_CATEGORY') .')'] + $ca
 				$id[1] = isset($categories[1])? $categories[1]->category_id : null;
                 $id[2] = isset($categories[2])? $categories[2]->category_id : null;
 				
-				$categoriesReference_first = $categoriesReference; unset($categoriesReference_first[$id[1]], $categoriesReference_first[$id[2]]);
+				$categoriesReference_first = $categoriesReference; 
+					if ($id[0]!=$id[1])
+						unset($categoriesReference_first[$id[1]]);
+					if ($id[0]!=$id[2])
+						unset($categoriesReference_first[$id[2]]);
 				$categoriesReference_second = $categoriesReference; unset($categoriesReference_second[$id[0]], $categoriesReference_second[$id[2]]);
 				$categoriesReference_third = $categoriesReference; unset($categoriesReference_third[$id[0]], $categoriesReference_third[$id[1]]);
             ?>
