@@ -12,8 +12,7 @@ class m160520_150339_create_news_article extends Migration
      * @inheritdoc
      */
     public function up()
-<<<<<<< Updated upstream
-    {
+	{
         $articleTemp = require (__DIR__ . '/../assets/fixtures/article/over-thinking_and_knowing_too_much_to_just_code/article.php');
         $paragraphsTemp = require (__DIR__ . '/../assets/fixtures/article/over-thinking_and_knowing_too_much_to_just_code/paragraphs.php');
 
@@ -57,8 +56,7 @@ class m160520_150339_create_news_article extends Migration
                 return false;
             }
         }
-=======
-    {	
+		
 		$this->insert('article', [
 			'id' => 1,
 			'title_original' => 'Analysis Paralysis: Over-thinking and Knowing Too Much to Just CODE',
@@ -80,7 +78,6 @@ class m160520_150339_create_news_article extends Migration
 			'lang_original_id' => 1,
 			'lang_transtate_id' => 2,
 		]);
->>>>>>> Stashed changes
     }
 
     /**
@@ -88,18 +85,18 @@ class m160520_150339_create_news_article extends Migration
      */
     public function down()
     {
-<<<<<<< Updated upstream
         $articleTemp = require (__DIR__ . '/../assets/fixtures/article/over-thinking_and_knowing_too_much_to_just_code/article.php');
 
         $article = \app\models\Article::findOne([
             'title_original' => $articleTemp->title_original,
             'user_id' => $articleTemp->user_id,
-=======
-        $this->delete('article', [
+		
+		$this->delete('article', [
             'title_original' => 'Analysis Paralysis: Over-thinking and Knowing Too Much to Just CODE',
 			'user_id' => 1
->>>>>>> Stashed changes
+
         ]);
+		
         if ($article) {
             \app\models\Paragraph::deleteAll(['article_id' => $article->id]);
             $article->delete();
