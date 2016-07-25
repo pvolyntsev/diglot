@@ -90,11 +90,11 @@ class m160520_150339_create_news_article extends Migration
         $article = \app\models\Article::findOne([
             'title_original' => $articleTemp->title_original,
             'user_id' => $articleTemp->user_id,
+		]);
 		
 		$this->delete('article', [
             'title_original' => 'Analysis Paralysis: Over-thinking and Knowing Too Much to Just CODE',
-			'user_id' => 1
-
+			'user_id' => 1,
         ]);
 		
         if ($article) {
