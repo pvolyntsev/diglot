@@ -7,6 +7,7 @@ use yii\data\ActiveDataProvider;
 use app\models\Article;
 use app\models\User;
 
+
 /**
  * @var $this View
  * @var $author User
@@ -14,6 +15,23 @@ use app\models\User;
  */
 
 $this->title = $author->username . ' | Profile';
+?>
+
+<?php
+
+// Проверка на наличие аккаунта на github
+$user = Yii::$app->user->identity;
+
+$userAuth = $user->userOauthKeys;
+
+// Ищем github среди всех доступных методов авторизаций
+
+foreach ($userAuth as $item) {
+    if ($item->provider_id == 4) {
+        echo Html::a('Запустить импорт с GitHub',\yii\helpers\Url::to('import-git'));
+    }
+}
+
 ?>
 
 <div class="container">

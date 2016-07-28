@@ -8,6 +8,8 @@ use app\models\github\Github;
 use app\models\User;
 use app\models\Article;
 use app\models\Paragraph;
+use app\models\ImportedRepo;
+use app\models\ImportedArticle;
 
 class GitController extends Controller
 {
@@ -57,6 +59,7 @@ class GitController extends Controller
 
             // Адрес репозиториев
             $ghRepos = $data->repos_url;
+
         } else {
             // Ошибка запроса
             echo "error";
@@ -149,12 +152,13 @@ class GitController extends Controller
                 continue;
             }
 
-
-
             // Получение файлов по каждой статье
+
+
 
             foreach($arrIniConf['article'] as $article)
             {
+
                 // Массив с мета-информацией о статье
                 $arrMeta = array();
 
@@ -240,11 +244,30 @@ class GitController extends Controller
                     continue;
                 }
 
+
+                // Запись информации о репозитории, если он не найден
+
+                $repo_url = $repo->svn_url;
+
+                // Проверка на существования этого репозитория
+                $newRepo = ImportedRepo::find()->where(['repo_url' => $repo_url])->limit(1)->asArray()->one();
+
+                // Если репозиторий не найден, создаем новый
+                if (empty($newRepo)) {
+                    $newRepo = new ImportedRepo();
+                    $newRepo->user_id = $id;
+                    $newRepo->repo_url = $repo_url;
+                    $newRepo->last_revision =  $ghSha;
+                    $newRepo->save();
+                }
+
                 // Добавление информации по статье
                 $importArticles[] = [
                     'meta' => $arrMeta,
                     'original' => $arrOriginal,
-                    'translate' => $arrTranslate
+                    'translate' => $arrTranslate,
+                    'repo_id' => $newRepo['id'],
+                    'article_path' => $repo_url . '/tree/master/' . $article
                 ];
 
             }
@@ -254,6 +277,7 @@ class GitController extends Controller
         // Запись статьи в БД
         foreach ($importArticles as $article)
         {
+
             // Мета-информация о статье
             $meta = $article['meta'];
 
@@ -262,9 +286,31 @@ class GitController extends Controller
 
             // Переведенные параграфы текста
             $translate = $article['translate'];
-            
+
+            // Проверка на наличие статьи в таблице импортированных статей
+            $importArticle = ImportedArticle::find()->where(
+                [
+                    'imported_repo_id' => $article['repo_id'],
+                    'repo_article_path' => $article['article_path'],
+                ]
+            )->limit(1)->one();
+
+
+
+            // Если такой статьи еще нет, то создаем новую,
+            // иначе перезаписываем существующую
+            if (empty($importArticle)) {
+                $articleItem = new Article;
+            } else {
+                $articleItem = Article::findOne(['id' => $importArticle->article_id]);
+
+                if (empty($articleItem)) {
+                    echo $article['article_path'] . " - Ошибка записи статьи \n";
+                    continue;
+                }
+            }
+
             // Сбор мета-информации
-            $articleItem = new Article;
             $articleItem->title_original = $meta['orig-title'];
             $articleItem->title_translate = $meta['trans-title'];
             $articleItem->user_id = $id;
@@ -288,7 +334,7 @@ class GitController extends Controller
             }
 
             $articleItem->lang_original_id = $originalId;
-            $articleItem->lang_transtate_id = $translateId;
+            $articleItem->lang_translate_id = $translateId;
 
             // Автор оригинальной статьи и ссылка на него
             $articleItem->author_name = $meta['orig-author-title'];
@@ -325,6 +371,15 @@ class GitController extends Controller
             }
 
             echo "$articleItem->title_original - Запись завершена \n";
+
+            // Записываем информацию об импортированной статье, если она еще не была создана
+            if (empty($importArticle)) {
+                $importArticle = new ImportedArticle();
+                $importArticle->imported_repo_id = $article['repo_id'];
+                $importArticle->repo_article_path = $article['article_path'];
+                $importArticle->article_id = $articleItem->id;
+                $importArticle->save();
+            }
 
         }
     }

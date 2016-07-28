@@ -3,11 +3,13 @@
 namespace app\controllers;
 
 use Yii;
+use yii\helpers\Url;
 use yii\web\Controller;
 use app\models\Article;
 use app\models\User;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
+use app\models\github\Github;
 
 
 class AuthorPublicController extends Controller
@@ -113,5 +115,19 @@ class AuthorPublicController extends Controller
             'author' => $this->author,
             #'followers' => $dataProvider,
         ]);
+    }
+    
+    /**
+     * Запуск импорта с git
+     */
+    
+    public function actionImportGit() {
+
+        $github = new Github();
+        $github->import(Yii::$app->user->id);
+
+        Yii::$app->session->addFlash('info', 'Импорт статей с github завершен');
+
+        return $this->redirect(Yii::$app->request->referrer);
     }
 }

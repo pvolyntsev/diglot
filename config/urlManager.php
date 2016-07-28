@@ -46,6 +46,7 @@ return [
         '/<username>/responses' => 'author-public/responses',
         '/<username>/followings' => 'author-public/followings',
         '/<username>/followers' => 'author-public/followers',
+        '/<username>/import-git' => 'author-public/import-git',
 
         // Private Profile
         '/profile/drafts' => 'author-private/drafts',
