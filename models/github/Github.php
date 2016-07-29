@@ -20,24 +20,18 @@ class Github extends Model
      * Базовый url github api
      * @var string
      */
-    public $baseUrl = "https://api.github.com/";
-
-    /**
-     * Путь для директории с временными файлами для импорта
-     * @var string
-     */
-    public $importDir = "github_import/";
-
+    const BASE_URL = "https://api.github.com/";
+    
     /**
      * Символ-разделитель для разбора отдельных предложений текста
      * @var string
      */
-    public $strSeparator = "---";
+    const SEPARATOR = "---";
     /**
      *  Получение токенов для доступа к github из параметров 
      * @return mixed
      */
-    public function getGithubTokens()
+    public static function getGithubTokens()
     {
         return Yii::$app->params['authClientCollection.clients']['github'];
     }
@@ -47,7 +41,7 @@ class Github extends Model
      * @param $url
      * @return mixed|null
      */
-    public function runCurl($url)
+    public static function runCurl($url)
     {
         // Выполнение curl-запроса
 
@@ -74,18 +68,18 @@ class Github extends Model
      * @param $params
      * @return mixed|null
      */
-    public function getFileContent($url,$path,$params)
+    public static function getFileContent($url,$path,$params)
     {
         // Получаем содержимое каждого файла
         $url = str_replace('{+path}',$path,$url);
         $url.= $params;
-        $fileContent = $this->runCurl($url);
+        $fileContent = self::runCurl($url);
         return $fileContent;
     }
 
-    public function getArticleStrings($url,$file,$params)
+    public static function getArticleStrings($url,$file,$params)
     {
-        $dataFile = $this->getFileContent($url,$file,$params);
+        $dataFile = self::getFileContent($url,$file,$params);
 
         if(!$dataFile) {
             return null;
@@ -101,7 +95,7 @@ class Github extends Model
         $dataFileContent = base64_decode($dataFile->content);
 
         // Сбор строк в массив по разделителю
-        $tempArr = explode($this->strSeparator,$dataFileContent);
+        $tempArr = explode(self::SEPARATOR,$dataFileContent);
 
         // Обход и оптимизация строк контента
         foreach ($tempArr as $key=>$str)
@@ -130,13 +124,13 @@ class Github extends Model
         return $stringsArr;
     }
     
-    public function import($id) {
+    public static function import($id) {
 
         // Получаем данные для github api
-        $ghTokens = $this->getGithubTokens();
+        $ghTokens = self::getGithubTokens();
 
         // Переменные для запроса к github
-        $ghUrl = $this->baseUrl;
+        $ghUrl = self::BASE_URL;
         $ghParams = "?client_id=".$ghTokens["clientId"]."&client_secret=".$ghTokens["clientSecret"];
 
         // Получение пользователя по id
@@ -162,7 +156,7 @@ class Github extends Model
         // Получаем github username
         $ghUserId = $currentUser['provider_user_id'];
         $ghUserUrl = $ghUrl."user/".$ghUserId.$ghParams;
-        $data = $this->runCurl($ghUserUrl);
+        $data = self::runCurl($ghUserUrl);
 
         if($data) {
             // Имя пользователя github
@@ -179,7 +173,7 @@ class Github extends Model
 
         // Получаем список репозиториев пользователя
         $ghReposUrl = $ghRepos.$ghParams;
-        $data = $this->runCurl($ghReposUrl);
+        $data = self::runCurl($ghReposUrl);
 
         // Если запрос прошел успешно
         if(!$data)
@@ -200,7 +194,7 @@ class Github extends Model
             $ghDiglotUrl = str_replace('{+path}',"diglot.ini",$ghDiglotUrl);
             $ghDiglotUrl.= $ghParams;
 
-            $dataDiglot = $this->runCurl($ghDiglotUrl);
+            $dataDiglot = self::runCurl($ghDiglotUrl);
 
             if(!$dataDiglot || isset($dataDiglot->message))
             {
@@ -209,7 +203,7 @@ class Github extends Model
             }
 
             // Получение содержимого ini-файла
-            $dataIniFile = $this->getFileContent($repo->contents_url,"diglot.ini",$ghParams);
+            $dataIniFile = self::getFileContent($repo->contents_url,"diglot.ini",$ghParams);
 
             if(!$dataIniFile)
             {
@@ -240,7 +234,7 @@ class Github extends Model
             $ghMasterUrl = $repo->branches_url;
             $ghMasterUrl = str_replace('{/branch}',"/$currentBranch",$ghMasterUrl);
             $ghMasterUrl.= $ghParams;
-            $dataMaster = $this->runCurl($ghMasterUrl);
+            $dataMaster = self::runCurl($ghMasterUrl);
 
             if(isset($dataMaster->message))
             {
@@ -255,7 +249,7 @@ class Github extends Model
             $ghFilesUrl = str_replace('{/sha}',"/".$ghSha."?recursive=1",$ghFilesUrl);
             $ghFilesUrl.= "&client_id=".$ghTokens["clientId"]."&client_secret=".$ghTokens["clientSecret"];
 
-            $dataFiles = $this->runCurl($ghFilesUrl);
+            $dataFiles = self::runCurl($ghFilesUrl);
 
             if(!$dataFiles)
             {
@@ -286,7 +280,7 @@ class Github extends Model
                     // Получение файла с оригиналом
                     if($fileInfo->path == $article."/original.md")
                     {
-                        $arrOriginal = $this->getArticleStrings($repo->contents_url,$fileInfo->path,$ghParams);
+                        $arrOriginal = self::getArticleStrings($repo->contents_url,$fileInfo->path,$ghParams);
 
                         if(!$arrOriginal)
                         {
@@ -297,7 +291,7 @@ class Github extends Model
                     } elseif ($fileInfo->path == $article."/translation.md")
                     {
                         // Получение файла с переводом
-                        $arrTranslate = $this->getArticleStrings($repo->contents_url,$fileInfo->path,$ghParams);
+                        $arrTranslate = self::getArticleStrings($repo->contents_url,$fileInfo->path,$ghParams);
 
                         if(!$arrTranslate)
                         {
@@ -308,7 +302,7 @@ class Github extends Model
                     {
                         // Получение файла с метаинформацией
 
-                        $metaIniFile = $this->getFileContent($repo->contents_url,$fileInfo->path,$ghParams);
+                        $metaIniFile = self::getFileContent($repo->contents_url,$fileInfo->path,$ghParams);
 
                         if(!$metaIniFile)
                         {

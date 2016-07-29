@@ -123,8 +123,7 @@ class AuthorPublicController extends Controller
     
     public function actionImportGit() {
 
-        $github = new Github();
-        $github->import(Yii::$app->user->id);
+        Github::import(Yii::$app->user->id);
 
         Yii::$app->session->addFlash('info', 'Импорт статей с github завершен');
 
