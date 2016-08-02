@@ -9,7 +9,7 @@
         "issues": "https://github.com/pvolyntsev/diglot/issues?state=open",
         "source": "https://github.com/pvolyntsev/diglot"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": ">=2.0.5",
@@ -22,7 +22,8 @@
         "yii2mod/yii2-sweet-alert": "*",
         "zelenin/yii2-rss": "~0.1",
         "himiklab/yii2-sitemap-module" : "*",
-        "samdark/sitemap":"*"
+        "samdark/sitemap":"*",
+        "molchanovvg/yii2-pingator": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
