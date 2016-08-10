@@ -14,6 +14,7 @@ return [
     'HELP_US' => 'Help us',
     'LOGOUT' => 'Logout',
     'CATEGORY' => 'Category',
+	'CATEGORY:' => 'Category: ',
     'CHOOSE_CATEGORY' => 'Choose Category',
     'CATEGORY_Design' => 'Design',
     'CATEGORY_Development' => 'Development',

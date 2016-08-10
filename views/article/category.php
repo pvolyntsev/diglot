@@ -2,20 +2,33 @@
 
 use yii\helpers\Html;
 use yii\widgets\ListView;
+use app\models\Article;
+use app\models\Category;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $id int */
+/* @var $category Category */
 
 $this->title = 'Articles';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
+
+<?php ?>
+
 <div class="container">
 		<?php
             $dataProvider->prepare();
             $pageNumber = $dataProvider->getPagination()->getPage()+1;
         ?>
+	<div class="row">	
+		<?php 
+		// counter && category name (multylang) Found N article in category "X" ?>	
+		<h3><?php echo Yii::t('app', 'CATEGORY:'); echo Yii::t('app', 'CATEGORY_' . $category->category) ?></h3>
 		
+		<?php // echo Yii::t('app', 'CATEGORY_' . $category->category) ?>
+	</div>
 		<?= ListView::widget([
             'dataProvider' => $dataProvider,
 			'itemView' => '_article',

@@ -14,6 +14,7 @@ return [
     'HELP_US' => 'Помогите нам',
     'LOGOUT' => 'Выход',
     'CATEGORY' => 'Категория',
+	'CATEGORY:' => 'Категория: ',
     'CHOOSE_CATEGORY' => 'Выбери категорию',
     'CATEGORY_Design' => 'Дизайн',
     'CATEGORY_Development' => 'Разработка',

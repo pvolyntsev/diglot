@@ -89,7 +89,7 @@ $page = Yii::$app->request->get('page');
         <?php if (count($model->categories)) { ?>
             <div class="article-categories">
                 <?php foreach($model->categories as $category) { ?>
-                    <div class="article-category"><a href="#"><?php echo Yii::t('app', 'CATEGORY_' . $category->category) ?></a></div>
+					<div class="article-category"><?=Html::a(Html::encode(Yii::t('app', 'CATEGORY_' . $category->category)), ['category', 'id' => $category->id])?></div>
                 <?php } ?>
             </div>
         <?php } ?>

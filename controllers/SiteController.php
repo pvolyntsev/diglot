@@ -7,6 +7,7 @@ use yii\web\Response;
 use yii\web\Controller;
 use app\forms\ContactForm;
 use yii\helpers\Url;
+use yii\helpers\StringHelper;
 use \app\models;
 use samdark\sitemap\Sitemap;
 use samdark\sitemap\Index;

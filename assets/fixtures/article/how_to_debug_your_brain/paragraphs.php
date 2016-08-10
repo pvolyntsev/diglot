@@ -280,7 +280,7 @@ return array (
 			'date_modified' => 1462990179,
             'sortorder' => 31,
         )),
-	31>
+	31 =>
         (object)(array(
             'id' => -14,
             'article_id' => -1,

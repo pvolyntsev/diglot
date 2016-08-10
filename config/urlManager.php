@@ -63,7 +63,7 @@ return [
         '/article/delete-comment' => '/article/DeleteComment',
         '/article/<action>/<id:\d+>' => '/article/<action>',
         '/search' => '/article/search',
-
+	
         // control panel (adminka)
         '/cp' => '/admin-panel/index',
 
