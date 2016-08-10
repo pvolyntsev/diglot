@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\User;
 use Yii;
 
 use yii\base\ErrorException;
@@ -11,15 +12,16 @@ use app\models\Comment;
 use app\models\Paragraph;
 use app\models\Category;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\Pagination;
 use yii\web\Session;
-use yii\bootstrap\Alert;
 use yii\bootstrap\ActiveForm;
 use yii\web\Response;
 use yii\helpers\Html;
+use kartik\alert\Alert;
 
 /**
  * ArticleController implements the CRUD actions for Article model.
@@ -29,6 +31,20 @@ class ArticleController extends Controller
     /**
      * @inheritdoc
      */
+
+    /**
+     * The email subject
+     * @var string
+     */
+    public $subject = 'Diglot news post';
+
+    /**
+     * The email message
+     * @var string
+     */
+    public $message = 'Article has new comments';
+
+
     public function behaviors()
     {
         return [
@@ -170,6 +186,37 @@ class ArticleController extends Controller
                 if($comment->validate() && $comment->save()) { // выполнить валидацию и сохранить модель
                     $added = true;
                     $comment->comment = ''; // сбросить текст комментария, чтобы можно было вводить новый комментарий
+
+// Вставить рассылку письма всем, кто добавлял комментарии к данной статье, кроме самого автора комментария
+                    //Найдем пользователей, которые писали комментарии к данной статье, кроме самого автора данного комментария
+                    $users_for_mail =Comment::find()
+                            ->select('user_id')
+                            ->where(['!=','user_id',Yii::$app->user->identity->id])
+                            ->andWhere(['=','article_id',$id])
+                            ->distinct(true)
+                            ->all();
+
+                    $this->message="Появились новые комментарии к статье '".$model->title_original."' Для того, чтобы открыть данную статью, перейдите по следующему адресу ".Url::toRoute(['/article/view', 'id' => $id]);
+
+                    // Отправим всем найденным пользователям письма
+                    foreach ($users_for_mail as $user_for_mail)
+                    {
+                        $user_for_mail=User::findByPk($user_for_mail->user_id);
+                        $this->subject=$user_for_mail->one()['username']." добавил отклик к статье ".$model->title_original.$model->title_translate;
+                        \Yii::$app->mailer->compose([ 'text' => '/mail/simple-text' ], [
+                            'from' => \Yii::$app->params['supportEmail'],
+                            'to' => $user_for_mail->one()['email'],
+                            'subject' => $this->subject,
+                            'message' => $this->message
+                        ])
+                            ->setFrom(\Yii::$app->params['supportEmail'])
+                            ->setTo($user_for_mail->one()['email'])
+                            ->setSubject($this->subject)
+                            ->send();
+                    }
+
+                    echo 'Email was sent', PHP_EOL;
+
                 } else {
                     return ActiveForm::validate($comment);   // в случае ошибки вернуть результат валидации или сохранения
                 }
