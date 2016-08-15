@@ -10,7 +10,7 @@ use app\models\User;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use app\models\github\Github;
-
+use app\models\Job;
 
 class AuthorPublicController extends Controller
 {
@@ -122,10 +122,13 @@ class AuthorPublicController extends Controller
      */
     
     public function actionImportGit() {
+        
+        $job = new Job();
+        $job->type = Job::JOB_TYPE_GITHUB;
+        $job->user_id = Yii::$app->user->id;
+        $job->save();
 
-        Github::import(Yii::$app->user->id);
-
-        Yii::$app->session->addFlash('info', 'Импорт статей с github завершен');
+        Yii::$app->session->addFlash('info', 'Импорт статей с Github поставлен в очередь');
 
         return $this->redirect(Yii::$app->request->referrer);
     }

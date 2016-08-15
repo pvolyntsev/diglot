@@ -2,6 +2,8 @@
 namespace app\commands;
 
 use yii\console\Controller;
+use app\models\Job;
+use app\models\github\Github;
 
 class ArticleController extends Controller
 {
@@ -129,6 +131,24 @@ class ArticleController extends Controller
             $out = curl_exec($curl);
             echo $out;
             curl_close($curl);
+        }
+    }
+
+    /**
+     * Импорт статей с github
+     */
+
+    public function actionGit()
+    {
+        $jobs = Job::find()->where(['status' => '1', 'type' => Job::JOB_TYPE_GITHUB])->orderBy('updated_at ASC')->all();
+
+        foreach ($jobs as $job) {
+            // Импорт с github
+            Github::import($job->user_id);
+
+            // Смена статуса - выполненный
+            $job->status = 0;
+            $job->save(false);
         }
     }
 }
