@@ -88,3 +88,13 @@ cd /var/www/diglot
 php yii migrate/up --migrationPath=@vendor/budyaga/yii2-users/migrations
 php yii migrate/up
 ```
+
+#### Настройка CRON для импорта github ####
+Открыть настройку заданий cron
+```
+crontab -e
+```
+Указать путь к проекту в своей структуре и необходимое время выполнения задачи
+```
+*/3 * * * * php /home/nikolay/projects/mentor/diglot/yii article/git
+```
