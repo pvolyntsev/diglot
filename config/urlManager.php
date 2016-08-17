@@ -16,6 +16,7 @@ return [
         '/about' => 'site/article',
         '/terms' => 'site/article',
         '/team' => 'site/team',
+        '/github-import' => 'site/github-import',
         '/donate' => 'site/donate',
         '/github-integration' => 'site/article',
         'set' => 'lang/set',

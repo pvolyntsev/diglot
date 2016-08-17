@@ -44,6 +44,11 @@ class SiteController extends Controller
         return $this->render('team');
     }
 
+    public function actionGithubImport()
+    {
+        return $this->render('githubImport');
+    }
+
     public function actionContact()
     {
         $model = new ContactForm();
