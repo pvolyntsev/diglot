@@ -93,14 +93,6 @@ class SiteController extends Controller
                     return $model->title_original . ($model->title_translate ? " | " . $model->title_translate: '');
                 },
                 'description' => function ($model, $widget, $feed) {
-
-                    // Workaround добавление категорий статьи одновременно с подготовкой description
-                    /** @var models\Article $model */
-                    /** @var \Zelenin\Feed $feed */
-                    $categories = $model->categoryOfArticles;
-                    foreach($categories as $categoryOfArticle)
-                        $feed->addItemCategory($categoryOfArticle->category->category);
-
                     /** @var models\Article $model */
                     $paragraphsHtml = '';
                     foreach($model->paragraphs as $i => $paragraph)
@@ -128,6 +120,13 @@ class SiteController extends Controller
                     /** @var models\Article $model */
                     $date = \DateTime::createFromFormat('Y-m-d H:i:s', $model->date_published);
                     return $date->format(DATE_RSS);
+                },
+                'category' => function ($model, $widget, $feed) {
+                    /** @var models\Article $model */
+                    /** @var \Zelenin\Feed $feed */
+                    $categories = $model->categoryOfArticles;
+                    foreach ($categories as $categoryOfArticle)
+                        $feed->addItemCategory($categoryOfArticle->category->category);
                 },
             ],
         ]);
