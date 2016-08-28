@@ -8,8 +8,6 @@ return [
     'baseUrl' => $params['domain'],
 
     'rules' => [
-        //sitemap
-        '/sitemap' => 'site/sitemap',
         // Main page & static pages
         '/' => '/article/index',
         #'/contact' => 'site/contact',
@@ -19,6 +17,8 @@ return [
         '/donate' => 'site/donate',
         '/github-integration' => 'site/article',
         'set' => 'lang/set',
+        '/sitemap' => 'site/sitemap',
+        '/rss' => 'site/rss',
 
         // Auth & user manager
         '/signup' => '/user/user/signup',

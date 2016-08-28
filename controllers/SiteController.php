@@ -83,14 +83,14 @@ class SiteController extends Controller
             'dataProvider' => $dataProvider,
             'channel' => [
                 'title' => \Yii::$app->params['name'],
-                'link' => Url::toRoute('/', true),
-                'description' => \Yii::$app->params['title']['en'] . "<br/>\n" . \Yii::$app->params['title']['ru'],
+                'link' => Url::toRoute('/site/rss', true),
+                'description' => \Yii::$app->params['title']['en'] . " | " . \Yii::$app->params['title']['ru'],
                 'language' => Yii::$app->language
             ],
             'items' => [
                 'title' => function ($model, $widget, $feed) {
                     /** @var models\Article $model */
-                    return $model->title_original . ($model->title_translate ? "<br/>\n" . $model->title_translate: '');
+                    return $model->title_original . ($model->title_translate ? " | " . $model->title_translate: '');
                 },
                 'description' => function ($model, $widget, $feed) {
                     /** @var models\Article $model */
@@ -107,8 +107,13 @@ class SiteController extends Controller
                     }
                     return $paragraphsHtml; //$model->title_translate;
                 },
+                'guid' => function ($model, $widget, $feed) {
+                    return Url::toRoute(['article/view', 'id' => $model->id], true);
+                },
+                'author' => function ($model, $widget, $feed) {
+                    return $model->author_name. ($model->translator_name ? ", " . $model->translator_name: '');
+                },
                 'link' => function ($model, $widget, $feed) {
-                    /** @var models\Article $model */
                     return Url::toRoute(['article/view', 'id' => $model->id], true); //, 'slug' => $model->slug
                 },
                 'pubDate' => function ($model, $widget, $feed) {
@@ -116,7 +121,7 @@ class SiteController extends Controller
                     $date = \DateTime::createFromFormat('Y-m-d H:i:s', $model->date_published);
                     return $date->format(DATE_RSS);
                 },
-            ]
+            ],
         ]);
     }
 }
