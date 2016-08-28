@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use app\widgets\UserMenuWidget;
@@ -22,8 +23,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--  RSS Feed  -->
-    <link rel="alternate" type="application/rss+xml" title="<?php echo HTML::encode(Yii::$app->params['title']['en']) ?>" href="/site/rss" />
-
+    <link rel="alternate" type="application/rss+xml" title="<?php echo HTML::encode(\Yii::$app->params['title']['en'] . " | " . \Yii::$app->params['title']['ru']) ?>" href="<?php echo Url::toRoute('/site/rss', true); ?>" />
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
