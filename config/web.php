@@ -83,10 +83,10 @@ $config = [
         'yii2-pingator' => [
             'class' => 'molchanovvg\ping\Ping',
             'servers' => [
-            'molchanovvg\ping\Yandex',
-            'molchanovvg\ping\Google',
-            ]
-        ]
+                'Yandex' => 'molchanovvg\ping\Yandex',
+                'Google' => 'molchanovvg\ping\Google',
+            ],
+        ],
     ],
 	'modules' => $modules,
     'params' => $params,

@@ -2,6 +2,8 @@
 namespace app\commands;
 
 use yii\console\Controller;
+use molchanovvg\ping\Ping;
+use yii;
 
 class ArticleController extends Controller
 {
@@ -130,5 +132,15 @@ class ArticleController extends Controller
             echo $out;
             curl_close($curl);
         }
+    }
+
+    /**
+     * Оповещаем Google и Yandex о новой статье
+     */
+    public function actionSendPingator()
+    {
+        $pingator = new Ping();
+        $pingator->send('diglot','http://diglot.ru','http://diglot.ru','',"UTF-8", Yii::$app->components['yii2-pingator']['servers']);
+
     }
 }
