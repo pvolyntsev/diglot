@@ -199,6 +199,12 @@
     Articles list & search
     ---------------------------------- */
 
+.articles-list-title {
+    margin: 0 0 0.2em 0;
+    font-weight: 800;
+    font-size: 1.5em;
+}
+
 .articles.list .article {
     background: #fff;
     padding: 2em;

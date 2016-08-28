@@ -22,10 +22,10 @@ $this->params['breadcrumbs'][] = $this->title;
             $dataProvider->prepare();
             $pageNumber = $dataProvider->getPagination()->getPage()+1;
         ?>
-	<div class="row">	
+	<div class="row articles-list-title">
 		<?php 
 		// counter && category name (multylang) Found N article in category "X" ?>	
-		<h3><?php echo Yii::t('app', 'CATEGORY:'); echo Yii::t('app', 'CATEGORY_' . $category->category) ?></h3>
+		<h1><?php echo Yii::t('app', 'CATEGORY:'); echo Yii::t('app', 'CATEGORY_' . $category->category) ?></h1>
 		
 		<?php // echo Yii::t('app', 'CATEGORY_' . $category->category) ?>
 	</div>
