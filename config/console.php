@@ -60,6 +60,13 @@ $config = [
                 // configure more hosts if you have a cluster
             ],
         ],
+        'yii2-pingator' => [
+            'class' => 'molchanovvg\ping\Ping',
+            'servers' => [
+                'molchanovvg\ping\Yandex',
+                'molchanovvg\ping\Google',
+            ],
+        ],
     ],
 	'modules' => $modules,
     'params' => $params,

@@ -1,7 +1,6 @@
 <?php
 namespace app\elastic\models;
 
-use yii\db\ActiveRecord;
 use yii\elasticsearch;
 
 
