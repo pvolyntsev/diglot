@@ -306,6 +306,7 @@ class ArticleController extends Controller
     {
         $model = new Article();
         $this->view->params['article'] = $model;
+        $categories = $model->categoryOfArticles;
 
         $model->user_id = Yii::$app->user->id;
         $model->own_original = 0;
@@ -316,7 +317,8 @@ class ArticleController extends Controller
         $this->view->params['article'] = $model;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $paragraphs = $model->updateParagraphs($_POST['Article']['paragraphs']);
+            $paragraphs = $model->updateParagraphs($_POST['Article']['paragraphs']); //сохранение параграфов
+            $categories = $model->updateCategories($_POST['Article']['category']); //сохранение категорий
 
             Yii::$app->session->addFlash('info', 'Article is saved to ' . Html::a('drafts', ['/author-private/drafts']));
 
@@ -325,6 +327,7 @@ class ArticleController extends Controller
         return $this->render('update', [
             'model' => $model,
             'paragraphs' => $paragraphs,
+            'categories' => $categories,
             'publishFailed' => false,
         ]);
     }
