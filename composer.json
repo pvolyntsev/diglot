@@ -2,7 +2,7 @@
     "name": "https://github.com/pvolyntsev/diglot",
     "description": "Your bilingual books and articles shelf. English and Russian.",
     "keywords": ["bilingua", "language", "blog", "article", "book", "read", "text", "share"],
-    "homepage": "http://diglot.copist.ru/",
+    "homepage": "http://copist.ru/",
     "type": "application",
     "license": "BSD-3-Clause",
     "support": {
@@ -23,9 +23,7 @@
         "zelenin/yii2-rss": "~0.1",
         "himiklab/yii2-sitemap-module" : "*",
         "samdark/sitemap":"*",
-        "molchanovvg/yii2-pingator": "*"
-    },
-    "require-dev": {
+        "molchanovvg/yii2-pingator": "*",
         "yiisoft/yii2-codeception": "*",
         "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*",
