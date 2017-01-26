@@ -5,8 +5,8 @@ Your bilingual books and articles shelf. English and Russian.
 
 # Open access / Открытый доступ
 
-Public service http://diglot.copist.ru/
-> Публичный сервис http://diglot.copist.ru/
+Public service http://diglot.ru/
+> Публичный сервис http://diglot.ru/
 
 # Aim / Цель
 
@@ -18,8 +18,8 @@ Public service http://diglot.copist.ru/
 
 # Disclaimer / Отказ от прав
 
-All works, books and articles published at http://diglot.copist.ru/ were taken from open sources. Every work, article or book has its own copyright policy. Please check the rights before use.
-> Все работы, книги и статьи, опубликованные на http://diglot.copist.ru/, были взяты из открытых источников. Каждая работа, статья или книга имеет собственную политику защиты авторских прав. Пожалуйста, проверяйте права перед использованием.
+All works, books and articles published at http://diglot.ru/ were taken from open sources. Every work, article or book has its own copyright policy. Please check the rights before use.
+> Все работы, книги и статьи, опубликованные на http://diglot.ru/, были взяты из открытых источников. Каждая работа, статья или книга имеет собственную политику защиты авторских прав. Пожалуйста, проверяйте права перед использованием.
 
 # Contributions / Вклад
 
